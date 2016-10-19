@@ -9,10 +9,30 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>EjectTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>EjectUnitTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>AB47D9AB1DB5A3DD00A7B5E8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AB47D9BF1DB5AEFD00A7B5E8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AB47D9CB1DB5AF1A00A7B5E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

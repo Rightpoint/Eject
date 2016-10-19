@@ -8,7 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		AB47D9B01DB5A3DD00A7B5E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */; };
+		AB47D9B71DB5A3F100A7B5E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9B61DB5A3F100A7B5E8 /* Model.swift */; };
+		AB47D9BB1DB5AD4700A7B5E8 /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9BA1DB5AD4700A7B5E8 /* Builders.swift */; };
+		AB47D9CF1DB5AF1A00A7B5E8 /* EjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */; };
+		AB47D9D71DB5B90C00A7B5E8 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */; };
+		AB47D9DB1DB5CB4F00A7B5E8 /* ValueGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DA1DB5CB4F00A7B5E8 /* ValueGenerators.swift */; };
+		AB47D9DD1DB5D28C00A7B5E8 /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */; };
+		AB47D9DF1DB5E8BA00A7B5E8 /* DocumentDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DE1DB5E8BA00A7B5E8 /* DocumentDefinition.swift */; };
+		AB47D9E01DB657CF00A7B5E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9B61DB5A3F100A7B5E8 /* Model.swift */; };
+		AB47D9E11DB657CF00A7B5E8 /* ValueGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DA1DB5CB4F00A7B5E8 /* ValueGenerators.swift */; };
+		AB47D9E21DB657CF00A7B5E8 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */; };
+		AB47D9E31DB657CF00A7B5E8 /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9BA1DB5AD4700A7B5E8 /* Builders.swift */; };
+		AB47D9E41DB657CF00A7B5E8 /* DocumentDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DE1DB5E8BA00A7B5E8 /* DocumentDefinition.swift */; };
+		AB47D9E51DB657CF00A7B5E8 /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */; };
+		AB47D9E71DB65B5B00A7B5E8 /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */; };
+		AB47D9E81DB661CD00A7B5E8 /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */; };
+		AB47D9ED1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		AB47D9EE1DB6C19D00A7B5E8 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = wrapper.nib;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		AB47D9AA1DB5A3DD00A7B5E8 /* CopyFiles */ = {
@@ -25,10 +53,28 @@
 /* Begin PBXFileReference section */
 		AB47D9AC1DB5A3DD00A7B5E8 /* Eject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Eject; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		AB47D9B61DB5A3F100A7B5E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		AB47D9BA1DB5AD4700A7B5E8 /* Builders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
+		AB47D9CC1DB5AF1A00A7B5E8 /* EjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectTests.swift; sourceTree = "<group>"; };
+		AB47D9D01DB5AF1A00A7B5E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generators.swift; sourceTree = "<group>"; };
+		AB47D9DA1DB5CB4F00A7B5E8 /* ValueGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueGenerators.swift; sourceTree = "<group>"; };
+		AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBParser.swift; sourceTree = "<group>"; };
+		AB47D9DE1DB5E8BA00A7B5E8 /* DocumentDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentDefinition.swift; sourceTree = "<group>"; };
+		AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeGeneration.swift; sourceTree = "<group>"; };
+		AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AB47D9A91DB5A3DD00A7B5E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB47D9C91DB5AF1A00A7B5E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				AB47D9AE1DB5A3DD00A7B5E8 /* Eject */,
+				AB47D9CD1DB5AF1A00A7B5E8 /* EjectTests */,
 				AB47D9AD1DB5A3DD00A7B5E8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				AB47D9AC1DB5A3DD00A7B5E8 /* Eject */,
+				AB47D9CC1DB5AF1A00A7B5E8 /* EjectTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +105,34 @@
 		AB47D9AE1DB5A3DD00A7B5E8 /* Eject */ = {
 			isa = PBXGroup;
 			children = (
+				AB47D9B61DB5A3F100A7B5E8 /* Model.swift */,
+				AB47D9DA1DB5CB4F00A7B5E8 /* ValueGenerators.swift */,
+				AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */,
+				AB47D9BA1DB5AD4700A7B5E8 /* Builders.swift */,
+				AB47D9DE1DB5E8BA00A7B5E8 /* DocumentDefinition.swift */,
+				AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */,
+				AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */,
 				AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */,
 			);
 			path = Eject;
+			sourceTree = "<group>";
+		};
+		AB47D9CD1DB5AF1A00A7B5E8 /* EjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB47D9EB1DB6C0AD00A7B5E8 /* Resources */,
+				AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */,
+				AB47D9D01DB5AF1A00A7B5E8 /* Info.plist */,
+			);
+			path = EjectTests;
+			sourceTree = "<group>";
+		};
+		AB47D9EB1DB6C0AD00A7B5E8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +155,24 @@
 			productReference = AB47D9AC1DB5A3DD00A7B5E8 /* Eject */;
 			productType = "com.apple.product-type.tool";
 		};
+		AB47D9CB1DB5AF1A00A7B5E8 /* EjectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB47D9D11DB5AF1A00A7B5E8 /* Build configuration list for PBXNativeTarget "EjectTests" */;
+			buildPhases = (
+				AB47D9C81DB5AF1A00A7B5E8 /* Sources */,
+				AB47D9C91DB5AF1A00A7B5E8 /* Frameworks */,
+				AB47D9CA1DB5AF1A00A7B5E8 /* Resources */,
+			);
+			buildRules = (
+				AB47D9EE1DB6C19D00A7B5E8 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = EjectTests;
+			productName = EjectTests;
+			productReference = AB47D9CC1DB5AF1A00A7B5E8 /* EjectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +184,10 @@
 				ORGANIZATIONNAME = "Brian King";
 				TargetAttributes = {
 					AB47D9AB1DB5A3DD00A7B5E8 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					AB47D9CB1DB5AF1A00A7B5E8 = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
 					};
@@ -111,16 +206,50 @@
 			projectRoot = "";
 			targets = (
 				AB47D9AB1DB5A3DD00A7B5E8 /* Eject */,
+				AB47D9CB1DB5AF1A00A7B5E8 /* EjectTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB47D9CA1DB5AF1A00A7B5E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB47D9ED1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB47D9A81DB5A3DD00A7B5E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB47D9DB1DB5CB4F00A7B5E8 /* ValueGenerators.swift in Sources */,
+				AB47D9DD1DB5D28C00A7B5E8 /* XIBParser.swift in Sources */,
+				AB47D9DF1DB5E8BA00A7B5E8 /* DocumentDefinition.swift in Sources */,
+				AB47D9D71DB5B90C00A7B5E8 /* Generators.swift in Sources */,
+				AB47D9BB1DB5AD4700A7B5E8 /* Builders.swift in Sources */,
 				AB47D9B01DB5A3DD00A7B5E8 /* main.swift in Sources */,
+				AB47D9E71DB65B5B00A7B5E8 /* CodeGeneration.swift in Sources */,
+				AB47D9B71DB5A3F100A7B5E8 /* Model.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB47D9C81DB5AF1A00A7B5E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB47D9E31DB657CF00A7B5E8 /* Builders.swift in Sources */,
+				AB47D9E21DB657CF00A7B5E8 /* Generators.swift in Sources */,
+				AB47D9E51DB657CF00A7B5E8 /* XIBParser.swift in Sources */,
+				AB47D9CF1DB5AF1A00A7B5E8 /* EjectTests.swift in Sources */,
+				AB47D9E41DB657CF00A7B5E8 /* DocumentDefinition.swift in Sources */,
+				AB47D9E11DB657CF00A7B5E8 /* ValueGenerators.swift in Sources */,
+				AB47D9E81DB661CD00A7B5E8 /* CodeGeneration.swift in Sources */,
+				AB47D9E01DB657CF00A7B5E8 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +360,32 @@
 			};
 			name = Release;
 		};
+		AB47D9D21DB5AF1A00A7B5E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EjectTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		AB47D9D31DB5AF1A00A7B5E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EjectTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -250,6 +405,16 @@
 				AB47D9B51DB5A3DD00A7B5E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB47D9D11DB5AF1A00A7B5E8 /* Build configuration list for PBXNativeTarget "EjectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB47D9D21DB5AF1A00A7B5E8 /* Debug */,
+				AB47D9D31DB5AF1A00A7B5E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
