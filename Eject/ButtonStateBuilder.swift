@@ -18,6 +18,9 @@ class IBButtonStateProxy: IBReference {
 
     var document: IBDocument? { return reference.document }
     var identifier: String { return reference.identifier }
+    var className: String { return reference.className }
+    var userLabel: String? { return reference.userLabel }
+
     var generators: [ObjectCodeGenerator] {
         get {
             return reference.generators

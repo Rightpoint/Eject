@@ -18,7 +18,7 @@ struct SubviewConfiguration: ObjectCodeGenerator {
 
     func generateCode(in context: GenerationContext) -> String? {
         let document = context.document
-        let object = document.lookupObject(for: objectIdentifier)
+        let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         var representation = ""
         let subviewVariable = document.variable(for: subview)

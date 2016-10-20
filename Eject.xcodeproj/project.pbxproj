@@ -42,6 +42,10 @@
 		AB47DA101DB80CC400A7B5E8 /* SubviewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA0C1DB8042500A7B5E8 /* SubviewBuilder.swift */; };
 		AB47DA121DB83E4000A7B5E8 /* FontBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA111DB83E4000A7B5E8 /* FontBuilder.swift */; };
 		AB47DA131DB83E4000A7B5E8 /* FontBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA111DB83E4000A7B5E8 /* FontBuilder.swift */; };
+		AB47DA151DB84FB600A7B5E8 /* OutletBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA141DB84FB600A7B5E8 /* OutletBuilder.swift */; };
+		AB47DA161DB84FB600A7B5E8 /* OutletBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA141DB84FB600A7B5E8 /* OutletBuilder.swift */; };
+		AB47DA181DB8551400A7B5E8 /* PlaceholderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA171DB8551400A7B5E8 /* PlaceholderBuilder.swift */; };
+		AB47DA191DB8551400A7B5E8 /* PlaceholderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA171DB8551400A7B5E8 /* PlaceholderBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -91,6 +95,8 @@
 		AB47DA091DB7F45200A7B5E8 /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
 		AB47DA0C1DB8042500A7B5E8 /* SubviewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubviewBuilder.swift; sourceTree = "<group>"; };
 		AB47DA111DB83E4000A7B5E8 /* FontBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontBuilder.swift; sourceTree = "<group>"; };
+		AB47DA141DB84FB600A7B5E8 /* OutletBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutletBuilder.swift; sourceTree = "<group>"; };
+		AB47DA171DB8551400A7B5E8 /* PlaceholderBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +173,7 @@
 				AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */,
 				AB47D9F11DB7AAF000A7B5E8 /* DocumentBuilder.swift */,
 				AB47D9F31DB7AB0500A7B5E8 /* ObjectBuilder.swift */,
+				AB47DA171DB8551400A7B5E8 /* PlaceholderBuilder.swift */,
 				AB47D9F51DB7AB3000A7B5E8 /* StructBuilder.swift */,
 				AB47D9F71DB7AB6300A7B5E8 /* KeyValueBuilder.swift */,
 				AB47DA001DB7ACDE00A7B5E8 /* OptionSetBuilder.swift */,
@@ -175,6 +182,7 @@
 				AB47DA091DB7F45200A7B5E8 /* ButtonStateBuilder.swift */,
 				AB47DA0C1DB8042500A7B5E8 /* SubviewBuilder.swift */,
 				AB47DA111DB83E4000A7B5E8 /* FontBuilder.swift */,
+				AB47DA141DB84FB600A7B5E8 /* OutletBuilder.swift */,
 			);
 			name = Builders;
 			sourceTree = "<group>";
@@ -271,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB47DA151DB84FB600A7B5E8 /* OutletBuilder.swift in Sources */,
 				AB47D9FA1DB7AB9D00A7B5E8 /* RValues.swift in Sources */,
 				AB47DA031DB7AE0500A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */,
 				AB47DA0A1DB7F45200A7B5E8 /* ButtonStateBuilder.swift in Sources */,
@@ -288,6 +297,7 @@
 				AB47DA121DB83E4000A7B5E8 /* FontBuilder.swift in Sources */,
 				AB47D9F41DB7AB0500A7B5E8 /* ObjectBuilder.swift in Sources */,
 				AB47D9B71DB5A3F100A7B5E8 /* Model.swift in Sources */,
+				AB47DA181DB8551400A7B5E8 /* PlaceholderBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB47DA161DB84FB600A7B5E8 /* OutletBuilder.swift in Sources */,
 				AB47D9E21DB657CF00A7B5E8 /* Generators.swift in Sources */,
 				AB47D9E51DB657CF00A7B5E8 /* XIBParser.swift in Sources */,
 				AB47DA0B1DB7F77B00A7B5E8 /* ButtonStateBuilder.swift in Sources */,
@@ -312,6 +323,7 @@
 				AB47DA131DB83E4000A7B5E8 /* FontBuilder.swift in Sources */,
 				AB47D9FE1DB7AC8D00A7B5E8 /* KeyValueBuilder.swift in Sources */,
 				AB47D9FC1DB7AC8D00A7B5E8 /* ObjectBuilder.swift in Sources */,
+				AB47DA191DB8551400A7B5E8 /* PlaceholderBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -61,7 +61,7 @@ class BasicRValue: CodeGenerator {
 }
 
 struct OptionSetRValue: CodeGenerator {
-    var keys: [String]
+    let keys: [String]
 
     init(attributes: [String: String]) {
         let keys = attributes.map() { $0.value == "YES" ? .some($0.key) : nil }.flatMap() { $0 }
@@ -74,9 +74,11 @@ struct OptionSetRValue: CodeGenerator {
 }
 
 struct VariableRValue: CodeGenerator {
-    var object: IBObject
+    let objectIdentifier: String
+
     func generateCode(in context: GenerationContext) -> String? {
         let document = context.document
+        let object = document.lookupReference(for: objectIdentifier)
         return document.variable(for: object)
     }
 }

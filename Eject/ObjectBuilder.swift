@@ -50,8 +50,9 @@ struct ObjectBuilder: Builder {
             guard let parent = parent as? IBObject else {
                 fatalError("Must have a parent if the object defines a parent key")
             }
-            parent.addVariableConfiguration(for: parentKey, rvalue: VariableRValue(object: object))
+            parent.addVariableConfiguration(for: parentKey, rvalue: VariableRValue(objectIdentifier: object.identifier))
         }
+
         for (key, format) in properties {
             switch (format, attributes[key]) {
             case (.inject, _):
@@ -64,6 +65,7 @@ struct ObjectBuilder: Builder {
                 break
             }
         }
+
         for block in generators {
             if let config = block(attributes) {
                 object.generators.append(config)

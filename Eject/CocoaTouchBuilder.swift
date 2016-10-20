@@ -21,6 +21,8 @@ func CocoaTouchBuilder() -> DocumentBuilder {
     definition.register("state", ButtonStateBuilder())
     definition.register("subviews", SubviewBuilder())
     definition.register("fontDescription", FontBuilder())
+    definition.register("outlet", OutletBuilder())
+    definition.register("placeholder", PlaceholderBuilder())
 
     for type in ["integer", "real"] {
         definition.register(type, KeyValueBuilder())

@@ -16,6 +16,8 @@ protocol IBGraphable: class {
 /// An object that references something in the object graph that enerates code
 protocol IBReference: IBGraphable {
     var identifier: String { get }
+    var className: String { get }
+    var userLabel: String? { get }
     var generators: [ObjectCodeGenerator] { get set }
 
     func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator
@@ -26,37 +28,22 @@ protocol IBReference: IBGraphable {
 /// is either the file owner, or the first view in the objects array with a custom class configured.
 class IBDocument: IBGraphable {
 
-    /// These connections are all of the properties that were exposed by the xib file.
-    var connections: [IBOutlet] = []
-
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
     var references: [IBReference] = []
 
     /// Generate a variable property name with the following precedence
     ///
-    /// - IBOutlet property name
     /// - User Label joined and camel cased
     /// - Class name without the prefix
-    func variable(for object: IBObject) -> String {
-        for placeholder in connections {
-            if placeholder.destinationIdentifier == object.identifier {
-                return placeholder.property
-            }
-        }
-        var components = object.userLabel?.components(separatedBy: .whitespaces) ?? []
-        if components.count == 1 {
-            return components[0].lowercased()
-        }
-        else if components.count > 1 {
-            let first = components[0].lowercased()
-            components.replaceSubrange(0...1, with: [first])
-            return components.joined()
+    func variable(for object: IBReference) -> String {
+        if let userLabel = object.userLabel {
+            return userLabel.snakeCased()
         }
         var className = object.className
         for prefix in ["NS", "UI", "MK", "SCN"] {
             if let range = className.range(of: prefix) {
                 className.removeSubrange(range)
-                return className
+                return className.snakeCased()
             }
         }
         // This is the last resort and will not compile.
@@ -68,22 +55,19 @@ class IBDocument: IBGraphable {
         case property
     }
 
-    func scope(for object: IBObject) -> Scope {
-        for placeholder in connections {
-            if placeholder.destinationIdentifier == object.identifier {
-                return .property
-            }
-        }
+    func scope(for object: IBReference) -> Scope {
+//        for placeholder in connections {
+//            if placeholder.destinationIdentifier == object.identifier {
+//                return .property
+//            }
+//        }
         return .local
     }
 
-    func lookupObject(for identifier: String) -> IBObject {
-        for object in references {
-            if object.identifier == identifier {
-                guard let object = object as? IBObject else {
-                    fatalError("Identifier \(identifier) is not an object")
-                }
-                return object
+    func lookupReference(for identifier: String) -> IBReference {
+        for reference in references {
+            if reference.identifier == identifier {
+                return reference
             }
         }
         fatalError("Unknown identifier \(identifier)")
@@ -94,6 +78,13 @@ class IBDocument: IBGraphable {
         object.document = self
         references.append(object)
         parent?.children.append(object)
+        return object
+    }
+
+    func addPlaceholder(for identifier: String, className: String, userLabel: String?) -> IBPlaceholder {
+        let object = IBPlaceholder(identifier: identifier, className: className, userLabel: userLabel)
+        object.document = self
+        references.append(object)
         return object
     }
 
@@ -129,32 +120,26 @@ class IBObject: IBReference {
         }
     }
 
-    func addOutlet(for identifier: String, property: String, destinationIdentifier: String) -> IBOutlet {
-        return IBOutlet(object: self, identifier: identifier, property: property, destinationIdentifier: destinationIdentifier)
-    }
-
     func addDeclaration(arguments: [String: String]) {
         let declaration = Declaration(objectIdentifier: identifier, className: className, arguments: arguments)
         generators.append(declaration)
     }
 }
 
-class IBOutlet: IBReference {
-    var document: IBDocument? {
-        return object?.document
-    }
-    weak var object: IBObject?
-    var generators: [ObjectCodeGenerator] = []
+class IBPlaceholder: IBReference {
+    weak var document: IBDocument?
 
     var identifier: String
-    var property: String
-    var destinationIdentifier: String
-    fileprivate init(object: IBObject, identifier: String, property: String, destinationIdentifier: String) {
-        self.object = object
+    var className: String
+    var userLabel: String?
+    var generators: [ObjectCodeGenerator] = []
+
+    fileprivate init (identifier: String, className: String, userLabel: String? = nil) {
         self.identifier = identifier
-        self.property = property
-        self.destinationIdentifier = destinationIdentifier
+        self.className = className
+        self.userLabel = userLabel
     }
+
 }
 
 extension IBReference {
@@ -168,4 +153,26 @@ extension IBReference {
         let generator = configurationGenerator(for: key, rvalue: rvalue)
         generators.append(generator)
     }
+}
+
+extension String {
+
+    func snakeCased() -> String {
+        var newString = ""
+        var previousCharacter: Character? = nil
+        for character in characters {
+            if previousCharacter == nil {
+                newString.append(String(character).lowercased())
+            }
+            else if previousCharacter == " " {
+                newString.append(String(character).uppercased())
+            }
+            else if character != " " {
+                newString.append(character)
+            }
+            previousCharacter = character
+        }
+        return newString
+    }
+
 }

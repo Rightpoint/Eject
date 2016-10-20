@@ -21,7 +21,7 @@ struct VariableConfiguration: ObjectCodeGenerator {
 
     func generateCode(in context: GenerationContext) -> String? {
         let document = context.document
-        let object = document.lookupObject(for: objectIdentifier)
+        let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         if let setterContext = setterContext {
             return "\(variable).set\(key.capitalized)(\(value.generateCode(in: context) ?? "<ERROR>"), \(setterContext))"
@@ -39,7 +39,7 @@ struct Declaration: ObjectCodeGenerator {
 
     func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
         let document = context.document
-        let object = document.lookupObject(for: objectIdentifier)
+        let object = document.lookupReference(for: objectIdentifier)
         let scope = document.scope(for: object)
         switch scope {
         case .local:
@@ -51,7 +51,7 @@ struct Declaration: ObjectCodeGenerator {
 
     func generateCode(in context: GenerationContext) -> String? {
         let document = context.document
-        let object = document.lookupObject(for: objectIdentifier)
+        let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         let argumentString = arguments.map() { "\($0): \($1)" }.joined(separator: ", ")
         return "let \(variable) = \(className)(\(argumentString))"
