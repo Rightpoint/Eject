@@ -9,7 +9,7 @@ One common pain point with Interface Builder is that as a view becomes more dyna
 Yes, I understand that this is probably a bad idea. But it might not be.
 
 ### Does it work?
-Conceptually? The [Unit Tests](EjectTests/EjectTests.swift#L134) show how much work is done, but it won't be of use until Stencil is incorporated to generate the high-level code containers. UIKit coverage is incomplete, but is configured by the [CocoaTouchBuilder](Eject/CocoaTouchBuilder.swift) using various [Builders](Eject/Builders).
+Conceptually? The [Unit Tests](EjectTests/EjectTests.swift#L134) show how much work is done, but it won't be of use until Stencil is incorporated to generate the high-level code containers. UIKit coverage is incomplete, but is configured by the [CocoaTouchBuilder](Eject/Builder/CocoaTouchBuilder.swift) using various [Builders](Eject/Builder).
 
 ### Todo
 
