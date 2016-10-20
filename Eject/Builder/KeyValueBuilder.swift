@@ -16,8 +16,8 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
         self.rvalue = BasicRValue(value: "", format: format)
     }
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let object = parent as? IBReference else { fatalError("No parent to configure") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let object = parent else { fatalError("No parent to configure") }
         guard let key = attributes["key"] else { fatalError("No key supplied") }
         rvalue.value = attributes["value"] ?? rvalue.value
         object.addVariableConfiguration(for: key, rvalue: rvalue)

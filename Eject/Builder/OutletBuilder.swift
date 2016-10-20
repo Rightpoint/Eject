@@ -10,8 +10,8 @@ import Foundation
 
 struct OutletBuilder: Builder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let parent = parent as? IBReference else { fatalError("No parent to configure") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let parent = parent else { fatalError("No parent to configure") }
         guard let property = attributes["property"] else { fatalError("Must specify key") }
         guard let destination = attributes["destination"] else { fatalError("Must specify destination") }
 

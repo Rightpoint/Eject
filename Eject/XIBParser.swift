@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Builder {
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference?
 }
 
 protocol CharacterBuilder {
@@ -17,11 +17,15 @@ protocol CharacterBuilder {
 }
 
 protocol ContainerBuilder {
-    func add(object: IBGraphable, to parent: IBGraphable)
+    func add(object: IBReference, to parent: IBReference)
 }
 
 protocol BuilderLookup {
     func lookupBuilder(for elementName: String) -> Builder?
+}
+
+struct NoOpBuilder: Builder {
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? { return parent }
 }
 
 class XIBParser: NSObject {
@@ -39,7 +43,7 @@ class XIBParser: NSObject {
     private let documentBuilder: DocumentBuilder
 
     var builderStack: [Builder]
-    var stack: [IBGraphable]
+    var stack: [IBReference?]
 
     var document: IBDocument {
         return documentBuilder.document
@@ -55,8 +59,8 @@ class XIBParser: NSObject {
     init(data: Data, documentBuilder: DocumentBuilder) throws {
         self.parser = XMLParser(data: data)
         self.documentBuilder = documentBuilder
-        self.builderStack = [documentBuilder]
-        self.stack = [documentBuilder.document]
+        self.builderStack = []
+        self.stack = []
         super.init()
         self.parser.delegate = self
         if parser.parse() == false {
@@ -64,8 +68,8 @@ class XIBParser: NSObject {
         }
     }
 
-    var lastObject: IBGraphable? {
-        return stack.last
+    var lastObject: IBReference? {
+        return stack.last ?? nil
     }
 
     var lastBuilder: Builder? {
@@ -73,12 +77,7 @@ class XIBParser: NSObject {
     }
 
     var builderLookup: BuilderLookup {
-        for builder in builderStack.reversed() {
-            if let lookup = builder as? BuilderLookup {
-                return lookup
-            }
-        }
-        fatalError()
+        return documentBuilder
     }
 
 }
@@ -90,7 +89,7 @@ extension XIBParser: XMLParserDelegate {
             return
         }
         builderStack.append(builder)
-        let nextObject = builder.configure(parent: lastObject, attributes: attributeDict)
+        let nextObject = builder.configure(parent: lastObject, document: document, attributes: attributeDict)
         stack.append(nextObject)
     }
 
@@ -100,7 +99,7 @@ extension XIBParser: XMLParserDelegate {
         }
         let object = stack.removeLast()
         builderStack.removeLast()
-        if let lastBuilder = lastBuilder as? ContainerBuilder {
+        if let lastBuilder = lastBuilder as? ContainerBuilder, let object = object {
             lastBuilder.add(object: object, to: lastObject!)
         }
     }

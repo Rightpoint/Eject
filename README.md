@@ -6,4 +6,12 @@ Eject is a utility to transition from Interface Builder to programatic view layo
 Yes, I understand that there a million ways why this is a bad idea.
 
 ### Does it work?
-Conceptually! The [Unit Tests](EjectTests/EjectTests.swift) show how much work is done, but it won't be of use until Stencil is incorporated to generate the high-level code containers. The full scope of UIKit coverage is managed by the [CocoaTouchBuilder](Eject/CocoaTouchBuilder.swift). AppKit support and Storyboard support is missing.
+Conceptually? The [Unit Tests](EjectTests/EjectTests.swift#L134) show how much work is done, but it won't be of use until Stencil is incorporated to generate the high-level code containers. UIKit coverage is managed by the [CocoaTouchBuilder](Eject/CocoaTouchBuilder.swift) using various [Builders](Eject/Builders).
+
+### Todo
+
+- Enhance code generation approaches
+- Stencil Support
+- Complete UIKit
+- AppKit
+- Storyboards

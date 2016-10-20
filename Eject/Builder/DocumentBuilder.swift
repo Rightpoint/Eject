@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DocumentBuilder: Builder, BuilderLookup {
+class DocumentBuilder: BuilderLookup {
     var document = IBDocument()
     var elementBuilders: [String: Builder] = [:]
 
@@ -19,13 +19,9 @@ class DocumentBuilder: Builder, BuilderLookup {
     func lookupBuilder(for elementName: String) -> Builder? {
         let builder = elementBuilders[elementName]
         if builder == nil && document.references.count == 0 {
-            return self
+            return NoOpBuilder()
         }
         return builder
     }
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        return document
-    }
-    
 }

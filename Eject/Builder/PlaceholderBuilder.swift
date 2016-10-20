@@ -10,8 +10,7 @@ import Foundation
 
 struct PlaceholderBuilder: Builder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let parent = parent, let document = parent.document else { fatalError("ObjectBuilder must have a parent") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
         guard let identifier = attributes["id"] else { fatalError("Must have identifier") }
         let className = attributes["customClass"] ?? "NSObject"
         let placeholder = document.addPlaceholder(for: identifier,

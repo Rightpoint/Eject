@@ -8,13 +8,8 @@
 
 import Foundation
 
-/// An object that can be held inside the graph
-protocol IBGraphable: class {
-    var document: IBDocument? { get }
-}
-
 /// An object that references something in the object graph that enerates code
-protocol IBReference: IBGraphable {
+protocol IBReference: class {
     var identifier: String { get }
     var className: String { get }
     var userLabel: String? { get }
@@ -26,7 +21,7 @@ protocol IBReference: IBGraphable {
 
 /// Base class that models the state of a xib file. Eject assumes that the file to be generated
 /// is either the file owner, or the first view in the objects array with a custom class configured.
-class IBDocument: IBGraphable {
+class IBDocument {
 
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
     var references: [IBReference] = []

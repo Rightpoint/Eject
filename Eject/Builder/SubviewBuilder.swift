@@ -10,7 +10,7 @@ import Foundation
 
 struct SubviewConfiguration: ObjectCodeGenerator {
     var objectIdentifier: String
-    var subview: IBObject
+    var subview: IBReference
 
     func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
         return .subviews
@@ -29,14 +29,12 @@ struct SubviewConfiguration: ObjectCodeGenerator {
 
 struct SubviewBuilder: Builder, ContainerBuilder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         return parent
     }
 
-    func add(object: IBGraphable, to parent: IBGraphable) {
-        guard let parent = parent as? IBReference else { fatalError("No parent to configure") }
-        guard let object = object as? IBObject else { fatalError("Must be an object") }
+    func add(object: IBReference, to parent: IBReference) {
         parent.generators.append(SubviewConfiguration(objectIdentifier: parent.identifier, subview: object))
     }
 

@@ -16,7 +16,6 @@ class IBButtonStateProxy: IBReference {
         self.setterContext = setterContext
     }
 
-    var document: IBDocument? { return reference.document }
     var identifier: String { return reference.identifier }
     var className: String { return reference.className }
     var userLabel: String? { return reference.userLabel }
@@ -38,8 +37,8 @@ class IBButtonStateProxy: IBReference {
 
 struct ButtonStateBuilder: Builder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let object = parent as? IBReference else { fatalError("No parent to configure") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let object = parent else { fatalError("No parent to configure") }
         guard let state = attributes["key"] else { fatalError("No state attribute") }
         let proxy = IBButtonStateProxy(reference: object, setterContext: "for: \(RValueFormat.enumeration.transform(string: state))")
         let attributeFormat: [(String, RValueFormat)] = [("title", .string), ("image", .image)]

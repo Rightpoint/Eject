@@ -18,7 +18,6 @@ class IBUserDefinedProxy: IBReference {
         self.keyPath = keyPath
     }
 
-    var document: IBDocument? { return reference.document }
     var identifier: String { return reference.identifier }
     var className: String { return reference.className }
     var userLabel: String? { return reference.userLabel }
@@ -41,8 +40,8 @@ class IBUserDefinedProxy: IBReference {
 
 struct UserDefinedAttributeBuilder: Builder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let object = parent as? IBReference else { fatalError("No parent to configure") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let object = parent else { fatalError("No parent to configure") }
         guard let keyPath = attributes["keyPath"] else { fatalError("No keypath") }
         return IBUserDefinedProxy(reference: object, keyPath: keyPath)
     }

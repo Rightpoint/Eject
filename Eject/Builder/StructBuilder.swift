@@ -10,8 +10,8 @@ import Foundation
 
 struct RectBuilder: Builder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let object = parent as? IBReference & IBGraphable else { fatalError("No parent to configure") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let object = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
             let x = attributes["x"],
@@ -29,8 +29,8 @@ struct RectBuilder: Builder {
 
 struct SizeBuilder: Builder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let object = parent as? IBReference & IBGraphable else { fatalError("No parent to configure") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let object = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
             let width = attributes["width"],
@@ -47,8 +47,8 @@ struct SizeBuilder: Builder {
 struct InsetBuilder: Builder {
 
     // <inset key="x" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
-        guard let object = parent as? IBReference & IBGraphable else { fatalError("No parent to configure") }
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let object = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
             let x = attributes["minX"]?.floatValue,

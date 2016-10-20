@@ -10,9 +10,8 @@ import Foundation
 
 struct FontBuilder: Builder {
 
-    func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable {
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
         guard let parent = parent else { fatalError("No parent to configure") }
-        guard let object = parent as? IBReference else { fatalError("parent is not IBReference") }
         guard var key = attributes["key"] else { fatalError("Must specify key") }
         let value: String
 
@@ -28,7 +27,7 @@ struct FontBuilder: Builder {
             fatalError("Unknown font \(attributes)")
         }
 
-        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value))
+        parent.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value))
         return parent
     }
 }
