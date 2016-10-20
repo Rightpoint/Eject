@@ -8,12 +8,20 @@
 
 import Foundation
 
-protocol Buildable {
+protocol Builder {
     func configure(parent: IBGraphable?, attributes: [String: String]) -> IBGraphable
 }
 
-protocol BuildableLookup {
-    func lookupBuilder(for elementName: String) -> Buildable?
+protocol CharacterBuilder {
+    func found(characters: String)
+}
+
+protocol ContainerBuilder {
+    func add(object: IBGraphable, to parent: IBGraphable)
+}
+
+protocol BuilderLookup {
+    func lookupBuilder(for elementName: String) -> Builder?
 }
 
 class XIBParser: NSObject {
@@ -30,7 +38,7 @@ class XIBParser: NSObject {
     private let parser: XMLParser
     private let documentBuilder: DocumentBuilder
 
-    var builderStack: [Buildable]
+    var builderStack: [Builder]
     var stack: [IBGraphable]
 
     var document: IBDocument {
@@ -60,13 +68,13 @@ class XIBParser: NSObject {
         return stack.last
     }
 
-    var lastBuilder: Buildable? {
+    var lastBuilder: Builder? {
         return builderStack.last
     }
 
-    var builderLookup: BuildableLookup {
+    var builderLookup: BuilderLookup {
         for builder in builderStack.reversed() {
-            if let lookup = builder as? BuildableLookup {
+            if let lookup = builder as? BuilderLookup {
                 return lookup
             }
         }
@@ -82,8 +90,7 @@ extension XIBParser: XMLParserDelegate {
             return
         }
         builderStack.append(builder)
-        let parent = lastObject
-        let nextObject = builder.configure(parent: parent, attributes: attributeDict)
+        let nextObject = builder.configure(parent: lastObject, attributes: attributeDict)
         stack.append(nextObject)
     }
 
@@ -91,9 +98,17 @@ extension XIBParser: XMLParserDelegate {
         guard builderLookup.lookupBuilder(for: elementName) != nil else {
             return
         }
+        let object = stack.removeLast()
         builderStack.removeLast()
-        stack.removeLast()
+        if let lastBuilder = lastBuilder as? ContainerBuilder {
+            lastBuilder.add(object: object, to: lastObject!)
+        }
     }
 
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if let characterBuilder = lastBuilder as? CharacterBuilder {
+            characterBuilder.found(characters: string)
+        }
+    }
 
 }

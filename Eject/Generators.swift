@@ -8,27 +8,6 @@
 
 import Foundation
 
-struct SubviewConfiguration: ObjectCodeGenerator {
-    var objectIdentifier: String
-    var subviews: [IBObject]
-
-    func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
-        return .subviews
-    }
-
-    func generateCode(in context: GenerationContext) -> String? {
-        let document = context.document
-        let object = document.lookupObject(for: objectIdentifier)
-        let variable = document.variable(for: object)
-        var representation = ""
-        for subview in subviews {
-            let subviewVariable = document.variable(for: subview)
-            representation.append("\(variable).addSubview(\(subviewVariable))\n")
-        }
-        return representation
-    }
-}
-
 struct VariableConfiguration: ObjectCodeGenerator {
     var objectIdentifier: String
     var key: String = ""
@@ -53,10 +32,10 @@ struct VariableConfiguration: ObjectCodeGenerator {
     }
 }
 
-
 struct Declaration: ObjectCodeGenerator {
     let objectIdentifier: String
     let className: String
+    let arguments: [String: String]
 
     func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
         let document = context.document
@@ -74,13 +53,8 @@ struct Declaration: ObjectCodeGenerator {
         let document = context.document
         let object = document.lookupObject(for: objectIdentifier)
         let variable = document.variable(for: object)
-        return "let \(variable) = \(className)()"
+        let argumentString = arguments.map() { "\($0): \($1)" }.joined(separator: ", ")
+        return "let \(variable) = \(className)(\(argumentString))"
     }
     
-}
-
-extension IBReference {
-    func addVariableConfiguration(forKey key: String, valueGenerator: CodeGenerator, setterContext: String? = nil) {
-        generators.append(VariableConfiguration(objectIdentifier: identifier, key: key, value: valueGenerator, setterContext: setterContext))
-    }
 }

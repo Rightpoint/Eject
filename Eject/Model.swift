@@ -13,10 +13,12 @@ protocol IBGraphable: class {
     var document: IBDocument? { get }
 }
 
-/// An object that can be held inside a graph and has an identifier
+/// An object that references something in the object graph that enerates code
 protocol IBReference: IBGraphable {
     var identifier: String { get }
     var generators: [ObjectCodeGenerator] { get set }
+
+    func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator
 }
 
 
@@ -87,10 +89,11 @@ class IBDocument: IBGraphable {
         fatalError("Unknown identifier \(identifier)")
     }
 
-    func addObject(for identifier: String, className: String, userLabel: String? = nil) -> IBObject {
+    func addObject(for identifier: String, className: String, userLabel: String?, parent: IBObject?) -> IBObject {
         let object = IBObject(identifier: identifier, className: className, userLabel: userLabel)
         object.document = self
         references.append(object)
+        parent?.children.append(object)
         return object
     }
 
@@ -103,6 +106,8 @@ class IBDocument: IBGraphable {
 class IBObject: IBReference {
     weak var document: IBDocument?
     weak var parent: IBObject?
+    var children: [IBObject] = []
+
     var identifier: String
     var className: String
     var userLabel: String?
@@ -128,8 +133,8 @@ class IBObject: IBReference {
         return IBOutlet(object: self, identifier: identifier, property: property, destinationIdentifier: destinationIdentifier)
     }
 
-    func addDeclaration() {
-        let declaration = Declaration(objectIdentifier: identifier, className: className)
+    func addDeclaration(arguments: [String: String]) {
+        let declaration = Declaration(objectIdentifier: identifier, className: className, arguments: arguments)
         generators.append(declaration)
     }
 }
@@ -149,5 +154,18 @@ class IBOutlet: IBReference {
         self.identifier = identifier
         self.property = property
         self.destinationIdentifier = destinationIdentifier
+    }
+}
+
+extension IBReference {
+
+    // Default implementation
+    func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator {
+        return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, setterContext: nil)
+    }
+
+    func addVariableConfiguration(for key: String, rvalue: CodeGenerator) {
+        let generator = configurationGenerator(for: key, rvalue: rvalue)
+        generators.append(generator)
     }
 }
