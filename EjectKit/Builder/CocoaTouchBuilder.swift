@@ -23,6 +23,7 @@ extension DocumentBuilder {
         register("constraint", AchorageConstraintBuilder())
         register("fontDescription", FontBuilder())
         register("outlet", OutletBuilder())
+        register("action", ActionBuilder())
         register("placeholder", PlaceholderBuilder())
 
         for type in ["integer", "real"] {

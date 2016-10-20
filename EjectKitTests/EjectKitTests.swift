@@ -179,7 +179,7 @@ class EjectTests: XCTestCase {
             ])
     }
 
-    func testButtonState() {
+    func testButton() {
         let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
             "let button = UIButton()",
@@ -189,6 +189,20 @@ class EjectTests: XCTestCase {
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",
             "button.setTitlecolor(UIColor(white: 1, alpha: 1), for: .normal)",
             "button.setTitleshadowcolor(UIColor(white: 0, alpha: 0), for: .normal)",
+            "button.addTarget(fileOwner, action: #selector(TestClass.doThing:), for: .touchUpInside)"
+            ])
+    }
+
+    func testActions() {
+        let xml = wrap("<view id='i5M-Pr-FkT'><subviews><view id='FUp-2k-EIR' userLabel='BorderView'><subviews><webView id='glB-HT-PdE'/></subviews></view><view id='aaa-bb-ccc' userLabel='OtherView'/></subviews></view>")
+        checkXML(xml, [
+            "let otherView = UIView()",
+            "let webView = UIWebView()",
+            "let borderView = UIView()",
+            "let view = UIView()",
+            "borderView.addSubview(webView)",
+            "view.addSubview(borderView)",
+            "view.addSubview(otherView)",
             ])
     }
 

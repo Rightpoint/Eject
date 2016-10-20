@@ -40,6 +40,7 @@
 		ABB38A651DB95F6D008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FE1DB95DDB008BF59E /* Declaration.swift */; };
 		ABB38A661DB95F6D008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A061DB95DDB008BF59E /* String+Eject.swift */; };
 		ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */; };
+		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectKitTests.swift; sourceTree = "<group>"; };
 		ABB38A3E1DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
+		ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 				ABB38A261DB95E04008BF59E /* AchorageConstraintBuilder.swift */,
 				ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */,
 				ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */,
+				ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				ABB38A571DB95F6D008BF59E /* CocoaTouchBuilder.swift in Sources */,
 				ABB38A651DB95F6D008BF59E /* Declaration.swift in Sources */,
 				ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */,
+				ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */,
 				ABB38A591DB95F6D008BF59E /* PlaceholderBuilder.swift in Sources */,
 				ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */,
 				ABB38A581DB95F6D008BF59E /* ObjectBuilder.swift in Sources */,
