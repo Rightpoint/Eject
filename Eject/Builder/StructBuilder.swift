@@ -63,14 +63,3 @@ struct InsetBuilder: Builder {
     }
 
 }
-
-extension String {
-
-    var floatValue: CGFloat? {
-        if let double = Double(self) {
-            return CGFloat(double)
-        }
-        return nil
-    }
-
-}

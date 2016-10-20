@@ -8,6 +8,22 @@
 
 import Foundation
 
+protocol CodeGenerator {
+    func generateCode(in context: GenerationContext) -> String?
+}
+
+enum ObjectGenerationPhase {
+    case properties
+    case scopeVariable
+    case configuration
+    case subviews
+    case constraints
+}
+
+protocol ObjectCodeGenerator: CodeGenerator {
+    func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase
+}
+
 struct GenerationContext {
     let document: IBDocument
     var indentation: Int
@@ -17,22 +33,6 @@ struct GenerationContext {
         context.indentation = indentation
         return context
     }
-}
-
-protocol CodeGenerator {
-    func generateCode(in context: GenerationContext) -> String?
-}
-
-protocol ObjectCodeGenerator: CodeGenerator {
-    func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase
-}
-
-enum ObjectGenerationPhase {
-    case properties
-    case scopeVariable
-    case configuration
-    case subviews
-    case constraints
 }
 
 extension IBReference {
@@ -49,7 +49,6 @@ extension IBReference {
         declaration.append(contentsOf: generateCode(in: context, for: .configuration))
         return declaration
     }
-
 }
 
 extension IBDocument {
@@ -95,5 +94,4 @@ struct DefaultClassGenerator {
             ]
         return clusters.flatMap() { $0 }.joined(separator: "\n")
     }
-
 }

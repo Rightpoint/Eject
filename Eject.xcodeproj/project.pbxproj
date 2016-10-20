@@ -8,18 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		AB47D9B01DB5A3DD00A7B5E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */; };
-		AB47D9B71DB5A3F100A7B5E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9B61DB5A3F100A7B5E8 /* Model.swift */; };
 		AB47D9CF1DB5AF1A00A7B5E8 /* EjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */; };
-		AB47D9D71DB5B90C00A7B5E8 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */; };
 		AB47D9DD1DB5D28C00A7B5E8 /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */; };
-		AB47D9E01DB657CF00A7B5E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9B61DB5A3F100A7B5E8 /* Model.swift */; };
-		AB47D9E21DB657CF00A7B5E8 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */; };
 		AB47D9E51DB657CF00A7B5E8 /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */; };
 		AB47D9E71DB65B5B00A7B5E8 /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */; };
-		AB47D9E81DB661CD00A7B5E8 /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */; };
 		AB47D9ED1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */; };
 		AB47D9FA1DB7AB9D00A7B5E8 /* RValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */; };
-		AB47D9FF1DB7AC8D00A7B5E8 /* RValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */; };
 		AB47DA281DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */; };
 		AB47DA291DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */; };
 		AB47DA2A1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */; };
@@ -46,6 +40,23 @@
 		AB47DA3F1DB8663D00A7B5E8 /* StructBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA251DB8663D00A7B5E8 /* StructBuilder.swift */; };
 		AB47DA401DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */; };
 		AB47DA411DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */; };
+		ABB389B71DB870CF008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B61DB870CF008BF59E /* String+Eject.swift */; };
+		ABB389BA1DB87250008BF59E /* IBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B91DB87250008BF59E /* IBReference.swift */; };
+		ABB389BC1DB8725B008BF59E /* IBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BB1DB8725B008BF59E /* IBDocument.swift */; };
+		ABB389BE1DB87266008BF59E /* IBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BD1DB87266008BF59E /* IBObject.swift */; };
+		ABB389C01DB8728B008BF59E /* IBPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */; };
+		ABB389C21DB87307008BF59E /* VariableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C11DB87307008BF59E /* VariableConfiguration.swift */; };
+		ABB389C41DB87321008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C31DB87321008BF59E /* Declaration.swift */; };
+		ABB389C51DB873DD008BF59E /* IBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B91DB87250008BF59E /* IBReference.swift */; };
+		ABB389C61DB873DD008BF59E /* IBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BB1DB8725B008BF59E /* IBDocument.swift */; };
+		ABB389C71DB873DD008BF59E /* IBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BD1DB87266008BF59E /* IBObject.swift */; };
+		ABB389C81DB873DD008BF59E /* IBPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */; };
+		ABB389CD1DB873E2008BF59E /* RValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */; };
+		ABB389CE1DB873E2008BF59E /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */; };
+		ABB389CF1DB873E2008BF59E /* VariableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C11DB87307008BF59E /* VariableConfiguration.swift */; };
+		ABB389D01DB873E2008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C31DB87321008BF59E /* Declaration.swift */; };
+		ABB389D11DB873E2008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B61DB870CF008BF59E /* String+Eject.swift */; };
+		ABB389D21DB873E2008BF59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -75,11 +86,9 @@
 /* Begin PBXFileReference section */
 		AB47D9AC1DB5A3DD00A7B5E8 /* Eject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Eject; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		AB47D9B61DB5A3F100A7B5E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AB47D9CC1DB5AF1A00A7B5E8 /* EjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectTests.swift; sourceTree = "<group>"; };
 		AB47D9D01DB5AF1A00A7B5E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generators.swift; sourceTree = "<group>"; };
 		AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBParser.swift; sourceTree = "<group>"; };
 		AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeGeneration.swift; sourceTree = "<group>"; };
 		AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
@@ -97,6 +106,13 @@
 		AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyValueBuilder.swift; path = Builder/KeyValueBuilder.swift; sourceTree = "<group>"; };
 		AB47DA251DB8663D00A7B5E8 /* StructBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StructBuilder.swift; path = Builder/StructBuilder.swift; sourceTree = "<group>"; };
 		AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionSetBuilder.swift; path = Builder/OptionSetBuilder.swift; sourceTree = "<group>"; };
+		ABB389B61DB870CF008BF59E /* String+Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Eject.swift"; sourceTree = "<group>"; };
+		ABB389B91DB87250008BF59E /* IBReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBReference.swift; sourceTree = "<group>"; };
+		ABB389BB1DB8725B008BF59E /* IBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBDocument.swift; sourceTree = "<group>"; };
+		ABB389BD1DB87266008BF59E /* IBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBObject.swift; sourceTree = "<group>"; };
+		ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBPlaceholder.swift; sourceTree = "<group>"; };
+		ABB389C11DB87307008BF59E /* VariableConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableConfiguration.swift; sourceTree = "<group>"; };
+		ABB389C31DB87321008BF59E /* Declaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,12 +154,14 @@
 		AB47D9AE1DB5A3DD00A7B5E8 /* Eject */ = {
 			isa = PBXGroup;
 			children = (
-				AB47D9B61DB5A3F100A7B5E8 /* Model.swift */,
-				AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */,
-				AB47D9D61DB5B90C00A7B5E8 /* Generators.swift */,
+				ABB389B81DB87247008BF59E /* Model */,
 				AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */,
-				AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */,
 				AB47D9F01DB7AAD600A7B5E8 /* Builders */,
+				AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */,
+				AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */,
+				ABB389C11DB87307008BF59E /* VariableConfiguration.swift */,
+				ABB389C31DB87321008BF59E /* Declaration.swift */,
+				ABB389B61DB870CF008BF59E /* String+Eject.swift */,
 				AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */,
 			);
 			path = Eject;
@@ -170,21 +188,32 @@
 		AB47D9F01DB7AAD600A7B5E8 /* Builders */ = {
 			isa = PBXGroup;
 			children = (
-				AB47DA231DB8663D00A7B5E8 /* DocumentBuilder.swift */,
-				AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */,
-				AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */,
-				AB47DA1C1DB8663D00A7B5E8 /* SubviewBuilder.swift */,
-				AB47DA1D1DB8663D00A7B5E8 /* ObjectBuilder.swift */,
-				AB47DA1E1DB8663D00A7B5E8 /* OutletBuilder.swift */,
-				AB47DA1F1DB8663D00A7B5E8 /* PlaceholderBuilder.swift */,
 				AB47DA201DB8663D00A7B5E8 /* CocoaTouchBuilder.swift */,
+				AB47DA231DB8663D00A7B5E8 /* DocumentBuilder.swift */,
+				AB47DA1D1DB8663D00A7B5E8 /* ObjectBuilder.swift */,
+				AB47DA1F1DB8663D00A7B5E8 /* PlaceholderBuilder.swift */,
+				AB47DA1E1DB8663D00A7B5E8 /* OutletBuilder.swift */,
+				AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */,
+				AB47DA1C1DB8663D00A7B5E8 /* SubviewBuilder.swift */,
+				AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */,
+				AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */,
 				AB47DA211DB8663D00A7B5E8 /* FontBuilder.swift */,
 				AB47DA221DB8663D00A7B5E8 /* ColorBuilder.swift */,
-				AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */,
 				AB47DA251DB8663D00A7B5E8 /* StructBuilder.swift */,
 				AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */,
 			);
 			name = Builders;
+			sourceTree = "<group>";
+		};
+		ABB389B81DB87247008BF59E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABB389B91DB87250008BF59E /* IBReference.swift */,
+				ABB389BB1DB8725B008BF59E /* IBDocument.swift */,
+				ABB389BD1DB87266008BF59E /* IBObject.swift */,
+				ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,18 +311,23 @@
 				AB47DA341DB8663D00A7B5E8 /* CocoaTouchBuilder.swift in Sources */,
 				AB47D9FA1DB7AB9D00A7B5E8 /* RValues.swift in Sources */,
 				AB47D9DD1DB5D28C00A7B5E8 /* XIBParser.swift in Sources */,
-				AB47D9D71DB5B90C00A7B5E8 /* Generators.swift in Sources */,
+				ABB389C21DB87307008BF59E /* VariableConfiguration.swift in Sources */,
 				AB47DA3E1DB8663D00A7B5E8 /* StructBuilder.swift in Sources */,
+				ABB389BC1DB8725B008BF59E /* IBDocument.swift in Sources */,
 				AB47DA301DB8663D00A7B5E8 /* OutletBuilder.swift in Sources */,
 				AB47DA2C1DB8663D00A7B5E8 /* SubviewBuilder.swift in Sources */,
 				AB47DA3A1DB8663D00A7B5E8 /* DocumentBuilder.swift in Sources */,
 				AB47D9B01DB5A3DD00A7B5E8 /* main.swift in Sources */,
 				AB47D9E71DB65B5B00A7B5E8 /* CodeGeneration.swift in Sources */,
+				ABB389C41DB87321008BF59E /* Declaration.swift in Sources */,
 				AB47DA2A1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */,
-				AB47D9B71DB5A3F100A7B5E8 /* Model.swift in Sources */,
+				ABB389C01DB8728B008BF59E /* IBPlaceholder.swift in Sources */,
+				ABB389BA1DB87250008BF59E /* IBReference.swift in Sources */,
 				AB47DA3C1DB8663D00A7B5E8 /* KeyValueBuilder.swift in Sources */,
+				ABB389BE1DB87266008BF59E /* IBObject.swift in Sources */,
 				AB47DA321DB8663D00A7B5E8 /* PlaceholderBuilder.swift in Sources */,
 				AB47DA2E1DB8663D00A7B5E8 /* ObjectBuilder.swift in Sources */,
+				ABB389B71DB870CF008BF59E /* String+Eject.swift in Sources */,
 				AB47DA361DB8663D00A7B5E8 /* FontBuilder.swift in Sources */,
 				AB47DA381DB8663D00A7B5E8 /* ColorBuilder.swift in Sources */,
 				AB47DA401DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */,
@@ -306,23 +340,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB47DA351DB8663D00A7B5E8 /* CocoaTouchBuilder.swift in Sources */,
-				AB47D9E21DB657CF00A7B5E8 /* Generators.swift in Sources */,
 				AB47D9E51DB657CF00A7B5E8 /* XIBParser.swift in Sources */,
-				AB47D9FF1DB7AC8D00A7B5E8 /* RValues.swift in Sources */,
 				AB47DA3F1DB8663D00A7B5E8 /* StructBuilder.swift in Sources */,
 				AB47DA311DB8663D00A7B5E8 /* OutletBuilder.swift in Sources */,
 				AB47DA2D1DB8663D00A7B5E8 /* SubviewBuilder.swift in Sources */,
+				ABB389C61DB873DD008BF59E /* IBDocument.swift in Sources */,
 				AB47DA3B1DB8663D00A7B5E8 /* DocumentBuilder.swift in Sources */,
 				AB47D9CF1DB5AF1A00A7B5E8 /* EjectTests.swift in Sources */,
-				AB47D9E81DB661CD00A7B5E8 /* CodeGeneration.swift in Sources */,
+				ABB389CF1DB873E2008BF59E /* VariableConfiguration.swift in Sources */,
 				AB47DA2B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */,
-				AB47D9E01DB657CF00A7B5E8 /* Model.swift in Sources */,
+				ABB389D11DB873E2008BF59E /* String+Eject.swift in Sources */,
+				ABB389C71DB873DD008BF59E /* IBObject.swift in Sources */,
 				AB47DA3D1DB8663D00A7B5E8 /* KeyValueBuilder.swift in Sources */,
 				AB47DA331DB8663D00A7B5E8 /* PlaceholderBuilder.swift in Sources */,
 				AB47DA2F1DB8663D00A7B5E8 /* ObjectBuilder.swift in Sources */,
+				ABB389D01DB873E2008BF59E /* Declaration.swift in Sources */,
+				ABB389D21DB873E2008BF59E /* main.swift in Sources */,
+				ABB389C81DB873DD008BF59E /* IBPlaceholder.swift in Sources */,
+				ABB389CE1DB873E2008BF59E /* CodeGeneration.swift in Sources */,
 				AB47DA371DB8663D00A7B5E8 /* FontBuilder.swift in Sources */,
+				ABB389C51DB873DD008BF59E /* IBReference.swift in Sources */,
 				AB47DA391DB8663D00A7B5E8 /* ColorBuilder.swift in Sources */,
 				AB47DA411DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */,
+				ABB389CD1DB873E2008BF59E /* RValues.swift in Sources */,
 				AB47DA291DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

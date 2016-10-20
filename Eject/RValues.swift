@@ -44,8 +44,7 @@ indirect enum RValueFormat {
     }
 }
 
-
-// Note, this is a class, because some builders will use this as mutable state after it's been added to the hierarchy.
+// This is a class, because some builders will use this as mutable state after it's been added to the hierarchy.
 class BasicRValue: CodeGenerator {
     let format: RValueFormat
     var value: String = ""
