@@ -16,13 +16,13 @@ struct ColorBuilder: Builder {
         let alpha = attributes["alpha"]?.floatValue ?? 1
         let value: String
         if let white = attributes["white"]?.floatValue {
-            value = String(format: "UIColor(white: %.3g, alpha: %.3g)", white, alpha)
+            value = "UIColor(white: \(white.shortString), alpha: \(alpha.shortString))"
         }
         else if
             let red = attributes["red"]?.floatValue,
             let green = attributes["green"]?.floatValue,
             let blue = attributes["blue"]?.floatValue {
-            value = String(format: "UIColor(red: %.3g, green: %.3g, blue: %.3g, alpha: %.3g)", red, green, blue, alpha)
+            value = "UIColor(red: \(red.shortString), green: \(green.shortString), blue: \(blue.shortString), alpha: \(alpha.shortString))"
         }
         else {
             fatalError("Unknown color \(attributes)")

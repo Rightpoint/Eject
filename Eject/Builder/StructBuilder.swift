@@ -21,7 +21,7 @@ struct RectBuilder: Builder {
             else {
                 fatalError("Invalid Rect")
         }
-        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: "CGRect(x: \(x), y:\(y), width: \(width), height: \(height))"))
+        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))"))
         return object
     }
 

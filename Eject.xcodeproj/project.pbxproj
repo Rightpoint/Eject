@@ -57,6 +57,8 @@
 		ABB389D01DB873E2008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C31DB87321008BF59E /* Declaration.swift */; };
 		ABB389D11DB873E2008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B61DB870CF008BF59E /* String+Eject.swift */; };
 		ABB389D21DB873E2008BF59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */; };
+		ABB389D41DB8F5A8008BF59E /* AchorageConstraintBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */; };
+		ABB389D51DB901F0008BF59E /* AchorageConstraintBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -113,6 +115,7 @@
 		ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBPlaceholder.swift; sourceTree = "<group>"; };
 		ABB389C11DB87307008BF59E /* VariableConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableConfiguration.swift; sourceTree = "<group>"; };
 		ABB389C31DB87321008BF59E /* Declaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
+		ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchorageConstraintBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,7 @@
 				AB47DA1E1DB8663D00A7B5E8 /* OutletBuilder.swift */,
 				AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */,
 				AB47DA1C1DB8663D00A7B5E8 /* SubviewBuilder.swift */,
+				ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */,
 				AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */,
 				AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */,
 				AB47DA211DB8663D00A7B5E8 /* FontBuilder.swift */,
@@ -323,6 +327,7 @@
 				AB47DA2A1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */,
 				ABB389C01DB8728B008BF59E /* IBPlaceholder.swift in Sources */,
 				ABB389BA1DB87250008BF59E /* IBReference.swift in Sources */,
+				ABB389D41DB8F5A8008BF59E /* AchorageConstraintBuilder.swift in Sources */,
 				AB47DA3C1DB8663D00A7B5E8 /* KeyValueBuilder.swift in Sources */,
 				ABB389BE1DB87266008BF59E /* IBObject.swift in Sources */,
 				AB47DA321DB8663D00A7B5E8 /* PlaceholderBuilder.swift in Sources */,
@@ -363,6 +368,7 @@
 				AB47DA391DB8663D00A7B5E8 /* ColorBuilder.swift in Sources */,
 				AB47DA411DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */,
 				ABB389CD1DB873E2008BF59E /* RValues.swift in Sources */,
+				ABB389D51DB901F0008BF59E /* AchorageConstraintBuilder.swift in Sources */,
 				AB47DA291DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -38,3 +38,10 @@ extension String {
         return nil
     }
 }
+
+extension CGFloat {
+
+    var shortString: String {
+        return String(format: "%.3g", self)
+    }
+}

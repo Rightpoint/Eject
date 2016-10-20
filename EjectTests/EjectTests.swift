@@ -70,7 +70,7 @@ class EjectTests: XCTestCase {
             "let test = UIView()",
             "test.clearsContextBeforeDrawing = false",
             "test.contentMode = .scaleToFill",
-            "test.frame = CGRect(x: 0.0, y:0.0, width: 350, height: 85)"
+            "test.frame = CGRect(x: 0.0, y: 0.0, width: 350, height: 85)"
             ]
         )
     }
@@ -142,7 +142,7 @@ class EjectTests: XCTestCase {
             "let collectionView = UICollectionView()",
             "collectionView.translatesAutoresizingMaskIntoConstraints = false",
             "collectionView.contentMode = .scaleToFill",
-            "collectionView.frame = CGRect(x: 11, y:11, width: 328, height: 578)",
+            "collectionView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "collectionView.collectionViewLayout = collectionViewFlowLayout",
             "collectionView.dataSource = fileOwner",
             "collectionView.delegate = fileOwner",
@@ -159,7 +159,7 @@ class EjectTests: XCTestCase {
             "tableView.rowHeight = 44",
             "tableView.sectionHeaderHeight = 28",
             "tableView.sectionFooterHeight = 28",
-            "tableView.frame = CGRect(x: 11, y:11, width: 328, height: 578)",
+            "tableView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "tableView.backgroundColor = UIColor(white: 1, alpha: 1)",
             "tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 30.0)",
             "tableView.dataSource = fileOwner",
@@ -182,7 +182,7 @@ class EjectTests: XCTestCase {
         checkXML(xml, [
             "let button = UIButton()",
             "button.lineBreakMode = .middleTruncation", // This is deprecated and should be .titleLabel.lineBreakMode
-            "button.frame = CGRect(x: 11, y:11, width: 328, height: 578)",
+            "button.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "button.setTitle(\"Title\", for: .normal)",
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",
             "button.setTitlecolor(UIColor(white: 1, alpha: 1), for: .normal)",
@@ -200,6 +200,34 @@ class EjectTests: XCTestCase {
             "borderView.addSubview(webView)",
             "view.addSubview(borderView)",
             "view.addSubview(otherView)",
+            ])
+    }
+
+    func testAnchorageConstraints() {
+        let xml = "<view id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/><autoresizingMask key='autoresizingMask' widthSizable='YES' heightSizable='YES'/><subviews><view id='UX2-VG-eOo' customClass='CircularToggleView'><rect key='frame' x='0.0' y='29' width='28' height='28'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><constraints><constraint firstAttribute='height' constant='28' id='BqJ-XJ-eyz'/><constraint firstAttribute='width' constant='28' id='nMF-V2-XRU'/></constraints></view><label id='19u-jG-JIO'><rect key='frame' x='36' y='36' width='52' height='14'/><fontDescription key='fontDescription' name='Gotham-Book' family='Gotham' pointSize='14'/><color key='textColor' red='0.50196078430000002' green='0.50196078430000002' blue='0.50196078430000002' alpha='1' colorSpace='calibratedRGB'/><nil key='highlightedColor'/></label></subviews><color key='backgroundColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/><constraints><constraint firstItem='UX2-VG-eOo' firstAttribute='leading' secondItem='i5M-Pr-FkT' secondAttribute='leading' id='5fR-oy-xvA'/><constraint firstItem='UX2-VG-eOo' firstAttribute='centerY' secondItem='i5M-Pr-FkT' secondAttribute='centerY' id='6Qn-oN-YHI'/><constraint firstAttribute='bottom' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='bottom' constant='20' symbolic='YES' id='BGy-u3-ENo'/><constraint firstAttribute='trailing' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='trailing' constant='20' symbolic='YES' id='Kgc-VK-hur'/><constraint firstItem='19u-jG-JIO' firstAttribute='centerY' secondItem='UX2-VG-eOo' secondAttribute='centerY' id='jSG-kc-EZ6'/><constraint firstItem='19u-jG-JIO' firstAttribute='top' relation='greaterThanOrEqual' secondItem='i5M-Pr-FkT' secondAttribute='top' constant='20' symbolic='YES' id='trv-aZ-Isd'/><constraint firstItem='19u-jG-JIO' firstAttribute='leading' secondItem='UX2-VG-eOo' secondAttribute='trailing' priority='100' constant='8' id='zMe-2W-nrz'/></constraints></view>"
+        checkXML(xml, [
+            "let label = UILabel()",
+            "label.frame = CGRect(x: 36, y: 36, width: 52, height: 14)",
+            "label.font = UIFont(name: \"Gotham-Book\", size: 14)",
+            "label.textColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1)",
+            "label.highlightedColor = nil",
+            "let circularToggleView = CircularToggleView()",
+            "circularToggleView.frame = CGRect(x: 0.0, y: 29, width: 28, height: 28)",
+            "circularToggleView.backgroundColor = UIColor(white: 1, alpha: 1)",
+            "let view = UIView()",
+            "view.frame = CGRect(x: 0.0, y: 0.0, width: 350, height: 85)",
+            "view.backgroundColor = UIColor(white: 0, alpha: 0)",
+            "view.addSubview(circularToggleView)",
+            "view.addSubview(label)",
+            "circularToggleView.height == 28",
+            "circularToggleView.width == 28",
+            "circularToggleView.leading == view.leading",
+            "circularToggleView.centerY == view.centerY",
+            "view.bottom == label.bottom + 20",
+            "view.trailing == label.trailing + 20",
+            "label.centerY == circularToggleView.centerY",
+            "label.top == view.top + 20",
+            "label.leading == circularToggleView.trailing + 8 ~ 100"
             ])
     }
 

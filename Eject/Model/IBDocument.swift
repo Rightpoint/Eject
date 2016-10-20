@@ -26,11 +26,9 @@ class IBDocument {
         for prefix in ["NS", "UI", "MK", "SCN"] {
             if let range = className.range(of: prefix) {
                 className.removeSubrange(range)
-                return className.snakeCased()
             }
         }
-        // This is the last resort and will not compile.
-        return object.identifier
+        return className.snakeCased()
     }
 
     enum Scope {

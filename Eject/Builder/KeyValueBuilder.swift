@@ -13,7 +13,7 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
     let rvalue: BasicRValue
 
     init(value: String = "", format: RValueFormat = .raw) {
-        self.rvalue = BasicRValue(value: "", format: format)
+        self.rvalue = BasicRValue(value: value, format: format)
     }
 
     func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {

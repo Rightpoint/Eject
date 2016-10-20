@@ -20,6 +20,7 @@ func CocoaTouchBuilder() -> DocumentBuilder {
     definition.register("color", ColorBuilder())
     definition.register("state", ButtonStateBuilder())
     definition.register("subviews", SubviewBuilder())
+    definition.register("constraint", AchorageConstraintBuilder())
     definition.register("fontDescription", FontBuilder())
     definition.register("outlet", OutletBuilder())
     definition.register("placeholder", PlaceholderBuilder())
