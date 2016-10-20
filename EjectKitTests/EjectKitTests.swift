@@ -7,21 +7,23 @@
 //
 
 import XCTest
+@testable import EjectKit
+
 func checkXML(_ xml: String, _ expected: [String], file: StaticString = #file, line: UInt = #line) {
     do {
-        let builder = try XIBParser(content: xml, documentBuilder: CocoaTouchBuilder())
-        let references = builder.document.references
+        let document = try IBDocument.load(xml: xml)
+        let references = document.references
             .map() { $0 as? IBObject }.flatMap() { $0 } // Only generate IBObjects
             .reversed() // Walk the list in reverse
         guard references.count > 0 else {
             XCTFail("No objects in the document", file: file, line: line - 1)
             return
         }
-        let context = GenerationContext(document: builder.document, indentation: 0)
+        let context = GenerationContext(document: document, indentation: 0)
         var lines = references.map() { $0.generateCodeForConfiguration(in: context)}.flatMap() { $0 }
         lines.append(contentsOf: references.map() { $0.generateCode(in: context, for: .subviews) }.flatMap() { $0 })
         lines.append(contentsOf: references.map() { $0.generateCode(in: context, for: .constraints) }.flatMap() { $0 })
-        
+
         XCTAssertEqual(lines.count, expected.count, file: file, line:line)
         var i: UInt = 1
         for (actualLine, expectedLine) in zip(lines, expected) {
@@ -54,7 +56,7 @@ func wrap(_ xml: String) -> String {
             xml,
             "</objects>",
             "</document>"
-    ].joined(separator: "\n")
+        ].joined(separator: "\n")
 }
 
 class EjectTests: XCTestCase {
@@ -65,7 +67,7 @@ class EjectTests: XCTestCase {
     }
 
     func testViewPartsWithFrame() {
-        let xml = "<view userLabel='test' clearsContextBeforeDrawing='NO' contentMode='scaleToFill' id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/></view>"
+        let xml = wrap("<view userLabel='test' clearsContextBeforeDrawing='NO' contentMode='scaleToFill' id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/></view>")
         checkXML(xml, [
             "let test = UIView()",
             "test.clearsContextBeforeDrawing = false",
@@ -76,7 +78,7 @@ class EjectTests: XCTestCase {
     }
 
     func testUserDefinedInt() {
-        let xml = "<view userLabel='test' id='i5M-Pr-FkT'><userDefinedRuntimeAttributes><userDefinedRuntimeAttribute type='number' keyPath='layer.cornerRadius'><integer key='value' value='25'/></userDefinedRuntimeAttribute></userDefinedRuntimeAttributes></view>"
+        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><userDefinedRuntimeAttributes><userDefinedRuntimeAttribute type='number' keyPath='layer.cornerRadius'><integer key='value' value='25'/></userDefinedRuntimeAttribute></userDefinedRuntimeAttributes></view>")
         checkXML(xml, [
             "let test = UIView()",
             "test.layer.cornerRadius = 25"
@@ -85,7 +87,7 @@ class EjectTests: XCTestCase {
     }
 
     func testLabelWithTextContent() {
-        let xml = "<label userLabel='test' id='i5M-Pr-FkT'><mutableString key='text'>body</mutableString></label>"
+        let xml = wrap("<label userLabel='test' id='i5M-Pr-FkT'><mutableString key='text'>body</mutableString></label>")
         checkXML(xml, [
             "let test = UILabel()",
             "test.text = \"body\""
@@ -94,7 +96,7 @@ class EjectTests: XCTestCase {
     }
 
     func testColor() {
-        let xml = "<view userLabel='test' id='i5M-Pr-FkT'><color key='a' red='0.97254908084869385' green='0.97254908084869385' blue='0.90196084976196289' alpha='1' colorSpace='deviceRGB'/><color key='b' red='0.84705882352941175' green='0.16078431372549021' blue='0.18431372549019609' alpha='1' colorSpace='calibratedRGB'/><color key='c' white='1' alpha='1' colorSpace='custom' customColorSpace='calibratedWhite'/><color key='d' white='0.5' alpha='1' colorSpace='calibratedWhite'/></view>"
+        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><color key='a' red='0.97254908084869385' green='0.97254908084869385' blue='0.90196084976196289' alpha='1' colorSpace='deviceRGB'/><color key='b' red='0.84705882352941175' green='0.16078431372549021' blue='0.18431372549019609' alpha='1' colorSpace='calibratedRGB'/><color key='c' white='1' alpha='1' colorSpace='custom' customColorSpace='calibratedWhite'/><color key='d' white='0.5' alpha='1' colorSpace='calibratedWhite'/></view>")
         checkXML(xml, [
             "let test = UIView()",
             "test.a = UIColor(red: 0.973, green: 0.973, blue: 0.902, alpha: 1)",
@@ -106,12 +108,12 @@ class EjectTests: XCTestCase {
     }
 
     func crashTestAttributedText() {
-        let xml = "<attributedString key='attributedText'><fragment content='Get $50 bonus!'><attributes><color key='NSColor' red='0.42745098040000001' green='0.42745098040000001' blue='0.42745098040000001' alpha='1' colorSpace='calibratedRGB'/><font key='NSFont' metaFont='system' size='19'/>                                        <paragraphStyle key='NSParagraphStyle' alignment='center' lineBreakMode='truncatingTail' baseWritingDirection='natural' lineSpacing='5' tighteningFactorForTruncation='0.0'/></attributes></fragment></attributedString>"
+        let xml = wrap("<attributedString key='attributedText'><fragment content='Get $50 bonus!'><attributes><color key='NSColor' red='0.42745098040000001' green='0.42745098040000001' blue='0.42745098040000001' alpha='1' colorSpace='calibratedRGB'/><font key='NSFont' metaFont='system' size='19'/>                                        <paragraphStyle key='NSParagraphStyle' alignment='center' lineBreakMode='truncatingTail' baseWritingDirection='natural' lineSpacing='5' tighteningFactorForTruncation='0.0'/></attributes></fragment></attributedString>")
         checkXML(xml, [])
     }
 
     func testFont() {
-        let xml = "<view userLabel='test' id='i5M-Pr-FkT'><fontDescription key='a' name='Gotham-Bold' family='Gotham' pointSize='32'/><fontDescription key='b' type='system' pointSize='17'/></view>"
+        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><fontDescription key='a' name='Gotham-Bold' family='Gotham' pointSize='32'/><fontDescription key='b' type='system' pointSize='17'/></view>")
         checkXML(xml, [
             "let test = UIView()",
             "test.a = UIFont(name: \"Gotham-Bold\", size: 32)",
@@ -121,7 +123,7 @@ class EjectTests: XCTestCase {
     }
 
     func testLabel() {
-        let xml = "<label baselineAdjustment='alignBaselines' minimumFontSize='13' userLabel='test' id='i5M-Pr-FkT'><fontDescription key='fontDescription' type='system' pointSize='17'/></label>"
+        let xml = wrap("<label baselineAdjustment='alignBaselines' minimumFontSize='13' userLabel='test' id='i5M-Pr-FkT'><fontDescription key='fontDescription' type='system' pointSize='17'/></label>")
         checkXML(xml, [
             "let test = UILabel()",
             "test.minimumFontSize = 13",
@@ -146,7 +148,7 @@ class EjectTests: XCTestCase {
             "collectionView.collectionViewLayout = collectionViewFlowLayout",
             "collectionView.dataSource = fileOwner",
             "collectionView.delegate = fileOwner",
-        ])
+            ])
     }
 
     func testTableView() {
@@ -168,17 +170,17 @@ class EjectTests: XCTestCase {
     }
 
     func testImageView() {
-        let xml = "<imageView contentMode='center' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'></imageView>"
+        let xml = wrap("<imageView contentMode='center' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'></imageView>")
         checkXML(xml, [
             "let imageView = UIImageView()",
             "imageView.translatesAutoresizingMaskIntoConstraints = false",
             "imageView.contentMode = .center",
             "imageView.image = UIImage(named: \"icon\")",
-        ])
+            ])
     }
 
     func testButtonState() {
-        let xml = "<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>"
+        let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
             "let button = UIButton()",
             "button.lineBreakMode = .middleTruncation", // This is deprecated and should be .titleLabel.lineBreakMode
@@ -191,7 +193,7 @@ class EjectTests: XCTestCase {
     }
 
     func testViewHierarchy() {
-        let xml = "<view id='i5M-Pr-FkT'><subviews><view id='FUp-2k-EIR' userLabel='BorderView'><subviews><webView id='glB-HT-PdE'/></subviews></view><view id='aaa-bb-ccc' userLabel='OtherView'/></subviews></view>"
+        let xml = wrap("<view id='i5M-Pr-FkT'><subviews><view id='FUp-2k-EIR' userLabel='BorderView'><subviews><webView id='glB-HT-PdE'/></subviews></view><view id='aaa-bb-ccc' userLabel='OtherView'/></subviews></view>")
         checkXML(xml, [
             "let otherView = UIView()",
             "let webView = UIWebView()",
@@ -204,7 +206,7 @@ class EjectTests: XCTestCase {
     }
 
     func testAnchorageConstraints() {
-        let xml = "<view id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/><autoresizingMask key='autoresizingMask' widthSizable='YES' heightSizable='YES'/><subviews><view id='UX2-VG-eOo' customClass='CircularToggleView'><rect key='frame' x='0.0' y='29' width='28' height='28'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><constraints><constraint firstAttribute='height' constant='28' id='BqJ-XJ-eyz'/><constraint firstAttribute='width' constant='28' id='nMF-V2-XRU'/></constraints></view><label id='19u-jG-JIO'><rect key='frame' x='36' y='36' width='52' height='14'/><fontDescription key='fontDescription' name='Gotham-Book' family='Gotham' pointSize='14'/><color key='textColor' red='0.50196078430000002' green='0.50196078430000002' blue='0.50196078430000002' alpha='1' colorSpace='calibratedRGB'/><nil key='highlightedColor'/></label></subviews><color key='backgroundColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/><constraints><constraint firstItem='UX2-VG-eOo' firstAttribute='leading' secondItem='i5M-Pr-FkT' secondAttribute='leading' id='5fR-oy-xvA'/><constraint firstItem='UX2-VG-eOo' firstAttribute='centerY' secondItem='i5M-Pr-FkT' secondAttribute='centerY' id='6Qn-oN-YHI'/><constraint firstAttribute='bottom' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='bottom' constant='20' symbolic='YES' id='BGy-u3-ENo'/><constraint firstAttribute='trailing' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='trailing' constant='20' symbolic='YES' id='Kgc-VK-hur'/><constraint firstItem='19u-jG-JIO' firstAttribute='centerY' secondItem='UX2-VG-eOo' secondAttribute='centerY' id='jSG-kc-EZ6'/><constraint firstItem='19u-jG-JIO' firstAttribute='top' relation='greaterThanOrEqual' secondItem='i5M-Pr-FkT' secondAttribute='top' constant='20' symbolic='YES' id='trv-aZ-Isd'/><constraint firstItem='19u-jG-JIO' firstAttribute='leading' secondItem='UX2-VG-eOo' secondAttribute='trailing' priority='100' constant='8' id='zMe-2W-nrz'/></constraints></view>"
+        let xml = wrap("<view id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/><autoresizingMask key='autoresizingMask' widthSizable='YES' heightSizable='YES'/><subviews><view id='UX2-VG-eOo' customClass='CircularToggleView'><rect key='frame' x='0.0' y='29' width='28' height='28'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><constraints><constraint firstAttribute='height' constant='28' id='BqJ-XJ-eyz'/><constraint firstAttribute='width' constant='28' id='nMF-V2-XRU'/></constraints></view><label id='19u-jG-JIO'><rect key='frame' x='36' y='36' width='52' height='14'/><fontDescription key='fontDescription' name='Gotham-Book' family='Gotham' pointSize='14'/><color key='textColor' red='0.50196078430000002' green='0.50196078430000002' blue='0.50196078430000002' alpha='1' colorSpace='calibratedRGB'/><nil key='highlightedColor'/></label></subviews><color key='backgroundColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/><constraints><constraint firstItem='UX2-VG-eOo' firstAttribute='leading' secondItem='i5M-Pr-FkT' secondAttribute='leading' id='5fR-oy-xvA'/><constraint firstItem='UX2-VG-eOo' firstAttribute='centerY' secondItem='i5M-Pr-FkT' secondAttribute='centerY' id='6Qn-oN-YHI'/><constraint firstAttribute='bottom' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='bottom' constant='20' symbolic='YES' id='BGy-u3-ENo'/><constraint firstAttribute='trailing' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='trailing' constant='20' symbolic='YES' id='Kgc-VK-hur'/><constraint firstItem='19u-jG-JIO' firstAttribute='centerY' secondItem='UX2-VG-eOo' secondAttribute='centerY' id='jSG-kc-EZ6'/><constraint firstItem='19u-jG-JIO' firstAttribute='top' relation='greaterThanOrEqual' secondItem='i5M-Pr-FkT' secondAttribute='top' constant='20' symbolic='YES' id='trv-aZ-Isd'/><constraint firstItem='19u-jG-JIO' firstAttribute='leading' secondItem='UX2-VG-eOo' secondAttribute='trailing' priority='100' constant='8' id='zMe-2W-nrz'/></constraints></view>")
         checkXML(xml, [
             "let label = UILabel()",
             "label.frame = CGRect(x: 36, y: 36, width: 52, height: 14)",
@@ -232,12 +234,12 @@ class EjectTests: XCTestCase {
     }
 
     func testVisualEffectViewKey() {
-        let xml = "<visualEffectView opaque='NO' contentMode='scaleToFill' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT' userLabel='Top Bar Blur Container'><view key='contentView' opaque='NO' id='u6B-MW-OWb'></view></visualEffectView>"
+        let xml = wrap("<visualEffectView opaque='NO' contentMode='scaleToFill' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT' userLabel='Top Bar Blur Container'><view key='contentView' opaque='NO' id='u6B-MW-OWb'></view></visualEffectView>")
         checkXML(xml, [])
     }
 
     func testSegmentedControl() {
-        let xml = "<segmentedControl segmentControlStyle='plain' selectedSegmentIndex='0' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><segments><segment title='Overview'/><segment title='Description'/></segments></segmentedControl>"
+        let xml = wrap("<segmentedControl segmentControlStyle='plain' selectedSegmentIndex='0' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><segments><segment title='Overview'/><segment title='Description'/></segments></segmentedControl>")
         checkXML(xml, [])
     }
 
@@ -246,7 +248,7 @@ class EjectTests: XCTestCase {
         for path in Bundle(for: type(of: self)).paths(forResourcesOfType: "xibtest", inDirectory: "") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                let builder = try XIBParser(data: data, documentBuilder: CocoaTouchBuilder())
+                let builder = try XIBParser(data: data)
                 let code = builder.document.generateCode()
                 print(code)
             }

@@ -8,15 +8,15 @@
 
 import Foundation
 
-class IBObject: IBReference {
+public class IBObject: IBReference {
     weak var document: IBDocument?
     weak var parent: IBObject?
     var children: [IBObject] = []
 
-    var identifier: String
-    var className: String
-    var userLabel: String?
-    var generators: [ObjectCodeGenerator] = []
+    public var identifier: String
+    public var className: String
+    public var userLabel: String?
+    public var generators: [ObjectCodeGenerator] = []
 
     init (identifier: String, className: String, userLabel: String? = nil) {
         self.identifier = identifier

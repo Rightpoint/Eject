@@ -9,7 +9,7 @@
 import Foundation
 
 /// An protocol that references something in the object graph that enerates code
-protocol IBReference: class {
+public protocol IBReference: class {
     var identifier: String { get }
     var className: String { get }
     var userLabel: String? { get }
@@ -21,7 +21,7 @@ protocol IBReference: class {
 extension IBReference {
 
     // Default implementation
-    func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator {
+    public func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator {
         return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, setterContext: nil)
     }
 

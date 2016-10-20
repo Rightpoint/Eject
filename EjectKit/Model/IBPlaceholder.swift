@@ -8,13 +8,13 @@
 
 import Foundation
 
-class IBPlaceholder: IBReference {
+public class IBPlaceholder: IBReference {
     weak var document: IBDocument?
 
-    var identifier: String
-    var className: String
-    var userLabel: String?
-    var generators: [ObjectCodeGenerator] = []
+    public var identifier: String
+    public var className: String
+    public var userLabel: String?
+    public var generators: [ObjectCodeGenerator] = []
 
     init (identifier: String, className: String, userLabel: String? = nil) {
         self.identifier = identifier

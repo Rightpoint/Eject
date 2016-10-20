@@ -40,27 +40,17 @@ class XIBParser: NSObject {
     }
 
     private let parser: XMLParser
-    private let documentBuilder: DocumentBuilder
+    private let documentBuilder = DocumentBuilder()
 
-    var builderStack: [Builder]
-    var stack: [IBReference?]
+    var builderStack: [Builder] = []
+    var stack: [IBReference?] = []
 
     var document: IBDocument {
         return documentBuilder.document
     }
 
-    convenience init(content: String, documentBuilder: DocumentBuilder) throws {
-        guard let data = content.data(using: String.Encoding.utf8) else {
-            fatalError("Unable to convert to UTF8")
-        }
-        try self.init(data: data, documentBuilder: documentBuilder)
-    }
-
-    init(data: Data, documentBuilder: DocumentBuilder) throws {
+    init(data: Data) throws {
         self.parser = XMLParser(data: data)
-        self.documentBuilder = documentBuilder
-        self.builderStack = []
-        self.stack = []
         super.init()
         self.parser.delegate = self
         if parser.parse() == false {
@@ -83,7 +73,7 @@ class XIBParser: NSObject {
 }
 
 extension XIBParser: XMLParserDelegate {
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         guard let builder = builderLookup.lookupBuilder(for: elementName) else {
             print("No builder found for \(elementName)")
             return
@@ -93,7 +83,7 @@ extension XIBParser: XMLParserDelegate {
         stack.append(nextObject)
     }
 
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         guard builderLookup.lookupBuilder(for: elementName) != nil else {
             return
         }
@@ -104,7 +94,7 @@ extension XIBParser: XMLParserDelegate {
         }
     }
 
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
+    public func parser(_ parser: XMLParser, foundCharacters string: String) {
         if let characterBuilder = lastBuilder as? CharacterBuilder {
             characterBuilder.found(characters: string)
         }

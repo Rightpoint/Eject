@@ -12,6 +12,10 @@ class DocumentBuilder: BuilderLookup {
     var document = IBDocument()
     var elementBuilders: [String: Builder] = [:]
 
+    init() {
+        register("plugIn", PluginBuilder(documentBuilder: self))
+    }
+
     func register(_ element: String, _ builder: Builder) {
         elementBuilders[element] = builder
     }
@@ -24,4 +28,16 @@ class DocumentBuilder: BuilderLookup {
         return builder
     }
 
+    struct PluginBuilder: Builder {
+        weak var documentBuilder: DocumentBuilder?
+        func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+            guard let identifier = attributes["identifier"] else { fatalError("plugIn does not have an identifier") }
+            if identifier == "com.apple.InterfaceBuilder.IBCocoaTouchPlugin" {
+                documentBuilder!.registerCocoaTouch()
+            }
+            return nil
+        }
+    }
 }
+
+

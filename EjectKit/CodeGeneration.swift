@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol CodeGenerator {
+public protocol CodeGenerator {
     func generateCode(in context: GenerationContext) -> String?
 }
 
-enum ObjectGenerationPhase {
+public enum ObjectGenerationPhase {
     case properties
     case scopeVariable
     case configuration
@@ -20,13 +20,18 @@ enum ObjectGenerationPhase {
     case constraints
 }
 
-protocol ObjectCodeGenerator: CodeGenerator {
+public protocol ObjectCodeGenerator: CodeGenerator {
     func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase
 }
 
-struct GenerationContext {
+public struct GenerationContext {
     let document: IBDocument
     var indentation: Int
+
+    public init(document: IBDocument, indentation: Int) {
+        self.document = document
+        self.indentation = indentation
+    }
 
     func with(indentation: Int) -> GenerationContext {
         var context = self
@@ -35,7 +40,7 @@ struct GenerationContext {
     }
 }
 
-extension IBReference {
+public extension IBReference {
 
     func generateCode(in context: GenerationContext, for generationPhase: ObjectGenerationPhase) -> [String] {
         return generators
@@ -51,7 +56,7 @@ extension IBReference {
     }
 }
 
-extension IBDocument {
+public extension IBDocument {
 
     func generateCode(in context: GenerationContext, for generationPhase: ObjectGenerationPhase) -> [String] {
         return references

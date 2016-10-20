@@ -7,129 +7,132 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB47D9B01DB5A3DD00A7B5E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */; };
-		AB47D9CF1DB5AF1A00A7B5E8 /* EjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */; };
-		AB47D9DD1DB5D28C00A7B5E8 /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */; };
-		AB47D9E51DB657CF00A7B5E8 /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */; };
-		AB47D9E71DB65B5B00A7B5E8 /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */; };
-		AB47D9ED1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */; };
-		AB47D9FA1DB7AB9D00A7B5E8 /* RValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */; };
-		AB47DA281DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */; };
-		AB47DA291DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */; };
-		AB47DA2A1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */; };
-		AB47DA2B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */; };
-		AB47DA2C1DB8663D00A7B5E8 /* SubviewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1C1DB8663D00A7B5E8 /* SubviewBuilder.swift */; };
-		AB47DA2D1DB8663D00A7B5E8 /* SubviewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1C1DB8663D00A7B5E8 /* SubviewBuilder.swift */; };
-		AB47DA2E1DB8663D00A7B5E8 /* ObjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1D1DB8663D00A7B5E8 /* ObjectBuilder.swift */; };
-		AB47DA2F1DB8663D00A7B5E8 /* ObjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1D1DB8663D00A7B5E8 /* ObjectBuilder.swift */; };
-		AB47DA301DB8663D00A7B5E8 /* OutletBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1E1DB8663D00A7B5E8 /* OutletBuilder.swift */; };
-		AB47DA311DB8663D00A7B5E8 /* OutletBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1E1DB8663D00A7B5E8 /* OutletBuilder.swift */; };
-		AB47DA321DB8663D00A7B5E8 /* PlaceholderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1F1DB8663D00A7B5E8 /* PlaceholderBuilder.swift */; };
-		AB47DA331DB8663D00A7B5E8 /* PlaceholderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA1F1DB8663D00A7B5E8 /* PlaceholderBuilder.swift */; };
-		AB47DA341DB8663D00A7B5E8 /* CocoaTouchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA201DB8663D00A7B5E8 /* CocoaTouchBuilder.swift */; };
-		AB47DA351DB8663D00A7B5E8 /* CocoaTouchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA201DB8663D00A7B5E8 /* CocoaTouchBuilder.swift */; };
-		AB47DA361DB8663D00A7B5E8 /* FontBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA211DB8663D00A7B5E8 /* FontBuilder.swift */; };
-		AB47DA371DB8663D00A7B5E8 /* FontBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA211DB8663D00A7B5E8 /* FontBuilder.swift */; };
-		AB47DA381DB8663D00A7B5E8 /* ColorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA221DB8663D00A7B5E8 /* ColorBuilder.swift */; };
-		AB47DA391DB8663D00A7B5E8 /* ColorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA221DB8663D00A7B5E8 /* ColorBuilder.swift */; };
-		AB47DA3A1DB8663D00A7B5E8 /* DocumentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA231DB8663D00A7B5E8 /* DocumentBuilder.swift */; };
-		AB47DA3B1DB8663D00A7B5E8 /* DocumentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA231DB8663D00A7B5E8 /* DocumentBuilder.swift */; };
-		AB47DA3C1DB8663D00A7B5E8 /* KeyValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */; };
-		AB47DA3D1DB8663D00A7B5E8 /* KeyValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */; };
-		AB47DA3E1DB8663D00A7B5E8 /* StructBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA251DB8663D00A7B5E8 /* StructBuilder.swift */; };
-		AB47DA3F1DB8663D00A7B5E8 /* StructBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA251DB8663D00A7B5E8 /* StructBuilder.swift */; };
-		AB47DA401DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */; };
-		AB47DA411DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */; };
-		ABB389B71DB870CF008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B61DB870CF008BF59E /* String+Eject.swift */; };
-		ABB389BA1DB87250008BF59E /* IBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B91DB87250008BF59E /* IBReference.swift */; };
-		ABB389BC1DB8725B008BF59E /* IBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BB1DB8725B008BF59E /* IBDocument.swift */; };
-		ABB389BE1DB87266008BF59E /* IBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BD1DB87266008BF59E /* IBObject.swift */; };
-		ABB389C01DB8728B008BF59E /* IBPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */; };
-		ABB389C21DB87307008BF59E /* VariableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C11DB87307008BF59E /* VariableConfiguration.swift */; };
-		ABB389C41DB87321008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C31DB87321008BF59E /* Declaration.swift */; };
-		ABB389C51DB873DD008BF59E /* IBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B91DB87250008BF59E /* IBReference.swift */; };
-		ABB389C61DB873DD008BF59E /* IBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BB1DB8725B008BF59E /* IBDocument.swift */; };
-		ABB389C71DB873DD008BF59E /* IBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BD1DB87266008BF59E /* IBObject.swift */; };
-		ABB389C81DB873DD008BF59E /* IBPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */; };
-		ABB389CD1DB873E2008BF59E /* RValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */; };
-		ABB389CE1DB873E2008BF59E /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */; };
-		ABB389CF1DB873E2008BF59E /* VariableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C11DB87307008BF59E /* VariableConfiguration.swift */; };
-		ABB389D01DB873E2008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389C31DB87321008BF59E /* Declaration.swift */; };
-		ABB389D11DB873E2008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389B61DB870CF008BF59E /* String+Eject.swift */; };
-		ABB389D21DB873E2008BF59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */; };
-		ABB389D41DB8F5A8008BF59E /* AchorageConstraintBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */; };
-		ABB389D51DB901F0008BF59E /* AchorageConstraintBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */; };
+		ABB38A361DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
+		ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */; };
+		ABB38A3F1DB95EA0008BF59E /* EjectKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB38A2F1DB95EA0008BF59E /* EjectKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABB38A421DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
+		ABB38A441DB95EA0008BF59E /* EjectKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ABB38A4B1DB95F32008BF59E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389E81DB95DDA008BF59E /* AppDelegate.swift */; };
+		ABB38A4C1DB95F36008BF59E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABB389E91DB95DDA008BF59E /* Assets.xcassets */; };
+		ABB38A4E1DB95F3F008BF59E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB389EA1DB95DDA008BF59E /* MainMenu.xib */; };
+		ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A081DB95DDB008BF59E /* XIBParser.swift */; };
+		ABB38A501DB95F6D008BF59E /* IBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A011DB95DDB008BF59E /* IBDocument.swift */; };
+		ABB38A511DB95F6D008BF59E /* IBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A021DB95DDB008BF59E /* IBObject.swift */; };
+		ABB38A521DB95F6D008BF59E /* IBPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A031DB95DDB008BF59E /* IBPlaceholder.swift */; };
+		ABB38A531DB95F6D008BF59E /* IBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A041DB95DDB008BF59E /* IBReference.swift */; };
+		ABB38A541DB95F6D008BF59E /* RValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A051DB95DDB008BF59E /* RValues.swift */; };
+		ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */; };
+		ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */; };
+		ABB38A571DB95F6D008BF59E /* CocoaTouchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */; };
+		ABB38A581DB95F6D008BF59E /* ObjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */; };
+		ABB38A591DB95F6D008BF59E /* PlaceholderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F91DB95DDB008BF59E /* PlaceholderBuilder.swift */; };
+		ABB38A5A1DB95F6D008BF59E /* OutletBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */; };
+		ABB38A5B1DB95F6D008BF59E /* KeyValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */; };
+		ABB38A5C1DB95F6D008BF59E /* StructBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */; };
+		ABB38A5D1DB95F6D008BF59E /* OptionSetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F71DB95DDB008BF59E /* OptionSetBuilder.swift */; };
+		ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F21DB95DDB008BF59E /* ColorBuilder.swift */; };
+		ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F41DB95DDB008BF59E /* FontBuilder.swift */; };
+		ABB38A601DB95F6D008BF59E /* SubviewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */; };
+		ABB38A611DB95F6D008BF59E /* AchorageConstraintBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A261DB95E04008BF59E /* AchorageConstraintBuilder.swift */; };
+		ABB38A621DB95F6D008BF59E /* UserDefinedAttributesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */; };
+		ABB38A631DB95F6D008BF59E /* ButtonStateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */; };
+		ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */; };
+		ABB38A651DB95F6D008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FE1DB95DDB008BF59E /* Declaration.swift */; };
+		ABB38A661DB95F6D008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A061DB95DDB008BF59E /* String+Eject.swift */; };
+		ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		AB47D9EE1DB6C19D00A7B5E8 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			fileType = wrapper.nib;
-			isEditable = 1;
-			outputFiles = (
-			);
-			script = "";
+/* Begin PBXContainerItemProxy section */
+		ABB38A371DB95EA0008BF59E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB47D9A41DB5A3DD00A7B5E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABB38A2C1DB95EA0008BF59E;
+			remoteInfo = EjectKit;
 		};
-/* End PBXBuildRule section */
+		ABB38A401DB95EA0008BF59E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB47D9A41DB5A3DD00A7B5E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABB38A2C1DB95EA0008BF59E;
+			remoteInfo = EjectKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AB47D9AA1DB5A3DD00A7B5E8 /* CopyFiles */ = {
+		ABB38A431DB95EA0008BF59E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = "";
+			dstSubfolderSpec = 10;
 			files = (
+				ABB38A441DB95EA0008BF59E /* EjectKit.framework in Embed Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AB47D9AC1DB5A3DD00A7B5E8 /* Eject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Eject; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		AB47D9CC1DB5AF1A00A7B5E8 /* EjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectTests.swift; sourceTree = "<group>"; };
-		AB47D9D01DB5AF1A00A7B5E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBParser.swift; sourceTree = "<group>"; };
-		AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeGeneration.swift; sourceTree = "<group>"; };
-		AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
-		AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RValues.swift; sourceTree = "<group>"; };
-		AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonStateBuilder.swift; path = Builder/ButtonStateBuilder.swift; sourceTree = "<group>"; };
-		AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefinedAttributesBuilder.swift; path = Builder/UserDefinedAttributesBuilder.swift; sourceTree = "<group>"; };
-		AB47DA1C1DB8663D00A7B5E8 /* SubviewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubviewBuilder.swift; path = Builder/SubviewBuilder.swift; sourceTree = "<group>"; };
-		AB47DA1D1DB8663D00A7B5E8 /* ObjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObjectBuilder.swift; path = Builder/ObjectBuilder.swift; sourceTree = "<group>"; };
-		AB47DA1E1DB8663D00A7B5E8 /* OutletBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OutletBuilder.swift; path = Builder/OutletBuilder.swift; sourceTree = "<group>"; };
-		AB47DA1F1DB8663D00A7B5E8 /* PlaceholderBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceholderBuilder.swift; path = Builder/PlaceholderBuilder.swift; sourceTree = "<group>"; };
-		AB47DA201DB8663D00A7B5E8 /* CocoaTouchBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CocoaTouchBuilder.swift; path = Builder/CocoaTouchBuilder.swift; sourceTree = "<group>"; };
-		AB47DA211DB8663D00A7B5E8 /* FontBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontBuilder.swift; path = Builder/FontBuilder.swift; sourceTree = "<group>"; };
-		AB47DA221DB8663D00A7B5E8 /* ColorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorBuilder.swift; path = Builder/ColorBuilder.swift; sourceTree = "<group>"; };
-		AB47DA231DB8663D00A7B5E8 /* DocumentBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DocumentBuilder.swift; path = Builder/DocumentBuilder.swift; sourceTree = "<group>"; };
-		AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyValueBuilder.swift; path = Builder/KeyValueBuilder.swift; sourceTree = "<group>"; };
-		AB47DA251DB8663D00A7B5E8 /* StructBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StructBuilder.swift; path = Builder/StructBuilder.swift; sourceTree = "<group>"; };
-		AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionSetBuilder.swift; path = Builder/OptionSetBuilder.swift; sourceTree = "<group>"; };
-		ABB389B61DB870CF008BF59E /* String+Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Eject.swift"; sourceTree = "<group>"; };
-		ABB389B91DB87250008BF59E /* IBReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBReference.swift; sourceTree = "<group>"; };
-		ABB389BB1DB8725B008BF59E /* IBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBDocument.swift; sourceTree = "<group>"; };
-		ABB389BD1DB87266008BF59E /* IBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBObject.swift; sourceTree = "<group>"; };
-		ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBPlaceholder.swift; sourceTree = "<group>"; };
-		ABB389C11DB87307008BF59E /* VariableConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableConfiguration.swift; sourceTree = "<group>"; };
-		ABB389C31DB87321008BF59E /* Declaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
-		ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchorageConstraintBuilder.swift; sourceTree = "<group>"; };
+		ABB389DA1DB95D00008BF59E /* Eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB389E81DB95DDA008BF59E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ABB389E91DB95DDA008BF59E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABB389EB1DB95DDA008BF59E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
+		ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaTouchBuilder.swift; sourceTree = "<group>"; };
+		ABB389F21DB95DDB008BF59E /* ColorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBuilder.swift; sourceTree = "<group>"; };
+		ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentBuilder.swift; sourceTree = "<group>"; };
+		ABB389F41DB95DDB008BF59E /* FontBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontBuilder.swift; sourceTree = "<group>"; };
+		ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueBuilder.swift; sourceTree = "<group>"; };
+		ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectBuilder.swift; sourceTree = "<group>"; };
+		ABB389F71DB95DDB008BF59E /* OptionSetBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSetBuilder.swift; sourceTree = "<group>"; };
+		ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutletBuilder.swift; sourceTree = "<group>"; };
+		ABB389F91DB95DDB008BF59E /* PlaceholderBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderBuilder.swift; sourceTree = "<group>"; };
+		ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructBuilder.swift; sourceTree = "<group>"; };
+		ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubviewBuilder.swift; sourceTree = "<group>"; };
+		ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefinedAttributesBuilder.swift; sourceTree = "<group>"; };
+		ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeGeneration.swift; sourceTree = "<group>"; };
+		ABB389FE1DB95DDB008BF59E /* Declaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
+		ABB38A011DB95DDB008BF59E /* IBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBDocument.swift; sourceTree = "<group>"; };
+		ABB38A021DB95DDB008BF59E /* IBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBObject.swift; sourceTree = "<group>"; };
+		ABB38A031DB95DDB008BF59E /* IBPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBPlaceholder.swift; sourceTree = "<group>"; };
+		ABB38A041DB95DDB008BF59E /* IBReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBReference.swift; sourceTree = "<group>"; };
+		ABB38A051DB95DDB008BF59E /* RValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RValues.swift; sourceTree = "<group>"; };
+		ABB38A061DB95DDB008BF59E /* String+Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Eject.swift"; sourceTree = "<group>"; };
+		ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableConfiguration.swift; sourceTree = "<group>"; };
+		ABB38A081DB95DDB008BF59E /* XIBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBParser.swift; sourceTree = "<group>"; };
+		ABB38A261DB95E04008BF59E /* AchorageConstraintBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchorageConstraintBuilder.swift; sourceTree = "<group>"; };
+		ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EjectKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB38A2F1DB95EA0008BF59E /* EjectKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EjectKit.h; sourceTree = "<group>"; };
+		ABB38A301DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABB38A351DB95EA0008BF59E /* EjectKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EjectKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectKitTests.swift; sourceTree = "<group>"; };
+		ABB38A3E1DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AB47D9A91DB5A3DD00A7B5E8 /* Frameworks */ = {
+		ABB389D71DB95D00008BF59E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB38A421DB95EA0008BF59E /* EjectKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB38A291DB95EA0008BF59E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB47D9C91DB5AF1A00A7B5E8 /* Frameworks */ = {
+		ABB38A321DB95EA0008BF59E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABB38A361DB95EA0008BF59E /* EjectKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,8 +142,9 @@
 		AB47D9A31DB5A3DD00A7B5E8 = {
 			isa = PBXGroup;
 			children = (
-				AB47D9AE1DB5A3DD00A7B5E8 /* Eject */,
-				AB47D9CD1DB5AF1A00A7B5E8 /* EjectTests */,
+				ABB389E71DB95DDA008BF59E /* Eject */,
+				ABB389ED1DB95DDA008BF59E /* EjectKit */,
+				ABB38A3B1DB95EA0008BF59E /* EjectKitTests */,
 				AB47D9AD1DB5A3DD00A7B5E8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,114 +152,158 @@
 		AB47D9AD1DB5A3DD00A7B5E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB47D9AC1DB5A3DD00A7B5E8 /* Eject */,
-				AB47D9CC1DB5AF1A00A7B5E8 /* EjectTests.xctest */,
+				ABB389DA1DB95D00008BF59E /* Eject.app */,
+				ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */,
+				ABB38A351DB95EA0008BF59E /* EjectKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AB47D9AE1DB5A3DD00A7B5E8 /* Eject */ = {
+		ABB389E71DB95DDA008BF59E /* Eject */ = {
 			isa = PBXGroup;
 			children = (
-				ABB389B81DB87247008BF59E /* Model */,
-				AB47D9DC1DB5D28C00A7B5E8 /* XIBParser.swift */,
-				AB47D9F01DB7AAD600A7B5E8 /* Builders */,
-				AB47D9F91DB7AB9D00A7B5E8 /* RValues.swift */,
-				AB47D9E61DB65B5B00A7B5E8 /* CodeGeneration.swift */,
-				ABB389C11DB87307008BF59E /* VariableConfiguration.swift */,
-				ABB389C31DB87321008BF59E /* Declaration.swift */,
-				ABB389B61DB870CF008BF59E /* String+Eject.swift */,
-				AB47D9AF1DB5A3DD00A7B5E8 /* main.swift */,
+				ABB389E81DB95DDA008BF59E /* AppDelegate.swift */,
+				ABB389E91DB95DDA008BF59E /* Assets.xcassets */,
+				ABB389EA1DB95DDA008BF59E /* MainMenu.xib */,
+				ABB389EC1DB95DDA008BF59E /* Info.plist */,
 			);
 			path = Eject;
 			sourceTree = "<group>";
 		};
-		AB47D9CD1DB5AF1A00A7B5E8 /* EjectTests */ = {
+		ABB389ED1DB95DDA008BF59E /* EjectKit */ = {
 			isa = PBXGroup;
 			children = (
-				AB47D9EB1DB6C0AD00A7B5E8 /* Resources */,
-				AB47D9CE1DB5AF1A00A7B5E8 /* EjectTests.swift */,
-				AB47D9D01DB5AF1A00A7B5E8 /* Info.plist */,
+				ABB38A2F1DB95EA0008BF59E /* EjectKit.h */,
+				ABB38A301DB95EA0008BF59E /* Info.plist */,
+				ABB38A081DB95DDB008BF59E /* XIBParser.swift */,
+				ABB38A001DB95DDB008BF59E /* Model */,
+				ABB389EF1DB95DDB008BF59E /* Builder */,
+				ABB38A051DB95DDB008BF59E /* RValues.swift */,
+				ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */,
+				ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */,
+				ABB389FE1DB95DDB008BF59E /* Declaration.swift */,
+				ABB38A061DB95DDB008BF59E /* String+Eject.swift */,
 			);
-			path = EjectTests;
+			path = EjectKit;
 			sourceTree = "<group>";
 		};
-		AB47D9EB1DB6C0AD00A7B5E8 /* Resources */ = {
+		ABB389EF1DB95DDB008BF59E /* Builder */ = {
 			isa = PBXGroup;
 			children = (
-				AB47D9EC1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest */,
+				ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */,
+				ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */,
+				ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */,
+				ABB389F91DB95DDB008BF59E /* PlaceholderBuilder.swift */,
+				ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */,
+				ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */,
+				ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */,
+				ABB389F71DB95DDB008BF59E /* OptionSetBuilder.swift */,
+				ABB389F21DB95DDB008BF59E /* ColorBuilder.swift */,
+				ABB389F41DB95DDB008BF59E /* FontBuilder.swift */,
+				ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */,
+				ABB38A261DB95E04008BF59E /* AchorageConstraintBuilder.swift */,
+				ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */,
+				ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */,
 			);
-			path = Resources;
+			path = Builder;
 			sourceTree = "<group>";
 		};
-		AB47D9F01DB7AAD600A7B5E8 /* Builders */ = {
+		ABB38A001DB95DDB008BF59E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AB47DA201DB8663D00A7B5E8 /* CocoaTouchBuilder.swift */,
-				AB47DA231DB8663D00A7B5E8 /* DocumentBuilder.swift */,
-				AB47DA1D1DB8663D00A7B5E8 /* ObjectBuilder.swift */,
-				AB47DA1F1DB8663D00A7B5E8 /* PlaceholderBuilder.swift */,
-				AB47DA1E1DB8663D00A7B5E8 /* OutletBuilder.swift */,
-				AB47DA241DB8663D00A7B5E8 /* KeyValueBuilder.swift */,
-				AB47DA1C1DB8663D00A7B5E8 /* SubviewBuilder.swift */,
-				ABB389D31DB8F5A8008BF59E /* AchorageConstraintBuilder.swift */,
-				AB47DA1B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift */,
-				AB47DA1A1DB8663D00A7B5E8 /* ButtonStateBuilder.swift */,
-				AB47DA211DB8663D00A7B5E8 /* FontBuilder.swift */,
-				AB47DA221DB8663D00A7B5E8 /* ColorBuilder.swift */,
-				AB47DA251DB8663D00A7B5E8 /* StructBuilder.swift */,
-				AB47DA261DB8663D00A7B5E8 /* OptionSetBuilder.swift */,
-			);
-			name = Builders;
-			sourceTree = "<group>";
-		};
-		ABB389B81DB87247008BF59E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				ABB389B91DB87250008BF59E /* IBReference.swift */,
-				ABB389BB1DB8725B008BF59E /* IBDocument.swift */,
-				ABB389BD1DB87266008BF59E /* IBObject.swift */,
-				ABB389BF1DB8728B008BF59E /* IBPlaceholder.swift */,
+				ABB38A011DB95DDB008BF59E /* IBDocument.swift */,
+				ABB38A021DB95DDB008BF59E /* IBObject.swift */,
+				ABB38A031DB95DDB008BF59E /* IBPlaceholder.swift */,
+				ABB38A041DB95DDB008BF59E /* IBReference.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
+		ABB38A3B1DB95EA0008BF59E /* EjectKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				ABB38A671DB96EBC008BF59E /* Resources */,
+				ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */,
+				ABB38A3E1DB95EA0008BF59E /* Info.plist */,
+			);
+			path = EjectKitTests;
+			sourceTree = "<group>";
+		};
+		ABB38A671DB96EBC008BF59E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		ABB38A2A1DB95EA0008BF59E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB38A3F1DB95EA0008BF59E /* EjectKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		AB47D9AB1DB5A3DD00A7B5E8 /* Eject */ = {
+		ABB389D91DB95D00008BF59E /* Eject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB47D9B31DB5A3DD00A7B5E8 /* Build configuration list for PBXNativeTarget "Eject" */;
+			buildConfigurationList = ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "Eject" */;
 			buildPhases = (
-				AB47D9A81DB5A3DD00A7B5E8 /* Sources */,
-				AB47D9A91DB5A3DD00A7B5E8 /* Frameworks */,
-				AB47D9AA1DB5A3DD00A7B5E8 /* CopyFiles */,
+				ABB389D61DB95D00008BF59E /* Sources */,
+				ABB389D71DB95D00008BF59E /* Frameworks */,
+				ABB389D81DB95D00008BF59E /* Resources */,
+				ABB38A431DB95EA0008BF59E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ABB38A411DB95EA0008BF59E /* PBXTargetDependency */,
 			);
 			name = Eject;
 			productName = Eject;
-			productReference = AB47D9AC1DB5A3DD00A7B5E8 /* Eject */;
-			productType = "com.apple.product-type.tool";
+			productReference = ABB389DA1DB95D00008BF59E /* Eject.app */;
+			productType = "com.apple.product-type.application";
 		};
-		AB47D9CB1DB5AF1A00A7B5E8 /* EjectTests */ = {
+		ABB38A2C1DB95EA0008BF59E /* EjectKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB47D9D11DB5AF1A00A7B5E8 /* Build configuration list for PBXNativeTarget "EjectTests" */;
+			buildConfigurationList = ABB38A451DB95EA0008BF59E /* Build configuration list for PBXNativeTarget "EjectKit" */;
 			buildPhases = (
-				AB47D9C81DB5AF1A00A7B5E8 /* Sources */,
-				AB47D9C91DB5AF1A00A7B5E8 /* Frameworks */,
-				AB47D9CA1DB5AF1A00A7B5E8 /* Resources */,
+				ABB38A281DB95EA0008BF59E /* Sources */,
+				ABB38A291DB95EA0008BF59E /* Frameworks */,
+				ABB38A2A1DB95EA0008BF59E /* Headers */,
+				ABB38A2B1DB95EA0008BF59E /* Resources */,
 			);
 			buildRules = (
-				AB47D9EE1DB6C19D00A7B5E8 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
-			name = EjectTests;
-			productName = EjectTests;
-			productReference = AB47D9CC1DB5AF1A00A7B5E8 /* EjectTests.xctest */;
+			name = EjectKit;
+			productName = EjectKit;
+			productReference = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ABB38A341DB95EA0008BF59E /* EjectKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABB38A481DB95EA0008BF59E /* Build configuration list for PBXNativeTarget "EjectKitTests" */;
+			buildPhases = (
+				ABB38A311DB95EA0008BF59E /* Sources */,
+				ABB38A321DB95EA0008BF59E /* Frameworks */,
+				ABB38A331DB95EA0008BF59E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABB38A381DB95EA0008BF59E /* PBXTargetDependency */,
+			);
+			name = EjectKitTests;
+			productName = EjectKitTests;
+			productReference = ABB38A351DB95EA0008BF59E /* EjectKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -268,13 +316,18 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Brian King";
 				TargetAttributes = {
-					AB47D9AB1DB5A3DD00A7B5E8 = {
+					ABB389D91DB95D00008BF59E = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
 					};
-					AB47D9CB1DB5AF1A00A7B5E8 = {
+					ABB38A2C1DB95EA0008BF59E = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
+					};
+					ABB38A341DB95EA0008BF59E = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = ABB389D91DB95D00008BF59E;
 					};
 				};
 			};
@@ -284,96 +337,120 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = AB47D9A31DB5A3DD00A7B5E8;
 			productRefGroup = AB47D9AD1DB5A3DD00A7B5E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AB47D9AB1DB5A3DD00A7B5E8 /* Eject */,
-				AB47D9CB1DB5AF1A00A7B5E8 /* EjectTests */,
+				ABB389D91DB95D00008BF59E /* Eject */,
+				ABB38A2C1DB95EA0008BF59E /* EjectKit */,
+				ABB38A341DB95EA0008BF59E /* EjectKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AB47D9CA1DB5AF1A00A7B5E8 /* Resources */ = {
+		ABB389D81DB95D00008BF59E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB47D9ED1DB6C0C100A7B5E8 /* WebBrowserViewController.xibtest in Resources */,
+				ABB38A4C1DB95F36008BF59E /* Assets.xcassets in Resources */,
+				ABB38A4E1DB95F3F008BF59E /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB38A2B1DB95EA0008BF59E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB38A331DB95EA0008BF59E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AB47D9A81DB5A3DD00A7B5E8 /* Sources */ = {
+		ABB389D61DB95D00008BF59E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB47DA341DB8663D00A7B5E8 /* CocoaTouchBuilder.swift in Sources */,
-				AB47D9FA1DB7AB9D00A7B5E8 /* RValues.swift in Sources */,
-				AB47D9DD1DB5D28C00A7B5E8 /* XIBParser.swift in Sources */,
-				ABB389C21DB87307008BF59E /* VariableConfiguration.swift in Sources */,
-				AB47DA3E1DB8663D00A7B5E8 /* StructBuilder.swift in Sources */,
-				ABB389BC1DB8725B008BF59E /* IBDocument.swift in Sources */,
-				AB47DA301DB8663D00A7B5E8 /* OutletBuilder.swift in Sources */,
-				AB47DA2C1DB8663D00A7B5E8 /* SubviewBuilder.swift in Sources */,
-				AB47DA3A1DB8663D00A7B5E8 /* DocumentBuilder.swift in Sources */,
-				AB47D9B01DB5A3DD00A7B5E8 /* main.swift in Sources */,
-				AB47D9E71DB65B5B00A7B5E8 /* CodeGeneration.swift in Sources */,
-				ABB389C41DB87321008BF59E /* Declaration.swift in Sources */,
-				AB47DA2A1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */,
-				ABB389C01DB8728B008BF59E /* IBPlaceholder.swift in Sources */,
-				ABB389BA1DB87250008BF59E /* IBReference.swift in Sources */,
-				ABB389D41DB8F5A8008BF59E /* AchorageConstraintBuilder.swift in Sources */,
-				AB47DA3C1DB8663D00A7B5E8 /* KeyValueBuilder.swift in Sources */,
-				ABB389BE1DB87266008BF59E /* IBObject.swift in Sources */,
-				AB47DA321DB8663D00A7B5E8 /* PlaceholderBuilder.swift in Sources */,
-				AB47DA2E1DB8663D00A7B5E8 /* ObjectBuilder.swift in Sources */,
-				ABB389B71DB870CF008BF59E /* String+Eject.swift in Sources */,
-				AB47DA361DB8663D00A7B5E8 /* FontBuilder.swift in Sources */,
-				AB47DA381DB8663D00A7B5E8 /* ColorBuilder.swift in Sources */,
-				AB47DA401DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */,
-				AB47DA281DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */,
+				ABB38A4B1DB95F32008BF59E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB47D9C81DB5AF1A00A7B5E8 /* Sources */ = {
+		ABB38A281DB95EA0008BF59E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB47DA351DB8663D00A7B5E8 /* CocoaTouchBuilder.swift in Sources */,
-				AB47D9E51DB657CF00A7B5E8 /* XIBParser.swift in Sources */,
-				AB47DA3F1DB8663D00A7B5E8 /* StructBuilder.swift in Sources */,
-				AB47DA311DB8663D00A7B5E8 /* OutletBuilder.swift in Sources */,
-				AB47DA2D1DB8663D00A7B5E8 /* SubviewBuilder.swift in Sources */,
-				ABB389C61DB873DD008BF59E /* IBDocument.swift in Sources */,
-				AB47DA3B1DB8663D00A7B5E8 /* DocumentBuilder.swift in Sources */,
-				AB47D9CF1DB5AF1A00A7B5E8 /* EjectTests.swift in Sources */,
-				ABB389CF1DB873E2008BF59E /* VariableConfiguration.swift in Sources */,
-				AB47DA2B1DB8663D00A7B5E8 /* UserDefinedAttributesBuilder.swift in Sources */,
-				ABB389D11DB873E2008BF59E /* String+Eject.swift in Sources */,
-				ABB389C71DB873DD008BF59E /* IBObject.swift in Sources */,
-				AB47DA3D1DB8663D00A7B5E8 /* KeyValueBuilder.swift in Sources */,
-				AB47DA331DB8663D00A7B5E8 /* PlaceholderBuilder.swift in Sources */,
-				AB47DA2F1DB8663D00A7B5E8 /* ObjectBuilder.swift in Sources */,
-				ABB389D01DB873E2008BF59E /* Declaration.swift in Sources */,
-				ABB389D21DB873E2008BF59E /* main.swift in Sources */,
-				ABB389C81DB873DD008BF59E /* IBPlaceholder.swift in Sources */,
-				ABB389CE1DB873E2008BF59E /* CodeGeneration.swift in Sources */,
-				AB47DA371DB8663D00A7B5E8 /* FontBuilder.swift in Sources */,
-				ABB389C51DB873DD008BF59E /* IBReference.swift in Sources */,
-				AB47DA391DB8663D00A7B5E8 /* ColorBuilder.swift in Sources */,
-				AB47DA411DB8663D00A7B5E8 /* OptionSetBuilder.swift in Sources */,
-				ABB389CD1DB873E2008BF59E /* RValues.swift in Sources */,
-				ABB389D51DB901F0008BF59E /* AchorageConstraintBuilder.swift in Sources */,
-				AB47DA291DB8663D00A7B5E8 /* ButtonStateBuilder.swift in Sources */,
+				ABB38A521DB95F6D008BF59E /* IBPlaceholder.swift in Sources */,
+				ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */,
+				ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */,
+				ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */,
+				ABB38A601DB95F6D008BF59E /* SubviewBuilder.swift in Sources */,
+				ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */,
+				ABB38A541DB95F6D008BF59E /* RValues.swift in Sources */,
+				ABB38A531DB95F6D008BF59E /* IBReference.swift in Sources */,
+				ABB38A5D1DB95F6D008BF59E /* OptionSetBuilder.swift in Sources */,
+				ABB38A511DB95F6D008BF59E /* IBObject.swift in Sources */,
+				ABB38A661DB95F6D008BF59E /* String+Eject.swift in Sources */,
+				ABB38A5C1DB95F6D008BF59E /* StructBuilder.swift in Sources */,
+				ABB38A5B1DB95F6D008BF59E /* KeyValueBuilder.swift in Sources */,
+				ABB38A5A1DB95F6D008BF59E /* OutletBuilder.swift in Sources */,
+				ABB38A571DB95F6D008BF59E /* CocoaTouchBuilder.swift in Sources */,
+				ABB38A651DB95F6D008BF59E /* Declaration.swift in Sources */,
+				ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */,
+				ABB38A591DB95F6D008BF59E /* PlaceholderBuilder.swift in Sources */,
+				ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */,
+				ABB38A581DB95F6D008BF59E /* ObjectBuilder.swift in Sources */,
+				ABB38A621DB95F6D008BF59E /* UserDefinedAttributesBuilder.swift in Sources */,
+				ABB38A501DB95F6D008BF59E /* IBDocument.swift in Sources */,
+				ABB38A611DB95F6D008BF59E /* AchorageConstraintBuilder.swift in Sources */,
+				ABB38A631DB95F6D008BF59E /* ButtonStateBuilder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB38A311DB95EA0008BF59E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABB38A381DB95EA0008BF59E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABB38A2C1DB95EA0008BF59E /* EjectKit */;
+			targetProxy = ABB38A371DB95EA0008BF59E /* PBXContainerItemProxy */;
+		};
+		ABB38A411DB95EA0008BF59E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABB38A2C1DB95EA0008BF59E /* EjectKit */;
+			targetProxy = ABB38A401DB95EA0008BF59E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ABB389EA1DB95DDA008BF59E /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABB389EB1DB95DDA008BF59E /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AB47D9B11DB5A3DD00A7B5E8 /* Debug */ = {
@@ -397,7 +474,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -445,7 +522,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -464,45 +541,117 @@
 			};
 			name = Release;
 		};
-		AB47D9B41DB5A3DD00A7B5E8 /* Debug */ = {
+		ABB389E51DB95D00008BF59E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		AB47D9B51DB5A3DD00A7B5E8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		AB47D9D21DB5AF1A00A7B5E8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = EjectTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectTests;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Eject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.Eject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		AB47D9D31DB5AF1A00A7B5E8 /* Release */ = {
+		ABB389E61DB95D00008BF59E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = EjectTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectTests;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Eject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.Eject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		ABB38A461DB95EA0008BF59E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = EjectKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ABB38A471DB95EA0008BF59E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = EjectKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		ABB38A491DB95EA0008BF59E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = EjectKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eject.app/Contents/MacOS/Eject";
+			};
+			name = Debug;
+		};
+		ABB38A4A1DB95EA0008BF59E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = EjectKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eject.app/Contents/MacOS/Eject";
 			};
 			name = Release;
 		};
@@ -518,23 +667,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB47D9B31DB5A3DD00A7B5E8 /* Build configuration list for PBXNativeTarget "Eject" */ = {
+		ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "Eject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB47D9B41DB5A3DD00A7B5E8 /* Debug */,
-				AB47D9B51DB5A3DD00A7B5E8 /* Release */,
+				ABB389E51DB95D00008BF59E /* Debug */,
+				ABB389E61DB95D00008BF59E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		AB47D9D11DB5AF1A00A7B5E8 /* Build configuration list for PBXNativeTarget "EjectTests" */ = {
+		ABB38A451DB95EA0008BF59E /* Build configuration list for PBXNativeTarget "EjectKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB47D9D21DB5AF1A00A7B5E8 /* Debug */,
-				AB47D9D31DB5AF1A00A7B5E8 /* Release */,
+				ABB38A461DB95EA0008BF59E /* Debug */,
+				ABB38A471DB95EA0008BF59E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+		};
+		ABB38A481DB95EA0008BF59E /* Build configuration list for PBXNativeTarget "EjectKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABB38A491DB95EA0008BF59E /* Debug */,
+				ABB38A4A1DB95EA0008BF59E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

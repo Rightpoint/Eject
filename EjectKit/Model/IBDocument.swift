@@ -9,10 +9,19 @@
 import Foundation
 
 /// Class that models the state of a xib file.
-class IBDocument {
+public class IBDocument {
+
+    public static func load(xml content: String) throws -> IBDocument {
+        guard let data = content.data(using: String.Encoding.utf8) else {
+            fatalError("Unable to convert to UTF8")
+        }
+
+        let parser = try XIBParser(data: data)
+        return parser.document
+    }
 
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
-    var references: [IBReference] = []
+    public var references: [IBReference] = []
 
     /// Generate a variable property name with the following precedence
     ///
