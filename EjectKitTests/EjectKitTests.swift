@@ -262,10 +262,17 @@ class EjectTests: XCTestCase {
     }
 
     func testVisualEffectViewKey() {
-        let xml = wrap("<visualEffectView opaque='NO' contentMode='scaleToFill' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT' userLabel='Top Bar Blur Container'><view key='contentView' opaque='NO' id='u6B-MW-OWb'></view></visualEffectView>")
-        checkXML(xml, [])
+        let xml = wrap("<visualEffectView id='TTJ-HQ-gdl' userLabel='Blur View'><rect key='frame' x='0.0' y='0.0' width='600' height='600'/><blurEffect style='extraLight'/><view key='contentView' id='F01-5F-ger' userLabel='Content View'></view></visualEffectView>")
+        checkXML(xml, [
+            "let contentView = UIView()",
+            "let blurView = UIVisualEffectView()",
+            "blurView.frame = CGRect(x: 0.0, y: 0.0, width: 600, height: 600)",
+            "blurView.style = .extraLight",
+            "blurView.contentView = contentView",
+            ])
     }
 
+    // This is an instance where the sax parser is a bit of a pain. The numberOfSegments property is set by the number of segment elements.
     func testSegmentedControl() {
         let xml = wrap("<segmentedControl segmentControlStyle='plain' selectedSegmentIndex='0' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><segments><segment title='Overview'/><segment title='Description'/></segments></segmentedControl>")
         checkXML(xml, [])

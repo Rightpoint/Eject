@@ -26,6 +26,8 @@ extension DocumentBuilder {
         register("outletCollection", OutletBuilder(collection: true))
         register("action", ActionBuilder())
         register("placeholder", PlaceholderBuilder())
+        register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
+
         for type in ["integer", "real"] {
             register(type, KeyValueBuilder())
         }
@@ -48,7 +50,7 @@ extension DocumentBuilder {
             properties: [("frame", .injectDefault(".zero")), ("style", .inject(.enumeration)), ("alwaysBounceVertical", .boolean), ("separatorStyle", .enumeration), ("rowHeight", .number), ("sectionHeaderHeight", .number), ("sectionFooterHeight", .number)])
         )
 
-        register("visualEffectView", ObjectBuilder(className: "UIVisualEffect"))
+        register("visualEffectView", view.inherit(className: "UIVisualEffectView"))
         register("webView", view.inherit(className: "UIWebView"))
         register("collectionView", view.inherit(className: "UICollectionView"))
         register("collectionViewFlowLayout", view.inherit(className: "UICollectionViewFlowLayout"))

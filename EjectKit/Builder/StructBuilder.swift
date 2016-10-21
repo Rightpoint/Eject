@@ -63,3 +63,19 @@ struct InsetBuilder: Builder {
     }
 
 }
+
+struct BasicBuilder: Builder {
+    let key: String
+    let format: RValueFormat
+
+    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+        guard let object = parent else { fatalError("No parent to configure") }
+        guard let value = attributes[key] else {
+            fatalError("Invalid Rect")
+        }
+        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value, format: format))
+        return object
+    }
+    
+}
+
