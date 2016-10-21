@@ -22,10 +22,10 @@ extension DocumentBuilder {
         register("subviews", SubviewBuilder())
         register("constraint", AchorageConstraintBuilder())
         register("fontDescription", FontBuilder())
-        register("outlet", OutletBuilder())
+        register("outlet", OutletBuilder(collection: false))
+        register("outletCollection", OutletBuilder(collection: true))
         register("action", ActionBuilder())
         register("placeholder", PlaceholderBuilder())
-
         for type in ["integer", "real"] {
             register(type, KeyValueBuilder())
         }
@@ -55,5 +55,7 @@ extension DocumentBuilder {
         register("button", view.inherit(className: "UIButton", properties: [("lineBreakMode", .enumeration)]))
         register("segmentedControl", view.inherit(className: "UISegmentedControl"))
         register("imageView", view.inherit(className: "UIImageView", properties: [("image", .image)]))
+
+        register("panGestureRecognizer", ObjectBuilder(className: "UIPanGestureRecognizer", properties: [("minimumNumberOfTouches", .number)]))
     }
 }

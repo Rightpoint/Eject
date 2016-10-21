@@ -30,7 +30,7 @@ class IBButtonStateProxy: IBReference {
     }
 
     func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator {
-        return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, setterContext: setterContext)
+        return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, style: .setter(context: setterContext))
     }
     
 }

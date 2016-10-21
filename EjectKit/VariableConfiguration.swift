@@ -9,11 +9,16 @@
 import Foundation
 
 struct VariableConfiguration: ObjectCodeGenerator {
-    var objectIdentifier: String
-    var key: String = ""
-    var value: CodeGenerator
-    // This bit of information adds support for `forState: .normal`
-    var setterContext: String? = nil
+    enum Style {
+        case assignment
+        case append
+        // This adds support for `forState: .normal`
+        case setter(context: String)
+    }
+    let objectIdentifier: String
+    let key: String
+    let value: CodeGenerator
+    let style: Style
 
     func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
         return .configuration
@@ -23,11 +28,15 @@ struct VariableConfiguration: ObjectCodeGenerator {
         let document = context.document
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
-        if let setterContext = setterContext {
-            return "\(variable).set\(key.capitalized)(\(value.generateCode(in: context) ?? "<ERROR>"), \(setterContext))"
-        }
-        else {
-            return "\(variable).\(key) = \(value.generateCode(in: context) ?? "<ERROR>")"
+
+        let valueString = value.generateCode(in: context) ?? "<ERROR>"
+        switch style {
+        case .assignment:
+            return "\(variable).\(key) = \(valueString)"
+        case .append:
+            return "\(variable).\(key).append(\(valueString))"
+        case let .setter(context):
+            return "\(variable).set\(key.capitalized)(\(valueString), \(context))"
         }
     }
 }

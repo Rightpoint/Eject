@@ -22,7 +22,7 @@ extension IBReference {
 
     // Default implementation
     public func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator {
-        return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, setterContext: nil)
+        return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, style: .assignment)
     }
 
     func addVariableConfiguration(for key: String, rvalue: CodeGenerator) {

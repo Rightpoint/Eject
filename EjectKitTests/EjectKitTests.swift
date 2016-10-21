@@ -77,6 +77,20 @@ class EjectTests: XCTestCase {
         )
     }
 
+    // Method ordering is broken here, not sure if this is fatal to compile-out-of-the-box.
+    func testGestureRecognizer() {
+        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><connections><outletCollection property='gestureRecognizers' destination='fDa-KR-68j' appends='YES' id='7AV-8r-dYL'/></connections></view><panGestureRecognizer minimumNumberOfTouches='1' id='fDa-KR-68j'><connections>            <action selector='dimissTextField:' destination='-1' id='zAI-0B-Wyz'/><outlet property='delegate' destination='i5M-Pr-FkT' id='0eg-ac-TGD'/></connections></panGestureRecognizer>")
+        checkXML(xml, [
+            "let panGestureRecognizer = UIPanGestureRecognizer()",
+            "panGestureRecognizer.minimumNumberOfTouches = 1",
+            "panGestureRecognizer.delegate = test",
+            "let test = UIView()",
+            "test.gestureRecognizers.append(panGestureRecognizer)",
+            "panGestureRecognizer.addTarget(fileOwner, action: #selector(TestClass.dimissTextField:))",
+            ]
+        )
+    }
+
     func testUserDefinedInt() {
         let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><userDefinedRuntimeAttributes><userDefinedRuntimeAttribute type='number' keyPath='layer.cornerRadius'><integer key='value' value='25'/></userDefinedRuntimeAttribute></userDefinedRuntimeAttributes></view>")
         checkXML(xml, [
