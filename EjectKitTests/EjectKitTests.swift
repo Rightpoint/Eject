@@ -69,8 +69,8 @@ class EjectTests: XCTestCase {
         let xml = wrap("<view userLabel='test' clearsContextBeforeDrawing='NO' contentMode='scaleToFill' id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/></view>")
         checkXML(xml, [
             "let test = UIView()",
-            "test.clearsContextBeforeDrawing = false",
             "test.contentMode = .scaleToFill",
+            "test.clearsContextBeforeDrawing = false",
             "test.frame = CGRect(x: 0.0, y: 0.0, width: 350, height: 85)"
             ]
         )
@@ -139,8 +139,8 @@ class EjectTests: XCTestCase {
         let xml = wrap("<label baselineAdjustment='alignBaselines' minimumFontSize='13' userLabel='test' id='i5M-Pr-FkT'><fontDescription key='fontDescription' type='system' pointSize='17'/></label>")
         checkXML(xml, [
             "let test = UILabel()",
-            "test.minimumFontSize = 13",
             "test.baselineAdjustment = .alignBaselines",
+            "test.minimumFontSize = 13",
             "test.font = .systemFont(ofSize: 17)"
             ]
         )
@@ -155,8 +155,8 @@ class EjectTests: XCTestCase {
             "collectionViewFlowLayout.footerReferenceSize = CGSize(width: 0.0, height: 0.0)",
             "collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)",
             "let collectionView = UICollectionView()",
-            "collectionView.translatesAutoresizingMaskIntoConstraints = false",
             "collectionView.contentMode = .scaleToFill",
+            "collectionView.translatesAutoresizingMaskIntoConstraints = false",
             "collectionView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "collectionView.collectionViewLayout = collectionViewFlowLayout",
             "collectionView.dataSource = fileOwner",
@@ -186,8 +186,8 @@ class EjectTests: XCTestCase {
         let xml = wrap("<imageView contentMode='center' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'></imageView>")
         checkXML(xml, [
             "let imageView = UIImageView()",
-            "imageView.translatesAutoresizingMaskIntoConstraints = false",
             "imageView.contentMode = .center",
+            "imageView.translatesAutoresizingMaskIntoConstraints = false",
             "imageView.image = UIImage(named: \"icon\")",
             ])
     }
@@ -196,7 +196,9 @@ class EjectTests: XCTestCase {
         let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
             "let button = UIButton()",
-            "button.lineBreakMode = .middleTruncation", // This is deprecated and should be .titleLabel.lineBreakMode
+            "button.contentHorizontalAlignment = .center",
+            "button.contentVerticalAlignment = .center",
+            "button.lineBreakMode = .middleTruncation",
             "button.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "button.setTitle(\"Title\", for: .normal)",
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",

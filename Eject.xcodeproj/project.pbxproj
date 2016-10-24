@@ -41,7 +41,8 @@
 		ABB38A661DB95F6D008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A061DB95DDB008BF59E /* String+Eject.swift */; };
 		ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */; };
 		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
-		ABB38A6F1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6E1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist */; };
+		ABB38A741DBE3527008BF59E /* XMLParser+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A731DBE3527008BF59E /* XMLParser+Eject.swift */; };
+		ABB38A761DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,7 +114,8 @@
 		ABB38A3E1DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
 		ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBuilder.swift; sourceTree = "<group>"; };
-		ABB38A6E1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = CocoaTouchClassHierarchy.plist; sourceTree = "<group>"; };
+		ABB38A731DBE3527008BF59E /* XMLParser+Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMLParser+Eject.swift"; sourceTree = "<group>"; };
+		ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorPropertyConfigurationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */,
 				ABB389FE1DB95DDB008BF59E /* Declaration.swift */,
 				ABB38A061DB95DDB008BF59E /* String+Eject.swift */,
+				ABB38A731DBE3527008BF59E /* XMLParser+Eject.swift */,
 			);
 			path = EjectKit;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				ABB38A671DB96EBC008BF59E /* Resources */,
 				ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */,
 				ABB38A3E1DB95EA0008BF59E /* Info.plist */,
+				ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */,
 			);
 			path = EjectKitTests;
 			sourceTree = "<group>";
@@ -238,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */,
-				ABB38A6E1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				ABB38A521DB95F6D008BF59E /* IBPlaceholder.swift in Sources */,
 				ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */,
 				ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */,
+				ABB38A741DBE3527008BF59E /* XMLParser+Eject.swift in Sources */,
 				ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */,
 				ABB38A601DB95F6D008BF59E /* SubviewBuilder.swift in Sources */,
 				ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */,
@@ -429,8 +433,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB38A6F1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist in Sources */,
 				ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */,
+				ABB38A761DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
