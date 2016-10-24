@@ -42,15 +42,15 @@ public extension IBReference {
 
 public extension IBDocument {
 
-    func generateCode(in document: IBDocument, for generationPhase: ObjectGenerationPhase) -> [String] {
+    func generateCode(for generationPhase: ObjectGenerationPhase) -> [String] {
         return references
-            .map() { $0.generateCode(in: document, for: generationPhase) }
+            .map() { $0.generateCode(in: self, for: generationPhase) }
             .flatMap() { $0 }
     }
 
-    func generateCodeForConfiguration(in document: IBDocument) -> [String] {
+    func generateCodeForConfiguration() -> [String] {
         return references
-            .map() { $0.generateCodeForConfiguration(in: document) }
+            .map() { $0.generateCodeForConfiguration(in: self) }
             .flatMap() { $0 }
     }
 }

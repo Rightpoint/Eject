@@ -35,7 +35,8 @@ struct VariableConfiguration: ObjectCodeGenerator {
         case .append:
             return "\(variable).\(key).append(\(valueString))"
         case let .setter(context):
-            return "\(variable).set\(key.capitalized)(\(valueString), \(context))"
+            let label = "set \(key)".snakeCased()
+            return "\(variable).\(label)(\(valueString), \(context))"
         }
     }
 }

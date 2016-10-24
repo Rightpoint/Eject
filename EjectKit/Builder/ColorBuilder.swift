@@ -24,6 +24,12 @@ struct ColorBuilder: Builder {
             let blue = attributes["blue"]?.floatValue {
             value = "UIColor(red: \(red.shortString), green: \(green.shortString), blue: \(blue.shortString), alpha: \(alpha.shortString))"
         }
+        else if var systemColor = attributes["cocoaTouchSystemColor"] {
+            if let range = systemColor.range(of: "Color") {
+                systemColor.removeSubrange(range)
+            }
+            value = "UIColor.\(systemColor)"
+        }
         else {
             fatalError("Unknown color \(attributes)")
         }

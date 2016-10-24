@@ -17,8 +17,8 @@ struct FontBuilder: Builder {
 
         // Not sure why, but the IB specifies a private key. Fix it up.
         if key == "fontDescription" { key = "font" }
-        if let type = attributes["type"], let pointSize = attributes["pointSize"], type == "system" {
-            value = ".systemFont(ofSize: \(pointSize))"
+        if let type = attributes["type"], let pointSize = attributes["pointSize"] {
+            value = ".\(type)Font(ofSize: \(pointSize))"
         }
         else if let pointSize = attributes["pointSize"], let name = attributes["name"] {
             value = "UIFont(name: \"\(name)\", size: \(pointSize))"

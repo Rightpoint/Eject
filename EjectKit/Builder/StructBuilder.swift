@@ -14,10 +14,10 @@ struct RectBuilder: Builder {
         guard let object = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
-            let x = attributes["x"],
-            let y = attributes["y"],
-            let width = attributes["width"],
-            let height = attributes["height"]
+            let x = attributes["x"]?.floatValue?.shortString,
+            let y = attributes["y"]?.floatValue?.shortString,
+            let width = attributes["width"]?.floatValue?.shortString,
+            let height = attributes["height"]?.floatValue?.shortString
             else {
                 fatalError("Invalid Rect")
         }
@@ -33,8 +33,8 @@ struct SizeBuilder: Builder {
         guard let object = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
-            let width = attributes["width"],
-            let height = attributes["height"]
+            let width = attributes["width"]?.floatValue?.shortString,
+            let height = attributes["height"]?.floatValue?.shortString
             else {
                 fatalError("Invalid Size")
         }
@@ -58,7 +58,7 @@ struct InsetBuilder: Builder {
             else {
                 fatalError("Invalid inset")
         }
-        object.addVariableConfiguration(for: key, value: BasicValue(value: "UIEdgeInsets(top: \(y), left: \(x), bottom: \(y + height), right: \(x + width))"))
+        object.addVariableConfiguration(for: key, value: BasicValue(value: "UIEdgeInsets(top: \(y.shortString), left: \(x.shortString), bottom: \((y + height).shortString), right: \((x + width).shortString))"))
         return object
     }
 

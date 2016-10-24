@@ -20,7 +20,8 @@ struct ObjectBuilder: Builder {
     }
 
     func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
-        guard let identifier = attributes["id"] else { fatalError("Must have identifier") }
+        let identifier = attributes["id"]
+            ?? UUID().uuidString // if a key is specified, the ID can be nil, so just generate a UUID in that case.
         let className = attributes["customClass"] ?? self.className
         let object = document.addObject(for: identifier,
                                         className: className,

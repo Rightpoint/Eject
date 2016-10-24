@@ -36,6 +36,7 @@ extension DocumentBuilder {
         // These two tags are containers that do not need a builder
         register("connections", NoOpBuilder())
         register("constraints", NoOpBuilder())
+        register("userDefinedRuntimeAttributes", NoOpBuilder())
 
         for type in ["integer", "real"] {
             register(type, KeyValueBuilder())
@@ -93,6 +94,9 @@ extension DocumentBuilder {
             properties: [("prefetchingEnabled", .boolean)]
         )
         register("collectionView", collectionView)
+        let collectionViewCell = view.inherit(className: "UICollectionViewCell")
+        register("collectionViewCell", collectionViewCell)
+
         let datePicker = view.inherit(
             className: "UIDatePicker",
             properties: [("inspectedDatePickerMode", .enumeration), ("locale", .enumeration), ("minuteInterval", .enumeration), ("hasMinimumDate", .boolean), ("hasMaximumDate", .boolean)]

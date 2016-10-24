@@ -61,8 +61,8 @@ func wrap(_ xml: String) -> String {
 class EjectTests: XCTestCase {
 
     func testString() {
-        let string = "Test String"
-        XCTAssertEqual(string.snakeCased(), "testString")
+        let string = "Test StringToCamel Case"
+        XCTAssertEqual(string.snakeCased(), "testStringToCamelCase")
     }
 
     func testViewPartsWithFrame() {
@@ -71,7 +71,7 @@ class EjectTests: XCTestCase {
             "let test = UIView()",
             "test.contentMode = .scaleToFill",
             "test.clearsContextBeforeDrawing = false",
-            "test.frame = CGRect(x: 0.0, y: 0.0, width: 350, height: 85)"
+            "test.frame = CGRect(x: 0, y: 0, width: 350, height: 85)"
             ]
         )
     }
@@ -160,9 +160,9 @@ class EjectTests: XCTestCase {
         checkXML(xml, [
             "let collectionViewFlowLayout = UICollectionViewFlowLayout()",
             "collectionViewFlowLayout.itemSize = CGSize(width: 50, height: 50)",
-            "collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0.0, height: 0.0)",
-            "collectionViewFlowLayout.footerReferenceSize = CGSize(width: 0.0, height: 0.0)",
-            "collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)",
+            "collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)",
+            "collectionViewFlowLayout.footerReferenceSize = CGSize(width: 0, height: 0)",
+            "collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)",
             "let collectionView = UICollectionView()",
             "collectionView.contentMode = .scaleToFill",
             "collectionView.translatesAutoresizingMaskIntoConstraints = false",
@@ -185,7 +185,7 @@ class EjectTests: XCTestCase {
             "tableView.sectionFooterHeight = 28",
             "tableView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "tableView.backgroundColor = UIColor(white: 1, alpha: 1)",
-            "tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 30.0)",
+            "tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 30)",
             "tableView.dataSource = fileOwner",
             "tableView.delegate = fileOwner",
             ])
@@ -211,8 +211,8 @@ class EjectTests: XCTestCase {
             "button.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "button.setTitle(\"Title\", for: .normal)",
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",
-            "button.setTitlecolor(UIColor(white: 1, alpha: 1), for: .normal)",
-            "button.setTitleshadowcolor(UIColor(white: 0, alpha: 0), for: .normal)",
+            "button.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)",
+            "button.setTitleShadowColor(UIColor(white: 0, alpha: 0), for: .normal)",
             "button.addTarget(fileOwner, action: #selector(TestClass.doThing:), for: .touchUpInside)"
             ])
     }
@@ -252,10 +252,10 @@ class EjectTests: XCTestCase {
             "label.textColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1)",
             "label.highlightedColor = nil",
             "let circularToggleView = CircularToggleView()",
-            "circularToggleView.frame = CGRect(x: 0.0, y: 29, width: 28, height: 28)",
+            "circularToggleView.frame = CGRect(x: 0, y: 29, width: 28, height: 28)",
             "circularToggleView.backgroundColor = UIColor(white: 1, alpha: 1)",
             "let view = UIView()",
-            "view.frame = CGRect(x: 0.0, y: 0.0, width: 350, height: 85)",
+            "view.frame = CGRect(x: 0, y: 0, width: 350, height: 85)",
             "view.backgroundColor = UIColor(white: 0, alpha: 0)",
             "view.addSubview(circularToggleView)",
             "view.addSubview(label)",
@@ -276,7 +276,7 @@ class EjectTests: XCTestCase {
         checkXML(xml, [
             "let contentView = UIView()",
             "let blurView = UIVisualEffectView()",
-            "blurView.frame = CGRect(x: 0.0, y: 0.0, width: 600, height: 600)",
+            "blurView.frame = CGRect(x: 0, y: 0, width: 600, height: 600)",
             "blurView.style = .extraLight",
             "blurView.contentView = contentView",
             ])
