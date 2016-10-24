@@ -20,6 +20,7 @@ extension DocumentBuilder {
         register("nil", KeyValueBuilder(value: "nil"))
         register("dataDetectorType", OptionSetBuilder())
         register("userDefinedRuntimeAttribute", UserDefinedAttributeBuilder())
+        register("autoresizingMask", AutoresizingMaskBuilder())
         register("size", SizeBuilder())
         register("inset", InsetBuilder())
         register("color", ColorBuilder())

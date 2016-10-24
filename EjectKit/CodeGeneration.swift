@@ -21,8 +21,6 @@ public enum ObjectGenerationPhase {
 }
 
 public protocol ObjectCodeGenerator: CodeGenerator {
-// 
-//    var dependent: [IBReference] { get }
     func generationPhase(in document: IBDocument) -> ObjectGenerationPhase
 }
 

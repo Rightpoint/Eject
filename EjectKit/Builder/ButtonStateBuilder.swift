@@ -29,10 +29,10 @@ class IBButtonStateProxy: IBReference {
         }
     }
 
-    func configurationGenerator(for key: String, value: CodeGenerator) -> ObjectCodeGenerator {
-        return VariableConfiguration(objectIdentifier: identifier, key: key, value: value, style: .setter(context: setterContext))
+    public func addVariableConfiguration(for key: String, value: CodeGenerator) {
+        generators.append(VariableConfiguration(objectIdentifier: identifier, key: key, value: value, style:  .setter(context: setterContext)))
     }
-    
+
 }
 
 struct ButtonStateBuilder: Builder {

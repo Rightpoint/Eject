@@ -31,9 +31,8 @@ class IBUserDefinedProxy: IBReference {
         }
     }
 
-    func configurationGenerator(for key: String, value: CodeGenerator) -> ObjectCodeGenerator {
-        guard key == "value" else { fatalError("Expecting key 'value'.") }
-        return VariableConfiguration(objectIdentifier: identifier, key: keyPath, value: value, style: .assignment)
+    public func addVariableConfiguration(for key: String, value: CodeGenerator) {
+        generators.append(VariableConfiguration(objectIdentifier: identifier, key: keyPath, value: value, style: .assignment))
     }
 
 }
