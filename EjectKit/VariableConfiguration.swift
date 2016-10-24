@@ -20,16 +20,15 @@ struct VariableConfiguration: ObjectCodeGenerator {
     let value: CodeGenerator
     let style: Style
 
-    func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
+    func generationPhase(in document: IBDocument) -> ObjectGenerationPhase {
         return .configuration
     }
 
-    func generateCode(in context: GenerationContext) -> String? {
-        let document = context.document
+    func generateCode(in document: IBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
 
-        let valueString = value.generateCode(in: context) ?? "<ERROR>"
+        let valueString = value.generateCode(in: document)
         switch style {
         case .assignment:
             return "\(variable).\(key) = \(valueString)"

@@ -29,8 +29,8 @@ class IBButtonStateProxy: IBReference {
         }
     }
 
-    func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator {
-        return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, style: .setter(context: setterContext))
+    func configurationGenerator(for key: String, value: CodeGenerator) -> ObjectCodeGenerator {
+        return VariableConfiguration(objectIdentifier: identifier, key: key, value: value, style: .setter(context: setterContext))
     }
     
 }
@@ -40,11 +40,11 @@ struct ButtonStateBuilder: Builder {
     func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
         guard let object = parent else { fatalError("No parent to configure") }
         guard let state = attributes["key"] else { fatalError("No state attribute") }
-        let proxy = IBButtonStateProxy(reference: object, setterContext: "for: \(RValueFormat.enumeration.transform(string: state))")
-        let attributeFormat: [(String, RValueFormat)] = [("title", .string), ("image", .image)]
+        let proxy = IBButtonStateProxy(reference: object, setterContext: "for: \(ValueFormat.enumeration.transform(string: state))")
+        let attributeFormat: [(String, ValueFormat)] = [("title", .string), ("image", .image)]
         for (key, format) in attributeFormat {
             if let value = attributes[key] {
-                proxy.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value, format: format))
+                proxy.addVariableConfiguration(for: key, value: BasicValue(value: value, format: format))
             }
         }
         return proxy

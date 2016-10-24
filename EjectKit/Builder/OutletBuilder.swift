@@ -16,12 +16,12 @@ struct OutletBuilder: Builder {
         guard let property = attributes["property"] else { fatalError("Must specify key") }
         guard let destination = attributes["destination"] else { fatalError("Must specify destination") }
 
-        let value = VariableRValue(objectIdentifier: destination)
+        let value = VariableValue(objectIdentifier: destination)
         if collection {
             parent.generators.append(VariableConfiguration(objectIdentifier: parent.identifier, key: property, value: value, style: .append))
         }
         else {
-            parent.addVariableConfiguration(for: property, rvalue: value)
+            parent.addVariableConfiguration(for: property, value: value)
         }
         return parent
     }

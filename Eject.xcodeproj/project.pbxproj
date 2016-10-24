@@ -41,6 +41,7 @@
 		ABB38A661DB95F6D008BF59E /* String+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A061DB95DDB008BF59E /* String+Eject.swift */; };
 		ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */; };
 		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
+		ABB38A6F1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6E1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		ABB38A3E1DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
 		ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBuilder.swift; sourceTree = "<group>"; };
+		ABB38A6E1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = CocoaTouchClassHierarchy.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */,
+				ABB38A6E1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABB38A6F1DBE329D008BF59E /* CocoaTouchClassHierarchy.plist in Sources */,
 				ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

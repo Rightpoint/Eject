@@ -13,8 +13,7 @@ struct Declaration: ObjectCodeGenerator {
     let className: String
     let arguments: [String: String]
 
-    func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
-        let document = context.document
+    func generationPhase(in document: IBDocument) -> ObjectGenerationPhase {
         let object = document.lookupReference(for: objectIdentifier)
         let scope = document.scope(for: object)
         switch scope {
@@ -25,8 +24,7 @@ struct Declaration: ObjectCodeGenerator {
         }
     }
 
-    func generateCode(in context: GenerationContext) -> String? {
-        let document = context.document
+    func generateCode(in document: IBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         let argumentString = arguments.map() { "\($0): \($1)" }.joined(separator: ", ")

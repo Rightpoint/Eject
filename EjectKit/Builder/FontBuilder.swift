@@ -27,7 +27,7 @@ struct FontBuilder: Builder {
             fatalError("Unknown font \(attributes)")
         }
 
-        parent.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value))
+        parent.addVariableConfiguration(for: key, value: BasicValue(value: value))
         return parent
     }
 }

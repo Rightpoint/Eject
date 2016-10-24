@@ -27,7 +27,7 @@ struct ColorBuilder: Builder {
         else {
             fatalError("Unknown color \(attributes)")
         }
-        parent.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value))
+        parent.addVariableConfiguration(for: key, value: BasicValue(value: value))
         return parent
     }
 }

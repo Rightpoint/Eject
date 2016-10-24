@@ -21,7 +21,7 @@ struct RectBuilder: Builder {
             else {
                 fatalError("Invalid Rect")
         }
-        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))"))
+        object.addVariableConfiguration(for: key, value: BasicValue(value: "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))"))
         return object
     }
 
@@ -38,7 +38,7 @@ struct SizeBuilder: Builder {
             else {
                 fatalError("Invalid Size")
         }
-        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: "CGSize(width: \(width), height: \(height))"))
+        object.addVariableConfiguration(for: key, value: BasicValue(value: "CGSize(width: \(width), height: \(height))"))
         return object
     }
 
@@ -58,7 +58,7 @@ struct InsetBuilder: Builder {
             else {
                 fatalError("Invalid inset")
         }
-        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: "UIEdgeInsets(top: \(y), left: \(x), bottom: \(y + height), right: \(x + width))"))
+        object.addVariableConfiguration(for: key, value: BasicValue(value: "UIEdgeInsets(top: \(y), left: \(x), bottom: \(y + height), right: \(x + width))"))
         return object
     }
 
@@ -66,14 +66,14 @@ struct InsetBuilder: Builder {
 
 struct BasicBuilder: Builder {
     let key: String
-    let format: RValueFormat
+    let format: ValueFormat
 
     func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
         guard let object = parent else { fatalError("No parent to configure") }
         guard let value = attributes[key] else {
             fatalError("Invalid Rect")
         }
-        object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value, format: format))
+        object.addVariableConfiguration(for: key, value: BasicValue(value: value, format: format))
         return object
     }
     

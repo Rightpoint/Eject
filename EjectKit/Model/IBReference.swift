@@ -15,18 +15,18 @@ public protocol IBReference: class {
     var userLabel: String? { get }
     var generators: [ObjectCodeGenerator] { get set }
 
-    func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator
+    func configurationGenerator(for key: String, value: CodeGenerator) -> ObjectCodeGenerator
 }
 
 extension IBReference {
 
     // Default implementation
-    public func configurationGenerator(for key: String, rvalue: CodeGenerator) -> ObjectCodeGenerator {
-        return VariableConfiguration(objectIdentifier: identifier, key: key, value: rvalue, style: .assignment)
+    public func configurationGenerator(for key: String, value: CodeGenerator) -> ObjectCodeGenerator {
+        return VariableConfiguration(objectIdentifier: identifier, key: key, value: value, style: .assignment)
     }
 
-    func addVariableConfiguration(for key: String, rvalue: CodeGenerator) {
-        let generator = configurationGenerator(for: key, rvalue: rvalue)
+    func addVariableConfiguration(for key: String, value: CodeGenerator) {
+        let generator = configurationGenerator(for: key, value: value)
         generators.append(generator)
     }
 }

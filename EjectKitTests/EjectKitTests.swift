@@ -19,10 +19,9 @@ func checkXML(_ xml: String, _ expected: [String], file: StaticString = #file, l
             XCTFail("No objects in the document", file: file, line: line - 1)
             return
         }
-        let context = GenerationContext(document: document, indentation: 0)
-        var lines = references.map() { $0.generateCodeForConfiguration(in: context)}.flatMap() { $0 }
-        lines.append(contentsOf: references.map() { $0.generateCode(in: context, for: .subviews) }.flatMap() { $0 })
-        lines.append(contentsOf: references.map() { $0.generateCode(in: context, for: .constraints) }.flatMap() { $0 })
+        var lines = references.map() { $0.generateCodeForConfiguration(in: document)}.flatMap() { $0 }
+        lines.append(contentsOf: references.map() { $0.generateCode(in: document, for: .subviews) }.flatMap() { $0 })
+        lines.append(contentsOf: references.map() { $0.generateCode(in: document, for: .constraints) }.flatMap() { $0 })
 
         XCTAssertEqual(lines.count, expected.count, file: file, line:line)
         var i: UInt = 1
@@ -277,20 +276,5 @@ class EjectTests: XCTestCase {
         let xml = wrap("<segmentedControl segmentControlStyle='plain' selectedSegmentIndex='0' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><segments><segment title='Overview'/><segment title='Description'/></segments></segmentedControl>")
         checkXML(xml, [])
     }
-
-    /// This test will validate the generation eventually. The hope is to have a directory full of xib files and the generated code and ensure things don't change.
-    func testXibResources() {
-        for path in Bundle(for: type(of: self)).paths(forResourcesOfType: "xibtest", inDirectory: "") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                let builder = try XIBParser(data: data)
-                let code = builder.document.generateCode()
-                print(code)
-            }
-            catch let error {
-                XCTFail(error.localizedDescription)
-            }
-        }
-    }
-    
+   
 }

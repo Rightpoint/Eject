@@ -8,6 +8,10 @@
 
 import Foundation
 
+// Class Hierarchy:     
+// The property tags in here
+// /Applications/Xcode.app/Contents/PlugIns/IDEInterfaceBuilderCocoaTouchIntegration.ideplugin/Contents/Resources
+
 extension DocumentBuilder {
     func registerCocoaTouch() {
         // Register all the configuration nodes. These do not create objects, but apply configuration to existing objects
@@ -27,6 +31,9 @@ extension DocumentBuilder {
         register("action", ActionBuilder())
         register("placeholder", PlaceholderBuilder())
         register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
+        // These two tags are containers that do not need a builder
+        register("connections", NoOpBuilder())
+        register("constraints", NoOpBuilder())
 
         for type in ["integer", "real"] {
             register(type, KeyValueBuilder())

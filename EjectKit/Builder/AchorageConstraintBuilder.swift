@@ -12,7 +12,7 @@ struct AnchorageConfiguration: ObjectCodeGenerator {
     let parentIdentifier: String
     let attributes: [String: String]
 
-    func generationPhase(in context: GenerationContext) -> ObjectGenerationPhase {
+    func generationPhase(in document: IBDocument) -> ObjectGenerationPhase {
         return .constraints
     }
 
@@ -25,8 +25,7 @@ struct AnchorageConfiguration: ObjectCodeGenerator {
         }
     }
 
-    func generateCode(in context: GenerationContext) -> String? {
-        let document = context.document
+    func generateCode(in document: IBDocument) -> String {
         var constraintParts: [String] = []
         let firstItem = attributes["firstItem"] ?? parentIdentifier
         guard let firstAttribute = attributes["firstAttribute"] else {

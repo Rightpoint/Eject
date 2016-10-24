@@ -10,10 +10,10 @@ import Foundation
 
 struct ObjectBuilder: Builder {
     var className: String
-    var properties: [(String, RValueFormat)]
+    var properties: [(String, ValueFormat)]
     var generators: [([String: String]) -> ObjectCodeGenerator?]
 
-    init(className: String, properties: [(String, RValueFormat)] = [], generators: [([String: String]) -> ObjectCodeGenerator?] = []) {
+    init(className: String, properties: [(String, ValueFormat)] = [], generators: [([String: String]) -> ObjectCodeGenerator?] = []) {
         self.className = className
         self.properties = properties
         self.generators = generators
@@ -49,7 +49,7 @@ struct ObjectBuilder: Builder {
             guard let parent = parent as? IBObject else {
                 fatalError("Must have a parent if the object defines a parent key")
             }
-            parent.addVariableConfiguration(for: parentKey, rvalue: VariableRValue(objectIdentifier: object.identifier))
+            parent.addVariableConfiguration(for: parentKey, value: VariableValue(objectIdentifier: object.identifier))
         }
 
         for (key, format) in properties {
@@ -59,7 +59,7 @@ struct ObjectBuilder: Builder {
             case (.injectDefault, _):
                 break // ignore properties that are injected into the constructor
             case let (_, value?):
-                object.addVariableConfiguration(for: key, rvalue: BasicRValue(value: value, format: format))
+                object.addVariableConfiguration(for: key, value: BasicValue(value: value, format: format))
             default:
                 break
             }
@@ -73,7 +73,7 @@ struct ObjectBuilder: Builder {
         return object
     }
 
-    func inherit(className: String, properties: [(String, RValueFormat)] = [], generators: [([String: String]) -> ObjectCodeGenerator?] = []) -> ObjectBuilder {
+    func inherit(className: String, properties: [(String, ValueFormat)] = [], generators: [([String: String]) -> ObjectCodeGenerator?] = []) -> ObjectBuilder {
         var subclass = self
         subclass.className = className
         subclass.properties.append(contentsOf: properties)
