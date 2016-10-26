@@ -25,8 +25,6 @@ public class XIBDocument {
     var references: [Reference] = []
     var containerContext: ConfigurationContext?
     var variableNameOverrides: [String: String] = ["-1": "self"]
-    var namespaces: [String] = ["NS", "UI", "MK", "SCN"]
-
 
     /// Generate a variable property name with the following precedence
     ///
@@ -43,10 +41,8 @@ public class XIBDocument {
         }
         else {
             var className = object.className
-            for prefix in namespaces {
-                if let range = className.range(of: prefix) {
-                    className.removeSubrange(range)
-                }
+            if let range = className.range(of: className.objcNamespace()) {
+                className.removeSubrange(range)
             }
             variable = className.snakeCased()
         }

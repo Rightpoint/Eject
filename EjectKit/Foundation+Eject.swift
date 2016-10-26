@@ -27,6 +27,23 @@ extension String {
         }
         return newString
     }
+
+    func objcNamespace() -> String {
+        var namespace = ""
+        var previousCharacter: UnicodeScalar? = nil
+        for character in unicodeScalars {
+            if let previousCharacter = previousCharacter {
+                if CharacterSet.uppercaseLetters.contains(previousCharacter) && CharacterSet.uppercaseLetters.contains(character) {
+                    namespace.append(String(previousCharacter))
+                }
+                else {
+                    return namespace
+                }
+            }
+            previousCharacter = character
+        }
+        return namespace
+    }
 }
 
 extension String {
