@@ -90,13 +90,13 @@ struct AchorageConstraintBuilder: Builder {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let identifier = attributes["id"] else { fatalError("No id attribute") }
         let generator = AnchorageConfiguration(parentIdentifier: parent.identifier, attributes: attributes)
-        _ = document.addObject(
+        let constraint = document.addObject(
             for: identifier,
             className: "NSLayoutConstraint",
             userLabel: attributes["userLabel"],
             declaration: .invocation(generator, .constraints)
         )
-        return parent
+        return constraint
     }
 
 }

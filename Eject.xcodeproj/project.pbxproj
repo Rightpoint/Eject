@@ -36,7 +36,7 @@
 		ABB38A621DB95F6D008BF59E /* UserDefinedAttributesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */; };
 		ABB38A631DB95F6D008BF59E /* ButtonStateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */; };
 		ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */; };
-		ABB38A651DB95F6D008BF59E /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FE1DB95DDB008BF59E /* Declaration.swift */; };
+		ABB38A651DB95F6D008BF59E /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FE1DB95DDB008BF59E /* Initializer.swift */; };
 		ABB38A661DB95F6D008BF59E /* Foundation+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */; };
 		ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */; };
 		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
@@ -96,7 +96,7 @@
 		ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubviewBuilder.swift; sourceTree = "<group>"; };
 		ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefinedAttributesBuilder.swift; sourceTree = "<group>"; };
 		ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeGeneration.swift; sourceTree = "<group>"; };
-		ABB389FE1DB95DDB008BF59E /* Declaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
+		ABB389FE1DB95DDB008BF59E /* Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 		ABB38A011DB95DDB008BF59E /* XIBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBDocument.swift; sourceTree = "<group>"; };
 		ABB38A041DB95DDB008BF59E /* Reference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
 		ABB38A051DB95DDB008BF59E /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
@@ -183,9 +183,9 @@
 				ABB38A001DB95DDB008BF59E /* Model */,
 				ABB389EF1DB95DDB008BF59E /* Builder */,
 				ABB38A051DB95DDB008BF59E /* Values.swift */,
+				ABB389FE1DB95DDB008BF59E /* Initializer.swift */,
 				ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */,
 				ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */,
-				ABB389FE1DB95DDB008BF59E /* Declaration.swift */,
 				ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */,
 			);
 			path = EjectKit;
@@ -411,7 +411,7 @@
 				ABB38A5B1DB95F6D008BF59E /* KeyValueBuilder.swift in Sources */,
 				ABB38A5A1DB95F6D008BF59E /* OutletBuilder.swift in Sources */,
 				ABB38A571DB95F6D008BF59E /* CocoaTouchBuilder.swift in Sources */,
-				ABB38A651DB95F6D008BF59E /* Declaration.swift in Sources */,
+				ABB38A651DB95F6D008BF59E /* Initializer.swift in Sources */,
 				ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */,
 				ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */,
 				ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */,
