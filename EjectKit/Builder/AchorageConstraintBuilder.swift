@@ -90,9 +90,9 @@ struct AnchorageConfiguration: CodeGenerator {
 
 struct AchorageConstraintBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let parent = parent else { fatalError("No parent to configure") }
-        guard let identifier = attributes["id"] else { fatalError("No id attribute") }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        guard let identifier = attributes["id"] else { throw XIBParser.Error.requiredAttribute(attribute: "id") }
         let generator = AnchorageConfiguration(parentIdentifier: parent.identifier, attributes: attributes)
         let constraint = document.addObject(
             for: identifier,

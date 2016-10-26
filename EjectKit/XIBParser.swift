@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Builder {
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference?
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference?
     func complete(document: XIBDocument)
 }
 
@@ -34,11 +34,18 @@ struct NoOpBuilder: Builder {
 }
 
 public class XIBParser: NSObject {
+    public enum Error: Swift.Error {
+        case needParent
+        case requiredAttribute(attribute: String)
+        case invalidAttribute(attribute: String, value: String)
+        case unknown(attributes: [String: String])
+    }
     private let parser: XMLParser
     private let documentBuilder = DocumentBuilder()
 
     var builderStack: [Builder] = []
     var stack: [Reference?] = []
+    var error: Error?
 
     public var document: XIBDocument {
         return documentBuilder.document
@@ -49,6 +56,9 @@ public class XIBParser: NSObject {
         super.init()
         self.parser.delegate = self
         try parser.throwingParse()
+        if let error = error {
+            throw error
+        }
     }
 
     var lastObject: Reference? {
@@ -71,8 +81,18 @@ extension XIBParser: XMLParserDelegate {
             print("No builder found for \(elementName)")
             return
         }
+        let nextObject: Reference?
+        do {
+            nextObject = try builder.buildElement(attributes: attributeDict, document: document, parent: lastObject)
+        }
+        catch let error as XIBParser.Error {
+            nextObject = nil
+            self.error = error
+        }
+        catch {
+            fatalError("Unknown error thrown")
+        }
         builderStack.append(builder)
-        let nextObject = builder.buildElement(attributes: attributeDict, document: document, parent: lastObject)
         stack.append(nextObject)
     }
 

@@ -10,9 +10,10 @@ import Foundation
 
 struct ButtonStateBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let parent = parent else { fatalError("No parent to configure") }
-        guard let state = attributes["key"] else { fatalError("No state attribute") }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        guard let state = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
+
         document.containerContext = .setter(suffix: "for: \(ValueFormat.enumeration.transform(string: state))")
 
         let attributeFormat: [(String, ValueFormat)] = [("title", .string), ("image", .image)]

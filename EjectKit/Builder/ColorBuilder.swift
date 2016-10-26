@@ -10,9 +10,9 @@ import Foundation
 
 struct ColorBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let parent = parent else { fatalError("No parent to configure") }
-        guard let key = attributes["key"] else { fatalError("Must specify key") }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        guard let key = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
         let alpha = attributes["alpha"]?.floatValue ?? 1
         let value: String
         if let white = attributes["white"]?.floatValue {
@@ -31,7 +31,7 @@ struct ColorBuilder: Builder {
             value = "UIColor.\(systemColor)"
         }
         else {
-            fatalError("Unknown color \(attributes)")
+            throw XIBParser.Error.unknown(attributes: attributes)
         }
         document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value))
         return parent

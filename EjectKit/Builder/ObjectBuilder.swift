@@ -19,7 +19,7 @@ struct ObjectBuilder: Builder {
         self.placeholder = placeholder
     }
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         let identifier = attributes["id"]
             ?? UUID().uuidString // if a key is specified, the ID can be nil, so just generate a UUID in that case.
         let className = attributes["customClass"] ?? self.className
@@ -54,9 +54,7 @@ struct ObjectBuilder: Builder {
 
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes["key"] {
-            guard let parent = parent else {
-                fatalError("Must have a parent if the object defines a parent key")
-            }
+            guard let parent = parent else { throw XIBParser.Error.needParent }
             if case .placeholder = declaration {
                 // If this is a placeholder (IE: an object that the parent will initialize internally) set the variable name to the property.
                 document.variableNameOverrides[identifier] = parentKey

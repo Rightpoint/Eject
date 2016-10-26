@@ -30,8 +30,8 @@ struct SegmentsBuilder: Builder, ContainerBuilder {
     }
 
     struct Segment: Builder {
-        func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-            guard let parent = parent else { fatalError("Unable to build a segment without a parent") }
+        func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+            guard let parent = parent else { throw XIBParser.Error.needParent }
             for (key, format) in [("title", ValueFormat.string), ("image", ValueFormat.image)] {
                 if let value = attributes[key] {
                     document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value, format: format))

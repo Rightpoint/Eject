@@ -30,8 +30,9 @@ class DocumentBuilder: BuilderLookup {
 
     struct PluginBuilder: Builder {
         weak var documentBuilder: DocumentBuilder?
-        func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-            guard let identifier = attributes["identifier"] else { fatalError("plugIn does not have an identifier") }
+        func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+            guard let identifier = attributes["identifier"] else { throw XIBParser.Error.requiredAttribute(attribute: "identifier") }
+
             if identifier == "com.apple.InterfaceBuilder.IBCocoaTouchPlugin" {
                 documentBuilder!.registerPrimitives()
                 documentBuilder!.registerCocoaTouch()

@@ -37,10 +37,10 @@ struct TargetActionConfiguration: CodeGenerator {
 
 struct ActionBuilder: Builder {
 
-    func buildElement(attributes: [String : String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let parent = parent else { fatalError("No parent to configure") }
-        guard var action = attributes["selector"] else { fatalError("No Action Specified") }
-        guard let destination = attributes["destination"] else { fatalError("No target specified") }
+    func buildElement(attributes: [String : String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        guard var action = attributes["selector"] else { throw XIBParser.Error.requiredAttribute(attribute: "selector") }
+        guard let destination = attributes["destination"] else { throw XIBParser.Error.requiredAttribute(attribute: "destination") }
         let event = attributes["eventType"]
 
         if !action.contains("("), let range = action.range(of: ":") {

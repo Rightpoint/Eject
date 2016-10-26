@@ -16,12 +16,12 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
         self.value = BasicValue(value: value, format: format)
     }
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let object = parent else { fatalError("No parent to configure") }
-        guard let key = attributes["key"] else { fatalError("No key supplied") }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        guard let key = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
         value.value = attributes["value"] ?? value.value
-        document.addVariableConfiguration(for: object.identifier, key: key, value: value)
-        return object
+        document.addVariableConfiguration(for: parent.identifier, key: key, value: value)
+        return parent
     }
 
     func found(characters: String) {

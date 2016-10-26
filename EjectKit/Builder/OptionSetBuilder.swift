@@ -10,12 +10,11 @@ import Foundation
 
 struct OptionSetBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let parent = parent else { fatalError("No parent to configure") }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
         var attributes = attributes
-        guard let key = attributes.removeValue(forKey: "key") else {
-            fatalError("Key not found in Option Set")
-        }
+        guard let key = attributes.removeValue(forKey: "key") else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
+
         document.addVariableConfiguration(for: parent.identifier, key: key, value: OptionSetValue(attributes: attributes))
         return parent
     }

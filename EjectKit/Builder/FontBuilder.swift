@@ -10,9 +10,9 @@ import Foundation
 
 struct FontBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let parent = parent else { fatalError("No parent to configure") }
-        guard var key = attributes["key"] else { fatalError("Must specify key") }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        guard var key = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
         let value: String
 
         // Not sure why, but the IB specifies a private key. Fix it up.
@@ -24,7 +24,7 @@ struct FontBuilder: Builder {
             value = "UIFont(name: \"\(name)\", size: \(pointSize))"
         }
         else {
-            fatalError("Unknown font \(attributes)")
+            throw XIBParser.Error.unknown(attributes: attributes)
         }
 
         document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value))

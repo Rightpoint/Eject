@@ -10,9 +10,9 @@ import Foundation
 
 struct AutoresizingMaskBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        guard let parent = parent else { fatalError("No parent to configure") }
-        guard attributes["key"] == "autoresizingMask" else { fatalError("Invalid Key") }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        guard attributes["key"] == "autoresizingMask" else { throw XIBParser.Error.unknown(attributes: attributes) }
 
         var values: [String: String] = [:]
         for (key, value) in attributes {
@@ -31,7 +31,7 @@ struct AutoresizingMaskBuilder: Builder {
             case "heightSizable":
                 values["flexibleHeight"] = value
             default:
-                fatalError("Unknown Key '\(key)'")
+                throw XIBParser.Error.unknown(attributes: attributes)
             }
         }
         document.addVariableConfiguration(for: parent.identifier, key: "autoresizingMask", value: OptionSetValue(attributes: values))
