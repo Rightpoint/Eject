@@ -10,7 +10,7 @@ import Foundation
 
 struct ColorBuilder: Builder {
 
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let key = attributes["key"] else { fatalError("Must specify key") }
         let alpha = attributes["alpha"]?.floatValue ?? 1
@@ -33,7 +33,7 @@ struct ColorBuilder: Builder {
         else {
             fatalError("Unknown color \(attributes)")
         }
-        parent.addVariableConfiguration(for: key, value: BasicValue(value: value))
+        document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value))
         return parent
     }
 }

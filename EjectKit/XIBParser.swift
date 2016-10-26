@@ -9,7 +9,12 @@
 import Foundation
 
 protocol Builder {
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference?
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference?
+    func complete(document: IBDocument)
+}
+
+extension Builder {
+    func complete(document: IBDocument) {}
 }
 
 protocol CharacterBuilder {
@@ -17,7 +22,7 @@ protocol CharacterBuilder {
 }
 
 protocol ContainerBuilder {
-    func add(object: IBReference, to parent: IBReference)
+    func didAddChild(object: IBReference, to parent: IBReference, document: IBDocument)
 }
 
 protocol BuilderLookup {
@@ -25,7 +30,7 @@ protocol BuilderLookup {
 }
 
 struct NoOpBuilder: Builder {
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? { return parent }
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? { return parent }
 }
 
 class XIBParser: NSObject {
@@ -67,7 +72,7 @@ extension XIBParser: XMLParserDelegate {
             return
         }
         builderStack.append(builder)
-        let nextObject = builder.configure(parent: lastObject, document: document, attributes: attributeDict)
+        let nextObject = builder.buildElement(attributes: attributeDict, document: document, parent: lastObject)
         stack.append(nextObject)
     }
 
@@ -76,16 +81,18 @@ extension XIBParser: XMLParserDelegate {
             return
         }
         let object = stack.removeLast()
-        builderStack.removeLast()
+        let completedBuilder = builderStack.removeLast()
+        completedBuilder.complete(document: document)
         if let lastBuilder = lastBuilder as? ContainerBuilder, let object = object {
-            lastBuilder.add(object: object, to: lastObject!)
+            lastBuilder.didAddChild(object: object, to: lastObject!, document: document)
         }
     }
 
     public func parser(_ parser: XMLParser, foundCharacters string: String) {
-        if let characterBuilder = lastBuilder as? CharacterBuilder {
-            characterBuilder.found(characters: string)
+        guard let characterBuilder = lastBuilder as? CharacterBuilder else {
+            return
         }
+        characterBuilder.found(characters: string)
     }
 
 }

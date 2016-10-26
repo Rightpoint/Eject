@@ -22,12 +22,17 @@ public class IBDocument {
 
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
     public var references: [IBReference] = []
+    var statements: [Statement] = []
+    var containerContext: ConfigurationContext?
 
     /// Generate a variable property name with the following precedence
     ///
     /// - User Label joined and camel cased
     /// - Class name without the prefix
     func variable(for object: IBReference) -> String {
+        if object.identifier == "-1" {
+            return "self"
+        }
         if let userLabel = object.userLabel {
             return userLabel.snakeCased()
         }
@@ -40,20 +45,6 @@ public class IBDocument {
         return className.snakeCased()
     }
 
-    enum Scope {
-        case local
-        case property
-    }
-
-    func scope(for object: IBReference) -> Scope {
-        //        for placeholder in connections {
-        //            if placeholder.destinationIdentifier == object.identifier {
-        //                return .property
-        //            }
-        //        }
-        return .local
-    }
-
     func lookupReference(for identifier: String) -> IBReference {
         for reference in references {
             if reference.identifier == identifier {
@@ -63,22 +54,48 @@ public class IBDocument {
         fatalError("Unknown identifier \(identifier)")
     }
 
-    func addObject(for identifier: String, className: String, userLabel: String?, parent: IBObject?) -> IBObject {
+    enum Declaration {
+        case initializer([String: String])
+        case invocation(CodeGenerator)
+    }
+
+    func addObject(for identifier: String, className: String, userLabel: String?, declaration: Declaration, phase: CodeGeneratorPhase) -> IBObject {
         let object = IBObject(identifier: identifier, className: className, userLabel: userLabel)
-        object.document = self
         references.append(object)
-        parent?.children.append(object)
+
+        let generator: CodeGenerator
+        switch declaration {
+        case let .initializer(arguments):
+            generator = Initializer(objectIdentifier: identifier, className: className, arguments: arguments)
+        case let .invocation(invocation):
+            generator = invocation
+        }
+        addStatement(generator, phase: phase, declares: object)
+
         return object
     }
 
     func addPlaceholder(for identifier: String, className: String, userLabel: String?) -> IBPlaceholder {
         let object = IBPlaceholder(identifier: identifier, className: className, userLabel: userLabel)
-        object.document = self
         references.append(object)
         return object
     }
-    
-    var document: IBDocument? {
-        return self
+
+    func addVariableConfiguration(for identifier: String, key: String, value: CodeGenerator, context: ConfigurationContext = .assignment) {
+        addStatement(
+            VariableConfiguration(
+                objectIdentifier: identifier,
+                key: key,
+                value: value,
+                style: containerContext ?? context
+            ),
+            phase: .configuration
+        )
     }
+
+    func addStatement(_ generator: CodeGenerator, phase: CodeGeneratorPhase, declares: IBReference? = nil) {
+        let statement = Statement(declares: declares, generator: generator, phase: phase)
+        statements.append(statement)
+    }
+
 }

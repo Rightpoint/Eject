@@ -62,3 +62,14 @@ extension XMLParser {
         }
     }
 }
+
+extension RangeReplaceableCollection where Iterator.Element : Equatable {
+
+    mutating func remove(contentsOf array: Array<Iterator.Element>) {
+        for item in array {
+            if let index = index(of: item) {
+                remove(at: index)
+            }
+        }
+    }
+}

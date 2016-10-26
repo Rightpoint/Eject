@@ -8,20 +8,25 @@
 
 import Foundation
 
-struct VariableConfiguration: ObjectCodeGenerator {
-    enum Style {
-        case assignment
-        case append
-        // This adds support for `forState: .normal`
-        case setter(context: String)
-    }
+enum ConfigurationContext {
+    case assignment
+    case append
+    case assigmentOverride(key: String)
+    // This adds support for `forState: .normal`
+    case setter(suffix: String)
+    case invocation(method: String)
+}
+
+
+struct VariableConfiguration: CodeGenerator {
     let objectIdentifier: String
     let key: String
     let value: CodeGenerator
-    let style: Style
+    let style: ConfigurationContext
 
-    func generationPhase(in document: IBDocument) -> ObjectGenerationPhase {
-        return .configuration
+    var dependentIdentifiers: Set<String> {
+        let identifiers: Set<String> = [objectIdentifier]
+        return identifiers.union(value.dependentIdentifiers)
     }
 
     func generateCode(in document: IBDocument) -> String {
@@ -34,9 +39,13 @@ struct VariableConfiguration: ObjectCodeGenerator {
             return "\(variable).\(key) = \(valueString)"
         case .append:
             return "\(variable).\(key).append(\(valueString))"
+        case let .assigmentOverride(key):
+            return "\(variable).\(key) = \(valueString)"
         case let .setter(context):
             let label = "set \(key)".snakeCased()
             return "\(variable).\(label)(\(valueString), \(context))"
+        case let .invocation(method):
+            return "\(variable).\(method)(\(valueString))"
         }
     }
 }

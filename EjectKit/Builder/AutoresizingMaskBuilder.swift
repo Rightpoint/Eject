@@ -10,7 +10,7 @@ import Foundation
 
 struct AutoresizingMaskBuilder: Builder {
 
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard attributes["key"] == "autoresizingMask" else { fatalError("Invalid Key") }
 
@@ -34,7 +34,7 @@ struct AutoresizingMaskBuilder: Builder {
                 fatalError("Unknown Key '\(key)'")
             }
         }
-        parent.addVariableConfiguration(for: "autoresizingMask", value: OptionSetValue(attributes: values))
+        document.addVariableConfiguration(for: parent.identifier, key: "autoresizingMask", value: OptionSetValue(attributes: values))
         return parent
     }
 }

@@ -8,21 +8,10 @@
 
 import Foundation
 
-struct Declaration: ObjectCodeGenerator {
+struct Initializer: CodeGenerator {
     let objectIdentifier: String
     let className: String
     let arguments: [String: String]
-
-    func generationPhase(in document: IBDocument) -> ObjectGenerationPhase {
-        let object = document.lookupReference(for: objectIdentifier)
-        let scope = document.scope(for: object)
-        switch scope {
-        case .local:
-            return .scopeVariable
-        case .property:
-            return .properties
-        }
-    }
 
     func generateCode(in document: IBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)

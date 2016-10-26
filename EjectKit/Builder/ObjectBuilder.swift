@@ -11,22 +11,16 @@ import Foundation
 struct ObjectBuilder: Builder {
     var className: String
     var properties: [(String, ValueFormat)]
-    var generators: [([String: String]) -> ObjectCodeGenerator?]
 
-    init(className: String, properties: [(String, ValueFormat)] = [], generators: [([String: String]) -> ObjectCodeGenerator?] = []) {
+    init(className: String, properties: [(String, ValueFormat)] = []) {
         self.className = className
         self.properties = properties
-        self.generators = generators
     }
 
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
         let identifier = attributes["id"]
             ?? UUID().uuidString // if a key is specified, the ID can be nil, so just generate a UUID in that case.
         let className = attributes["customClass"] ?? self.className
-        let object = document.addObject(for: identifier,
-                                        className: className,
-                                        userLabel: attributes["userLabel"],
-                                        parent: parent as? IBObject)
 
         // Build the arguments to inject into the constructor.
         let arguments: [String: String] = properties.reduce([:]) { arguments, tuple in
@@ -42,15 +36,21 @@ struct ObjectBuilder: Builder {
             return arguments
         }
 
-        // Add a generator for the declaration of this object
-        object.addDeclaration(arguments: arguments)
+        let object = document.addObject(
+            for: identifier,
+            className: className,
+            userLabel: attributes["userLabel"],
+            declaration: .initializer(arguments),
+            phase: .initialization
+        )
 
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes["key"] {
             guard let parent = parent as? IBObject else {
                 fatalError("Must have a parent if the object defines a parent key")
             }
-            parent.addVariableConfiguration(for: parentKey, value: VariableValue(objectIdentifier: object.identifier))
+            let value = VariableValue(objectIdentifier: object.identifier)
+            document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
         }
 
         for (key, format) in properties {
@@ -60,25 +60,18 @@ struct ObjectBuilder: Builder {
             case (.injectDefault, _):
                 break // ignore properties that are injected into the constructor
             case let (_, value?):
-                object.addVariableConfiguration(for: key, value: BasicValue(value: value, format: format))
+                document.addVariableConfiguration(for: object.identifier, key: key, value: BasicValue(value: value, format: format))
             default:
                 break
-            }
-        }
-
-        for block in generators {
-            if let config = block(attributes) {
-                object.generators.append(config)
             }
         }
         return object
     }
 
-    func inherit(className: String, properties: [(String, ValueFormat)] = [], generators: [([String: String]) -> ObjectCodeGenerator?] = []) -> ObjectBuilder {
+    func inherit(className: String, properties: [(String, ValueFormat)] = []) -> ObjectBuilder {
         var subclass = self
         subclass.className = className
         subclass.properties.append(contentsOf: properties)
-        subclass.generators.append(contentsOf: generators)
         return subclass
     }
     

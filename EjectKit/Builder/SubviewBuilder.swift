@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct SubviewConfiguration: ObjectCodeGenerator {
+struct SubviewConfiguration: CodeGenerator {
     var objectIdentifier: String
     var subview: IBReference
 
-    func generationPhase(in document: IBDocument) -> ObjectGenerationPhase {
-        return .subviews
+    var dependentIdentifiers: Set<String> {
+        return [objectIdentifier, subview.identifier]
     }
 
     func generateCode(in document: IBDocument) -> String {
@@ -28,13 +28,16 @@ struct SubviewConfiguration: ObjectCodeGenerator {
 
 struct SubviewBuilder: Builder, ContainerBuilder {
 
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         return parent
     }
 
-    func add(object: IBReference, to parent: IBReference) {
-        parent.generators.append(SubviewConfiguration(objectIdentifier: parent.identifier, subview: object))
+    func didAddChild(object: IBReference, to parent: IBReference, document: IBDocument) {
+        document.addStatement(
+            SubviewConfiguration(objectIdentifier: parent.identifier, subview: object),
+            phase: .subviews
+        )
     }
 
 }

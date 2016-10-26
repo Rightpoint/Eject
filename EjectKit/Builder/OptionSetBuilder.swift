@@ -10,13 +10,13 @@ import Foundation
 
 struct OptionSetBuilder: Builder {
 
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         var attributes = attributes
         guard let key = attributes.removeValue(forKey: "key") else {
             fatalError("Key not found in Option Set")
         }
-        parent.addVariableConfiguration(for: key, value: OptionSetValue(attributes: attributes))
+        document.addVariableConfiguration(for: parent.identifier, key: key, value: OptionSetValue(attributes: attributes))
         return parent
     }
     

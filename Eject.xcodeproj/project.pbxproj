@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */; };
+		AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E331DBF8F2E000A0A56 /* Statement.swift */; };
 		ABB38A361DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
 		ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */; };
 		ABB38A3F1DB95EA0008BF59E /* EjectKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB38A2F1DB95EA0008BF59E /* EjectKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,6 +80,7 @@
 /* Begin PBXFileReference section */
 		AB477E2F1DBEAA1E000A0A56 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoresizingMaskBuilder.swift; sourceTree = "<group>"; };
+		AB477E331DBF8F2E000A0A56 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		ABB389DA1DB95D00008BF59E /* Eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB389E81DB95DDA008BF59E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABB389E91DB95DDA008BF59E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				ABB38A021DB95DDB008BF59E /* IBObject.swift */,
 				ABB38A031DB95DDB008BF59E /* IBPlaceholder.swift */,
 				ABB38A041DB95DDB008BF59E /* IBReference.swift */,
+				AB477E331DBF8F2E000A0A56 /* Statement.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */,
 				ABB38A521DB95F6D008BF59E /* IBPlaceholder.swift in Sources */,
 				ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */,
 				ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */,

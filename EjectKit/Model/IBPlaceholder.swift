@@ -9,12 +9,9 @@
 import Foundation
 
 public class IBPlaceholder: IBReference {
-    weak var document: IBDocument?
-
     public var identifier: String
     public var className: String
     public var userLabel: String?
-    public var generators: [ObjectCodeGenerator] = []
 
     init (identifier: String, className: String, userLabel: String? = nil) {
         self.identifier = identifier

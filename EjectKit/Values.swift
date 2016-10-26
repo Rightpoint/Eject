@@ -75,6 +75,10 @@ struct OptionSetValue: CodeGenerator {
 struct VariableValue: CodeGenerator {
     let objectIdentifier: String
 
+    var dependentIdentifiers: Set<String> {
+        return [objectIdentifier]
+    }
+
     func generateCode(in document: IBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         return document.variable(for: object)

@@ -16,11 +16,11 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
         self.value = BasicValue(value: value, format: format)
     }
 
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String: String]) -> IBReference? {
+    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
         guard let object = parent else { fatalError("No parent to configure") }
         guard let key = attributes["key"] else { fatalError("No key supplied") }
         value.value = attributes["value"] ?? value.value
-        object.addVariableConfiguration(for: key, value: value)
+        document.addVariableConfiguration(for: object.identifier, key: key, value: value)
         return object
     }
 

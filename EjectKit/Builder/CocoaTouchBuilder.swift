@@ -34,9 +34,9 @@ extension DocumentBuilder {
         register("placeholder", PlaceholderBuilder())
         register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
         // These two tags are containers that do not need a builder
-        register("connections", NoOpBuilder())
-        register("constraints", NoOpBuilder())
-        register("userDefinedRuntimeAttributes", NoOpBuilder())
+        for noopKey in ["userDefinedRuntimeAttributes", "connections", "constraints", "freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "resources", "image"] {
+            register(noopKey, NoOpBuilder())
+        }
 
         for type in ["integer", "real"] {
             register(type, KeyValueBuilder())

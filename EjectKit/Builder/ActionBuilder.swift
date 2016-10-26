@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct TargetActionConfiguration: ObjectCodeGenerator {
+struct TargetActionConfiguration: CodeGenerator {
     let objectIdentifier: String
     let targetIdentifier: String
     let action: String
     let event: String?
 
-    func generationPhase(in document: IBDocument) -> ObjectGenerationPhase {
-        return .subviews
+    var dependentIdentifiers: Set<String> {
+        return [objectIdentifier, targetIdentifier]
     }
 
     func generateCode(in document: IBDocument) -> String {
@@ -37,20 +37,20 @@ struct TargetActionConfiguration: ObjectCodeGenerator {
 
 struct ActionBuilder: Builder {
 
-    func configure(parent: IBReference?, document: IBDocument, attributes: [String : String]) -> IBReference? {
+    func buildElement(attributes: [String : String], document: IBDocument, parent: IBReference?) -> IBReference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let action = attributes["selector"] else { fatalError("No Action Specified") }
         guard let destination = attributes["destination"] else { fatalError("No target specified") }
         let event = attributes["eventType"]
 
-        parent.generators.append(
+        document.addStatement(
             TargetActionConfiguration(
                 objectIdentifier: parent.identifier,
                 targetIdentifier: destination,
                 action: action,
                 event: event
-            )
-        )
+            ),
+            phase: .configuration)
         return parent
     }
 }
