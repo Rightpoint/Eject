@@ -16,7 +16,7 @@ func checkXML(_ xml: String, _ expected: [String], file: StaticString = #file, l
             XCTFail("No objects in the document", file: file, line: line - 1)
             return
         }
-        let lines = document.generateCode()
+        let lines = document.generateCode(disableComments: true)
 
         XCTAssertEqual(lines.count, expected.count, file: file, line:line)
         var i: UInt = 1
@@ -67,6 +67,7 @@ class EjectTests: XCTestCase {
             "test.contentMode = .scaleToFill",
             "test.clearsContextBeforeDrawing = false",
             "test.frame = CGRect(x: 0, y: 0, width: 350, height: 85)",
+            "",
             "self.view = test",
             ]
         )
@@ -79,6 +80,7 @@ class EjectTests: XCTestCase {
             "let test = UIView()",
             "let panGestureRecognizer = UIPanGestureRecognizer()",
             "panGestureRecognizer.minimumNumberOfTouches = 1",
+            "",
             "panGestureRecognizer.delegate = test",
             "panGestureRecognizer.addTarget(self, action: #selector(TestClass.dimissTextField(_:)))",
             "test.gestureRecognizers.append(panGestureRecognizer)",
@@ -94,6 +96,7 @@ class EjectTests: XCTestCase {
             "test.baselineAdjustment = .alignBaselines",
             "test.minimumFontSize = 13",
             "test.font = .systemFont(ofSize: 17)",
+            "",
             "self.view = test",
             ]
         )
@@ -104,6 +107,7 @@ class EjectTests: XCTestCase {
         checkXML(xml, [
             "let test = UIView()",
             "test.layer.cornerRadius = 25",
+            "",
             "self.view = test",
             ]
         )
@@ -114,6 +118,7 @@ class EjectTests: XCTestCase {
         checkXML(xml, [
             "let test = UILabel()",
             "test.text = \"body\"",
+            "",
             "self.view = test",
             ]
         )
@@ -124,6 +129,7 @@ class EjectTests: XCTestCase {
         checkXML(xml, [
             "let test = UILabel()",
             "test.text = \"body\"",
+            "",
             "self.view = test",
             ]
         )
@@ -137,6 +143,7 @@ class EjectTests: XCTestCase {
             "test.b = UIColor(red: 0.847, green: 0.161, blue: 0.184, alpha: 1)",
             "test.c = UIColor(white: 1, alpha: 1)",
             "test.d = UIColor(white: 0.5, alpha: 1)",
+            "",
             "self.view = test",
             ]
         )
@@ -147,6 +154,7 @@ class EjectTests: XCTestCase {
         checkXML(xml, [
             "let test = UIView()",
             "test.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleHeight]",
+            "",
             "self.view = test",
             ]
         )
@@ -163,6 +171,7 @@ class EjectTests: XCTestCase {
             "let test = UIView()",
             "test.a = UIFont(name: \"Gotham-Bold\", size: 32)",
             "test.b = .systemFont(ofSize: 17)",
+            "",
             "self.view = test",
             ]
         )
@@ -175,11 +184,13 @@ class EjectTests: XCTestCase {
             "collectionView.contentMode = .scaleToFill",
             "collectionView.translatesAutoresizingMaskIntoConstraints = false",
             "collectionView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
+            "",
             "let collectionViewFlowLayout = UICollectionViewFlowLayout()",
             "collectionViewFlowLayout.itemSize = CGSize(width: 50, height: 50)",
             "collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)",
             "collectionViewFlowLayout.footerReferenceSize = CGSize(width: 0, height: 0)",
             "collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)",
+            "",
             "collectionView.delegate = self",
             "collectionView.dataSource = self",
             "collectionView.collectionViewLayout = collectionViewFlowLayout",
@@ -200,6 +211,7 @@ class EjectTests: XCTestCase {
             "tableView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "tableView.backgroundColor = UIColor(white: 1, alpha: 1)",
             "tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 30)",
+            "",
             "tableView.delegate = self",
             "tableView.dataSource = self",
             "self.view = tableView",
@@ -213,6 +225,7 @@ class EjectTests: XCTestCase {
             "imageView.contentMode = .center",
             "imageView.translatesAutoresizingMaskIntoConstraints = false",
             "imageView.image = UIImage(named: \"icon\")",
+            "",
             "self.view = imageView",
             ])
     }
@@ -229,6 +242,7 @@ class EjectTests: XCTestCase {
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",
             "button.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)",
             "button.setTitleShadowColor(UIColor(white: 0, alpha: 0), for: .normal)",
+            "",
             "button.addTarget(self, action: #selector(TestClass.doThing(_:)), for: .touchUpInside)",
             "self.view = button",
             ])
@@ -244,6 +258,7 @@ class EjectTests: XCTestCase {
             "view.addSubview(otherView)",
             "view.addSubview(borderView)",
             "borderView.addSubview(webView)",
+            "",
             "self.view = view",
             ])
     }
@@ -258,6 +273,7 @@ class EjectTests: XCTestCase {
             "view.addSubview(otherView)",
             "view.addSubview(borderView)",
             "borderView.addSubview(webView)",
+            "",
             "self.view = view",
             ])
     }
@@ -268,16 +284,20 @@ class EjectTests: XCTestCase {
             "let view = UIView()",
             "view.frame = CGRect(x: 0, y: 0, width: 350, height: 85)",
             "view.backgroundColor = UIColor(white: 0, alpha: 0)",
+            "",
             "let circularToggleView = CircularToggleView()",
             "circularToggleView.frame = CGRect(x: 0, y: 29, width: 28, height: 28)",
             "circularToggleView.backgroundColor = UIColor(white: 1, alpha: 1)",
+            "",
             "let label = UILabel()",
             "label.frame = CGRect(x: 36, y: 36, width: 52, height: 14)",
             "label.font = UIFont(name: \"Gotham-Book\", size: 14)",
             "label.textColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1)",
             "label.highlightedColor = nil",
+            "",
             "view.addSubview(label)",
             "view.addSubview(circularToggleView)",
+            "",
             "label.leadingAnchor == circularToggleView.trailingAnchor + 8 ~ 100",
             "label.topAnchor == view.topAnchor + 20",
             "label.centerYAnchor == circularToggleView.centerYAnchor",
@@ -287,6 +307,7 @@ class EjectTests: XCTestCase {
             "circularToggleView.leadingAnchor == view.leadingAnchor",
             "circularToggleView.widthAnchor == 28",
             "circularToggleView.heightAnchor == 28",
+            "",
             "self.view = view"
             ])
     }
@@ -297,6 +318,7 @@ class EjectTests: XCTestCase {
             "let blurView = UIVisualEffectView()",
             "blurView.frame = CGRect(x: 0, y: 0, width: 600, height: 600)",
             "blurView.style = .extraLight",
+            "",
             "let contentView = UIView()",
             "blurView.contentView = contentView",
             "self.view = blurView",
@@ -310,7 +332,7 @@ class EjectTests: XCTestCase {
     }
 
     /// This test will validate the generation eventually. The hope is to have a directory full of xib files and the generated code and ensure things don't change.
-    func testXibResources() {
+    func skip_testXibResources() {
         let path = URL(fileURLWithPath: "/Users/brianking/sandbox/Eject/.nonPublicXIBs")
         let files = try? FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }

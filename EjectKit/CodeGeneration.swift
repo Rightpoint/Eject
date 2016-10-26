@@ -27,6 +27,19 @@ public enum CodeGeneratorPhase {
     case configuration
     case subviews
     case constraints
+
+    var comment: String {
+        switch self {
+        case .initialization:
+            return "// Create Views"
+        case .configuration:
+            return "// Remaining Configuration"
+        case .subviews:
+            return "// Assemble View Hierarchy"
+        case .constraints:
+            return "// Configure Constraints"
+        }
+    }
 }
 
 extension XIBDocument {
@@ -35,21 +48,23 @@ extension XIBDocument {
         return statements.filter() { $0.phase == generationPhase }.map() { $0.generator.generateCode(in: self) }
     }
 
-    public func generateCode() -> [String] {
-        var context = GenerationContext(document: self)
+    public func generateCode(disableComments: Bool = false) -> [String] {
+        var context = GenerationContext(document: self, disableComments: disableComments)
         return context.generateCode()
     }
 }
 
 struct GenerationContext {
     let document: XIBDocument
+    let disableComments: Bool
     var statements: [Statement]
     var declared = Set<String>()
 
 
-    init(document: XIBDocument) {
+    init(document: XIBDocument, disableComments: Bool) {
         self.document = document
         self.statements = document.statements
+        self.disableComments = disableComments
     }
 
     mutating func extractStatements(matching: (Statement) -> Bool) -> [Statement] {
@@ -98,12 +113,17 @@ struct GenerationContext {
         // Generate the list of objects that need generation. This will remove the
         // placeholders since they are declared externally.
         var needGeneration = document.references.filter() { !$0.identifier.hasPrefix("-") }
+        if !disableComments { generatedCode.append(CodeGeneratorPhase.initialization.comment) }
         while needGeneration.count > 0 {
             var removedIndexes = IndexSet()
             for (index, reference) in needGeneration.enumerated() {
                 if let code = declaration(identifier: reference.identifier) {
                     generatedCode.append(code)
-                    generatedCode.append(contentsOf: configuration(identifier: reference.identifier))
+                    let configuration = self.configuration(identifier: reference.identifier)
+                    if configuration.count > 0 {
+                        generatedCode.append(contentsOf: configuration)
+                        generatedCode.append("")
+                    }
                     removedIndexes.insert(index)
                 }
             }
@@ -115,9 +135,17 @@ struct GenerationContext {
             }
         }
         for phase: CodeGeneratorPhase in [.subviews, .constraints, .configuration] {
-            generatedCode.append(contentsOf: code(for: phase))
+            let lines = code(for: phase)
+            if lines.count > 0 {
+                if !disableComments { generatedCode.append(phase.comment) }
+                generatedCode.append(contentsOf: lines)
+                generatedCode.append("")
+            }
         }
         assert(statements.count == 0)
+        if generatedCode.last == "" {
+            generatedCode.removeLast()
+        }
         return generatedCode
     }
 }
