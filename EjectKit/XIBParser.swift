@@ -33,18 +33,18 @@ struct NoOpBuilder: Builder {
     func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? { return parent }
 }
 
-class XIBParser: NSObject {
+public class XIBParser: NSObject {
     private let parser: XMLParser
     private let documentBuilder = DocumentBuilder()
 
     var builderStack: [Builder] = []
     var stack: [Reference?] = []
 
-    var document: XIBDocument {
+    public var document: XIBDocument {
         return documentBuilder.document
     }
 
-    init(data: Data) throws {
+    public init(data: Data) throws {
         self.parser = XMLParser(data: data)
         super.init()
         self.parser.delegate = self

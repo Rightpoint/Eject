@@ -35,7 +35,7 @@ extension XIBDocument {
         return statements.filter() { $0.phase == generationPhase }.map() { $0.generator.generateCode(in: self) }
     }
 
-    func generateCode() -> [String] {
+    public func generateCode() -> [String] {
         var context = GenerationContext(document: self)
         return context.generateCode()
     }

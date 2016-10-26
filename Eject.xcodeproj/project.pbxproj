@@ -14,9 +14,6 @@
 		ABB38A3F1DB95EA0008BF59E /* EjectKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB38A2F1DB95EA0008BF59E /* EjectKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABB38A421DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
 		ABB38A441DB95EA0008BF59E /* EjectKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ABB38A4B1DB95F32008BF59E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389E81DB95DDA008BF59E /* AppDelegate.swift */; };
-		ABB38A4C1DB95F36008BF59E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABB389E91DB95DDA008BF59E /* Assets.xcassets */; };
-		ABB38A4E1DB95F3F008BF59E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB389EA1DB95DDA008BF59E /* MainMenu.xib */; };
 		ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A081DB95DDB008BF59E /* XIBParser.swift */; };
 		ABB38A501DB95F6D008BF59E /* XIBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A011DB95DDB008BF59E /* XIBDocument.swift */; };
 		ABB38A531DB95F6D008BF59E /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A041DB95DDB008BF59E /* Reference.swift */; };
@@ -41,6 +38,7 @@
 		ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */; };
 		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
 		ABB38A761DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */; };
+		ABF8D9091DC0668A008D9178 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D9081DC0668A008D9178 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,9 +77,6 @@
 		AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoresizingMaskBuilder.swift; sourceTree = "<group>"; };
 		AB477E331DBF8F2E000A0A56 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		ABB389DA1DB95D00008BF59E /* Eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABB389E81DB95DDA008BF59E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ABB389E91DB95DDA008BF59E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ABB389EB1DB95DDA008BF59E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
 		ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaTouchBuilder.swift; sourceTree = "<group>"; };
@@ -113,6 +108,7 @@
 		ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
 		ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBuilder.swift; sourceTree = "<group>"; };
 		ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorPropertyConfigurationTests.swift; sourceTree = "<group>"; };
+		ABF8D9081DC0668A008D9178 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,10 +162,8 @@
 		ABB389E71DB95DDA008BF59E /* Eject */ = {
 			isa = PBXGroup;
 			children = (
-				ABB389E81DB95DDA008BF59E /* AppDelegate.swift */,
-				ABB389E91DB95DDA008BF59E /* Assets.xcassets */,
-				ABB389EA1DB95DDA008BF59E /* MainMenu.xib */,
 				ABB389EC1DB95DDA008BF59E /* Info.plist */,
+				ABF8D9081DC0668A008D9178 /* main.swift */,
 			);
 			path = Eject;
 			sourceTree = "<group>";
@@ -323,6 +317,7 @@
 				TargetAttributes = {
 					ABB389D91DB95D00008BF59E = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					ABB38A2C1DB95EA0008BF59E = {
@@ -332,7 +327,6 @@
 					ABB38A341DB95EA0008BF59E = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
-						TestTargetID = ABB389D91DB95D00008BF59E;
 					};
 				};
 			};
@@ -361,8 +355,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB38A4C1DB95F36008BF59E /* Assets.xcassets in Resources */,
-				ABB38A4E1DB95F3F008BF59E /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB38A4B1DB95F32008BF59E /* AppDelegate.swift in Sources */,
+				ABF8D9091DC0668A008D9178 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,17 +438,6 @@
 			targetProxy = ABB38A401DB95EA0008BF59E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		ABB389EA1DB95DDA008BF59E /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABB389EB1DB95DDA008BF59E /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AB47D9B11DB5A3DD00A7B5E8 /* Debug */ = {
@@ -552,6 +533,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Eject/Info.plist;
@@ -559,6 +541,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.Eject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -568,6 +551,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Eject/Info.plist;
@@ -641,7 +625,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eject.app/Contents/MacOS/Eject";
 			};
 			name = Debug;
 		};
@@ -657,7 +640,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eject.app/Contents/MacOS/Eject";
 			};
 			name = Release;
 		};
