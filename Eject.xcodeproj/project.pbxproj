@@ -39,6 +39,9 @@
 		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
 		ABB38A761DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */; };
 		ABF8D9091DC0668A008D9178 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D9081DC0668A008D9178 /* main.swift */; };
+		ABF8D90B1DC1197C008D9178 /* SegmentsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */; };
+		ABF8D90D1DC11A7C008D9178 /* ConfigurationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */; };
+		ABF8D90F1DC11E75008D9178 /* ValueFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +112,9 @@
 		ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBuilder.swift; sourceTree = "<group>"; };
 		ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorPropertyConfigurationTests.swift; sourceTree = "<group>"; };
 		ABF8D9081DC0668A008D9178 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentsBuilder.swift; sourceTree = "<group>"; };
+		ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationContext.swift; sourceTree = "<group>"; };
+		ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,8 +182,10 @@
 				ABB38A081DB95DDB008BF59E /* XIBParser.swift */,
 				ABB38A001DB95DDB008BF59E /* Model */,
 				ABB389EF1DB95DDB008BF59E /* Builder */,
+				ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */,
 				ABB38A051DB95DDB008BF59E /* Values.swift */,
 				ABB389FE1DB95DDB008BF59E /* Initializer.swift */,
+				ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */,
 				ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */,
 				ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */,
 				ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */,
@@ -203,6 +211,7 @@
 				ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */,
 				ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */,
 				ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */,
+				ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -389,11 +398,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */,
+				ABF8D90F1DC11E75008D9178 /* ValueFormat.swift in Sources */,
 				ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */,
 				ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */,
 				ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */,
 				ABB38A601DB95F6D008BF59E /* SubviewBuilder.swift in Sources */,
 				ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */,
+				ABF8D90D1DC11A7C008D9178 /* ConfigurationContext.swift in Sources */,
 				ABB38A541DB95F6D008BF59E /* Values.swift in Sources */,
 				AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */,
 				ABB38A531DB95F6D008BF59E /* Reference.swift in Sources */,
@@ -404,6 +415,7 @@
 				ABB38A5A1DB95F6D008BF59E /* OutletBuilder.swift in Sources */,
 				ABB38A571DB95F6D008BF59E /* CocoaTouchBuilder.swift in Sources */,
 				ABB38A651DB95F6D008BF59E /* Initializer.swift in Sources */,
+				ABF8D90B1DC1197C008D9178 /* SegmentsBuilder.swift in Sources */,
 				ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */,
 				ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */,
 				ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */,

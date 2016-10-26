@@ -25,7 +25,7 @@ func checkXML(_ xml: String, _ expected: [String], file: StaticString = #file, l
             i += 1
         }
         if lines != expected {
-            print(lines.joined(separator: "\n"))
+            print(lines.map() { "\"\($0.replacingOccurrences(of: "\"", with: "\\\""))\","}.joined(separator: "\n"))
         }
     }
     catch let error {
@@ -328,13 +328,21 @@ class EjectTests: XCTestCase {
     // This is an instance where the sax parser is a bit of a pain. The numberOfSegments property is set by the number of segment elements.
     func testSegmentedControl() {
         let xml = wrap("<segmentedControl segmentControlStyle='plain' selectedSegmentIndex='0' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><segments><segment title='Overview'/><segment title='Description'/></segments></segmentedControl>")
-        checkXML(xml, [])
+        checkXML(xml, [
+            "let segmentedControl = UISegmentedControl()",
+            "segmentedControl.selectedSegmentIndex = 0",
+            "segmentedControl.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
+            "segmentedControl.setTitle(\"Overview\", forSegmentAt: 0)",
+            "segmentedControl.setTitle(\"Description\", forSegmentAt: 1)",
+            "",
+            "self.view = segmentedControl",
+            ])
     }
 
     /// This test will validate the generation eventually. The hope is to have a directory full of xib files and the generated code and ensure things don't change.
     func skip_testXibResources() {
         let path = URL(fileURLWithPath: "/Users/brianking/sandbox/Eject/.nonPublicXIBs")
-        let files = try? FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])
+        let files = try? FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])            
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }
         for path in xibs {
             do {

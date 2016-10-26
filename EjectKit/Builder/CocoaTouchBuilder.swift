@@ -64,6 +64,14 @@ extension DocumentBuilder {
             properties: [("scrollDirection", .enumeration)]
         )
         register("collectionViewFlowLayout", collectionViewFlowLayout)
+        let collectionViewLayout = ObjectBuilder(
+            className: "UICollectionViewdLayout",
+            properties: [],
+            placeholder: true
+        )
+        register("collectionViewLayout", collectionViewLayout)
+        register("segments", SegmentsBuilder())
+        register("segment", SegmentsBuilder.Segment())
 
         registerCocoaTouchViews()
         registerCocoaTouchControls()
@@ -201,7 +209,7 @@ extension DocumentBuilder {
         register("pageControl", pageControl)
         let segmentedControl = control.inherit(
             className: "UISegmentedControl",
-            properties: [("momentary", .boolean), ("apportionsSegmentWidthsByContent", .enumeration)]
+            properties: [("momentary", .boolean), ("apportionsSegmentWidthsByContent", .enumeration), ("selectedSegmentIndex", .number)]
         )
         register("segmentedControl", segmentedControl)
         let slider = control.inherit(

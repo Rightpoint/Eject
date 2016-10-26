@@ -8,16 +8,6 @@
 
 import Foundation
 
-enum ConfigurationContext {
-    case assignment
-    case append
-    case assigmentOverride(key: String)
-    // This adds support for `forState: .normal`
-    case setter(suffix: String)
-    case invocation(method: String)
-}
-
-
 struct VariableConfiguration: CodeGenerator {
     let objectIdentifier: String
     let key: String
