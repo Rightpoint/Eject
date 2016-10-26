@@ -38,7 +38,7 @@ struct AnchorageConfiguration: CodeGenerator {
         }
         let reference = document.lookupReference(for: firstItem)
         let variable = document.variable(for: reference)
-        constraintParts.append("\(variable).\(firstAttribute)")
+        constraintParts.append("\(variable).\(firstAttribute)Anchor")
         variablePart.append(variable)
         variablePart.append(firstAttribute)
 
@@ -50,7 +50,7 @@ struct AnchorageConfiguration: CodeGenerator {
         if let item = attributes["secondItem"], let attribute = attributes["secondAttribute"] {
             let reference = document.lookupReference(for: item)
             let variable = document.variable(for: reference)
-            constraintParts.append("\(variable).\(attribute)")
+            constraintParts.append("\(variable).\(attribute)Anchor")
             variablePart.append("to")
             variablePart.append(variable)
             variablePart.append(attribute)
@@ -66,7 +66,7 @@ struct AnchorageConfiguration: CodeGenerator {
                     constraintParts.append("-")
                 }
             }
-            constraintParts.append(constant.shortString)
+            constraintParts.append(abs(constant).shortString)
         }
         if let priority = attributes["priority"] {
             constraintParts.append("~ \(priority)")
