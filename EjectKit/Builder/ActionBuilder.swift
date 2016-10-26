@@ -39,9 +39,13 @@ struct ActionBuilder: Builder {
 
     func buildElement(attributes: [String : String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
-        guard let action = attributes["selector"] else { fatalError("No Action Specified") }
+        guard var action = attributes["selector"] else { fatalError("No Action Specified") }
         guard let destination = attributes["destination"] else { fatalError("No target specified") }
         let event = attributes["eventType"]
+
+        if !action.contains("("), let range = action.range(of: ":") {
+            action.replaceSubrange(range, with: "(_:)")
+        }
 
         document.addStatement(
             TargetActionConfiguration(

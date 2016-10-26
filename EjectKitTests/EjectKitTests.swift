@@ -80,7 +80,7 @@ class EjectTests: XCTestCase {
             "let panGestureRecognizer = UIPanGestureRecognizer()",
             "panGestureRecognizer.minimumNumberOfTouches = 1",
             "panGestureRecognizer.delegate = test",
-            "panGestureRecognizer.addTarget(self, action: #selector(TestClass.dimissTextField:))",
+            "panGestureRecognizer.addTarget(self, action: #selector(TestClass.dimissTextField(_:)))",
             "test.gestureRecognizers.append(panGestureRecognizer)",
             "self.view = test",
             ]
@@ -229,7 +229,7 @@ class EjectTests: XCTestCase {
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",
             "button.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)",
             "button.setTitleShadowColor(UIColor(white: 0, alpha: 0), for: .normal)",
-            "button.addTarget(self, action: #selector(TestClass.doThing:), for: .touchUpInside)",
+            "button.addTarget(self, action: #selector(TestClass.doThing(_:)), for: .touchUpInside)",
             "self.view = button",
             ])
     }
