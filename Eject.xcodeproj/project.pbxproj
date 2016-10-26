@@ -79,7 +79,7 @@
 		AB477E2F1DBEAA1E000A0A56 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoresizingMaskBuilder.swift; sourceTree = "<group>"; };
 		AB477E331DBF8F2E000A0A56 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
-		ABB389DA1DB95D00008BF59E /* Eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB389DA1DB95D00008BF59E /* eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
 		ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaTouchBuilder.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		AB47D9AD1DB5A3DD00A7B5E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ABB389DA1DB95D00008BF59E /* Eject.app */,
+				ABB389DA1DB95D00008BF59E /* eject.app */,
 				ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */,
 				ABB38A351DB95EA0008BF59E /* EjectKitTests.xctest */,
 			);
@@ -259,23 +259,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		ABB389D91DB95D00008BF59E /* Eject */ = {
+		ABB389D91DB95D00008BF59E /* eject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "Eject" */;
+			buildConfigurationList = ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "eject" */;
 			buildPhases = (
 				ABB389D61DB95D00008BF59E /* Sources */,
 				ABB389D71DB95D00008BF59E /* Frameworks */,
 				ABB389D81DB95D00008BF59E /* Resources */,
 				ABB38A431DB95EA0008BF59E /* Embed Frameworks */,
+				ABF8D9101DC1293A008D9178 /* Extract CLI Tool */,
+				ABF8D9111DC12C82008D9178 /* Easy Distribution */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				ABB38A411DB95EA0008BF59E /* PBXTargetDependency */,
 			);
-			name = Eject;
+			name = eject;
 			productName = Eject;
-			productReference = ABB389DA1DB95D00008BF59E /* Eject.app */;
+			productReference = ABB389DA1DB95D00008BF59E /* eject.app */;
 			productType = "com.apple.product-type.application";
 		};
 		ABB38A2C1DB95EA0008BF59E /* EjectKit */ = {
@@ -352,7 +354,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ABB389D91DB95D00008BF59E /* Eject */,
+				ABB389D91DB95D00008BF59E /* eject */,
 				ABB38A2C1DB95EA0008BF59E /* EjectKit */,
 				ABB38A341DB95EA0008BF59E /* EjectKitTests */,
 			);
@@ -383,6 +385,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ABF8D9101DC1293A008D9178 /* Extract CLI Tool */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = "Extract CLI Tool";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_NAME)",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -v \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}\"\n";
+		};
+		ABF8D9111DC12C82008D9178 /* Easy Distribution */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Easy Distribution";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -v \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}\" \"${SOURCE_DIR}${EXECUTABLE_NAME}-cli\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ABB389D61DB95D00008BF59E /* Sources */ = {
@@ -667,7 +702,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "Eject" */ = {
+		ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "eject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ABB389E51DB95D00008BF59E /* Debug */,
