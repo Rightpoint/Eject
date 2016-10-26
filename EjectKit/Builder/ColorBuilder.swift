@@ -10,7 +10,7 @@ import Foundation
 
 struct ColorBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let key = attributes["key"] else { fatalError("Must specify key") }
         let alpha = attributes["alpha"]?.floatValue ?? 1

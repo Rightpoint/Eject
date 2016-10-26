@@ -11,13 +11,15 @@ import Foundation
 struct ObjectBuilder: Builder {
     var className: String
     var properties: [(String, ValueFormat)]
+    var placeholder: Bool
 
-    init(className: String, properties: [(String, ValueFormat)] = []) {
+    init(className: String, properties: [(String, ValueFormat)] = [], placeholder: Bool = false) {
         self.className = className
         self.properties = properties
+        self.placeholder = placeholder
     }
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         let identifier = attributes["id"]
             ?? UUID().uuidString // if a key is specified, the ID can be nil, so just generate a UUID in that case.
         let className = attributes["customClass"] ?? self.className
@@ -35,22 +37,35 @@ struct ObjectBuilder: Builder {
             }
             return arguments
         }
-
+        let declaration: XIBDocument.Declaration
+        if placeholder {
+            assert(arguments.count == 0)
+            declaration = .placeholder
+        }
+        else {
+            declaration = .initializer(arguments, .initialization)
+        }
         let object = document.addObject(
             for: identifier,
             className: className,
             userLabel: attributes["userLabel"],
-            declaration: .initializer(arguments),
-            phase: .initialization
+            declaration: declaration
         )
 
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes["key"] {
-            guard let parent = parent as? IBObject else {
+            guard let parent = parent else {
                 fatalError("Must have a parent if the object defines a parent key")
             }
-            let value = VariableValue(objectIdentifier: object.identifier)
-            document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
+            if case .placeholder = declaration {
+                // If this is a placeholder (IE: an object that the parent will initialize internally) set the variable name to the property.
+                document.variableNameOverrides[identifier] = parentKey
+            }
+            else {
+                // Otherwise create a create an assignment
+                let value = VariableValue(objectIdentifier: object.identifier)
+                document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
+            }
         }
 
         for (key, format) in properties {

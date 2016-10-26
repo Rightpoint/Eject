@@ -9,7 +9,7 @@
 import Foundation
 
 struct Statement {
-    let declares: IBReference?
+    let declares: Reference?
     let generator: CodeGenerator
     let phase: CodeGeneratorPhase
 }

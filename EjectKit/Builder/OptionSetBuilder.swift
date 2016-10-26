@@ -10,7 +10,7 @@ import Foundation
 
 struct OptionSetBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         var attributes = attributes
         guard let key = attributes.removeValue(forKey: "key") else {

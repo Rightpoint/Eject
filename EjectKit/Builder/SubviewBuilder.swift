@@ -10,13 +10,13 @@ import Foundation
 
 struct SubviewConfiguration: CodeGenerator {
     var objectIdentifier: String
-    var subview: IBReference
+    var subview: Reference
 
     var dependentIdentifiers: Set<String> {
         return [objectIdentifier, subview.identifier]
     }
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         var representation = ""
@@ -28,12 +28,12 @@ struct SubviewConfiguration: CodeGenerator {
 
 struct SubviewBuilder: Builder, ContainerBuilder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         return parent
     }
 
-    func didAddChild(object: IBReference, to parent: IBReference, document: IBDocument) {
+    func didAddChild(object: Reference, to parent: Reference, document: XIBDocument) {
         document.addStatement(
             SubviewConfiguration(objectIdentifier: parent.identifier, subview: object),
             phase: .subviews

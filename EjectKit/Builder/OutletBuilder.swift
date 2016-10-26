@@ -15,7 +15,7 @@ struct OutletBuilder: Builder {
         return collection ? .append : .assignment
     }
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let property = attributes["property"] else { fatalError("Must specify key") }
         guard let destination = attributes["destination"] else { fatalError("Must specify destination") }

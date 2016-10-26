@@ -9,7 +9,7 @@
 import Foundation
 
 class DocumentBuilder: BuilderLookup {
-    var document = IBDocument()
+    var document = XIBDocument()
     var elementBuilders: [String: Builder] = [:]
 
     init() {
@@ -30,7 +30,7 @@ class DocumentBuilder: BuilderLookup {
 
     struct PluginBuilder: Builder {
         weak var documentBuilder: DocumentBuilder?
-        func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+        func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
             guard let identifier = attributes["identifier"] else { fatalError("plugIn does not have an identifier") }
             if identifier == "com.apple.InterfaceBuilder.IBCocoaTouchPlugin" {
                 documentBuilder!.registerPrimitives()

@@ -18,16 +18,13 @@
 		ABB38A4C1DB95F36008BF59E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABB389E91DB95DDA008BF59E /* Assets.xcassets */; };
 		ABB38A4E1DB95F3F008BF59E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB389EA1DB95DDA008BF59E /* MainMenu.xib */; };
 		ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A081DB95DDB008BF59E /* XIBParser.swift */; };
-		ABB38A501DB95F6D008BF59E /* IBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A011DB95DDB008BF59E /* IBDocument.swift */; };
-		ABB38A511DB95F6D008BF59E /* IBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A021DB95DDB008BF59E /* IBObject.swift */; };
-		ABB38A521DB95F6D008BF59E /* IBPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A031DB95DDB008BF59E /* IBPlaceholder.swift */; };
-		ABB38A531DB95F6D008BF59E /* IBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A041DB95DDB008BF59E /* IBReference.swift */; };
+		ABB38A501DB95F6D008BF59E /* XIBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A011DB95DDB008BF59E /* XIBDocument.swift */; };
+		ABB38A531DB95F6D008BF59E /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A041DB95DDB008BF59E /* Reference.swift */; };
 		ABB38A541DB95F6D008BF59E /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A051DB95DDB008BF59E /* Values.swift */; };
 		ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */; };
 		ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */; };
 		ABB38A571DB95F6D008BF59E /* CocoaTouchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */; };
 		ABB38A581DB95F6D008BF59E /* ObjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */; };
-		ABB38A591DB95F6D008BF59E /* PlaceholderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F91DB95DDB008BF59E /* PlaceholderBuilder.swift */; };
 		ABB38A5A1DB95F6D008BF59E /* OutletBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */; };
 		ABB38A5B1DB95F6D008BF59E /* KeyValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */; };
 		ABB38A5C1DB95F6D008BF59E /* StructBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */; };
@@ -95,16 +92,13 @@
 		ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectBuilder.swift; sourceTree = "<group>"; };
 		ABB389F71DB95DDB008BF59E /* OptionSetBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSetBuilder.swift; sourceTree = "<group>"; };
 		ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutletBuilder.swift; sourceTree = "<group>"; };
-		ABB389F91DB95DDB008BF59E /* PlaceholderBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderBuilder.swift; sourceTree = "<group>"; };
 		ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructBuilder.swift; sourceTree = "<group>"; };
 		ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubviewBuilder.swift; sourceTree = "<group>"; };
 		ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefinedAttributesBuilder.swift; sourceTree = "<group>"; };
 		ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeGeneration.swift; sourceTree = "<group>"; };
 		ABB389FE1DB95DDB008BF59E /* Declaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
-		ABB38A011DB95DDB008BF59E /* IBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBDocument.swift; sourceTree = "<group>"; };
-		ABB38A021DB95DDB008BF59E /* IBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBObject.swift; sourceTree = "<group>"; };
-		ABB38A031DB95DDB008BF59E /* IBPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBPlaceholder.swift; sourceTree = "<group>"; };
-		ABB38A041DB95DDB008BF59E /* IBReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBReference.swift; sourceTree = "<group>"; };
+		ABB38A011DB95DDB008BF59E /* XIBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBDocument.swift; sourceTree = "<group>"; };
+		ABB38A041DB95DDB008BF59E /* Reference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
 		ABB38A051DB95DDB008BF59E /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
 		ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Eject.swift"; sourceTree = "<group>"; };
 		ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableConfiguration.swift; sourceTree = "<group>"; };
@@ -203,7 +197,6 @@
 				ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */,
 				ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */,
 				ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */,
-				ABB389F91DB95DDB008BF59E /* PlaceholderBuilder.swift */,
 				ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */,
 				ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */,
 				ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */,
@@ -223,10 +216,8 @@
 		ABB38A001DB95DDB008BF59E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ABB38A011DB95DDB008BF59E /* IBDocument.swift */,
-				ABB38A021DB95DDB008BF59E /* IBObject.swift */,
-				ABB38A031DB95DDB008BF59E /* IBPlaceholder.swift */,
-				ABB38A041DB95DDB008BF59E /* IBReference.swift */,
+				ABB38A011DB95DDB008BF59E /* XIBDocument.swift */,
+				ABB38A041DB95DDB008BF59E /* Reference.swift */,
 				AB477E331DBF8F2E000A0A56 /* Statement.swift */,
 			);
 			path = Model;
@@ -406,7 +397,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */,
-				ABB38A521DB95F6D008BF59E /* IBPlaceholder.swift in Sources */,
 				ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */,
 				ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */,
 				ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */,
@@ -414,9 +404,8 @@
 				ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */,
 				ABB38A541DB95F6D008BF59E /* Values.swift in Sources */,
 				AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */,
-				ABB38A531DB95F6D008BF59E /* IBReference.swift in Sources */,
+				ABB38A531DB95F6D008BF59E /* Reference.swift in Sources */,
 				ABB38A5D1DB95F6D008BF59E /* OptionSetBuilder.swift in Sources */,
-				ABB38A511DB95F6D008BF59E /* IBObject.swift in Sources */,
 				ABB38A661DB95F6D008BF59E /* Foundation+Eject.swift in Sources */,
 				ABB38A5C1DB95F6D008BF59E /* StructBuilder.swift in Sources */,
 				ABB38A5B1DB95F6D008BF59E /* KeyValueBuilder.swift in Sources */,
@@ -425,11 +414,10 @@
 				ABB38A651DB95F6D008BF59E /* Declaration.swift in Sources */,
 				ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */,
 				ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */,
-				ABB38A591DB95F6D008BF59E /* PlaceholderBuilder.swift in Sources */,
 				ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */,
 				ABB38A581DB95F6D008BF59E /* ObjectBuilder.swift in Sources */,
 				ABB38A621DB95F6D008BF59E /* UserDefinedAttributesBuilder.swift in Sources */,
-				ABB38A501DB95F6D008BF59E /* IBDocument.swift in Sources */,
+				ABB38A501DB95F6D008BF59E /* XIBDocument.swift in Sources */,
 				ABB38A611DB95F6D008BF59E /* AchorageConstraintBuilder.swift in Sources */,
 				ABB38A631DB95F6D008BF59E /* ButtonStateBuilder.swift in Sources */,
 			);

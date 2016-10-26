@@ -9,12 +9,12 @@
 import Foundation
 
 protocol Builder {
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference?
-    func complete(document: IBDocument)
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference?
+    func complete(document: XIBDocument)
 }
 
 extension Builder {
-    func complete(document: IBDocument) {}
+    func complete(document: XIBDocument) {}
 }
 
 protocol CharacterBuilder {
@@ -22,7 +22,7 @@ protocol CharacterBuilder {
 }
 
 protocol ContainerBuilder {
-    func didAddChild(object: IBReference, to parent: IBReference, document: IBDocument)
+    func didAddChild(object: Reference, to parent: Reference, document: XIBDocument)
 }
 
 protocol BuilderLookup {
@@ -30,7 +30,7 @@ protocol BuilderLookup {
 }
 
 struct NoOpBuilder: Builder {
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? { return parent }
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? { return parent }
 }
 
 class XIBParser: NSObject {
@@ -38,9 +38,9 @@ class XIBParser: NSObject {
     private let documentBuilder = DocumentBuilder()
 
     var builderStack: [Builder] = []
-    var stack: [IBReference?] = []
+    var stack: [Reference?] = []
 
-    var document: IBDocument {
+    var document: XIBDocument {
         return documentBuilder.document
     }
 
@@ -51,7 +51,7 @@ class XIBParser: NSObject {
         try parser.throwingParse()
     }
 
-    var lastObject: IBReference? {
+    var lastObject: Reference? {
         return stack.last ?? nil
     }
 

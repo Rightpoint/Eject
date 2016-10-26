@@ -10,7 +10,7 @@ import Foundation
 
 struct ButtonStateBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let state = attributes["key"] else { fatalError("No state attribute") }
         document.containerContext = .setter(suffix: "for: \(ValueFormat.enumeration.transform(string: state))")
@@ -24,7 +24,7 @@ struct ButtonStateBuilder: Builder {
         return parent
     }
 
-    func complete(document: IBDocument) {
+    func complete(document: XIBDocument) {
         document.containerContext = nil
     }
 

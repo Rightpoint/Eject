@@ -16,7 +16,7 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
         self.value = BasicValue(value: value, format: format)
     }
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let object = parent else { fatalError("No parent to configure") }
         guard let key = attributes["key"] else { fatalError("No key supplied") }
         value.value = attributes["value"] ?? value.value

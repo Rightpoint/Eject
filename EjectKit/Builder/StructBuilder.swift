@@ -10,7 +10,7 @@ import Foundation
 
 struct RectBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
@@ -29,7 +29,7 @@ struct RectBuilder: Builder {
 
 struct SizeBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
@@ -47,7 +47,7 @@ struct SizeBuilder: Builder {
 struct InsetBuilder: Builder {
 
     // <inset key="x" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard
             let key = attributes["key"],
@@ -68,7 +68,7 @@ struct BasicBuilder: Builder {
     let key: String
     let format: ValueFormat
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let value = attributes[key] else {
             fatalError("Invalid Rect")

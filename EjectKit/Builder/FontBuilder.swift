@@ -10,7 +10,7 @@ import Foundation
 
 struct FontBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard var key = attributes["key"] else { fatalError("Must specify key") }
         let value: String

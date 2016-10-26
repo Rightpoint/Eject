@@ -10,14 +10,14 @@ import Foundation
 
 struct UserDefinedAttributeBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let keyPath = attributes["keyPath"] else { fatalError("No keypath") }
         document.containerContext = .assigmentOverride(key: keyPath)
         return parent
     }
 
-    func complete(document: IBDocument) {
+    func complete(document: XIBDocument) {
         document.containerContext = nil
     }
 }

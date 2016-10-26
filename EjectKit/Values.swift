@@ -54,7 +54,7 @@ class BasicValue: CodeGenerator {
         self.format = format
     }
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         return format.transform(string: value)
     }
 }
@@ -67,7 +67,7 @@ struct OptionSetValue: CodeGenerator {
         self.keys = keys
     }
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         return "[\(keys.map() { ".\($0)" }.joined(separator: ", "))]"
     }
 }
@@ -79,7 +79,7 @@ struct VariableValue: CodeGenerator {
         return [objectIdentifier]
     }
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         return document.variable(for: object)
     }

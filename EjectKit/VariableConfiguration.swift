@@ -29,7 +29,7 @@ struct VariableConfiguration: CodeGenerator {
         return identifiers.union(value.dependentIdentifiers)
     }
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
 

@@ -11,11 +11,8 @@ import XCTest
 
 func checkXML(_ xml: String, _ expected: [String], file: StaticString = #file, line: UInt = #line) {
     do {
-        let document = try IBDocument.load(xml: xml)
-        let references = document.references
-            .map() { $0 as? IBObject }.flatMap() { $0 } // Only generate IBObjects
-            .reversed() // Walk the list in reverse
-        guard references.count > 0 else {
+        let document = try XIBDocument.load(xml: xml)
+        guard document.references.count > 0 else {
             XCTFail("No objects in the document", file: file, line: line - 1)
             return
         }
@@ -90,6 +87,18 @@ class EjectTests: XCTestCase {
         )
     }
 
+    func testLabel() {
+        let xml = wrap("<label baselineAdjustment='alignBaselines' minimumFontSize='13' userLabel='test' id='i5M-Pr-FkT'><fontDescription key='fontDescription' type='system' pointSize='17'/></label>")
+        checkXML(xml, [
+            "let test = UILabel()",
+            "test.baselineAdjustment = .alignBaselines",
+            "test.minimumFontSize = 13",
+            "test.font = .systemFont(ofSize: 17)",
+            "self.view = test",
+            ]
+        )
+    }
+
     func testUserDefinedInt() {
         let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><userDefinedRuntimeAttributes><userDefinedRuntimeAttribute type='number' keyPath='layer.cornerRadius'><integer key='value' value='25'/></userDefinedRuntimeAttribute></userDefinedRuntimeAttributes></view>")
         checkXML(xml, [
@@ -102,6 +111,16 @@ class EjectTests: XCTestCase {
 
     func testLabelWithTextContent() {
         let xml = wrap("<label userLabel='test' id='i5M-Pr-FkT'><mutableString key='text'>body</mutableString></label>")
+        checkXML(xml, [
+            "let test = UILabel()",
+            "test.text = \"body\"",
+            "self.view = test",
+            ]
+        )
+    }
+
+    func testLabelWithTextArgument() {
+        let xml = wrap("<label userLabel='test' text='body' id='i5M-Pr-FkT'/>")
         checkXML(xml, [
             "let test = UILabel()",
             "test.text = \"body\"",
@@ -144,18 +163,6 @@ class EjectTests: XCTestCase {
             "let test = UIView()",
             "test.a = UIFont(name: \"Gotham-Bold\", size: 32)",
             "test.b = .systemFont(ofSize: 17)",
-            "self.view = test",
-            ]
-        )
-    }
-
-    func testLabel() {
-        let xml = wrap("<label baselineAdjustment='alignBaselines' minimumFontSize='13' userLabel='test' id='i5M-Pr-FkT'><fontDescription key='fontDescription' type='system' pointSize='17'/></label>")
-        checkXML(xml, [
-            "let test = UILabel()",
-            "test.baselineAdjustment = .alignBaselines",
-            "test.minimumFontSize = 13",
-            "test.font = .systemFont(ofSize: 17)",
             "self.view = test",
             ]
         )

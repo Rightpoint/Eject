@@ -18,7 +18,7 @@ struct TargetActionConfiguration: CodeGenerator {
         return [objectIdentifier, targetIdentifier]
     }
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         let target = document.lookupReference(for: targetIdentifier)
@@ -37,7 +37,7 @@ struct TargetActionConfiguration: CodeGenerator {
 
 struct ActionBuilder: Builder {
 
-    func buildElement(attributes: [String : String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String : String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let action = attributes["selector"] else { fatalError("No Action Specified") }
         guard let destination = attributes["destination"] else { fatalError("No target specified") }

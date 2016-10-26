@@ -31,7 +31,7 @@ extension DocumentBuilder {
         register("outlet", OutletBuilder(collection: false))
         register("outletCollection", OutletBuilder(collection: true))
         register("action", ActionBuilder())
-        register("placeholder", PlaceholderBuilder())
+        register("placeholder", ObjectBuilder(className: "", placeholder: true))
         register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
         // These two tags are containers that do not need a builder
         for noopKey in ["userDefinedRuntimeAttributes", "connections", "constraints", "freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "resources", "image"] {
@@ -109,7 +109,7 @@ extension DocumentBuilder {
         register("imageView", imageView)
         let label = view.inherit(
             className: "UILabel",
-            properties: [("textAlignment", .enumeration), ("numberOfLines", .number), ("enabled", .boolean), ("highlighted", .boolean), ("baselineAdjustment", .enumeration), ("minimumScaleFactor", .number), ("minimumFontSize", .number), ("preferredMaxLayoutWidth", .number)]
+            properties: [("textAlignment", .enumeration), ("numberOfLines", .number), ("enabled", .boolean), ("highlighted", .boolean), ("baselineAdjustment", .enumeration), ("minimumScaleFactor", .number), ("minimumFontSize", .number), ("preferredMaxLayoutWidth", .number), ("text", .string)]
         )
         register("label", label)
         let navigationBar = view.inherit(
@@ -152,6 +152,11 @@ extension DocumentBuilder {
             properties: [("selectionStyle", .enumeration), ("accessoryType", .enumeration), ("editingAccessoryType", .enumeration), ("focusStyle", .enumeration), ("indentationLevel", .number), ("indentationWidth", .number), ("shouldIndentWhileEditing", .boolean), ("showsReorderControl", .boolean), ("rowHeight", .number)]
         )
         register("tableViewCell", tableViewCell)
+        var tableViewCellContentView = view
+        tableViewCellContentView.className = "UITableViewCellContentView"
+        tableViewCellContentView.placeholder = true
+        register("tableViewCellContentView", tableViewCellContentView)
+
         let textView = view.inherit(
             className: "UITextView",
             properties: [("textAlignment", .enumeration), ("allowsEditingTextAttributes", .boolean), ("editable", .boolean), ("selectable", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("autocapitalizationType", .enumeration), ("autocorrectionType", .enumeration), ("spellCheckingType", .enumeration), ("keyboardType", .enumeration), ("keyboardAppearance", .enumeration), ("returnKeyType", .enumeration), ("enablesReturnKeyAutomatically", .boolean), ("secureTextEntry", .boolean)]

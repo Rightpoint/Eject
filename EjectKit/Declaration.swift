@@ -13,7 +13,7 @@ struct Initializer: CodeGenerator {
     let className: String
     let arguments: [String: String]
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         let argumentString = arguments.map() { "\($0): \($1)" }.joined(separator: ", ")

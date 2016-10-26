@@ -11,7 +11,8 @@ import XCTest
 
 class InspectorPropertyConfigurationTests: XCTestCase {
 
-    func avoidTestBasic() {
+    // Uncomment this to create a populated DocumentBuilder
+    func skip_testBasic() {
         let url = URL(fileURLWithPath: "/Applications/Xcode.app/Contents/PlugIns/IDEInterfaceBuilderCocoaTouchIntegration.ideplugin/Contents/Resources/")
         let output = try? InspectorParser.helperCode(for: url)
         if output != nil {
@@ -30,6 +31,7 @@ class InspectorPropertyConfigurationTests: XCTestCase {
 //  - Merge UITextInputTraits into text view and text field
 //  - Update UITableView constructor
 //  - Update UIImageView to supply image
+//  - Add 'text' to UILabel
 class InspectorParser: NSObject, XMLParserDelegate {
 
     static func helperCode(for directory: URL) throws -> String {

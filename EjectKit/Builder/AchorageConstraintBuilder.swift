@@ -29,7 +29,7 @@ struct AnchorageConfiguration: CodeGenerator {
         }
     }
 
-    func generateCode(in document: IBDocument) -> String {
+    func generateCode(in document: XIBDocument) -> String {
         var constraintParts: [String] = []
         var variablePart: [String] = []
         let firstItem = attributes["firstItem"] ?? parentIdentifier
@@ -86,7 +86,7 @@ struct AnchorageConfiguration: CodeGenerator {
 
 struct AchorageConstraintBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard let identifier = attributes["id"] else { fatalError("No id attribute") }
         let generator = AnchorageConfiguration(parentIdentifier: parent.identifier, attributes: attributes)
@@ -94,8 +94,7 @@ struct AchorageConstraintBuilder: Builder {
             for: identifier,
             className: "NSLayoutConstraint",
             userLabel: attributes["userLabel"],
-            declaration: .invocation(generator),
-            phase: .constraints
+            declaration: .invocation(generator, .constraints)
         )
         return parent
     }

@@ -12,7 +12,7 @@ public protocol CodeGenerator {
 
     var dependentIdentifiers: Set<String> { get }
 
-    func generateCode(in document: IBDocument) -> String
+    func generateCode(in document: XIBDocument) -> String
 
 }
 
@@ -29,7 +29,7 @@ public enum CodeGeneratorPhase {
     case constraints
 }
 
-extension IBDocument {
+extension XIBDocument {
 
     func code(for generationPhase: CodeGeneratorPhase) -> [String] {
         return statements.filter() { $0.phase == generationPhase }.map() { $0.generator.generateCode(in: self) }
@@ -42,12 +42,12 @@ extension IBDocument {
 }
 
 struct GenerationContext {
-    let document: IBDocument
+    let document: XIBDocument
     var statements: [Statement]
     var declared = Set<String>()
 
 
-    init(document: IBDocument) {
+    init(document: XIBDocument) {
         self.document = document
         self.statements = document.statements
     }

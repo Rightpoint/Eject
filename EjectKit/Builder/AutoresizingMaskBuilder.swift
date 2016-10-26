@@ -10,7 +10,7 @@ import Foundation
 
 struct AutoresizingMaskBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: IBDocument, parent: IBReference?) -> IBReference? {
+    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         guard let parent = parent else { fatalError("No parent to configure") }
         guard attributes["key"] == "autoresizingMask" else { fatalError("Invalid Key") }
 
