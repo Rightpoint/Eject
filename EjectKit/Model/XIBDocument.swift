@@ -58,6 +58,15 @@ public class XIBDocument {
         fatalError("Unknown identifier \(identifier)")
     }
 
+    func hasDependencies(for identifier: String) -> Bool {
+        for statement in statements {
+            if statement.generator.dependentIdentifiers.contains(identifier) {
+                return true
+            }
+        }
+        return false
+    }
+
     enum Declaration {
         case placeholder
         case initializer([String: String], CodeGeneratorPhase)

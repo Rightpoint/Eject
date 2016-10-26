@@ -74,8 +74,12 @@ struct AnchorageConfiguration: CodeGenerator {
 
         let constraintCommand = constraintParts.joined(separator: " ")
 
-        if false {
+        guard let identifier = attributes["id"] else {
+            fatalError("Constraint does not have ID")
+        }
+        if document.hasDependencies(for: identifier) {
             let variableString = variablePart.joined(separator: " ").snakeCased()
+            document.variableNameOverrides[identifier] = variableString
             return "let \(variableString) = \(constraintCommand)"
         }
         else {
