@@ -117,6 +117,7 @@ extension XIBParser: XMLParserDelegate {
 
 
     // Not sure why, but it appears these methods are needed on Linux.
+    #if os(Linux)
     public func parserDidStartDocument(_ parser: XMLParser) {}
     public func parserDidEndDocument(_ parser: XMLParser) {}
     public func parser(_ parser: XMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?) {}
@@ -132,7 +133,8 @@ extension XIBParser: XMLParserDelegate {
     public func parser(_ parser: XMLParser, foundComment comment: String) {}
     public func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {}
     public func parser(_ parser: XMLParser, resolveExternalEntityName name: String, systemID: String?) -> Data? { return nil }
-    public func parser(_ parser: XMLParser, parseErrorOccurred parseError: Swift.Error) {}
-    public func parser(_ parser: XMLParser, validationErrorOccurred validationError: Swift.Error) {}
-
+    // Aaaand, it's NSError, not Error on Linux.
+    public func parser(_ parser: XMLParser, parseErrorOccurred parseError: NSError) {}
+    public func parser(_ parser: XMLParser, validationErrorOccurred validationError: NSError) {}
+    #endif
 }
