@@ -68,7 +68,6 @@ class EjectTests: XCTestCase {
         let xml = wrap("<view userLabel='test' clearsContextBeforeDrawing='NO' contentMode='scaleToFill' id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/></view>")
         checkXML(xml, [
             "let test = UIView()",
-            "test.contentMode = .scaleToFill",
             "test.clearsContextBeforeDrawing = false",
             "test.frame = CGRect(x: 0, y: 0, width: 350, height: 85)",
             "",
@@ -185,7 +184,6 @@ class EjectTests: XCTestCase {
         let xml = wrap("<collectionView contentMode='scaleToFill' dataMode='none' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><collectionViewFlowLayout key='collectionViewLayout' minimumLineSpacing='10' minimumInteritemSpacing='10' id='sFl-c5-v9d'><size key='itemSize' width='50' height='50'/><size key='headerReferenceSize' width='0.0' height='0.0'/><size key='footerReferenceSize' width='0.0' height='0.0'/><inset key='sectionInset' minX='0.0' minY='0.0' maxX='0.0' maxY='0.0'/></collectionViewFlowLayout><connections><outlet property='dataSource' destination='-1' id='0eg-ac-TGD'/><outlet property='delegate' destination='-1' id='jQ0-LG-WAK'/></connections></collectionView>")
         checkXML(xml, [
             "let collectionView = UICollectionView()",
-            "collectionView.contentMode = .scaleToFill",
             "collectionView.translatesAutoresizingMaskIntoConstraints = false",
             "collectionView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "",
@@ -242,8 +240,6 @@ class EjectTests: XCTestCase {
         let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
             "let button = UIButton()",
-            "button.contentHorizontalAlignment = .center",
-            "button.contentVerticalAlignment = .center",
             "button.lineBreakMode = .middleTruncation",
             "button.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "button.setTitle(\"Title\", for: .normal)",

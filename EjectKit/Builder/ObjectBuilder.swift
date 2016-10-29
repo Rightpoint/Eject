@@ -9,16 +9,23 @@
 import Foundation
 
 struct ObjectBuilder: Builder {
+    struct Property {
+        let key: String
+        let format: ValueFormat
+        let defaultValue: String
+        let injected: Bool
+        static func p(_ key: String, _ format: ValueFormat, defaultValue: String = "", injected: Bool = false) -> Property {
+            return Property(key: key, format: format, defaultValue: defaultValue, injected: injected)
+        }
+    }
     var className: String
-    var injectedProperties: [(String, ValueFormat)]
-    var properties: [(String, ValueFormat)]
+    var properties: [Property]
     var placeholder: Bool
 
-    init(className: String, properties: [(String, ValueFormat)] = [], injectedProperties: [(String, ValueFormat)] = [], placeholder: Bool = false) {
+    init(className: String, properties: [Property] = [], placeholder: Bool = false) {
         self.className = className
         self.properties = properties
         self.placeholder = placeholder
-        self.injectedProperties = injectedProperties
     }
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
@@ -34,7 +41,7 @@ struct ObjectBuilder: Builder {
             }
         }
         else {
-            declaration = .initializer(injectedProperties.map() { $0.0 }, .initialization)
+            declaration = .initializer(properties.filter() { $0.injected }.map() { $0.key }, .initialization)
         }
         let object = document.addObject(
             for: identifier,
@@ -57,29 +64,27 @@ struct ObjectBuilder: Builder {
             }
         }
 
-        for (key, format) in properties {
-            if let value = attributes.removeValue(forKey: key) {
-                document.addVariableConfiguration(
-                    for: object.identifier,
-                    key: key,
-                    value: BasicValue(value: value, format: format)
-                )
+        for property in properties {
+            if let value = attributes.removeValue(forKey: property.key) {
+                if property.injected {
+                    document.lookupReference(for: identifier).values[property.key] = BasicValue(value: value, format: property.format)
+                }
+                else if value != property.defaultValue {
+                    document.addVariableConfiguration(
+                        for: object.identifier,
+                        key: property.key,
+                        value: BasicValue(value: value, format: property.format)
+                    )
+                }
             }
         }
-        for (key, format) in injectedProperties {
-            if let value = attributes.removeValue(forKey: key) {
-                document.lookupReference(for: identifier).values[key] = BasicValue(value: value, format: format)
-            }
-        }
-
         return object
     }
 
-    func inherit(className: String, properties: [(String, ValueFormat)] = [], injectedProperties: [(String, ValueFormat)] = []) -> ObjectBuilder {
+    func inherit(className: String, properties: [Property] = []) -> ObjectBuilder {
         var subclass = self
         subclass.className = className
         subclass.properties.append(contentsOf: properties)
-        subclass.injectedProperties.append(contentsOf: injectedProperties)
         return subclass
     }
     

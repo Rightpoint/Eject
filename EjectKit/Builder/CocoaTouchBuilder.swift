@@ -49,19 +49,23 @@ extension DocumentBuilder {
     func registerCocoaTouch() {
         let barItem = ObjectBuilder(
             className: "UIBarItem",
-            properties: [("tag", .number), ("enabled", .boolean), ("imageInsetsTop", .number), ("imageInsetsBottom", .number), ("imageInsetsLeft", .number), ("imageInsetsRight", .number)]
+            properties: [
+                .p("tag", ValueFormat.number), .p("enabled", .boolean),
+                .p("imageInsetsTop", .number), .p("imageInsetsBottom", .number),
+                .p("imageInsetsLeft", .number), .p("imageInsetsRight", .number)
+            ]
         )
         register("barItem", barItem)
 
         let barButtonItem = barItem.inherit(
             className: "UIBarButtonItem",
-            properties: [("style", .enumeration), ("width", .number)]
+            properties: [.p("style", .enumeration), .p("width", .number)]
         )
         register("barButtonItem", barButtonItem)
 
         let collectionViewFlowLayout = ObjectBuilder(
             className: "UICollectionViewFlowLayout",
-            properties: [("scrollDirection", .enumeration), ("minimumLineSpacing", .number), ("minimumInteritemSpacing", .number)]
+            properties: [.p("scrollDirection", .enumeration), .p("minimumLineSpacing", .number), .p("minimumInteritemSpacing", .number)]
         )
         register("collectionViewFlowLayout", collectionViewFlowLayout)
         let collectionViewLayout = ObjectBuilder(
@@ -83,23 +87,32 @@ extension DocumentBuilder {
     func registerCocoaTouchViews() {
         let view = ObjectBuilder(
             className: "UIView",
-            properties: [("contentMode", .enumeration), ("semanticContentAttribute", .enumeration), ("tag", .number), ("userInteractionEnabled", .boolean), ("multipleTouchEnabled", .boolean), ("alpha", .number), ("opaqueForDevice", .boolean), ("hidden", .boolean), ("clearsContextBeforeDrawing", .boolean), ("clipsToBounds", .boolean), ("inspectedInstalled", .boolean), ("preservesSuperviewLayoutMargins", .boolean), ("layoutMarginsFollowReadableWidth", .boolean), ("simulatedAppContext", .enumeration), ("translatesAutoresizingMaskIntoConstraints", .boolean), ("clipsSubviews", .boolean)]
+            properties: [
+                .p("contentMode", .enumeration, defaultValue: "scaleToFill"), .p("semanticContentAttribute", .enumeration),
+                .p("tag", .number), .p("userInteractionEnabled", .boolean),
+                .p("multipleTouchEnabled", .boolean), .p("alpha", .number),
+                .p("opaqueForDevice", .boolean), .p("hidden", .boolean),
+                .p("clearsContextBeforeDrawing", .boolean), .p("clipsToBounds", .boolean),
+                .p("inspectedInstalled", .boolean), .p("preservesSuperviewLayoutMargins", .boolean),
+                .p("layoutMarginsFollowReadableWidth", .boolean), .p("simulatedAppContext", .enumeration),
+                .p("translatesAutoresizingMaskIntoConstraints", .boolean), .p("clipsSubviews", .boolean)
+            ]
         )
         register("view", view)
         let scrollView = view.inherit(
             className: "UIScrollView",
-            properties: [("indicatorStyle", .enumeration), ("showsHorizontalScrollIndicator", .boolean), ("showsVerticalScrollIndicator", .boolean), ("scrollEnabled", .boolean), ("pagingEnabled", .boolean), ("directionalLockEnabled", .boolean), ("bounces", .boolean), ("alwaysBounceHorizontal", .boolean), ("alwaysBounceVertical", .boolean), ("minimumZoomScale", .number), ("maximumZoomScale", .number), ("bouncesZoom", .boolean), ("delaysContentTouches", .boolean), ("canCancelContentTouches", .boolean), ("keyboardDismissMode", .enumeration)]
+            properties: [.p("indicatorStyle", .enumeration), .p("showsHorizontalScrollIndicator", .boolean), .p("showsVerticalScrollIndicator", .boolean), .p("scrollEnabled", .boolean), .p("pagingEnabled", .boolean), .p("directionalLockEnabled", .boolean), .p("bounces", .boolean), .p("alwaysBounceHorizontal", .boolean), .p("alwaysBounceVertical", .boolean), .p("minimumZoomScale", .number), .p("maximumZoomScale", .number), .p("bouncesZoom", .boolean), .p("delaysContentTouches", .boolean), .p("canCancelContentTouches", .boolean), .p("keyboardDismissMode", .enumeration)]
         )
         register("scrollView", scrollView)
 
         let activityIndicatorView = view.inherit(
             className: "UIActivityIndicatorView",
-            properties: [("style", .enumeration), ("inspectedAnimating", .boolean), ("inspectedHidesWhenStopped", .boolean)]
+            properties: [.p("style", .enumeration), .p("inspectedAnimating", .boolean), .p("inspectedHidesWhenStopped", .boolean)]
         )
         register("activityIndicatorView", activityIndicatorView)
         let collectionView = scrollView.inherit(
             className: "UICollectionView",
-            properties: [("prefetchingEnabled", .boolean)]
+            properties: [.p("prefetchingEnabled", .boolean)]
         )
         register("collectionView", collectionView)
         let collectionViewCell = view.inherit(className: "UICollectionViewCell")
@@ -107,58 +120,57 @@ extension DocumentBuilder {
 
         let datePicker = view.inherit(
             className: "UIDatePicker",
-            properties: [("inspectedDatePickerMode", .enumeration), ("locale", .enumeration), ("minuteInterval", .enumeration), ("hasMinimumDate", .boolean), ("hasMaximumDate", .boolean)]
+            properties: [.p("inspectedDatePickerMode", .enumeration), .p("locale", .enumeration), .p("minuteInterval", .enumeration), .p("hasMinimumDate", .boolean), .p("hasMaximumDate", .boolean)]
         )
         register("datePicker", datePicker)
         let imageView = view.inherit(
             className: "UIImageView",
-            properties: [("highlighted", .boolean), ("image", .image)]
+            properties: [.p("highlighted", .boolean), .p("image", .image)]
         )
         register("imageView", imageView)
         let label = view.inherit(
             className: "UILabel",
-            properties: [("textAlignment", .enumeration), ("numberOfLines", .number), ("enabled", .boolean), ("highlighted", .boolean), ("baselineAdjustment", .enumeration), ("minimumScaleFactor", .number), ("minimumFontSize", .number), ("preferredMaxLayoutWidth", .number), ("text", .string)]
+            properties: [.p("textAlignment", .enumeration), .p("numberOfLines", .number), .p("enabled", .boolean), .p("highlighted", .boolean), .p("baselineAdjustment", .enumeration), .p("minimumScaleFactor", .number), .p("minimumFontSize", .number), .p("preferredMaxLayoutWidth", .number), .p("text", .string)]
         )
         register("label", label)
         let navigationBar = view.inherit(
             className: "UINavigationBar",
-            properties: [("barStyle", .enumeration), ("translucent", .boolean)]
+            properties: [.p("barStyle", .enumeration), .p("translucent", .boolean)]
         )
         register("navigationBar", navigationBar)
         let pickerView = view.inherit(
             className: "UIPickerView",
-            properties: [("showsSelectionIndicator", .boolean)]
+            properties: [.p("showsSelectionIndicator", .boolean)]
         )
         register("pickerView", pickerView)
         let progressView = view.inherit(
             className: "UIProgressView",
-            properties: [("progressViewStyle", .enumeration), ("progress", .number)]
+            properties: [.p("progressViewStyle", .enumeration), .p("progress", .number)]
         )
         register("progressView", progressView)
         let searchBar = view.inherit(
             className: "UISearchBar",
-            properties: [("searchBarStyle", .enumeration), ("barStyle", .enumeration), ("translucent", .boolean), ("showsSearchResultsButton", .boolean), ("showsBookmarkButton", .boolean), ("showsCancelButton", .boolean), ("inspectedShowsScopeBar", .boolean)]
+            properties: [.p("searchBarStyle", .enumeration), .p("barStyle", .enumeration), .p("translucent", .boolean), .p("showsSearchResultsButton", .boolean), .p("showsBookmarkButton", .boolean), .p("showsCancelButton", .boolean), .p("inspectedShowsScopeBar", .boolean)]
         )
         register("searchBar", searchBar)
         let stackView = view.inherit(
             className: "UIStackView",
-            properties: [("axis", .enumeration), ("alignment", .enumeration), ("alignment", .enumeration), ("alignment", .enumeration), ("alignment", .enumeration), ("distribution", .enumeration), ("spacing", .number), ("baselineRelativeArrangement", .boolean)]
+            properties: [.p("axis", .enumeration), .p("alignment", .enumeration), .p("alignment", .enumeration), .p("alignment", .enumeration), .p("alignment", .enumeration), .p("distribution", .enumeration), .p("spacing", .number), .p("baselineRelativeArrangement", .boolean)]
         )
         register("stackView", stackView)
         let tabBar = view.inherit(
             className: "UITabBar",
-            properties: [("barStyle", .enumeration), ("translucent", .boolean), ("itemWidth", .number), ("itemSpacing", .number)]
+            properties: [.p("barStyle", .enumeration), .p("translucent", .boolean), .p("itemWidth", .number), .p("itemSpacing", .number)]
         )
         register("tabBar", tabBar)
         let tableView = scrollView.inherit(
             className: "UITableView",
-            properties: [("separatorStyle", .enumeration), ("sectionIndexMinimumDisplayRowCount", .number), ("rowHeight", .number), ("sectionHeaderHeight", .number), ("sectionFooterHeight", .number)],
-            injectedProperties: [("frame", .raw), ("style", .enumeration)]
+            properties: [.p("separatorStyle", .enumeration), .p("sectionIndexMinimumDisplayRowCount", .number), .p("rowHeight", .number), .p("sectionHeaderHeight", .number), .p("sectionFooterHeight", .number), .p("frame", .raw, defaultValue: ".zero", injected: true), .p("style", .enumeration, defaultValue: "plain", injected: true)]
         )
         register("tableView", tableView)
         let tableViewCell = view.inherit(
             className: "UITableViewCell",
-            properties: [("selectionStyle", .enumeration), ("accessoryType", .enumeration), ("editingAccessoryType", .enumeration), ("focusStyle", .enumeration), ("indentationLevel", .number), ("indentationWidth", .number), ("shouldIndentWhileEditing", .boolean), ("showsReorderControl", .boolean), ("rowHeight", .number)]
+            properties: [.p("selectionStyle", .enumeration), .p("accessoryType", .enumeration), .p("editingAccessoryType", .enumeration), .p("focusStyle", .enumeration), .p("indentationLevel", .number), .p("indentationWidth", .number), .p("shouldIndentWhileEditing", .boolean), .p("showsReorderControl", .boolean), .p("rowHeight", .number)]
         )
         register("tableViewCell", tableViewCell)
         var tableViewCellContentView = view
@@ -168,27 +180,27 @@ extension DocumentBuilder {
 
         let textView = view.inherit(
             className: "UITextView",
-            properties: [("textAlignment", .enumeration), ("allowsEditingTextAttributes", .boolean), ("editable", .boolean), ("selectable", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("autocapitalizationType", .enumeration), ("autocorrectionType", .enumeration), ("spellCheckingType", .enumeration), ("keyboardType", .enumeration), ("keyboardAppearance", .enumeration), ("returnKeyType", .enumeration), ("enablesReturnKeyAutomatically", .boolean), ("secureTextEntry", .boolean)]
+            properties: [.p("textAlignment", .enumeration), .p("allowsEditingTextAttributes", .boolean), .p("editable", .boolean), .p("selectable", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("autocapitalizationType", .enumeration), .p("autocorrectionType", .enumeration), .p("spellCheckingType", .enumeration), .p("keyboardType", .enumeration), .p("keyboardAppearance", .enumeration), .p("returnKeyType", .enumeration), .p("enablesReturnKeyAutomatically", .boolean), .p("secureTextEntry", .boolean)]
         )
         register("textView", textView)
         let toolbar = view.inherit(
             className: "UIToolbar",
-            properties: [("barStyle", .enumeration), ("translucent", .boolean)]
+            properties: [.p("barStyle", .enumeration), .p("translucent", .boolean)]
         )
         register("toolbar", toolbar)
         let visualEffectView = view.inherit(
             className: "UIVisualEffectView",
-            properties: [("blurEffectStyle", .enumeration), ("vibrancy", .boolean)]
+            properties: [.p("blurEffectStyle", .enumeration), .p("vibrancy", .boolean)]
         )
         register("visualEffectView", visualEffectView)
         let webView = view.inherit(
             className: "UIWebView",
-            properties: [("scalesPageToFit", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("dataDetectorTypes", .boolean), ("allowsInlineMediaPlayback", .boolean), ("mediaPlaybackRequiresUserAction", .boolean), ("mediaPlaybackAllowsAirPlay", .boolean), ("suppressesIncrementalRendering", .boolean), ("keyboardDisplayRequiresUserAction", .boolean), ("paginationMode", .enumeration), ("paginationBreakingMode", .enumeration), ("pageLength", .number), ("gapBetweenPages", .number)]
+            properties: [.p("scalesPageToFit", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("dataDetectorTypes", .boolean), .p("allowsInlineMediaPlayback", .boolean), .p("mediaPlaybackRequiresUserAction", .boolean), .p("mediaPlaybackAllowsAirPlay", .boolean), .p("suppressesIncrementalRendering", .boolean), .p("keyboardDisplayRequiresUserAction", .boolean), .p("paginationMode", .enumeration), .p("paginationBreakingMode", .enumeration), .p("pageLength", .number), .p("gapBetweenPages", .number)]
         )
         register("webView", webView)
         let window = ObjectBuilder(
             className: "UIWindow",
-            properties: [("visibleAtLaunch", .boolean), ("resizesToFullScreen", .boolean)]
+            properties: [.p("visibleAtLaunch", .boolean), .p("resizesToFullScreen", .boolean)]
         )
         register("window", window)
     }
@@ -196,41 +208,42 @@ extension DocumentBuilder {
     func registerCocoaTouchControls() {
         let control = ObjectBuilder(
             className: "UIControl",
-            properties: [("contentHorizontalAlignment", .enumeration), ("contentVerticalAlignment", .enumeration), ("selected", .boolean), ("enabled", .boolean), ("highlighted", .boolean)]
+            properties: [.p("contentHorizontalAlignment", .enumeration, defaultValue: "center"), .p("contentVerticalAlignment", .enumeration, defaultValue: "center"),
+                         .p("selected", .boolean), .p("enabled", .boolean), .p("highlighted", .boolean)]
         )
         let button = control.inherit(
             className: "UIButton",
-            properties: [("reversesTitleShadowWhenHighlighted", .boolean), ("showsTouchWhenHighlighted", .boolean), ("adjustsImageWhenHighlighted", .boolean), ("adjustsImageWhenDisabled", .boolean), ("lineBreakMode", .enumeration)]
+            properties: [.p("reversesTitleShadowWhenHighlighted", .boolean), .p("showsTouchWhenHighlighted", .boolean), .p("adjustsImageWhenHighlighted", .boolean), .p("adjustsImageWhenDisabled", .boolean), .p("lineBreakMode", .enumeration)]
         )
         register("button", button)
         let pageControl = control.inherit(
             className: "UIPageControl",
-            properties: [("numberOfPages", .number), ("currentPage", .number), ("hidesForSinglePage", .boolean), ("defersCurrentPageDisplay", .boolean)]
+            properties: [.p("numberOfPages", .number), .p("currentPage", .number), .p("hidesForSinglePage", .boolean), .p("defersCurrentPageDisplay", .boolean)]
         )
         register("pageControl", pageControl)
         let segmentedControl = control.inherit(
             className: "UISegmentedControl",
-            properties: [("momentary", .boolean), ("apportionsSegmentWidthsByContent", .enumeration), ("selectedSegmentIndex", .number)]
+            properties: [.p("momentary", .boolean), .p("apportionsSegmentWidthsByContent", .enumeration), .p("selectedSegmentIndex", .number, defaultValue: "selectedSegmentIndex")]
         )
         register("segmentedControl", segmentedControl)
         let slider = control.inherit(
             className: "UISlider",
-            properties: [("continuous", .boolean)]
+            properties: [.p("continuous", .boolean)]
         )
         register("slider", slider)
         let stepper = control.inherit(
             className: "UIStepper",
-            properties: [("autorepeat", .boolean), ("continuous", .boolean), ("wraps", .boolean)]
+            properties: [.p("autorepeat", .boolean), .p("continuous", .boolean), .p("wraps", .boolean)]
         )
         register("stepper", stepper)
         let uiSwitch = control.inherit(
             className: "UISwitch",
-            properties: [("on", .enumeration)]
+            properties: [.p("on", .enumeration)]
         )
         register("switch", uiSwitch)
         let textField = control.inherit(
             className: "UITextField",
-            properties: [("textAlignment", .enumeration), ("allowsEditingTextAttributes", .boolean), ("borderStyle", .enumeration), ("clearButtonMode", .enumeration), ("clearsOnBeginEditing", .boolean), ("minimumFontSize", .number), ("adjustsFontSizeToFitWidth", .boolean), ("autocapitalizationType", .enumeration), ("autocorrectionType", .enumeration), ("spellCheckingType", .enumeration), ("keyboardType", .enumeration), ("keyboardAppearance", .enumeration), ("returnKeyType", .enumeration), ("enablesReturnKeyAutomatically", .boolean), ("secureTextEntry", .boolean)]
+            properties: [.p("textAlignment", .enumeration), .p("allowsEditingTextAttributes", .boolean), .p("borderStyle", .enumeration), .p("clearButtonMode", .enumeration), .p("clearsOnBeginEditing", .boolean), .p("minimumFontSize", .number), .p("adjustsFontSizeToFitWidth", .boolean), .p("autocapitalizationType", .enumeration), .p("autocorrectionType", .enumeration), .p("spellCheckingType", .enumeration), .p("keyboardType", .enumeration), .p("keyboardAppearance", .enumeration), .p("returnKeyType", .enumeration), .p("enablesReturnKeyAutomatically", .boolean), .p("secureTextEntry", .boolean)]
         )
         register("textField", textField)
     }
@@ -238,37 +251,37 @@ extension DocumentBuilder {
     func registerCocoaTouchViewControllers() {
         let viewController = ObjectBuilder(
             className: "UIViewController",
-            properties: [("automaticallyAdjustsScrollViewInsets", .boolean), ("hidesBottomBarWhenPushed", .boolean), ("autoresizesArchivedViewToFullSize", .boolean), ("wantsFullScreenLayout", .boolean), ("extendedLayoutIncludesOpaqueBars", .boolean), ("modalTransitionStyle", .enumeration), ("modalPresentationStyle", .enumeration), ("definesPresentationContext", .boolean), ("providesPresentationContextTransitionStyle", .boolean)]
+            properties: [.p("automaticallyAdjustsScrollViewInsets", .boolean), .p("hidesBottomBarWhenPushed", .boolean), .p("autoresizesArchivedViewToFullSize", .boolean), .p("wantsFullScreenLayout", .boolean), .p("extendedLayoutIncludesOpaqueBars", .boolean), .p("modalTransitionStyle", .enumeration), .p("modalPresentationStyle", .enumeration), .p("definesPresentationContext", .boolean), .p("providesPresentationContextTransitionStyle", .boolean)]
         )
         register("viewController", viewController)
 
         let tableViewController = ObjectBuilder(
             className: "UITableViewController",
-            properties: [("clearsSelectionOnViewWillAppear", .boolean)]
+            properties: [.p("clearsSelectionOnViewWillAppear", .boolean)]
         )
         register("tableViewController", tableViewController)
 
         let imagePickerController = ObjectBuilder(
             className: "UIImagePickerController",
-            properties: [("sourceType", .enumeration), ("allowsImageEditing", .boolean)]
+            properties: [.p("sourceType", .enumeration), .p("allowsImageEditing", .boolean)]
         )
         register("imagePickerController", imagePickerController)
 
         let collectionViewController = ObjectBuilder(
             className: "UICollectionViewController",
-            properties: [("clearsSelectionOnViewWillAppear", .boolean)]
+            properties: [.p("clearsSelectionOnViewWillAppear", .boolean)]
         )
         register("collectionViewController", collectionViewController)
 
         let navigationController = ObjectBuilder(
             className: "UINavigationController",
-            properties: [("hidesBarsOnSwipe", .boolean), ("hidesBarsOnTap", .boolean), ("hidesBarsWhenKeyboardAppears", .boolean), ("hidesBarsWhenVerticallyCompact", .boolean)]
+            properties: [.p("hidesBarsOnSwipe", .boolean), .p("hidesBarsOnTap", .boolean), .p("hidesBarsWhenKeyboardAppears", .boolean), .p("hidesBarsWhenVerticallyCompact", .boolean)]
         )
         register("navigationController", navigationController)
 
         let pageViewController = ObjectBuilder(
             className: "UIPageViewController",
-            properties: [("navigationOrientation", .enumeration), ("pageSpacing", .number), ("doubleSided", .boolean)]
+            properties: [.p("navigationOrientation", .enumeration), .p("pageSpacing", .number), .p("doubleSided", .boolean)]
         )
         register("pageViewController", pageViewController)
     }
@@ -276,49 +289,49 @@ extension DocumentBuilder {
     func registerCocoaTouchGestureRecognizers() {
         let gestureRecognizer = ObjectBuilder(
             className: "UIGestureRecognizer",
-            properties: [("enabled", .boolean), ("cancelsTouchesInView", .boolean), ("delaysTouchesBegan", .boolean), ("delaysTouchesEnded", .boolean)]
+            properties: [.p("enabled", .boolean), .p("cancelsTouchesInView", .boolean), .p("delaysTouchesBegan", .boolean), .p("delaysTouchesEnded", .boolean)]
         )
         register("gestureRecognizer", gestureRecognizer)
 
         let longPressGestureRecognizer = gestureRecognizer.inherit(
             className: "UILongPressGestureRecognizer",
-            properties: [("minimumPressDuration", .number), ("numberOfTapsRequired", .number), ("numberOfTouchesRequired", .number), ("allowableMovement", .number)]
+            properties: [.p("minimumPressDuration", .number), .p("numberOfTapsRequired", .number), .p("numberOfTouchesRequired", .number), .p("allowableMovement", .number)]
         )
         register("longPressGestureRecognizer", longPressGestureRecognizer)
 
         let panGestureRecognizer = gestureRecognizer.inherit(
             className: "UIPanGestureRecognizer",
-            properties: [("minimumNumberOfTouches", .number), ("maximumNumberOfTouches", .number)]
+            properties: [.p("minimumNumberOfTouches", .number), .p("maximumNumberOfTouches", .number)]
         )
         register("panGestureRecognizer", panGestureRecognizer)
 
         let pinchGestureRecognizer = gestureRecognizer.inherit(
             className: "UIPinchGestureRecognizer",
-            properties: [("scale", .number)]
+            properties: [.p("scale", .number)]
         )
         register("pinchGestureRecognizer", pinchGestureRecognizer)
 
         let rotationGestureRecognizer = gestureRecognizer.inherit(
             className: "UIRotationGestureRecognizer",
-            properties: [("rotationInDegrees", .number)]
+            properties: [.p("rotationInDegrees", .number)]
         )
         register("rotationGestureRecognizer", rotationGestureRecognizer)
 
         let screenEdgePanGestureRecognizer = panGestureRecognizer.inherit(
             className: "UIScreenEdgePanGestureRecognizer",
-            properties: [("edges", .boolean), ("edges", .boolean), ("edges", .boolean), ("edges", .boolean)]
+            properties: [.p("edges", .boolean)]
         )
         register("screenEdgePanGestureRecognizer", screenEdgePanGestureRecognizer)
 
         let swipeGestureRecognizer = gestureRecognizer.inherit(
             className: "UISwipeGestureRecognizer",
-            properties: [("direction", .enumeration), ("numberOfTouchesRequired", .number)]
+            properties: [.p("direction", .enumeration), .p("numberOfTouchesRequired", .number)]
         )
         register("swipeGestureRecognizer", swipeGestureRecognizer)
 
         let tapGestureRecognizer = gestureRecognizer.inherit(
             className: "UITapGestureRecognizer",
-            properties: [("numberOfTapsRequired", .number), ("numberOfTouchesRequired", .number)]
+            properties: [.p("numberOfTapsRequired", .number), .p("numberOfTouchesRequired", .number)]
         )
         register("tapGestureRecognizer", tapGestureRecognizer)
     }
@@ -326,46 +339,46 @@ extension DocumentBuilder {
     func registerProbablyBrokenNamespaced() {
         let aDBannerView = ObjectBuilder(
             className: "ADBannerView",
-            properties: [("adType", .enumeration)]
+            properties: [.p("adType", .enumeration)]
         )
         register("aDBannerView", aDBannerView)
 
         let gLKView = ObjectBuilder(
             className: "GLKView",
-            properties: [("drawableColorFormat", .enumeration), ("drawableDepthFormat", .enumeration), ("drawableStencilFormat", .enumeration), ("drawableMultisample", .enumeration), ("enableSetNeedsDisplay", .boolean)]
+            properties: [.p("drawableColorFormat", .enumeration), .p("drawableDepthFormat", .enumeration), .p("drawableStencilFormat", .enumeration), .p("drawableMultisample", .enumeration), .p("enableSetNeedsDisplay", .boolean)]
         )
         register("gLKView", gLKView)
 
         // Class: MKMapView
         let mKMapView = ObjectBuilder(
             className: "MKMapView",
-            properties: [("mapType", .enumeration), ("zoomEnabled", .boolean), ("scrollEnabled", .boolean), ("rotateEnabled", .boolean), ("pitchEnabled", .boolean), ("showsBuildings", .boolean), ("showsCompass", .boolean), ("showsScale", .boolean), ("showsTraffic", .boolean), ("showsPointsOfInterest", .boolean), ("showsUserLocation", .boolean)]
+            properties: [.p("mapType", .enumeration), .p("zoomEnabled", .boolean), .p("scrollEnabled", .boolean), .p("rotateEnabled", .boolean), .p("pitchEnabled", .boolean), .p("showsBuildings", .boolean), .p("showsCompass", .boolean), .p("showsScale", .boolean), .p("showsTraffic", .boolean), .p("showsPointsOfInterest", .boolean), .p("showsUserLocation", .boolean)]
         )
         register("mKMapView", mKMapView)
 
         // Class: MTKView
         let mTKView = ObjectBuilder(
             className: "MTKView",
-            properties: [("clearDepth", .number), ("clearStencil", .number), ("colorPixelFormat", .enumeration), ("depthStencilPixelFormat", .enumeration), ("sampleCount", .number), ("preferredFramesPerSecond", .number), ("enableSetNeedsDisplay", .boolean), ("paused", .boolean), ("autoResizeDrawable", .boolean)]
+            properties: [.p("clearDepth", .number), .p("clearStencil", .number), .p("colorPixelFormat", .enumeration), .p("depthStencilPixelFormat", .enumeration), .p("sampleCount", .number), .p("preferredFramesPerSecond", .number), .p("enableSetNeedsDisplay", .boolean), .p("paused", .boolean), .p("autoResizeDrawable", .boolean)]
         )
         register("mTKView", mTKView)
 
         // Class: SCNView
         let sCNView = ObjectBuilder(
             className: "SCNView",
-            properties: [("allowsCameraControl", .boolean), ("jitteringEnabled", .boolean), ("autoenablesDefaultLighting", .boolean), ("playing", .boolean), ("loops", .boolean)]
+            properties: [.p("allowsCameraControl", .boolean), .p("jitteringEnabled", .boolean), .p("autoenablesDefaultLighting", .boolean), .p("playing", .boolean), .p("loops", .boolean)]
         )
         register("sCNView", sCNView)
 
         let gLKViewController = ObjectBuilder(
             className: "GLKViewController",
-            properties: [("preferredFramesPerSecond", .number), ("pauseOnWillResignActive", .boolean), ("resumeOnDidBecomeActive", .boolean)]
+            properties: [.p("preferredFramesPerSecond", .number), .p("pauseOnWillResignActive", .boolean), .p("resumeOnDidBecomeActive", .boolean)]
         )
         register("gLKViewController", gLKViewController)
 
         let aVPlayerViewController = ObjectBuilder(
             className: "AVPlayerViewController",
-            properties: [("showsPlaybackControls", .boolean)]
+            properties: [.p("showsPlaybackControls", .boolean)]
         )
         register("aVPlayerViewController", aVPlayerViewController)
     }
