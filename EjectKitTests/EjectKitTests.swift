@@ -9,7 +9,7 @@
 import XCTest
 @testable import EjectKit
 
-func checkXML(_ xml: String, _ expected: [String], file: StaticString = #file, line: UInt = #line) {
+func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], file: StaticString = #file, line: UInt = #line) {
     do {
         let document = try XIBDocument.load(xml: xml)
         guard document.references.count > 0 else {
@@ -27,6 +27,10 @@ func checkXML(_ xml: String, _ expected: [String], file: StaticString = #file, l
         if lines != expected {
             print(lines.map() { "\"\($0.replacingOccurrences(of: "\"", with: "\\\""))\","}.joined(separator: "\n"))
         }
+        if document.missingAttributeWarnings !=  warnings {
+            print(document.missingAttributeWarnings.joined(separator: "\n"))
+        }
+        XCTAssertEqual(document.missingAttributeWarnings, warnings)
     }
     catch let error {
         XCTFail(error.localizedDescription, file: file, line: line)
@@ -75,7 +79,7 @@ class EjectTests: XCTestCase {
 
     // Method ordering is broken here, not sure if this is fatal to compile-out-of-the-box.
     func testGestureRecognizer() {
-        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><connections><outletCollection property='gestureRecognizers' destination='fDa-KR-68j' appends='YES' id='7AV-8r-dYL'/></connections></view><panGestureRecognizer minimumNumberOfTouches='1' id='fDa-KR-68j'><connections>            <action selector='dimissTextField:' destination='-1' id='zAI-0B-Wyz'/><outlet property='delegate' destination='i5M-Pr-FkT' id='0eg-ac-TGD'/></connections></panGestureRecognizer>")
+        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><connections><outletCollection property='gestureRecognizers' destination='fDa-KR-68j' appends='YES' id='7AV-8r-dYL'/></connections></view><panGestureRecognizer minimumNumberOfTouches='1' id='fDa-KR-68j'><connections><action selector='dimissTextField:' destination='-1' id='zAI-0B-Wyz'/><outlet property='delegate' destination='i5M-Pr-FkT' id='0eg-ac-TGD'/></connections></panGestureRecognizer>")
         checkXML(xml, [
             "let test = UIView()",
             "let panGestureRecognizer = UIPanGestureRecognizer()",
@@ -186,6 +190,8 @@ class EjectTests: XCTestCase {
             "collectionView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "",
             "let collectionViewFlowLayout = UICollectionViewFlowLayout()",
+            "collectionViewFlowLayout.minimumLineSpacing = 10",
+            "collectionViewFlowLayout.minimumInteritemSpacing = 10",
             "collectionViewFlowLayout.itemSize = CGSize(width: 50, height: 50)",
             "collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)",
             "collectionViewFlowLayout.footerReferenceSize = CGSize(width: 0, height: 0)",
@@ -195,13 +201,15 @@ class EjectTests: XCTestCase {
             "collectionView.dataSource = self",
             "collectionView.collectionViewLayout = collectionViewFlowLayout",
             "self.view = collectionView",
+            ], warnings: [
+                "document.objects.collectionView: dataMode='none'"
             ])
     }
 
     func testTableView() {
         let xml = wrap("<tableView alwaysBounceVertical='YES' style='plain' separatorStyle='default' rowHeight='44' sectionHeaderHeight='28' sectionFooterHeight='28' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><inset key='separatorInset' minX='15' minY='0.0' maxX='15' maxY='0.0'/><connections><outlet property='dataSource' destination='-1' id='0eg-ac-TGD'/><outlet property='delegate' destination='-1' id='jQ0-LG-WAK'/></connections></tableView>")
         checkXML(xml, [
-            "let tableView = UITableView(frame: .zero, style: .plain)",
+            "let tableView = UITableView(frame: CGRect(x: 11, y: 11, width: 328, height: 578), style: .plain)",
             "tableView.translatesAutoresizingMaskIntoConstraints = false",
             "tableView.alwaysBounceVertical = true",
             "tableView.separatorStyle = .default",
@@ -299,10 +307,10 @@ class EjectTests: XCTestCase {
             "view.addSubview(circularToggleView)",
             "",
             "label.leadingAnchor == circularToggleView.trailingAnchor + 8 ~ 100",
-            "label.topAnchor == view.topAnchor + 20",
+            "label.topAnchor >= view.topAnchor + 20",
             "label.centerYAnchor == circularToggleView.centerYAnchor",
-            "view.trailingAnchor == label.trailingAnchor + 20",
-            "view.bottomAnchor == label.bottomAnchor + 20",
+            "view.trailingAnchor >= label.trailingAnchor + 20",
+            "view.bottomAnchor >= label.bottomAnchor + 20",
             "circularToggleView.centerYAnchor == view.centerYAnchor",
             "circularToggleView.leadingAnchor == view.leadingAnchor",
             "circularToggleView.widthAnchor == 28",
@@ -336,6 +344,22 @@ class EjectTests: XCTestCase {
             "segmentedControl.setTitle(\"Description\", forSegmentAt: 1)",
             "",
             "self.view = segmentedControl",
+            ], warnings: [
+                "document.objects.segmentedControl: segmentControlStyle='plain'"
+            ])
+    }
+
+    func testMissingAttributes() {
+        let xml = wrap("<imageView contentMode='center' thisattribute='isnotdefined' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'></imageView>")
+        checkXML(xml, [
+            "let imageView = UIImageView()",
+            "imageView.contentMode = .center",
+            "imageView.translatesAutoresizingMaskIntoConstraints = false",
+            "imageView.image = UIImage(named: \"icon\")",
+            "",
+            "self.view = imageView",
+            ], warnings: [
+                "document.objects.imageView: thisattribute='isnotdefined'"
             ])
     }
 

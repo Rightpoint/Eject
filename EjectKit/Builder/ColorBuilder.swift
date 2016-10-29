@@ -10,21 +10,23 @@ import Foundation
 
 struct ColorBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let key = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
-        let alpha = attributes["alpha"]?.floatValue ?? 1
+        let key = try attributes.removeRequiredValue(forKey: "key")
+        let alpha = try attributes.removeFloatString(forKey: "alpha") ?? "1"
+        attributes.removeValue(forKey: "colorSpace")
+        attributes.removeValue(forKey: "customColorSpace")
         let value: String
-        if let white = attributes["white"]?.floatValue {
-            value = "UIColor(white: \(white.shortString), alpha: \(alpha.shortString))"
+        if let white = try attributes.removeOptionalFloat(forKey: "white") {
+            value = "UIColor(white: \(white.shortString), alpha: \(alpha))"
         }
         else if
-            let red = attributes["red"]?.floatValue,
-            let green = attributes["green"]?.floatValue,
-            let blue = attributes["blue"]?.floatValue {
-            value = "UIColor(red: \(red.shortString), green: \(green.shortString), blue: \(blue.shortString), alpha: \(alpha.shortString))"
+            let red = try attributes.removeFloatString(forKey: "red"),
+            let green = try attributes.removeFloatString(forKey: "green"),
+            let blue = try attributes.removeFloatString(forKey: "blue") {
+            value = "UIColor(red: \(red), green: \(green), blue: \(blue), alpha: \(alpha))"
         }
-        else if var systemColor = attributes["cocoaTouchSystemColor"] {
+        else if var systemColor = attributes.removeValue(forKey: "cocoaTouchSystemColor") {
             if let range = systemColor.range(of: "Color") {
                 systemColor.removeSubrange(range)
             }

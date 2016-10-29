@@ -37,12 +37,12 @@ struct TargetActionConfiguration: CodeGenerator {
 
 struct ActionBuilder: Builder {
 
-    func buildElement(attributes: [String : String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String : String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard var action = attributes["selector"] else { throw XIBParser.Error.requiredAttribute(attribute: "selector") }
-        guard let destination = attributes["destination"] else { throw XIBParser.Error.requiredAttribute(attribute: "destination") }
-        let event = attributes["eventType"]
-
+        var action = try attributes.removeRequiredValue(forKey: "selector")
+        let destination = try attributes.removeRequiredValue(forKey: "destination")
+        let event = attributes.removeValue(forKey: "eventType")
+        attributes.removeValue(forKey: "id")
         if !action.contains("("), let range = action.range(of: ":") {
             action.replaceSubrange(range, with: "(_:)")
         }

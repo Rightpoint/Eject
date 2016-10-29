@@ -30,16 +30,25 @@ class DocumentBuilder: BuilderLookup {
 
     struct PluginBuilder: Builder {
         weak var documentBuilder: DocumentBuilder?
-        func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
-            guard let identifier = attributes["identifier"] else { throw XIBParser.Error.requiredAttribute(attribute: "identifier") }
-
+        func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+            let identifier = try attributes.removeRequiredValue(forKey: "identifier")
             if identifier == "com.apple.InterfaceBuilder.IBCocoaTouchPlugin" {
                 documentBuilder!.registerPrimitives()
                 documentBuilder!.registerCocoaTouch()
             }
+
+            document.documentInformation["version"] = attributes.removeValue(forKey: "version")
             return nil
         }
     }
+
+    struct NoOpBuilder: Builder {
+        func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
+            attributes.removeAll()
+            return parent
+        }
+    }
+
 }
 
 

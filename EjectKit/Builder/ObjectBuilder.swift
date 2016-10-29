@@ -10,50 +10,41 @@ import Foundation
 
 struct ObjectBuilder: Builder {
     var className: String
+    var injectedProperties: [(String, ValueFormat)]
     var properties: [(String, ValueFormat)]
     var placeholder: Bool
 
-    init(className: String, properties: [(String, ValueFormat)] = [], placeholder: Bool = false) {
+    init(className: String, properties: [(String, ValueFormat)] = [], injectedProperties: [(String, ValueFormat)] = [], placeholder: Bool = false) {
         self.className = className
         self.properties = properties
         self.placeholder = placeholder
+        self.injectedProperties = injectedProperties
     }
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
-        let identifier = attributes["id"]
-            ?? UUID().uuidString // if a key is specified, the ID can be nil, so just generate a UUID in that case.
-        let className = attributes["customClass"] ?? self.className
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        // if a key is specified, the ID can be nil, so just generate a UUID in that case.
+        let identifier = attributes.removeValue(forKey: "id") ?? UUID().uuidString
+        let className = attributes.removeValue(forKey: "customClass") ?? self.className
 
-        // Build the arguments to inject into the constructor.
-        let arguments: [String: String] = properties.reduce([:]) { arguments, tuple in
-            var arguments = arguments
-            switch (attributes[tuple.0], tuple.1) {
-            case let (value?, .inject(string)):
-                arguments[tuple.0] = string.transform(string: value)
-            case let (_, .injectDefault(value)):
-                arguments[tuple.0] = value
-            default:
-                break
-            }
-            return arguments
-        }
         let declaration: XIBDocument.Declaration
         if placeholder {
-            assert(arguments.count == 0)
             declaration = .placeholder
+            for key in ["customModule", "placeholderIdentifier", "customModuleProvider"] {
+                attributes.removeValue(forKey: key)
+            }
         }
         else {
-            declaration = .initializer(arguments, .initialization)
+            declaration = .initializer(injectedProperties.map() { $0.0 }, .initialization)
         }
         let object = document.addObject(
             for: identifier,
             className: className,
-            userLabel: attributes["userLabel"],
+            userLabel: attributes.removeValue(forKey: "userLabel"),
             declaration: declaration
         )
 
         // If a key is specified, add a configuration to the parent
-        if let parentKey = attributes["key"] {
+        if let parentKey = attributes.removeValue(forKey: "key") {
             guard let parent = parent else { throw XIBParser.Error.needParent }
             if case .placeholder = declaration {
                 // If this is a placeholder (IE: an object that the parent will initialize internally) set the variable name to the property.
@@ -67,24 +58,28 @@ struct ObjectBuilder: Builder {
         }
 
         for (key, format) in properties {
-            switch (format, attributes[key]) {
-            case (.inject, _):
-                fallthrough
-            case (.injectDefault, _):
-                break // ignore properties that are injected into the constructor
-            case let (_, value?):
-                document.addVariableConfiguration(for: object.identifier, key: key, value: BasicValue(value: value, format: format))
-            default:
-                break
+            if let value = attributes.removeValue(forKey: key) {
+                document.addVariableConfiguration(
+                    for: object.identifier,
+                    key: key,
+                    value: BasicValue(value: value, format: format)
+                )
             }
         }
+        for (key, format) in injectedProperties {
+            if let value = attributes.removeValue(forKey: key) {
+                document.lookupReference(for: identifier).values[key] = BasicValue(value: value, format: format)
+            }
+        }
+
         return object
     }
 
-    func inherit(className: String, properties: [(String, ValueFormat)] = []) -> ObjectBuilder {
+    func inherit(className: String, properties: [(String, ValueFormat)] = [], injectedProperties: [(String, ValueFormat)] = []) -> ObjectBuilder {
         var subclass = self
         subclass.className = className
         subclass.properties.append(contentsOf: properties)
+        subclass.injectedProperties.append(contentsOf: injectedProperties)
         return subclass
     }
     

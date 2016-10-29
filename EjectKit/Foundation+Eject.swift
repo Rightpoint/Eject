@@ -90,3 +90,40 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
         }
     }
 }
+
+protocol AnyString {}
+extension String: AnyString {}
+extension Dictionary where Key: AnyString, Value: AnyString {
+
+    mutating func removeRequiredValue(forKey key: Key) throws -> String {
+        guard let property = key as? String else { fatalError() }
+        guard let string = removeValue(forKey: key) as? String else {
+            throw XIBParser.Error.requiredAttribute(attribute: property)
+        }
+        return string
+    }
+
+    mutating func removeOptionalFloat(forKey key: Key) throws -> CGFloat? {
+        guard self[key] != nil else { return nil }
+        return try removeFloat(forKey: key)
+    }
+
+    mutating func removeFloat(forKey key: Key) throws -> CGFloat {
+        guard let property = key as? String else { fatalError() }
+        let string = try removeRequiredValue(forKey: key)
+        guard let float = string.floatValue else {
+            throw XIBParser.Error.invalidAttribute(attribute: property, value: string)
+        }
+        return float
+    }
+
+    mutating func removeFloatString(forKey key: Key) throws -> String? {
+        guard let property = key as? String else { fatalError() }
+        guard let string = removeValue(forKey: key) as? String else { return nil }
+        guard let float = string.floatValue else {
+            throw XIBParser.Error.invalidAttribute(attribute: property, value: string)
+        }
+        return float.shortString
+    }
+
+}

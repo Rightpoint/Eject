@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Builder {
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference?
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference?
     func complete(document: XIBDocument)
 }
 
@@ -29,10 +29,6 @@ protocol BuilderLookup {
     func lookupBuilder(for elementName: String) -> Builder?
 }
 
-struct NoOpBuilder: Builder {
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? { return parent }
-}
-
 public class XIBParser: NSObject {
     public enum Error: Swift.Error {
         case needParent
@@ -45,6 +41,7 @@ public class XIBParser: NSObject {
 
     var builderStack: [Builder] = []
     var stack: [Reference?] = []
+    var elementStack: [String] = []
     var error: Error?
 
     public var document: XIBDocument {
@@ -82,27 +79,37 @@ extension XIBParser: XMLParserDelegate {
             return
         }
         let nextObject: Reference?
+        var attributes = attributeDict
         do {
-            nextObject = try builder.buildElement(attributes: attributeDict, document: document, parent: lastObject)
+            nextObject = try builder.buildElement(attributes: &attributes, document: document, parent: lastObject)
         }
         catch let error as XIBParser.Error {
             nextObject = nil
             self.error = error
+            parser.abortParsing()
         }
         catch {
             fatalError("Unknown error thrown")
         }
+        elementStack.append(elementName)
         builderStack.append(builder)
         stack.append(nextObject)
+        if attributes.count > 0 {
+            let attrs = attributes.map() { "\($0)='\($1)'" }.joined(separator: ", ")
+            let missing = elementStack.joined(separator: ".").appending(": \(attrs)")
+            document.missingAttributeWarnings.append(missing)
+        }
     }
 
     public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         guard builderLookup.lookupBuilder(for: elementName) != nil else {
             return
         }
+        elementStack.removeLast()
         let object = stack.removeLast()
         let completedBuilder = builderStack.removeLast()
         completedBuilder.complete(document: document)
+
         if let lastBuilder = lastBuilder as? ContainerBuilder, let object = object {
             lastBuilder.didAddChild(object: object, to: lastObject!, document: document)
         }

@@ -11,12 +11,18 @@ import Foundation
 struct Initializer: CodeGenerator {
     let objectIdentifier: String
     let className: String
-    let arguments: [String: String]
+    let injectedProperties: [String]
 
     func generateCode(in document: XIBDocument) -> String {
         let object = document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
-        let argumentString = arguments.map() { "\($0): \($1)" }.joined(separator: ", ")
-        return "let \(variable) = \(className)(\(argumentString))"
+        let arguments = injectedProperties.map() { (property: String) -> String? in
+            if let generator = object.values[property] {
+                return "\(property): \(generator.generateCode(in: document))"
+            }
+            return nil
+        }.flatMap() { $0 }
+
+        return "let \(variable) = \(className)(\(arguments.joined(separator: ", ")))"
     }
 }

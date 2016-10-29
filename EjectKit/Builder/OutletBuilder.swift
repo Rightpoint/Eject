@@ -15,11 +15,12 @@ struct OutletBuilder: Builder {
         return collection ? .append : .assignment
     }
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let property = attributes["property"] else { throw XIBParser.Error.requiredAttribute(attribute: "property") }
-        guard let destination = attributes["destination"] else { throw XIBParser.Error.requiredAttribute(attribute: "destination") }
-
+        let property = try attributes.removeRequiredValue(forKey: "property")
+        let destination = try attributes.removeRequiredValue(forKey: "destination")
+        attributes.removeValue(forKey: "id")
+        attributes.removeValue(forKey: "appends")
         let value = VariableValue(objectIdentifier: destination)
         document.addVariableConfiguration(
             for: parent.identifier,

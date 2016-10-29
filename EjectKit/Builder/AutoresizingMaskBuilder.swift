@@ -10,9 +10,9 @@ import Foundation
 
 struct AutoresizingMaskBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard attributes["key"] == "autoresizingMask" else { throw XIBParser.Error.unknown(attributes: attributes) }
+        guard attributes.removeValue(forKey: "key") == "autoresizingMask" else { throw XIBParser.Error.unknown(attributes: attributes) }
 
         var values: [String: String] = [:]
         for (key, value) in attributes {
@@ -34,7 +34,13 @@ struct AutoresizingMaskBuilder: Builder {
                 throw XIBParser.Error.unknown(attributes: attributes)
             }
         }
-        document.addVariableConfiguration(for: parent.identifier, key: "autoresizingMask", value: OptionSetValue(attributes: values))
+        document.addVariableConfiguration(
+            for: parent.identifier,
+            key: "autoresizingMask",
+            value: OptionSetValue(attributes: values)
+        )
+        // Remove all the keys, any unknown state should be caught above.
+        attributes.removeAll()
         return parent
     }
 }

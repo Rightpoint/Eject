@@ -10,15 +10,19 @@ import Foundation
 
 struct RectBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let key = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
-        guard let x = attributes["x"]?.floatValue?.shortString else { throw XIBParser.Error.requiredAttribute(attribute: "x") }
-        guard let y = attributes["y"]?.floatValue?.shortString else { throw XIBParser.Error.requiredAttribute(attribute: "y") }
-        guard let width = attributes["width"]?.floatValue?.shortString else { throw XIBParser.Error.requiredAttribute(attribute: "width") }
-        guard let height = attributes["height"]?.floatValue?.shortString else { throw XIBParser.Error.requiredAttribute(attribute: "height") }
+        let key = try attributes.removeRequiredValue(forKey: "key")
+        let x = try attributes.removeFloatString(forKey: "x") ?? "0"
+        let y = try attributes.removeFloatString(forKey: "y") ?? "0"
+        let width = try attributes.removeFloatString(forKey: "width") ?? "0"
+        let height = try attributes.removeFloatString(forKey: "height") ?? "0"
 
-        document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))"))
+        document.addVariableConfiguration(
+            for: parent.identifier,
+            key: key,
+            value: BasicValue(value: "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))")
+        )
         return parent
     }
 
@@ -26,13 +30,17 @@ struct RectBuilder: Builder {
 
 struct SizeBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let key = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
-        guard let width = attributes["width"]?.floatValue?.shortString else { throw XIBParser.Error.requiredAttribute(attribute: "width") }
-        guard let height = attributes["height"]?.floatValue?.shortString else { throw XIBParser.Error.requiredAttribute(attribute: "height") }
+        let key = try attributes.removeRequiredValue(forKey: "key")
+        let width = try attributes.removeFloatString(forKey: "width") ?? "0"
+        let height = try attributes.removeFloatString(forKey: "height") ?? "0"
 
-        document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: "CGSize(width: \(width), height: \(height))"))
+        document.addVariableConfiguration(
+            for: parent.identifier,
+            key: key,
+            value: BasicValue(value: "CGSize(width: \(width), height: \(height))")
+        )
         return parent
     }
 
@@ -40,15 +48,19 @@ struct SizeBuilder: Builder {
 
 struct InsetBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let key = attributes["key"] else { throw XIBParser.Error.requiredAttribute(attribute: "key") }
-        guard let x = attributes["minX"]?.floatValue else { throw XIBParser.Error.requiredAttribute(attribute: "minX") }
-        guard let y = attributes["minY"]?.floatValue else { throw XIBParser.Error.requiredAttribute(attribute: "minY") }
-        guard let width = attributes["maxX"]?.floatValue else { throw XIBParser.Error.requiredAttribute(attribute: "maxX") }
-        guard let height = attributes["maxY"]?.floatValue else { throw XIBParser.Error.requiredAttribute(attribute: "maxY") }
+        let key = try attributes.removeRequiredValue(forKey: "key")
+        let x = try attributes.removeFloat(forKey: "minX")
+        let y = try attributes.removeFloat(forKey: "minY")
+        let width = try attributes.removeFloat(forKey: "maxX")
+        let height = try attributes.removeFloat(forKey: "maxY")
 
-        document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: "UIEdgeInsets(top: \(y.shortString), left: \(x.shortString), bottom: \((y + height).shortString), right: \((x + width).shortString))"))
+        let edgeInsets = "UIEdgeInsets(top: \(y.shortString), left: \(x.shortString), bottom: \((y + height).shortString), right: \((x + width).shortString))"
+        document.addVariableConfiguration(
+            for: parent.identifier,
+            key: key,
+            value: BasicValue(value: edgeInsets))
         return parent
     }
 
@@ -58,12 +70,16 @@ struct BasicBuilder: Builder {
     let key: String
     let format: ValueFormat
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let value = attributes[key] else { throw XIBParser.Error.requiredAttribute(attribute: key) }
-        document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value, format: format))
+        let value = try attributes.removeRequiredValue(forKey: key)
+
+        document.addVariableConfiguration(
+            for: parent.identifier,
+            key: key,
+            value: BasicValue(value: value, format: format)
+        )
         return parent
     }
     
 }
-

@@ -10,7 +10,7 @@ import Foundation
 
 struct SegmentsBuilder: Builder, ContainerBuilder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
         document.containerContext = .setter(suffix: "forSegmentAt: 0")
         return parent
     }
@@ -30,10 +30,10 @@ struct SegmentsBuilder: Builder, ContainerBuilder {
     }
 
     struct Segment: Builder {
-        func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
             guard let parent = parent else { throw XIBParser.Error.needParent }
             for (key, format) in [("title", ValueFormat.string), ("image", ValueFormat.image)] {
-                if let value = attributes[key] {
+                if let value = attributes.removeValue(forKey: key) {
                     document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value, format: format))
                 }
             }

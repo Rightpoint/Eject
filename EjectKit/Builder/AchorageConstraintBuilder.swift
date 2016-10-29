@@ -9,15 +9,17 @@
 import Foundation
 
 struct AnchorageConfiguration: CodeGenerator {
-    let parentIdentifier: String
-    let attributes: [String: String]
+    let identifier: String
+    let first: (item: String, attr: String)
+    let relationship: String
+    let constant: String?
+    let second: (item: String, attr: String)?
+    let priority: String?
 
     var dependentIdentifiers: Set<String> {
-        let identifiers: Set<String> = [attributes["firstItem"] ?? parentIdentifier]
-        guard let second = attributes["secondItem"] else {
-            return identifiers
-        }
-        return identifiers.union([second])
+        let identifiers: Set<String> = [first.item]
+        guard let second = second else { return identifiers }
+        return identifiers.union([second.item])
     }
 
     func relationshipOperator(for enumeration: String) -> String {
@@ -32,32 +34,28 @@ struct AnchorageConfiguration: CodeGenerator {
     func generateCode(in document: XIBDocument) -> String {
         var constraintParts: [String] = []
         var variablePart: [String] = []
-        let firstItem = attributes["firstItem"] ?? parentIdentifier
-        guard let firstAttribute = attributes["firstAttribute"] else {
-            fatalError("Expecting a firstAttribute")
-        }
-        let reference = document.lookupReference(for: firstItem)
-        let variable = document.variable(for: reference)
-        constraintParts.append("\(variable).\(firstAttribute)Anchor")
-        variablePart.append(variable)
-        variablePart.append(firstAttribute)
 
-        let relationship = attributes["relationship"] ?? "equal"
+        let reference = document.lookupReference(for: first.item)
+        let variable = document.variable(for: reference)
+        constraintParts.append("\(variable).\(first.attr)Anchor")
+        variablePart.append(variable)
+        variablePart.append(first.attr)
+
         constraintParts.append(relationshipOperator(for: relationship))
         variablePart.append(relationship)
         var includeOperationForConstant = false
 
-        if let item = attributes["secondItem"], let attribute = attributes["secondAttribute"] {
-            let reference = document.lookupReference(for: item)
+        if let second = second {
+            let reference = document.lookupReference(for: second.item)
             let variable = document.variable(for: reference)
-            constraintParts.append("\(variable).\(attribute)Anchor")
+            constraintParts.append("\(variable).\(second.attr)Anchor")
             variablePart.append("to")
             variablePart.append(variable)
-            variablePart.append(attribute)
+            variablePart.append(second.attr)
             includeOperationForConstant = true
         }
 
-        if let constant = attributes["constant"]?.floatValue {
+        if let constant = constant?.floatValue {
             if includeOperationForConstant {
                 if constant > 0 {
                     constraintParts.append("+")
@@ -68,15 +66,12 @@ struct AnchorageConfiguration: CodeGenerator {
             }
             constraintParts.append(abs(constant).shortString)
         }
-        if let priority = attributes["priority"] {
+        if let priority = priority {
             constraintParts.append("~ \(priority)")
         }
 
         let constraintCommand = constraintParts.joined(separator: " ")
 
-        guard let identifier = attributes["id"] else {
-            fatalError("Constraint does not have ID")
-        }
         if document.hasDependencies(for: identifier) {
             let variableString = variablePart.joined(separator: " ").snakeCased()
             document.variableNameOverrides[identifier] = variableString
@@ -90,14 +85,34 @@ struct AnchorageConfiguration: CodeGenerator {
 
 struct AchorageConstraintBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let identifier = attributes["id"] else { throw XIBParser.Error.requiredAttribute(attribute: "id") }
-        let generator = AnchorageConfiguration(parentIdentifier: parent.identifier, attributes: attributes)
+        let identifier = try attributes.removeRequiredValue(forKey: "id")
+        let firstItem = attributes.removeValue(forKey: "firstItem") ?? parent.identifier
+        let firstAttr = try attributes.removeRequiredValue(forKey: "firstAttribute")
+        let relationship = attributes.removeValue(forKey: "relation") ?? "equal"
+        let constant = attributes.removeValue(forKey: "constant")
+        let secondItem = attributes.removeValue(forKey: "secondItem")
+        let secondAttr = attributes.removeValue(forKey: "secondAttribute")
+        let priority = attributes.removeValue(forKey: "priority")
+        attributes.removeValue(forKey: "symbolic")
+        var second: (String, String)? = nil
+        if let secondItem = secondItem, let secondAttr = secondAttr {
+            second = (secondItem, secondAttr)
+        }
+        let generator = AnchorageConfiguration(
+            identifier: identifier,
+            first: (firstItem, firstAttr),
+            relationship: relationship,
+            constant: constant,
+            second: second,
+            priority: priority
+        )
+
         let constraint = document.addObject(
             for: identifier,
             className: "NSLayoutConstraint",
-            userLabel: attributes["userLabel"],
+            userLabel: attributes.removeValue(forKey: "userLabel"),
             declaration: .invocation(generator, .constraints)
         )
         return constraint

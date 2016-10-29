@@ -8,9 +8,16 @@
 
 import Foundation
 
-/// A struct that references an object in the graph
-public struct Reference {
+/// A class to represent an object in the graph
+public class Reference {
     let identifier: String
     let className: String
     let userLabel: String?
+    var values: [String: CodeGenerator] = [:]
+
+    init(identifier: String, className: String, userLabel: String?) {
+        self.identifier = identifier
+        self.className = className
+        self.userLabel = userLabel
+    }
 }

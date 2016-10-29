@@ -10,9 +10,10 @@ import Foundation
 
 struct UserDefinedAttributeBuilder: Builder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        guard let keyPath = attributes["keyPath"] else { throw XIBParser.Error.requiredAttribute(attribute: "keyPath") }
+        let keyPath = try attributes.removeRequiredValue(forKey: "keyPath")
+        attributes.removeValue(forKey: "type")
         document.containerContext = .assigmentOverride(key: keyPath)
         return parent
     }

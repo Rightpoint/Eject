@@ -25,6 +25,8 @@ public class XIBDocument {
     var references: [Reference] = []
     var containerContext: ConfigurationContext?
     var variableNameOverrides: [String: String] = ["-1": "self"]
+    var missingAttributeWarnings: [String] = []
+    var documentInformation: [String: String] = [:]
 
     /// Generate a variable property name with the following precedence
     ///
@@ -69,7 +71,7 @@ public class XIBDocument {
 
     enum Declaration {
         case placeholder
-        case initializer([String: String], CodeGeneratorPhase)
+        case initializer([String], CodeGeneratorPhase)
         case invocation(CodeGenerator, CodeGeneratorPhase)
     }
 
@@ -80,8 +82,8 @@ public class XIBDocument {
         switch declaration {
         case .placeholder:
             break
-        case let .initializer(arguments, phase):
-            let generator = Initializer(objectIdentifier: identifier, className: className, arguments: arguments)
+        case let .initializer(injectedProperties, phase):
+            let generator = Initializer(objectIdentifier: identifier, className: className, injectedProperties: injectedProperties)
             addStatement(generator, phase: phase, declares: object)
         case let .invocation(invocation, phase):
             let generator = invocation
@@ -101,6 +103,9 @@ public class XIBDocument {
             ),
             phase: .configuration
         )
+        // Save the key / CodeGenerator. These can be used by Initializer to inject values
+        let obj = lookupReference(for: identifier)
+        obj.values[key] = value
     }
 
     func addStatement(_ generator: CodeGenerator, phase: CodeGeneratorPhase, declares: Reference? = nil) {

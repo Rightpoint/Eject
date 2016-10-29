@@ -28,7 +28,7 @@ struct SubviewConfiguration: CodeGenerator {
 
 struct SubviewBuilder: Builder, ContainerBuilder {
 
-    func buildElement(attributes: [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
         return parent
     }

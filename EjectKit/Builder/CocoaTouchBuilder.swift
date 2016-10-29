@@ -61,11 +61,11 @@ extension DocumentBuilder {
 
         let collectionViewFlowLayout = ObjectBuilder(
             className: "UICollectionViewFlowLayout",
-            properties: [("scrollDirection", .enumeration)]
+            properties: [("scrollDirection", .enumeration), ("minimumLineSpacing", .number), ("minimumInteritemSpacing", .number)]
         )
         register("collectionViewFlowLayout", collectionViewFlowLayout)
         let collectionViewLayout = ObjectBuilder(
-            className: "UICollectionViewdLayout",
+            className: "UICollectionViewLayout",
             properties: [],
             placeholder: true
         )
@@ -152,7 +152,8 @@ extension DocumentBuilder {
         register("tabBar", tabBar)
         let tableView = scrollView.inherit(
             className: "UITableView",
-            properties: [("frame", .injectDefault(".zero")), ("style", .inject(.enumeration)), ("separatorStyle", .enumeration), ("sectionIndexMinimumDisplayRowCount", .number), ("rowHeight", .number), ("sectionHeaderHeight", .number), ("sectionFooterHeight", .number)]
+            properties: [("separatorStyle", .enumeration), ("sectionIndexMinimumDisplayRowCount", .number), ("rowHeight", .number), ("sectionHeaderHeight", .number), ("sectionFooterHeight", .number)],
+            injectedProperties: [("frame", .raw), ("style", .enumeration)]
         )
         register("tableView", tableView)
         let tableViewCell = view.inherit(
