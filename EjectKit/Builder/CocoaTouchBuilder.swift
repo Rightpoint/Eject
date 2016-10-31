@@ -190,7 +190,8 @@ extension DocumentBuilder {
                 .build("autocapitalizationType", .enumeration), .build("autocorrectionType", .enumeration),
                 .build("spellCheckingType", .enumeration), .build("keyboardType", .enumeration),
                 .build("keyboardAppearance", .enumeration), .build("returnKeyType", .enumeration),
-                .build("enablesReturnKeyAutomatically", .boolean), .build("secureTextEntry", .boolean)]
+                .build("enablesReturnKeyAutomatically", .boolean), .build("secureTextEntry", .boolean),
+                .build("text", .string), .build("keyboardDismissMode", .enumeration)]
         )
         register("textView", textView)
         let toolbar = view.inherit(
