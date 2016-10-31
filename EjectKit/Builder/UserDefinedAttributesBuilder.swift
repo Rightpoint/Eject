@@ -13,8 +13,21 @@ struct UserDefinedAttributeBuilder: Builder {
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
         let keyPath = try attributes.removeRequiredValue(forKey: "keyPath")
-        attributes.removeValue(forKey: "type")
-        document.containerContext = .assigmentOverride(key: keyPath)
+        let type = attributes.removeValue(forKey: "type")
+        if let value = attributes.removeValue(forKey: "value") {
+            guard type == "boolean" else {
+                throw XIBParser.Error.unknown(attributes: attributes)
+            }
+            document.addVariableConfiguration(
+                for: parent.identifier,
+                key: keyPath,
+                value: BasicValue(value: value, format: .boolean),
+                context: .assignment
+            )
+        }
+        else {
+            document.containerContext = .assigmentOverride(key: keyPath)
+        }
         return parent
     }
 

@@ -107,11 +107,12 @@ class EjectTests: XCTestCase {
         )
     }
 
-    func testUserDefinedInt() {
-        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><userDefinedRuntimeAttributes><userDefinedRuntimeAttribute type='number' keyPath='layer.cornerRadius'><integer key='value' value='25'/></userDefinedRuntimeAttribute></userDefinedRuntimeAttributes></view>")
+    func testUserDefined() {
+        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><userDefinedRuntimeAttributes><userDefinedRuntimeAttribute type='number' keyPath='layer.cornerRadius'><integer key='value' value='25'/></userDefinedRuntimeAttribute><userDefinedRuntimeAttribute type='boolean' keyPath='clipsToBounds' value='YES'/></userDefinedRuntimeAttributes></view>")
         checkXML(xml, [
             "let test = UIView()",
             "test.layer.cornerRadius = 25",
+            "test.clipsToBounds = true",
             "",
             "self.view = test",
             ]
