@@ -26,8 +26,21 @@ public class XIBDocument {
     var references: [Reference] = []
     var containerContext: ConfigurationContext?
     var variableNameOverrides: [String: String] = ["-1": "self"]
-    var missingAttributeWarnings: [String] = []
     var documentInformation: [String: String] = [:]
+    public enum Warning {
+        case unknownAttribute(String)
+        case duplicateVariable(String)
+
+        var message: String {
+            switch self {
+            case let .unknownAttribute(message):
+                return message
+            case let .duplicateVariable(message):
+                return message
+            }
+        }
+    }
+    var warnings: [Warning] = []
 
     /// Generate a variable property name with the following precedence
     ///
@@ -112,6 +125,22 @@ public class XIBDocument {
     func addStatement(_ generator: CodeGenerator, phase: CodeGeneratorPhase, declares: Reference? = nil) {
         let statement = Statement(declares: declares, generator: generator, phase: phase)
         statements.append(statement)
+    }
+
+    func scanForDuplicateVariableNames() {
+        var names: Set<String> = []
+        var warned: Set<String> = []
+        for object in references {
+            let variable = self.variable(for: object)
+            if names.contains(variable) && !warned.contains(variable) {
+                let message = "Variable '\(variable): \(object.className)' was generated multiple times."
+                warnings.append(.duplicateVariable(message))
+                warned.insert(variable)
+            }
+            else {
+                names.insert(variable)
+            }
+        }
     }
 
 }

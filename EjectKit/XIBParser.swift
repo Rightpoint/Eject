@@ -97,7 +97,7 @@ extension XIBParser: XMLParserDelegate {
         if attributes.count > 0 {
             let attrs = attributes.map() { "\($0)='\($1)'" }.joined(separator: ", ")
             let missing = elementStack.joined(separator: ".").appending(": \(attrs)")
-            document.missingAttributeWarnings.append(missing)
+            document.warnings.append(.unknownAttribute(missing))
         }
     }
 

@@ -27,10 +27,11 @@ func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], file
         if lines != expected {
             print(lines.map() { "\"\($0.replacingOccurrences(of: "\"", with: "\\\""))\","}.joined(separator: "\n"))
         }
-        if document.missingAttributeWarnings !=  warnings {
-            print(document.missingAttributeWarnings.joined(separator: "\n"))
+        let messages = document.warnings.map() { $0.message }
+        if messages !=  warnings {
+            print(messages.joined(separator: "\n"))
         }
-        XCTAssertEqual(document.missingAttributeWarnings, warnings)
+        XCTAssertEqual(messages, warnings)
     }
     catch let error {
         XCTFail(error.localizedDescription, file: file, line: line)
