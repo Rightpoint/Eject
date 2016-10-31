@@ -13,7 +13,7 @@ func printUsage(errorMessage: String? = nil) -> Never {
     if let errorMessage = errorMessage {
         print(errorMessage + "\n")
     }
-    print([
+    printWarning(message:[
         " Eject:",
         "",
         " --file <path>.xib",
@@ -23,6 +23,11 @@ func printUsage(errorMessage: String? = nil) -> Never {
         ].joined(separator: "\n"))
     exit(0)
 }
+func printWarning(message: String) {
+    let e = FileHandle.standardError
+    e.write(message.appending("\n").data(using: String.Encoding.utf8)!)
+}
+
 let arguments = CommandLine.arguments.dropFirst()
 
 guard !arguments.contains("-h") && !arguments.contains("--help") && arguments.count == 2 && arguments.first == "--file" else {
@@ -30,22 +35,16 @@ guard !arguments.contains("-h") && !arguments.contains("--help") && arguments.co
 }
 
 let path = URL(fileURLWithPath: arguments.last!)
-print("Generating Code for xib at path: " + path.path + "\n")
-
-guard path.pathExtension == "xib" else {
-    printUsage(errorMessage: "File must specify a xib file")
-}
 
 do {
     let data = try Data(contentsOf: path)
     let builder = try XIBParser(data: data)
+    printWarning(message: builder.document.warnings.map() { $0.message }.joined(separator: "\n"))
+
     let code = builder.document.generateCode()
     print(code.joined(separator: "\n"))
 }
 catch {
-    print("Error: ")
-    print("")
-    print(error)
+    printWarning(message: "Error: \(error)")
 }
-
 

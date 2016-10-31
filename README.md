@@ -8,6 +8,25 @@ One common pain point with Interface Builder is that as a view becomes more dyna
 ### But But
 Yes, I understand that this is probably a bad idea. But it might not be.
 
+### Usage
+
+```
+# Help me set up `brew install eject`, or copy `eject` out of the xcode project build
+
+eject --file /path/to/MassiveViewController.xib
+
+# Copy and paste code into .swift file, and remove the .xib
+rm  /path/to/MassiveViewController.xib
+
+```
+Or to see what changed in a xib file by looking at the changes in generated code
+
+```
+TMP=`mktemp` && git show HEAD:$XIB > $TMP && diff <(eject --file $XIB ) <(eject --file $TMP)
+```
+
+`eject` will generate code for everything it can in the `.xib` file. If there is any XML that `eject` does not understand, it will print out a warning message. Open an [Issue](https://github.com/Raizlabs/Eject/issues) with any warnings, bugs or ideas you may have.
+
 
 ### Features
 
@@ -24,16 +43,8 @@ Yes, I understand that this is probably a bad idea. But it might not be.
 ### Does it work?
 The [Unit Tests](EjectKitTests/EjectKitTests.swift#L136###testCollectionView) show how much work is done. UIKit coverage is configured by the [CocoaTouchBuilder](EjectKit/Builder/CocoaTouchBuilder.swift) using various [Builders](EjectKit/Builder). Some configuration is [generated](EjectKitTests/InspectorPropertyConfigurationTests.swift#34) from Interface Builder `.inspector` files.
 
-This should still be considered an Alpha quality tool. Given the undocumented scope of Interface Builder XML, I really need your help to make things better!
+This should still be considered an Alpha quality tool.
 
-### Usage
-
-Download the repository and build the `Eject` target. The binary `eject-cli` should be copied into the current directory.
-```
-./eject-cli --file /path/to/MassiveViewController.xib
-```
-
-- Open an [Issue](https://github.com/Raizlabs/Eject/issues) with any bugs or ideas.
 
 ### Todo
 
