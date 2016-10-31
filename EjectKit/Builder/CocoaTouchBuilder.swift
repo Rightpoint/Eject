@@ -76,6 +76,15 @@ extension DocumentBuilder {
         register("collectionViewLayout", collectionViewLayout)
         register("segments", SegmentsBuilder())
         register("segment", SegmentsBuilder.Segment())
+        let textInputTraits = PropertyBuilder(
+            keysToRemove: ["key"],
+            properties: [
+                .build("autocapitalizationType", .enumeration), .build("autocorrectionType", .enumeration),
+                .build("spellCheckingType", .enumeration), .build("keyboardType", .enumeration),
+                .build("keyboardAppearance", .enumeration), .build("returnKeyType", .enumeration),
+                .build("enablesReturnKeyAutomatically", .boolean), .build("secureTextEntry", .boolean)]
+        )
+        register("textInputTraits", textInputTraits)
 
         registerCocoaTouchViews()
         registerCocoaTouchViewControllers()
@@ -263,7 +272,15 @@ extension DocumentBuilder {
         register("switch", uiSwitch)
         let textField = control.inherit(
             className: "UITextField",
-            properties: [.build("textAlignment", .enumeration), .build("allowsEditingTextAttributes", .boolean), .build("borderStyle", .enumeration), .build("clearButtonMode", .enumeration), .build("clearsOnBeginEditing", .boolean), .build("minimumFontSize", .number), .build("adjustsFontSizeToFitWidth", .boolean), .build("autocapitalizationType", .enumeration), .build("autocorrectionType", .enumeration), .build("spellCheckingType", .enumeration), .build("keyboardType", .enumeration), .build("keyboardAppearance", .enumeration), .build("returnKeyType", .enumeration), .build("enablesReturnKeyAutomatically", .boolean), .build("secureTextEntry", .boolean)]
+            properties: [
+                .build("textAlignment", .enumeration), .build("allowsEditingTextAttributes", .boolean),
+                .build("borderStyle", .enumeration), .build("clearButtonMode", .enumeration),
+                .build("clearsOnBeginEditing", .boolean), .build("minimumFontSize", .number),
+                .build("adjustsFontSizeToFitWidth", .boolean), .build("autocapitalizationType", .enumeration),
+                .build("autocorrectionType", .enumeration), .build("spellCheckingType", .enumeration),
+                .build("keyboardType", .enumeration), .build("keyboardAppearance", .enumeration),
+                .build("returnKeyType", .enumeration), .build("enablesReturnKeyAutomatically", .boolean),
+                .build("secureTextEntry", .boolean), .build("text", .string), .build("placeholder", .string)]
         )
         register("textField", textField)
     }
@@ -271,7 +288,12 @@ extension DocumentBuilder {
     func registerCocoaTouchViewControllers() {
         let viewController = ObjectBuilder(
             className: "UIViewController",
-            properties: [.build("automaticallyAdjustsScrollViewInsets", .boolean), .build("hidesBottomBarWhenPushed", .boolean), .build("autoresizesArchivedViewToFullSize", .boolean), .build("wantsFullScreenLayout", .boolean), .build("extendedLayoutIncludesOpaqueBars", .boolean), .build("modalTransitionStyle", .enumeration), .build("modalPresentationStyle", .enumeration), .build("definesPresentationContext", .boolean), .build("providesPresentationContextTransitionStyle", .boolean)]
+            properties: [
+                .build("automaticallyAdjustsScrollViewInsets", .boolean), .build("hidesBottomBarWhenPushed", .boolean),
+                .build("autoresizesArchivedViewToFullSize", .boolean), .build("wantsFullScreenLayout", .boolean),
+                .build("extendedLayoutIncludesOpaqueBars", .boolean), .build("modalTransitionStyle", .enumeration),
+                .build("modalPresentationStyle", .enumeration), .build("definesPresentationContext", .boolean),
+                .build("providesPresentationContextTransitionStyle", .boolean)]
         )
         register("viewController", viewController)
 

@@ -75,7 +75,7 @@ public class XIBParser: NSObject {
 extension XIBParser: XMLParserDelegate {
     public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         guard let builder = builderLookup.lookupBuilder(for: elementName) else {
-            print("No builder found for \(elementName)")
+            document.missingBuilder(forElement: elementName)
             return
         }
         let nextObject: Reference?

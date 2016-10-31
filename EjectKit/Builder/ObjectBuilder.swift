@@ -64,7 +64,46 @@ struct ObjectBuilder: Builder {
                 document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
             }
         }
+        try buildElementProperties(attributes: &attributes, document: document, object: object)
 
+        return object
+    }
+
+    func inherit(className: String, properties: [Property] = []) -> ObjectBuilder {
+        var subclass = self
+        subclass.className = className
+        subclass.properties.append(contentsOf: properties)
+        return subclass
+    }
+    
+}
+
+struct PropertyBuilder: Builder {
+    var keysToRemove: [String]
+    var properties: [ObjectBuilder.Property]
+
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        for key in keysToRemove {
+            attributes.removeValue(forKey: key)
+        }
+        return try buildElementProperties(attributes: &attributes, document: document, object: parent)
+    }
+}
+
+extension PropertyBuilder: ObjectBuilderPropertyContainer {}
+extension ObjectBuilder: ObjectBuilderPropertyContainer {}
+
+private protocol ObjectBuilderPropertyContainer: Builder {
+
+    var properties: [ObjectBuilder.Property] { get }
+
+}
+
+extension ObjectBuilderPropertyContainer {
+
+    @discardableResult func buildElementProperties(attributes: inout [String: String], document: XIBDocument, object: Reference?) throws -> Reference? {
+        guard let object = object else { throw XIBParser.Error.needParent }
+        let identifier = object.identifier
         for property in properties {
             if let value = attributes.removeValue(forKey: property.key) {
                 if property.injected {
@@ -83,11 +122,4 @@ struct ObjectBuilder: Builder {
         return object
     }
 
-    func inherit(className: String, properties: [Property] = []) -> ObjectBuilder {
-        var subclass = self
-        subclass.className = className
-        subclass.properties.append(contentsOf: properties)
-        return subclass
-    }
-    
 }

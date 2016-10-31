@@ -17,10 +17,11 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
     }
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
-        guard let parent = parent else { throw XIBParser.Error.needParent }
-        let key = try attributes.removeRequiredValue(forKey: "key")
-        value.value = attributes.removeValue(forKey: "value") ?? value.value
-        document.addVariableConfiguration(for: parent.identifier, key: key, value: value)
+        if let parent = parent {
+            let key = try attributes.removeRequiredValue(forKey: "key")
+            value.value = attributes.removeValue(forKey: "value") ?? value.value
+            document.addVariableConfiguration(for: parent.identifier, key: key, value: value)
+        }
         return parent
     }
 

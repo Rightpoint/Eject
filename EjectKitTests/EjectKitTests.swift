@@ -362,7 +362,7 @@ class EjectTests: XCTestCase {
     }
 
     func testMissingAttributes() {
-        let xml = wrap("<imageView contentMode='center' thisattribute='isnotdefined' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'></imageView>")
+        let xml = wrap("<imageView contentMode='center' thisattribute='isnotdefined' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><unknown/></imageView>")
         checkXML(xml, [
             "let imageView = UIImageView()",
             "imageView.contentMode = .center",
@@ -371,7 +371,8 @@ class EjectTests: XCTestCase {
             "",
             "self.view = imageView",
             ], warnings: [
-                "document.objects.imageView: thisattribute='isnotdefined'"
+                "document.objects.imageView: thisattribute='isnotdefined'",
+                "Can not configure XML nodes 'unknown'",
             ])
     }
 

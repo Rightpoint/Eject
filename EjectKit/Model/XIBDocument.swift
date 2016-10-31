@@ -29,18 +29,22 @@ public class XIBDocument {
     var documentInformation: [String: String] = [:]
     public enum Warning {
         case unknownAttribute(String)
+        case unknownElementName(String)
         case duplicateVariable(String)
 
-        var message: String {
+        public var message: String {
             switch self {
             case let .unknownAttribute(message):
                 return message
             case let .duplicateVariable(message):
                 return message
+            case let .unknownElementName(message):
+                return message
             }
         }
     }
     public var warnings: [Warning] = []
+    var missingElementNames: Set<String> = []
 
     /// Generate a variable property name with the following precedence
     ///
@@ -143,6 +147,13 @@ public class XIBDocument {
                 names.insert(variable)
             }
         }
+    }
+
+    func missingBuilder(forElement element: String) {
+        if !missingElementNames.contains(element) {
+            warnings.append(.unknownElementName("Can not configure XML nodes '\(element)'"))
+        }
+        missingElementNames.insert(element)
     }
 
 }
