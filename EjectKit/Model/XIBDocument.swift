@@ -40,7 +40,7 @@ public class XIBDocument {
             }
         }
     }
-    var warnings: [Warning] = []
+    public var warnings: [Warning] = []
 
     /// Generate a variable property name with the following precedence
     ///
@@ -127,7 +127,7 @@ public class XIBDocument {
         statements.append(statement)
     }
 
-    func scanForDuplicateVariableNames() {
+    public func scanForDuplicateVariableNames() {
         var names: Set<String> = []
         var warned: Set<String> = []
         for object in references {
