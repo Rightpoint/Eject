@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 /// Class that models the state of a xib file.
 public class XIBDocument {
 

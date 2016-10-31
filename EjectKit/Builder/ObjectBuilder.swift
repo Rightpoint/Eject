@@ -14,7 +14,7 @@ struct ObjectBuilder: Builder {
         let format: ValueFormat
         let defaultValue: String
         let injected: Bool
-        static func p(_ key: String, _ format: ValueFormat, defaultValue: String = "", injected: Bool = false) -> Property {
+        static func build(_ key: String, _ format: ValueFormat, defaultValue: String = "", injected: Bool = false) -> Property {
             return Property(key: key, format: format, defaultValue: defaultValue, injected: injected)
         }
     }
