@@ -32,13 +32,13 @@ struct ObjectBuilder: Builder {
         // if a key is specified, the ID can be nil, so just generate a UUID in that case.
         let identifier = attributes.removeValue(forKey: "id") ?? UUID().uuidString
         let className = attributes.removeValue(forKey: "customClass") ?? self.className
+        for key in ["customModule", "placeholderIdentifier", "customModuleProvider", "misplaced"] {
+            attributes.removeValue(forKey: key)
+        }
 
         let declaration: XIBDocument.Declaration
         if placeholder {
             declaration = .placeholder
-            for key in ["customModule", "placeholderIdentifier", "customModuleProvider"] {
-                attributes.removeValue(forKey: key)
-            }
         }
         else {
             declaration = .initializer(properties.filter() { $0.injected }.map() { $0.key }, .initialization)

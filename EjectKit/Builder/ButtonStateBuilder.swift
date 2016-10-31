@@ -16,7 +16,7 @@ struct ButtonStateBuilder: Builder {
 
         document.containerContext = .setter(suffix: "for: \(ValueFormat.enumeration.transform(string: state))")
 
-        let attributeFormat: [(String, ValueFormat)] = [("title", .string), ("image", .image)]
+        let attributeFormat: [(String, ValueFormat)] = [("title", .string), ("image", .image), ("backgroundImage", .image)]
         for (key, format) in attributeFormat {
             if let value = attributes.removeValue(forKey: key) {
                 document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value, format: format))

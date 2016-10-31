@@ -12,6 +12,7 @@ struct AnchorageConfiguration: CodeGenerator {
     let identifier: String
     let first: (item: String, attr: String)
     let relationship: String
+    let multiplier: String?
     let constant: String?
     let second: (item: String, attr: String)?
     let priority: String?
@@ -55,6 +56,10 @@ struct AnchorageConfiguration: CodeGenerator {
             includeOperationForConstant = true
         }
 
+        if let multiplier = multiplier {
+            constraintParts.append("* \(multiplier)")
+        }
+
         if let constant = constant?.floatValue {
             if includeOperationForConstant {
                 if constant > 0 {
@@ -91,6 +96,7 @@ struct AchorageConstraintBuilder: Builder {
         let firstItem = attributes.removeValue(forKey: "firstItem") ?? parent.identifier
         let firstAttr = try attributes.removeRequiredValue(forKey: "firstAttribute")
         let relationship = attributes.removeValue(forKey: "relation") ?? "equal"
+        let multiplier = attributes.removeValue(forKey: "multiplier")
         let constant = attributes.removeValue(forKey: "constant")
         let secondItem = attributes.removeValue(forKey: "secondItem")
         let secondAttr = attributes.removeValue(forKey: "secondAttribute")
@@ -104,6 +110,7 @@ struct AchorageConstraintBuilder: Builder {
             identifier: identifier,
             first: (firstItem, firstAttr),
             relationship: relationship,
+            multiplier: multiplier,
             constant: constant,
             second: second,
             priority: priority

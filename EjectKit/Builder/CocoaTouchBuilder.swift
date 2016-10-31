@@ -78,7 +78,6 @@ extension DocumentBuilder {
         register("segment", SegmentsBuilder.Segment())
 
         registerCocoaTouchViews()
-        registerCocoaTouchControls()
         registerCocoaTouchViewControllers()
         registerCocoaTouchGestureRecognizers()
         registerProbablyBrokenNamespaced()
@@ -91,7 +90,7 @@ extension DocumentBuilder {
                 .build("contentMode", .enumeration, defaultValue: "scaleToFill"), .build("semanticContentAttribute", .enumeration),
                 .build("tag", .number), .build("userInteractionEnabled", .boolean),
                 .build("multipleTouchEnabled", .boolean), .build("alpha", .number),
-                .build("opaqueForDevice", .boolean), .build("hidden", .boolean),
+                .build("opaque", .boolean), .build("hidden", .boolean),
                 .build("clearsContextBeforeDrawing", .boolean), .build("clipsToBounds", .boolean),
                 .build("inspectedInstalled", .boolean), .build("preservesSuperviewLayoutMargins", .boolean),
                 .build("layoutMarginsFollowReadableWidth", .boolean), .build("simulatedAppContext", .enumeration),
@@ -99,6 +98,7 @@ extension DocumentBuilder {
             ]
         )
         register("view", view)
+        registerCocoaTouchControls(view: view)
         let scrollView = view.inherit(
             className: "UIScrollView",
             properties: [.build("indicatorStyle", .enumeration), .build("showsHorizontalScrollIndicator", .boolean), .build("showsVerticalScrollIndicator", .boolean), .build("scrollEnabled", .boolean), .build("pagingEnabled", .boolean), .build("directionalLockEnabled", .boolean), .build("bounces", .boolean), .build("alwaysBounceHorizontal", .boolean), .build("alwaysBounceVertical", .boolean), .build("minimumZoomScale", .number), .build("maximumZoomScale", .number), .build("bouncesZoom", .boolean), .build("delaysContentTouches", .boolean), .build("canCancelContentTouches", .boolean), .build("keyboardDismissMode", .enumeration)]
@@ -130,7 +130,7 @@ extension DocumentBuilder {
         register("imageView", imageView)
         let label = view.inherit(
             className: "UILabel",
-            properties: [.build("textAlignment", .enumeration), .build("numberOfLines", .number), .build("enabled", .boolean), .build("highlighted", .boolean), .build("baselineAdjustment", .enumeration), .build("minimumScaleFactor", .number), .build("minimumFontSize", .number), .build("preferredMaxLayoutWidth", .number), .build("text", .string)]
+            properties: [.build("textAlignment", .enumeration), .build("adjustsFontSizeToFit", .boolean), .build("lineBreakMode", .enumeration), .build("numberOfLines", .number), .build("enabled", .boolean), .build("highlighted", .boolean), .build("baselineAdjustment", .enumeration), .build("minimumScaleFactor", .number), .build("minimumFontSize", .number), .build("preferredMaxLayoutWidth", .number), .build("text", .string)]
         )
         register("label", label)
         let navigationBar = view.inherit(
@@ -180,12 +180,18 @@ extension DocumentBuilder {
 
         let textView = view.inherit(
             className: "UITextView",
-            properties: [.build("textAlignment", .enumeration), .build("allowsEditingTextAttributes", .boolean), .build("editable", .boolean), .build("selectable", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("autocapitalizationType", .enumeration), .build("autocorrectionType", .enumeration), .build("spellCheckingType", .enumeration), .build("keyboardType", .enumeration), .build("keyboardAppearance", .enumeration), .build("returnKeyType", .enumeration), .build("enablesReturnKeyAutomatically", .boolean), .build("secureTextEntry", .boolean)]
+            properties: [
+                .build("textAlignment", .enumeration), .build("allowsEditingTextAttributes", .boolean),
+                .build("editable", .boolean), .build("selectable", .boolean), .build("dataDetectorTypes", .boolean),
+                .build("autocapitalizationType", .enumeration), .build("autocorrectionType", .enumeration),
+                .build("spellCheckingType", .enumeration), .build("keyboardType", .enumeration),
+                .build("keyboardAppearance", .enumeration), .build("returnKeyType", .enumeration),
+                .build("enablesReturnKeyAutomatically", .boolean), .build("secureTextEntry", .boolean)]
         )
         register("textView", textView)
         let toolbar = view.inherit(
             className: "UIToolbar",
-            properties: [.build("barStyle", .enumeration), .build("translucent", .boolean)]
+            properties: [.build("barStyle", .enumeration), .build("translucent", .boolean), .build("text", .string), .build("keyboardDismissMode", .enumeration)]
         )
         register("toolbar", toolbar)
         let visualEffectView = view.inherit(
@@ -195,7 +201,12 @@ extension DocumentBuilder {
         register("visualEffectView", visualEffectView)
         let webView = view.inherit(
             className: "UIWebView",
-            properties: [.build("scalesPageToFit", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("dataDetectorTypes", .boolean), .build("allowsInlineMediaPlayback", .boolean), .build("mediaPlaybackRequiresUserAction", .boolean), .build("mediaPlaybackAllowsAirPlay", .boolean), .build("suppressesIncrementalRendering", .boolean), .build("keyboardDisplayRequiresUserAction", .boolean), .build("paginationMode", .enumeration), .build("paginationBreakingMode", .enumeration), .build("pageLength", .number), .build("gapBetweenPages", .number)]
+            properties: [
+                .build("scalesPageToFit", .boolean), .build("dataDetectorTypes", .boolean),
+                .build("allowsInlineMediaPlayback", .boolean), .build("mediaPlaybackRequiresUserAction", .boolean),
+                .build("mediaPlaybackAllowsAirPlay", .boolean), .build("suppressesIncrementalRendering", .boolean),
+                .build("keyboardDisplayRequiresUserAction", .boolean), .build("paginationMode", .enumeration),
+                .build("paginationBreakingMode", .enumeration), .build("pageLength", .number), .build("gapBetweenPages", .number)]
         )
         register("webView", webView)
         let window = ObjectBuilder(
@@ -205,8 +216,8 @@ extension DocumentBuilder {
         register("window", window)
     }
 
-    func registerCocoaTouchControls() {
-        let control = ObjectBuilder(
+    func registerCocoaTouchControls(view: ObjectBuilder) {
+        let control = view.inherit(
             className: "UIControl",
             properties: [
                 .build("contentHorizontalAlignment", .enumeration, defaultValue: "center"),
