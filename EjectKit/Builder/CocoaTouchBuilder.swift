@@ -94,7 +94,11 @@ extension DocumentBuilder {
                 .build("clearsContextBeforeDrawing", .boolean), .build("clipsToBounds", .boolean),
                 .build("inspectedInstalled", .boolean), .build("preservesSuperviewLayoutMargins", .boolean),
                 .build("layoutMarginsFollowReadableWidth", .boolean), .build("simulatedAppContext", .enumeration),
-                .build("translatesAutoresizingMaskIntoConstraints", .boolean), .build("clipsSubviews", .boolean)
+                .build("translatesAutoresizingMaskIntoConstraints", .boolean), .build("clipsSubviews", .boolean),
+                .build("horizontalHuggingPriority", .number, defaultValue: "250", context: .invocation(format: "setContentHuggingPriority(%@, for: .horizontal)")),
+                .build("verticalHuggingPriority", .number, defaultValue: "250", context: .invocation(format: "setContentHuggingPriority(%@, for: .vertical)")),
+                .build("horizontalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(format: "setContentCompressionResistancePriority(%@, for: .horizontal)")),
+                .build("verticalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(format: "setContentCompressionResistancePriority(%@, for: .vertical)")),
             ]
         )
         register("view", view)

@@ -14,8 +14,9 @@ struct ObjectBuilder: Builder {
         let format: ValueFormat
         let defaultValue: String
         let injected: Bool
-        static func build(_ key: String, _ format: ValueFormat, defaultValue: String = "", injected: Bool = false) -> Property {
-            return Property(key: key, format: format, defaultValue: defaultValue, injected: injected)
+        let context: ConfigurationContext
+        static func build(_ key: String, _ format: ValueFormat, defaultValue: String = "", injected: Bool = false, context: ConfigurationContext = .assignment) -> Property {
+            return Property(key: key, format: format, defaultValue: defaultValue, injected: injected, context: context)
         }
     }
     var className: String
@@ -73,7 +74,8 @@ struct ObjectBuilder: Builder {
                     document.addVariableConfiguration(
                         for: object.identifier,
                         key: property.key,
-                        value: BasicValue(value: value, format: property.format)
+                        value: BasicValue(value: value, format: property.format),
+                        context: property.context
                     )
                 }
             }

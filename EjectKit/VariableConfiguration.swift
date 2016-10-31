@@ -34,8 +34,9 @@ struct VariableConfiguration: CodeGenerator {
         case let .setter(context):
             let label = "set \(key)".snakeCased()
             return "\(variable).\(label)(\(valueString), \(context))"
-        case let .invocation(method):
-            return "\(variable).\(method)(\(valueString))"
+        case let .invocation(format):
+            let invocation = String(format: format, arguments: [valueString])
+            return "\(variable).\(invocation)"
         }
     }
 }

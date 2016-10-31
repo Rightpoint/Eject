@@ -25,5 +25,5 @@ enum ConfigurationContext {
     case setter(suffix: String)
 
     // This can over-ride the key and invoke a method with one argument instead
-    case invocation(method: String)
+    case invocation(format: String)
 }
