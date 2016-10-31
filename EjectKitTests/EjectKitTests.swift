@@ -17,6 +17,7 @@ func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], file
             return
         }
         let lines = document.generateCode(disableComments: true)
+        document.scanForDuplicateVariableNames()
 
         XCTAssertEqual(lines.count, expected.count, file: file, line:line)
         var i: UInt = 1

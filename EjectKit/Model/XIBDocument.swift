@@ -131,6 +131,8 @@ public class XIBDocument {
         var names: Set<String> = []
         var warned: Set<String> = []
         for object in references {
+            // Don't count objects that don't have any dependencies
+            guard hasDependencies(for: object.identifier) else { continue }
             let variable = self.variable(for: object)
             if names.contains(variable) && !warned.contains(variable) {
                 let message = "Variable '\(variable): \(object.className)' was generated multiple times."
