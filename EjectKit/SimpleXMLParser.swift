@@ -248,5 +248,5 @@ public struct SimpleXMLParser {
             }
         }
     }
-    
+
 }
