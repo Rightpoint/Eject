@@ -104,10 +104,10 @@ extension DocumentBuilder {
                 .build("inspectedInstalled", .boolean), .build("preservesSuperviewLayoutMargins", .boolean),
                 .build("layoutMarginsFollowReadableWidth", .boolean), .build("simulatedAppContext", .enumeration),
                 .build("translatesAutoresizingMaskIntoConstraints", .boolean), .build("clipsSubviews", .boolean),
-                .build("horizontalHuggingPriority", .number, defaultValue: "250", context: .invocation(format: "setContentHuggingPriority(%@, for: .horizontal)")),
-                .build("verticalHuggingPriority", .number, defaultValue: "250", context: .invocation(format: "setContentHuggingPriority(%@, for: .vertical)")),
-                .build("horizontalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(format: "setContentCompressionResistancePriority(%@, for: .horizontal)")),
-                .build("verticalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(format: "setContentCompressionResistancePriority(%@, for: .vertical)")),
+                .build("horizontalHuggingPriority", .number, defaultValue: "250", context: .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
+                .build("verticalHuggingPriority", .number, defaultValue: "250", context: .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)")),
+                .build("horizontalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .horizontal)")),
+                .build("verticalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .vertical)")),
             ]
         )
         register("view", view)

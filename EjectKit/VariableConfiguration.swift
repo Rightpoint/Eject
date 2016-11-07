@@ -6,8 +6,6 @@
 //  Copyright © 2016 Brian King. All rights reserved.
 //
 
-import Foundation
-
 struct VariableConfiguration: CodeGenerator {
     let objectIdentifier: String
     let key: String
@@ -34,9 +32,8 @@ struct VariableConfiguration: CodeGenerator {
         case let .setter(context):
             let label = "set \(key)".snakeCased()
             return "\(variable).\(label)(\(valueString), \(context))"
-        case let .invocation(format):
-            let invocation = String(format: format, arguments: [valueString])
-            return "\(variable).\(invocation)"
+        case let .invocation(prefix, suffix):
+            return "\(variable).\(prefix)\(valueString)\(suffix)"
         }
     }
 }
