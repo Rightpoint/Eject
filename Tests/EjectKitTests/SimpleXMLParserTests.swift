@@ -130,7 +130,7 @@ class XMLParserTests: XCTestCase {
             stockParser.shouldReportNamespacePrefixes = false
             stockParser.shouldResolveExternalEntities = false
             stockParser.delegate = delegate
-            stockParser.parse()
+            _ = stockParser.parse()
 
             XCTAssertNil(stockParser.parserError)
         }

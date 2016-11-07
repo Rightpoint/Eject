@@ -69,7 +69,7 @@ struct AnchorageConfiguration: CodeGenerator {
                     constraintParts.append("-")
                 }
             }
-            constraintParts.append(abs(constant).shortString)
+            constraintParts.append((constant > 0 ? constant : -constant).shortString)
         }
         if let priority = priority {
             constraintParts.append("~ \(priority)")
