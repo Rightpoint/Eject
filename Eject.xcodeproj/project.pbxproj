@@ -10,9 +10,12 @@
 		AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */; };
 		AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E331DBF8F2E000A0A56 /* Statement.swift */; };
 		AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */; };
-		AB530CBF1DD0CDF600B54516 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CBE1DD0CDF600B54516 /* SimpleXMLParserTests.swift */; };
+		AB530CD41DD101DE00B54516 /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */; };
+		AB530CD51DD101DE00B54516 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB530CCF1DD101DE00B54516 /* Info.plist */; };
+		AB530CD61DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */; };
+		AB530CD71DD101DE00B54516 /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = AB530CD21DD101DE00B54516 /* WebBrowserViewController.xibtest */; };
+		AB530CD81DD101DE00B54516 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */; };
 		ABB38A361DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
-		ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */; };
 		ABB38A3F1DB95EA0008BF59E /* EjectKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB38A2F1DB95EA0008BF59E /* EjectKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABB38A421DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
 		ABB38A441DB95EA0008BF59E /* EjectKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -37,9 +40,7 @@
 		ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */; };
 		ABB38A651DB95F6D008BF59E /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FE1DB95DDB008BF59E /* Initializer.swift */; };
 		ABB38A661DB95F6D008BF59E /* Foundation+Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */; };
-		ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */; };
 		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
-		ABB38A761DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */; };
 		ABF8D9091DC0668A008D9178 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D9081DC0668A008D9178 /* main.swift */; };
 		ABF8D90B1DC1197C008D9178 /* SegmentsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */; };
 		ABF8D90D1DC11A7C008D9178 /* ConfigurationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */; };
@@ -82,7 +83,11 @@
 		AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoresizingMaskBuilder.swift; sourceTree = "<group>"; };
 		AB477E331DBF8F2E000A0A56 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleXMLParser.swift; sourceTree = "<group>"; };
-		AB530CBE1DD0CDF600B54516 /* SimpleXMLParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleXMLParserTests.swift; sourceTree = "<group>"; };
+		AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EjectKitTests.swift; sourceTree = "<group>"; };
+		AB530CCF1DD101DE00B54516 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorPropertyConfigurationTests.swift; sourceTree = "<group>"; };
+		AB530CD21DD101DE00B54516 /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
+		AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleXMLParserTests.swift; sourceTree = "<group>"; };
 		ABB389DA1DB95D00008BF59E /* eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
@@ -110,11 +115,7 @@
 		ABB38A2F1DB95EA0008BF59E /* EjectKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EjectKit.h; sourceTree = "<group>"; };
 		ABB38A301DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB38A351DB95EA0008BF59E /* EjectKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EjectKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectKitTests.swift; sourceTree = "<group>"; };
-		ABB38A3E1DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
 		ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBuilder.swift; sourceTree = "<group>"; };
-		ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorPropertyConfigurationTests.swift; sourceTree = "<group>"; };
 		ABF8D9081DC0668A008D9178 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentsBuilder.swift; sourceTree = "<group>"; };
 		ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationContext.swift; sourceTree = "<group>"; };
@@ -151,10 +152,10 @@
 		AB47D9A31DB5A3DD00A7B5E8 = {
 			isa = PBXGroup;
 			children = (
+				AB530CCC1DD101DE00B54516 /* Tests */,
 				AB477E2F1DBEAA1E000A0A56 /* README.md */,
 				ABB389E71DB95DDA008BF59E /* Eject */,
 				ABB389ED1DB95DDA008BF59E /* EjectKit */,
-				ABB38A3B1DB95EA0008BF59E /* EjectKitTests */,
 				AB47D9AD1DB5A3DD00A7B5E8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,6 +168,34 @@
 				ABB38A351DB95EA0008BF59E /* EjectKitTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AB530CCC1DD101DE00B54516 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				AB530CCD1DD101DE00B54516 /* EjectKitTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		AB530CCD1DD101DE00B54516 /* EjectKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */,
+				AB530CCF1DD101DE00B54516 /* Info.plist */,
+				AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */,
+				AB530CD11DD101DE00B54516 /* Resources */,
+				AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */,
+			);
+			path = EjectKitTests;
+			sourceTree = "<group>";
+		};
+		AB530CD11DD101DE00B54516 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB530CD21DD101DE00B54516 /* WebBrowserViewController.xibtest */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		ABB389E71DB95DDA008BF59E /* Eject */ = {
@@ -229,26 +258,6 @@
 				AB477E331DBF8F2E000A0A56 /* Statement.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		ABB38A3B1DB95EA0008BF59E /* EjectKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				ABB38A671DB96EBC008BF59E /* Resources */,
-				ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */,
-				ABB38A3E1DB95EA0008BF59E /* Info.plist */,
-				ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */,
-				AB530CBE1DD0CDF600B54516 /* SimpleXMLParserTests.swift */,
-			);
-			path = EjectKitTests;
-			sourceTree = "<group>";
-		};
-		ABB38A671DB96EBC008BF59E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				ABB38A681DB96EBC008BF59E /* WebBrowserViewController.xibtest */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +381,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB530CD71DD101DE00B54516 /* WebBrowserViewController.xibtest in Resources */,
+				AB530CD51DD101DE00B54516 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +397,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB38A691DB96EBC008BF59E /* WebBrowserViewController.xibtest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +440,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB530CD81DD101DE00B54516 /* SimpleXMLParserTests.swift in Sources */,
+				AB530CD41DD101DE00B54516 /* EjectKitTests.swift in Sources */,
 				ABF8D9091DC0668A008D9178 /* main.swift in Sources */,
+				AB530CD61DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,9 +486,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */,
-				AB530CBF1DD0CDF600B54516 /* SimpleXMLParserTests.swift in Sources */,
-				ABB38A761DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,7 +684,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = EjectKitTests/Info.plist;
+				INFOPLIST_FILE = Tests/EjectKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -689,7 +699,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = EjectKitTests/Info.plist;
+				INFOPLIST_FILE = Tests/EjectKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brianking.EjectKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
