@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brian King. All rights reserved.
 //
 
+import Foundation
 import XCTest
 @testable import EjectKit
 
@@ -128,4 +129,28 @@ class InspectorParser: NSObject, XMLParserDelegate {
             ].joined(separator: "\n")
         }
     }
+
+    #if os(Linux)
+    public func parserDidStartDocument(_ parser: XMLParser) {}
+    public func parserDidEndDocument(_ parser: XMLParser) {}
+    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {}
+    public func parser(_ parser: XMLParser, foundCharacters string: String) {}
+    public func parser(_ parser: XMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?) {}
+    public func parser(_ parser: XMLParser, foundUnparsedEntityDeclarationWithName name: String, publicID: String?, systemID: String?, notationName: String?) {}
+    public func parser(_ parser: XMLParser, foundAttributeDeclarationWithName attributeName: String, forElement elementName: String, type: String?, defaultValue: String?) {}
+    public func parser(_ parser: XMLParser, foundElementDeclarationWithName elementName: String, model: String) {}
+    public func parser(_ parser: XMLParser, foundInternalEntityDeclarationWithName name: String, value: String?) {}
+    public func parser(_ parser: XMLParser, foundExternalEntityDeclarationWithName name: String, publicID: String?, systemID: String?) {}
+    public func parser(_ parser: XMLParser, didStartMappingPrefix prefix: String, toURI namespaceURI: String) {}
+    public func parser(_ parser: XMLParser, didEndMappingPrefix prefix: String) {}
+    public func parser(_ parser: XMLParser, foundIgnorableWhitespace whitespaceString: String) {}
+    public func parser(_ parser: XMLParser, foundProcessingInstructionWithTarget target: String, data: String?) {}
+    public func parser(_ parser: XMLParser, foundComment comment: String) {}
+    public func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {}
+    public func parser(_ parser: XMLParser, resolveExternalEntityName name: String, systemID: String?) -> Data? { return nil }
+    // Aaaand, it's NSError, not Error on Linux.
+    public func parser(_ parser: XMLParser, parseErrorOccurred parseError: NSError) {}
+    public func parser(_ parser: XMLParser, validationErrorOccurred validationError: NSError) {}
+    #endif
+
 }

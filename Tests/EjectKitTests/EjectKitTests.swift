@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Foundation
 @testable import EjectKit
 
 func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], file: StaticString = #file, line: UInt = #line) {
