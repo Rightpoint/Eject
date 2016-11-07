@@ -159,7 +159,8 @@ class EjectTests: XCTestCase {
         let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><autoresizingMask key='autoresizingMask' widthSizable='YES' heightSizable='YES' flexibleMaxX='YES' flexibleMaxY='YES' flexibleMinX='YES' flexibleMinY='YES'/></view>")
         checkXML(xml, [
             "let test = UIView()",
-            "test.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleHeight]",
+            "test.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleTopMargin, .flexibleRightMargin, .flexibleBottomMargin, .flexibleHeight]",
+
             "",
             "self.view = test",
             ]
@@ -377,7 +378,7 @@ class EjectTests: XCTestCase {
     }
 
     /// This test will validate the generation eventually. The hope is to have a directory full of xib files and the generated code and ensure things don't change.
-    func skip_testXibResources() {
+    func testXibResources() {
         let path = URL(fileURLWithPath: "/Users/brianking/sandbox/Eject/.nonPublicXIBs")
         let files = try? FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])            
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }

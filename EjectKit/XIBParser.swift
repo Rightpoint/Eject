@@ -36,18 +36,25 @@ public class XIBParser: NSObject {
         case invalidAttribute(attribute: String, value: String)
         case unknown(attributes: [String: String])
     }
-    private let parser: XMLParser
     private let documentBuilder = DocumentBuilder()
 
     var builderStack: [Builder] = []
     var stack: [Reference?] = []
     var elementStack: [String] = []
-    var error: Error?
+    var error: Error? {
+        didSet {
+            #if STOCK_PARSER
+                parser.abortParsing()
+            #endif
+        }
+    }
 
     public var document: XIBDocument {
         return documentBuilder.document
     }
 
+#if STOCK_PARSER
+    private let parser: XMLParser
     public init(data: Data) throws {
         self.parser = XMLParser(data: data)
         super.init()
@@ -57,6 +64,25 @@ public class XIBParser: NSObject {
             throw error
         }
     }
+#else
+    public init(data: Data) throws {
+        super.init()
+        try data.withUnsafeBytes { (ptr: UnsafePointer<UInt8>) throws -> Void  in
+            let buffer = UnsafeBufferPointer(start: ptr, count: data.count)
+            var parser = SimpleXMLParser(input: buffer)
+            try parser.parse() { [unowned self] event in
+                switch event {
+                case let .enter(elementName, attributes):
+                    self.enterElement(elementName: elementName, attributes: attributes)
+                case let .exit(elementName):
+                    self.exitElement(elementName: elementName)
+                case let .body(string):
+                    self.foundCharacters(string: string)
+                }
+            }
+        }
+    }
+#endif
 
     var lastObject: Reference? {
         return stack.last ?? nil
@@ -70,23 +96,19 @@ public class XIBParser: NSObject {
         return documentBuilder
     }
 
-}
-
-extension XIBParser: XMLParserDelegate {
-    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    func enterElement(elementName: String, attributes: [String: String]) {
         guard let builder = builderLookup.lookupBuilder(for: elementName) else {
             document.missingBuilder(forElement: elementName)
             return
         }
         let nextObject: Reference?
-        var attributes = attributeDict
+        var attributes = attributes
         do {
             nextObject = try builder.buildElement(attributes: &attributes, document: document, parent: lastObject)
         }
         catch let error as XIBParser.Error {
             nextObject = nil
             self.error = error
-            parser.abortParsing()
         }
         catch {
             fatalError("Unknown error thrown")
@@ -101,7 +123,7 @@ extension XIBParser: XMLParserDelegate {
         }
     }
 
-    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func exitElement(elementName: String) {
         guard builderLookup.lookupBuilder(for: elementName) != nil else {
             return
         }
@@ -115,33 +137,26 @@ extension XIBParser: XMLParserDelegate {
         }
     }
 
-    public func parser(_ parser: XMLParser, foundCharacters string: String) {
+    func foundCharacters(string: String) {
         guard let characterBuilder = lastBuilder as? CharacterBuilder else {
             return
         }
         characterBuilder.found(characters: string)
     }
 
+}
 
-    // Not sure why, but it appears these methods are needed on Linux.
-    #if os(Linux)
-    public func parserDidStartDocument(_ parser: XMLParser) {}
-    public func parserDidEndDocument(_ parser: XMLParser) {}
-    public func parser(_ parser: XMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?) {}
-    public func parser(_ parser: XMLParser, foundUnparsedEntityDeclarationWithName name: String, publicID: String?, systemID: String?, notationName: String?) {}
-    public func parser(_ parser: XMLParser, foundAttributeDeclarationWithName attributeName: String, forElement elementName: String, type: String?, defaultValue: String?) {}
-    public func parser(_ parser: XMLParser, foundElementDeclarationWithName elementName: String, model: String) {}
-    public func parser(_ parser: XMLParser, foundInternalEntityDeclarationWithName name: String, value: String?) {}
-    public func parser(_ parser: XMLParser, foundExternalEntityDeclarationWithName name: String, publicID: String?, systemID: String?) {}
-    public func parser(_ parser: XMLParser, didStartMappingPrefix prefix: String, toURI namespaceURI: String) {}
-    public func parser(_ parser: XMLParser, didEndMappingPrefix prefix: String) {}
-    public func parser(_ parser: XMLParser, foundIgnorableWhitespace whitespaceString: String) {}
-    public func parser(_ parser: XMLParser, foundProcessingInstructionWithTarget target: String, data: String?) {}
-    public func parser(_ parser: XMLParser, foundComment comment: String) {}
-    public func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {}
-    public func parser(_ parser: XMLParser, resolveExternalEntityName name: String, systemID: String?) -> Data? { return nil }
-    // Aaaand, it's NSError, not Error on Linux.
-    public func parser(_ parser: XMLParser, parseErrorOccurred parseError: NSError) {}
-    public func parser(_ parser: XMLParser, validationErrorOccurred validationError: NSError) {}
-    #endif
+extension XIBParser: XMLParserDelegate {
+    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        enterElement(elementName: elementName, attributes: attributeDict)
+    }
+
+    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        exitElement(elementName: elementName)
+    }
+
+    public func parser(_ parser: XMLParser, foundCharacters string: String) {
+        foundCharacters(string: string)
+    }
+
 }

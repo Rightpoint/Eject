@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */; };
 		AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E331DBF8F2E000A0A56 /* Statement.swift */; };
+		AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */; };
+		AB530CBF1DD0CDF600B54516 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CBE1DD0CDF600B54516 /* SimpleXMLParserTests.swift */; };
 		ABB38A361DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
 		ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */; };
 		ABB38A3F1DB95EA0008BF59E /* EjectKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB38A2F1DB95EA0008BF59E /* EjectKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,6 +81,8 @@
 		AB477E2F1DBEAA1E000A0A56 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoresizingMaskBuilder.swift; sourceTree = "<group>"; };
 		AB477E331DBF8F2E000A0A56 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
+		AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleXMLParser.swift; sourceTree = "<group>"; };
+		AB530CBE1DD0CDF600B54516 /* SimpleXMLParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleXMLParserTests.swift; sourceTree = "<group>"; };
 		ABB389DA1DB95D00008BF59E /* eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */,
 				ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */,
 				ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */,
+				AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */,
 			);
 			path = EjectKit;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 				ABB38A3C1DB95EA0008BF59E /* EjectKitTests.swift */,
 				ABB38A3E1DB95EA0008BF59E /* Info.plist */,
 				ABB38A751DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift */,
+				AB530CBE1DD0CDF600B54516 /* SimpleXMLParserTests.swift */,
 			);
 			path = EjectKitTests;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 				ABB38A601DB95F6D008BF59E /* SubviewBuilder.swift in Sources */,
 				ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */,
 				ABF8D90D1DC11A7C008D9178 /* ConfigurationContext.swift in Sources */,
+				AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */,
 				ABB38A541DB95F6D008BF59E /* Values.swift in Sources */,
 				AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */,
 				ABB38A531DB95F6D008BF59E /* Reference.swift in Sources */,
@@ -467,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABB38A3D1DB95EA0008BF59E /* EjectKitTests.swift in Sources */,
+				AB530CBF1DD0CDF600B54516 /* SimpleXMLParserTests.swift in Sources */,
 				ABB38A761DBE395D008BF59E /* InspectorPropertyConfigurationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
