@@ -63,8 +63,8 @@ func wrap(_ xml: String) -> String {
 class EjectTests: XCTestCase {
 
     func testString() {
-        let string = "Test StringToCamel Case"
-        XCTAssertEqual(string.snakeCased(), "testStringToCamelCase")
+        XCTAssertEqual("Test StringToCamel Case".snakeCased(), "testStringToCamelCase")
+        XCTAssertEqual("Test     StringToCamel Case".snakeCased(), "testStringToCamelCase")
     }
 
     func testViewPartsWithFrame() {
@@ -363,6 +363,14 @@ class EjectTests: XCTestCase {
             ])
     }
 
+    func testUserLabelToVariableMapping() {
+        let xml = wrap("<label userLabel='test(Arbitrary.user    String[]is a Valid&V^A%RI!A@B-L=E)' id='i5M-Pr-FkT'></label>")
+        checkXML(xml, [
+            "let testArbitraryUserStringIsAValidVARIABLE = UILabel()",
+            "self.view = testArbitraryUserStringIsAValidVARIABLE",
+            ])
+    }
+
     func testMissingAttributes() {
         let xml = wrap("<imageView contentMode='center' thisattribute='isnotdefined' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><unknown/></imageView>")
         checkXML(xml, [
@@ -379,7 +387,7 @@ class EjectTests: XCTestCase {
     }
 
     /// This test will validate the generation eventually. The hope is to have a directory full of xib files and the generated code and ensure things don't change.
-    func testXibResources() {
+    func skip_testXibResources() {
         let path = URL(fileURLWithPath: "/Users/brianking/sandbox/Eject/.nonPublicXIBs")
         let files = try? FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])            
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }
@@ -398,3 +406,31 @@ class EjectTests: XCTestCase {
     }
 
 }
+
+extension EjectTests {
+
+    static var allTests = [
+        ("testString", testString),
+        ("testViewPartsWithFrame", testViewPartsWithFrame),
+        ("testGestureRecognizer", testGestureRecognizer),
+        ("testLabel", testLabel),
+        ("testUserDefined", testUserDefined),
+        ("testLabelWithTextContent", testLabelWithTextContent),
+        ("testLabelWithTextArgument", testLabelWithTextArgument),
+        ("testColor", testColor),
+        ("testAutoResizingMask", testAutoResizingMask),
+        ("testFont", testFont),
+        ("testCollectionView", testCollectionView),
+        ("testTableView", testTableView),
+        ("testImageView", testImageView),
+        ("testButton", testButton),
+        ("testActions", testActions),
+        ("testViewHierarchy", testViewHierarchy),
+        ("testHugging", testHugging),
+        ("testAnchorageConstraints", testAnchorageConstraints),
+        ("testVisualEffectViewKey", testVisualEffectViewKey),
+        ("testSegmentedControl", testSegmentedControl),
+        ("testMissingAttributes", testMissingAttributes),
+        ]
+}
+

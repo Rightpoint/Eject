@@ -10,11 +10,11 @@
 		AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */; };
 		AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E331DBF8F2E000A0A56 /* Statement.swift */; };
 		AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */; };
-		AB530CD41DD101DE00B54516 /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */; };
 		AB530CD51DD101DE00B54516 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB530CCF1DD101DE00B54516 /* Info.plist */; };
-		AB530CD61DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */; };
-		AB530CD71DD101DE00B54516 /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = AB530CD21DD101DE00B54516 /* WebBrowserViewController.xibtest */; };
-		AB530CD81DD101DE00B54516 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */; };
+		ABB1603C1DD27FCE00EA0F62 /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */; };
+		ABB1603D1DD27FCE00EA0F62 /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */; };
+		ABB1603E1DD27FCE00EA0F62 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */; };
+		ABB1603F1DD27FD400EA0F62 /* WebBrowserViewController.xibtest in Resources */ = {isa = PBXBuildFile; fileRef = AB530CD21DD101DE00B54516 /* WebBrowserViewController.xibtest */; };
 		ABB38A361DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
 		ABB38A3F1DB95EA0008BF59E /* EjectKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB38A2F1DB95EA0008BF59E /* EjectKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABB38A421DB95EA0008BF59E /* EjectKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */; };
@@ -381,7 +381,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB530CD71DD101DE00B54516 /* WebBrowserViewController.xibtest in Resources */,
 				AB530CD51DD101DE00B54516 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABB1603F1DD27FD400EA0F62 /* WebBrowserViewController.xibtest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,10 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB530CD81DD101DE00B54516 /* SimpleXMLParserTests.swift in Sources */,
-				AB530CD41DD101DE00B54516 /* EjectKitTests.swift in Sources */,
 				ABF8D9091DC0668A008D9178 /* main.swift in Sources */,
-				AB530CD61DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +483,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABB1603C1DD27FCE00EA0F62 /* EjectKitTests.swift in Sources */,
+				ABB1603E1DD27FCE00EA0F62 /* SimpleXMLParserTests.swift in Sources */,
+				ABB1603D1DD27FCE00EA0F62 /* InspectorPropertyConfigurationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,7 @@ extension String {
             if previousCharacter == nil {
                 newString.append(String(character).lowercased())
             }
-            else if previousCharacter == " " {
+            else if previousCharacter == " " && character != " " {
                 newString.append(String(character).uppercased())
             }
             else if character != " " {
