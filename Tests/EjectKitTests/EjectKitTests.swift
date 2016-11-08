@@ -386,6 +386,66 @@ class EjectTests: XCTestCase {
             ])
     }
 
+    func testSwitch() {
+        let xml = wrap("<switch opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='scaleToFill' contentHorizontalAlignment='center' contentVerticalAlignment='center' on='YES' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><rect key='frame' x='263' y='8' width='51' height='31'/><constraints><constraint firstAttribute='width' constant='49' id='XYJ-oE-Z6H'/><constraint firstAttribute='height' constant='31' id='sv1-aq-Ftb'/></constraints><connections><action selector='snoozeSwitchValueChanged:' destination='-1' eventType='valueChanged' id='-1'/></connections></switch>")
+        checkXML(xml, [
+            "let switch = UISwitch()",
+            "switch.multipleTouchEnabled = true",
+            "switch.opaque = false",
+            "switch.translatesAutoresizingMaskIntoConstraints = false",
+            "switch.clipsSubviews = true",
+            "switch.on = true",
+            "switch.frame = CGRect(x: 263, y: 8, width: 51, height: 31)",
+            "",
+            "switch.heightAnchor == 31",
+            "switch.widthAnchor == 49",
+            "",
+            "switch.addTarget(self, action: #selector(TestClass.snoozeSwitchValueChanged(_:)), for: .valueChanged)",
+            "self.view = switch",
+            ])
+    }
+
+    func testTableViewCell() {
+        let xml = wrap("<tableViewCell clearsContextBeforeDrawing='NO' contentMode='scaleToFill' selectionStyle='none' indentationWidth='10' reuseIdentifier='snoozeToggleCellId' id='i5M-Pr-FkT' userLabel='Table View Cell (Snooze Toggle)'><rect key='frame' x='0.0' y='0.0' width='320' height='44'/><autoresizingMask key='autoresizingMask' flexibleMaxX='YES' flexibleMaxY='YES'/><tableViewCellContentView key='contentView' opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='center' tableViewCell='27' id='20C-qx-qiB'><rect key='frame' x='0.0' y='0.0' width='320' height='43'/><autoresizingMask key='autoresizingMask'/><subviews><label opaque='NO' clipsSubviews='YES' userInteractionEnabled='NO' contentMode='scaleToFill' fixedFrame='YES' text='Snooze' lineBreakMode='tailTruncation' minimumFontSize='10' useAutomaticPreferredMaxLayoutWidth='YES' translatesAutoresizingMaskIntoConstraints='NO' id='29'><rect key='frame' x='20' y='13' width='135' height='21'/>                        <fontDescription key='fontDescription' type='system' pointSize='17'/><color key='textColor' cocoaTouchSystemColor='darkTextColor'/><nil key='highlightedColor'/></label></subviews></tableViewCellContentView><color key='backgroundColor' red='1' green='1' blue='1' alpha='1' colorSpace='calibratedRGB'/><point key='canvasLocation' x='-46' y='552'/></tableViewCell>")
+        checkXML(xml, [
+            "let tableViewCellSnoozeToggle = UITableViewCell()",
+            "tableViewCellSnoozeToggle.clearsContextBeforeDrawing = false",
+            "tableViewCellSnoozeToggle.selectionStyle = .none",
+            "tableViewCellSnoozeToggle.indentationWidth = 10",
+            "tableViewCellSnoozeToggle.frame = CGRect(x: 0, y: 0, width: 320, height: 44)",
+            "tableViewCellSnoozeToggle.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]",
+            "tableViewCellSnoozeToggle.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)",
+            "",
+            "let label = UILabel()",
+            "label.userInteractionEnabled = false",
+            "label.opaque = false",
+            "label.translatesAutoresizingMaskIntoConstraints = false",
+            "label.clipsSubviews = true",
+            "label.lineBreakMode = .tailTruncation",
+            "label.minimumFontSize = 10",
+            "label.text = \"Snooze\"",
+            "label.frame = CGRect(x: 20, y: 13, width: 135, height: 21)",
+            "label.font = .systemFont(ofSize: 17)",
+            "label.textColor = UIColor.darkText",
+            "label.highlightedColor = nil",
+            "",
+            "contentView.addSubview(label)",
+            "",
+            "contentView.autoresizingMask = []",
+            "contentView.frame = CGRect(x: 0, y: 0, width: 320, height: 43)",
+            "contentView.clipsSubviews = true",
+            "contentView.opaque = false",
+            "contentView.multipleTouchEnabled = true",
+            "contentView.contentMode = .center",
+            "self.view = tableViewCellSnoozeToggle",
+            ], warnings: [
+                "document.objects.tableViewCell: reuseIdentifier='snoozeToggleCellId'",
+                "document.objects.tableViewCell.tableViewCellContentView: tableViewCell='27'",
+                "document.objects.tableViewCell.tableViewCellContentView.subviews.label: fixedFrame='YES', useAutomaticPreferredMaxLayoutWidth='YES'",
+                "Can not configure XML nodes 'point'",
+            ])
+    }
+
     /// This test will validate the generation eventually. The hope is to have a directory full of xib files and the generated code and ensure things don't change.
     func skip_testXibResources() {
         let path = URL(fileURLWithPath: "/Users/brianking/sandbox/Eject/.nonPublicXIBs")

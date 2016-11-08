@@ -267,7 +267,7 @@ extension DocumentBuilder {
         register("stepper", stepper)
         let uiSwitch = control.inherit(
             className: "UISwitch",
-            properties: [.build("on", .enumeration)]
+            properties: [.build("on", .boolean)]
         )
         register("switch", uiSwitch)
         let textField = control.inherit(
