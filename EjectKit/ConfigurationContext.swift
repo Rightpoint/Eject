@@ -10,7 +10,7 @@ import Foundation
 
 /// ConfigurationContext modifies the behavior to the KVC behavior that the XML files define
 /// The document stores a configuration context which will be used when adding a variable configuration
-enum ConfigurationContext {
+indirect enum ConfigurationContext {
 
     // This will perform a normal assignment
     case assignment
@@ -29,4 +29,7 @@ enum ConfigurationContext {
 
     // This can over-ride the key and invoke a method with one argument instead
     case invocation(prefix: String, suffix: String)
+
+    // Append a comment after the configuration
+    case withComment(String, ConfigurationContext)
 }

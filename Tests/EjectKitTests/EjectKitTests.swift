@@ -205,7 +205,6 @@ class EjectTests: XCTestCase {
             "collectionView.collectionViewLayout = collectionViewFlowLayout",
             "self.view = collectionView",
             ], warnings: [
-                "document.objects.collectionView: dataMode='none'"
             ])
     }
 
@@ -215,7 +214,7 @@ class EjectTests: XCTestCase {
             "let tableView = UITableView(frame: CGRect(x: 11, y: 11, width: 328, height: 578), style: .plain)",
             "tableView.translatesAutoresizingMaskIntoConstraints = false",
             "tableView.alwaysBounceVertical = true",
-            "tableView.separatorStyle = .default",
+            "tableView.separatorStyle = .singleLine",
             "tableView.rowHeight = 44",
             "tableView.sectionHeaderHeight = 28",
             "tableView.sectionFooterHeight = 28",
@@ -457,7 +456,22 @@ class EjectTests: XCTestCase {
                 let data = try Data(contentsOf: path)
                 let builder = try XIBParser(data: data)
                 let code = builder.document.generateCode()
-                print(code.joined(separator: "\n"))
+                if "do not print" == "print"{
+                    print(code)
+                }
+                else {
+                    builder.document.warnings.forEach({ (warning) in
+                        switch warning {
+                        case let .unknownAttribute(message):
+                            print(message)
+                        case let .unknownElementName(message):
+                            print(message)
+                        default:
+                            break
+                        }
+                    })
+                }
+
             }
             catch let error {
                 XCTFail(error.localizedDescription)

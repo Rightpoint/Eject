@@ -34,9 +34,14 @@ extension DocumentBuilder {
         register("placeholder", ObjectBuilder(className: "", placeholder: true))
         register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
         // These two tags are containers that do not need a builder
-        for noopKey in ["userDefinedRuntimeAttributes", "connections", "constraints", "freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "resources", "image"] {
-            register(noopKey, NoOpBuilder())
+        for noopElement in ["userDefinedRuntimeAttributes", "connections", "constraints", "resources", "image", "gestureRecognizers"] {
+            register(noopElement, NoOpBuilder())
         }
+        // These are leaf containers that should do nothing
+        for noopElement in ["freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "modalFormSheetSimulatedSizeMetrics"] {
+            register(noopElement, NoOpBuilder())
+        }
+
 
         for type in ["integer", "real"] {
             register(type, KeyValueBuilder())
@@ -96,6 +101,7 @@ extension DocumentBuilder {
         let view = ObjectBuilder(
             className: "UIView",
             properties: [
+                .build("autoresizesSubviews", .boolean, "true"),
                 .build("contentMode", .enumeration, "scaleToFill"),
                 .build("semanticContentAttribute", .enumeration),
                 .build("tag", .number),
@@ -144,12 +150,19 @@ extension DocumentBuilder {
 
         let activityIndicatorView = view.inherit(
             className: "UIActivityIndicatorView",
-            properties: [.build("style", .enumeration), .build("inspectedAnimating", .boolean), .build("inspectedHidesWhenStopped", .boolean)]
+            properties: [
+                .build("style", .enumeration),
+                .build("animating", .boolean, "", .addIsPrefix),
+                .build("hidesWhenStopped", .boolean, "true")]
         )
         register("activityIndicatorView", activityIndicatorView)
         let collectionView = scrollView.inherit(
             className: "UICollectionView",
-            properties: [.build("prefetchingEnabled", .boolean)]
+            properties: [
+                .build("prefetchingEnabled", .boolean),
+                .build("dataMode", .enumeration, "none",
+                       .withComment("dataMode has no code equivilent and I've only seen none. Please log an issue if you see this.", .assignment))
+            ]
         )
         register("collectionView", collectionView)
         let collectionViewCell = view.inherit(className: "UICollectionViewCell")
@@ -157,7 +170,13 @@ extension DocumentBuilder {
 
         let datePicker = view.inherit(
             className: "UIDatePicker",
-            properties: [.build("inspectedDatePickerMode", .enumeration), .build("locale", .enumeration), .build("minuteInterval", .enumeration), .build("hasMinimumDate", .boolean), .build("hasMaximumDate", .boolean)]
+            properties: [
+                .build("inspectedDatePickerMode", .enumeration),
+                .build("locale", .enumeration),
+                .build("minuteInterval", .enumeration),
+                .build("hasMinimumDate", .boolean),
+                .build("hasMaximumDate", .boolean)
+            ]
         )
         register("datePicker", datePicker)
         let imageView = view.inherit(
@@ -169,8 +188,9 @@ extension DocumentBuilder {
             className: "UILabel",
             properties: [
                 .build("textAlignment", .enumeration),
-                .build("adjustsFontSizeToFit", .boolean),
-                .build("lineBreakMode", .transformed(lineBreakMappings)),
+                .build("adjustsFontSizeToFit", .boolean, "false", .assigmentOverride(key: "adjustsFontSizeToFitWidth")),
+                .build("adjustsLetterSpacingToFitWidth", .boolean, "false", .assigmentOverride(key: "allowsDefaultTighteningForTruncation")),
+                .build("lineBreakMode", .transformed(lineBreakMappings, .enumeration)),
                 .build("numberOfLines", .number),
                 .build("enabled", .boolean),
                 .build("highlighted", .boolean),
@@ -215,8 +235,11 @@ extension DocumentBuilder {
         let tableView = scrollView.inherit(
             className: "UITableView",
             properties: [
-                .build("separatorStyle", .enumeration), .build("sectionIndexMinimumDisplayRowCount", .number),
-                .build("rowHeight", .number), .build("sectionHeaderHeight", .number),
+                .build("separatorStyle", .transformed(["default": "singleLine"], .enumeration)),
+                .build("sectionIndexMinimumDisplayRowCount", .number),
+                .build("rowHeight", .number),
+                .build("allowsSelectionDuringEditing", .boolean, "false"),
+                .build("sectionHeaderHeight", .number),
                 .build("sectionFooterHeight", .number),
                 .build("frame", .raw, ".zero", .assignment, true),
                 .build("style", .enumeration, "plain", .assignment, true)]
@@ -224,7 +247,17 @@ extension DocumentBuilder {
         register("tableView", tableView)
         let tableViewCell = view.inherit(
             className: "UITableViewCell",
-            properties: [.build("selectionStyle", .enumeration), .build("accessoryType", .enumeration), .build("editingAccessoryType", .enumeration), .build("focusStyle", .enumeration), .build("indentationLevel", .number), .build("indentationWidth", .number), .build("shouldIndentWhileEditing", .boolean), .build("showsReorderControl", .boolean), .build("rowHeight", .number)]
+            properties: [
+                .build("selectionStyle", .enumeration),
+                .build("accessoryType", .enumeration),
+                .build("editingAccessoryType", .enumeration),
+                .build("focusStyle", .enumeration),
+                .build("indentationLevel", .number),
+                .build("indentationWidth", .number),
+                .build("shouldIndentWhileEditing", .boolean),
+                .build("showsReorderControl", .boolean),
+                .build("rowHeight", .number)
+            ]
         )
         register("tableViewCell", tableViewCell)
         var tableViewCellContentView = view
@@ -232,16 +265,24 @@ extension DocumentBuilder {
         tableViewCellContentView.placeholder = true
         register("tableViewCellContentView", tableViewCellContentView)
 
-        let textView = view.inherit(
+        let textView = scrollView.inherit(
             className: "UITextView",
             properties: [
-                .build("textAlignment", .enumeration), .build("allowsEditingTextAttributes", .boolean),
-                .build("editable", .boolean), .build("selectable", .boolean), .build("dataDetectorTypes", .boolean),
-                .build("autocapitalizationType", .enumeration), .build("autocorrectionType", .enumeration),
-                .build("spellCheckingType", .enumeration), .build("keyboardType", .enumeration),
-                .build("keyboardAppearance", .enumeration), .build("returnKeyType", .enumeration),
-                .build("enablesReturnKeyAutomatically", .boolean), .build("secureTextEntry", .boolean),
-                .build("text", .string), .build("keyboardDismissMode", .enumeration)]
+                .build("textAlignment", .enumeration),
+                .build("allowsEditingTextAttributes", .boolean, "false"),
+                .build("editable", .boolean, "true", .addIsPrefix),
+                .build("selectable", .boolean, "true", .addIsPrefix),
+                .build("dataDetectorTypes", .boolean),
+                .build("autocapitalizationType", .enumeration),
+                .build("autocorrectionType", .enumeration),
+                .build("spellCheckingType", .enumeration),
+                .build("keyboardType", .enumeration),
+                .build("keyboardAppearance", .enumeration),
+                .build("returnKeyType", .enumeration),
+                .build("enablesReturnKeyAutomatically", .boolean),
+                .build("secureTextEntry", .boolean),
+                .build("text", .string),
+                .build("keyboardDismissMode", .enumeration)]
         )
         register("textView", textView)
         let toolbar = view.inherit(
@@ -282,11 +323,12 @@ extension DocumentBuilder {
         let button = control.inherit(
             className: "UIButton",
             properties: [
+                .build("buttonType", .enumeration, "custom", .assignment, true),
                 .build("reversesTitleShadowWhenHighlighted", .boolean),
                 .build("showsTouchWhenHighlighted", .boolean),
                 .build("adjustsImageWhenHighlighted", .boolean),
                 .build("adjustsImageWhenDisabled", .boolean),
-                .build("lineBreakMode", .transformed(lineBreakMappings))
+                .build("lineBreakMode", .transformed(lineBreakMappings, .enumeration))
             ]
         )
         register("button", button)
@@ -472,12 +514,12 @@ extension DocumentBuilder {
 }
 
 let lineBreakMappings: [String: String]  = [
-    "wrapWord": ".byWordWrapping",
-    "wrapChar": ".byCharWrapping",
-    "clipping": ".byClipping",
-    "headTruncation": ".byTruncatingHead",
-    "tailTruncation": ".byTruncatingTail",
-    "middleTruncation": ".byTruncatingMiddle",
+    "wordWrap": "byWordWrapping",
+    "charWrap": "byCharWrapping",
+    "clipping": "byClipping",
+    "headTruncation": "byTruncatingHead",
+    "tailTruncation": "byTruncatingTail",
+    "middleTruncation": "byTruncatingMiddle",
 ]
 
 

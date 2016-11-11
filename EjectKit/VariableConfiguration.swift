@@ -22,7 +22,14 @@ struct VariableConfiguration: CodeGenerator {
         let variable = document.variable(for: object)
 
         let valueString = value.generateCode(in: document)
-        switch style {
+        return style.generateCommand(variable: variable, key: key, valueString: valueString)
+    }
+}
+
+extension ConfigurationContext {
+
+    func generateCommand(variable: String, key: String, valueString: String) -> String {
+        switch self {
         case .assignment:
             return "\(variable).\(key) = \(valueString)"
         case .append:
@@ -36,6 +43,9 @@ struct VariableConfiguration: CodeGenerator {
             return "\(variable).\(label)(\(valueString), \(context))"
         case let .invocation(prefix, suffix):
             return "\(variable).\(prefix)\(valueString)\(suffix)"
+        case let .withComment(comment, style):
+            let command = style.generateCommand(variable: variable, key: key, valueString: valueString)
+            return "\(command) // \(comment)"
         }
     }
 }
