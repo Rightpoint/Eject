@@ -81,7 +81,8 @@ extension DocumentBuilder {
                 .build("prompt", .string),
                 .build("hidesBackButton", .boolean),
                 .build("leftItemsSupplementBackButton", .boolean),
-            ]
+            ],
+            placeholder: true
         )
         register("navigationItem", navigationItem)
 
@@ -128,9 +129,8 @@ extension DocumentBuilder {
                 .build("alpha", .number),
                 .build(.addIsPrefix("opaque"), .boolean, "true"),
                 .build(.addIsPrefix("hidden"), .boolean, "false"),
-                .build("clearsContextBeforeDrawing", .boolean),
-                .build("clipsToBounds", .boolean),
-                .build("inspectedInstalled", .boolean),
+                .build("clearsContextBeforeDrawing", .boolean, "false"),
+                .build("clipsToBounds", .boolean, "false"),
                 .build("preservesSuperviewLayoutMargins", .boolean),
                 .build("layoutMarginsFollowReadableWidth", .boolean),
                 .build("simulatedAppContext", .enumeration),
@@ -216,7 +216,11 @@ extension DocumentBuilder {
         register("label", label)
         let navigationBar = view.inherit(
             className: "UINavigationBar",
-            properties: [.build("barStyle", .enumeration), .build("translucent", .boolean)]
+            properties: [
+                .build("barStyle", .enumeration),
+                .build("translucent", .boolean),
+            ],
+            placeholder: true
         )
         register("navigationBar", navigationBar)
         let pickerView = view.inherit(
@@ -251,7 +255,13 @@ extension DocumentBuilder {
         register("stackView", stackView)
         let tabBar = view.inherit(
             className: "UITabBar",
-            properties: [.build("barStyle", .enumeration), .build("translucent", .boolean), .build("itemWidth", .number), .build("itemSpacing", .number)]
+            properties: [
+                .build("barStyle", .enumeration),
+                .build("translucent", .boolean),
+                .build("itemWidth", .number),
+                .build("itemSpacing", .number)
+            ],
+            placeholder: true
         )
         register("tabBar", tabBar)
         let tableView = scrollView.inherit(
@@ -327,9 +337,12 @@ extension DocumentBuilder {
                 .build("paginationBreakingMode", .enumeration), .build("pageLength", .number), .build("gapBetweenPages", .number)]
         )
         register("webView", webView)
-        let window = ObjectBuilder(
+        let window = view.inherit(
             className: "UIWindow",
-            properties: [.build("visibleAtLaunch", .boolean), .build("resizesToFullScreen", .boolean)]
+            properties: [
+                .build("visibleAtLaunch", .boolean, "", .ignore),
+                .build("resizesToFullScreen", .boolean, "", .ignore),
+                ]
         )
         register("window", window)
     }
@@ -434,13 +447,6 @@ extension DocumentBuilder {
             ]
         )
         register("mapView", mKMapView)
-
-        let window = view.inherit(
-            className: "UIWindow",
-            properties: [
-            ]
-        )
-        register("window", window)
     }
 
     func registerCocoaTouchViewControllers() {
@@ -455,8 +461,12 @@ extension DocumentBuilder {
                 .build("modalTransitionStyle", .enumeration),
                 .build("modalPresentationStyle", .enumeration),
                 .build("title", .string),
-                .build("definesPresentationContext", .boolean),
-                .build("providesPresentationContextTransitionStyle", .boolean)]
+                .build("definesPresentationContext", .boolean, "false"),
+                .build("providesPresentationContextTransitionStyle", .boolean),
+                // Ignored, only used by IB
+                .build("simulatedBottomBarMetrics", .boolean, "", .ignore),
+                .build("wantsFullScreenLayout", .boolean, "", .ignore),
+            ]
         )
         register("viewController", viewController)
 

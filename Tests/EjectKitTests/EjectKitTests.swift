@@ -427,14 +427,14 @@ class EjectTests: XCTestCase {
             "label.textColor = UIColor.darkText",
             "label.highlightedColor = nil",
             "",
-            "contentView.addSubview(label)",
+            "tableViewCellSnoozeToggle.contentView.addSubview(label)",
             "",
-            "contentView.autoresizingMask = []",
-            "contentView.frame = CGRect(x: 0, y: 0, width: 320, height: 43)",
-            "contentView.clipsToBounds = true",
-            "contentView.isOpaque = false",
-            "contentView.isMultipleTouchEnabled = true",
-            "contentView.contentMode = .center",
+            "tableViewCellSnoozeToggle.contentView.autoresizingMask = []",
+            "tableViewCellSnoozeToggle.contentView.frame = CGRect(x: 0, y: 0, width: 320, height: 43)",
+            "tableViewCellSnoozeToggle.contentView.clipsToBounds = true",
+            "tableViewCellSnoozeToggle.contentView.isOpaque = false",
+            "tableViewCellSnoozeToggle.contentView.isMultipleTouchEnabled = true",
+            "tableViewCellSnoozeToggle.contentView.contentMode = .center",
             "self.view = tableViewCellSnoozeToggle",
             ], warnings: [
                 "document.objects.tableViewCell: reuseIdentifier='snoozeToggleCellId'",
@@ -451,12 +451,13 @@ class EjectTests: XCTestCase {
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }
         for path in xibs {
             do {
+                if path.lastPathComponent != "MainWindow.xib" { continue }
                 print("File: \(path.lastPathComponent)")
                 let data = try Data(contentsOf: path)
                 let builder = try XIBParser(data: data)
                 let code = try builder.document.generateCode()
-                if "do not print" == "print"{
-                    print(code)
+                if "print" == "print"{
+                    print(code.joined(separator: "\n"))
                 }
                 else {
                     builder.document.warnings.forEach({ (warning) in

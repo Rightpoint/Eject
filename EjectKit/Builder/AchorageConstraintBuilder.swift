@@ -79,7 +79,7 @@ struct AnchorageConfiguration: CodeGenerator {
 
         if document.hasDependencies(for: identifier) {
             let variableString = variablePart.joined(separator: " ").snakeCased()
-            document.variableNameOverrides[identifier] = variableString
+            document.variableNameOverrides[identifier] = { _ in return variableString }
             return "let \(variableString) = (\(constraintCommand))"
         }
         else {

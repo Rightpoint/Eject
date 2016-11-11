@@ -69,12 +69,19 @@ struct ObjectBuilder: Builder {
 
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes.removeValue(forKey: "key") {
-            guard let parent = parent else { throw XIBParser.Error.needParent }
             if case .placeholder = declaration {
                 // If this is a placeholder (IE: an object that the parent will initialize internally) set the variable name to the property.
-                document.variableNameOverrides[identifier] = parentKey
+                document.variableNameOverrides[identifier] = { document in
+                    if let parent = parent {
+                        return [document.variable(for: parent), parentKey].joined(separator: ".")
+                    }
+                    else {
+                        return parentKey
+                    }
+                }
             }
             else {
+                guard let parent = parent else { throw XIBParser.Error.needParent }
                 // Otherwise create a create an assignment
                 let value = VariableValue(objectIdentifier: object.identifier)
                 try document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
@@ -85,10 +92,11 @@ struct ObjectBuilder: Builder {
         return object
     }
 
-    func inherit(className: String, properties: [Property] = []) -> ObjectBuilder {
+    func inherit(className: String, properties: [Property] = [], placeholder: Bool = false) -> ObjectBuilder {
         var subclass = self
         subclass.className = className
         subclass.properties.append(contentsOf: properties)
+        subclass.placeholder = placeholder
         return subclass
     }
     
