@@ -29,7 +29,7 @@ struct FontBuilder: Builder {
             throw XIBParser.Error.unknown(attributes: attributes)
         }
 
-        document.addVariableConfiguration(
+        try document.addVariableConfiguration(
             for: parent.identifier,
             key: key,
             value: BasicValue(value: value)

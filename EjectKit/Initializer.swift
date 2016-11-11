@@ -13,12 +13,12 @@ struct Initializer: CodeGenerator {
     let className: String
     let injectedProperties: [String]
 
-    func generateCode(in document: XIBDocument) -> String {
-        let object = document.lookupReference(for: objectIdentifier)
+    func generateCode(in document: XIBDocument) throws -> String {
+        let object = try document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
-        let arguments = injectedProperties.map() { (property: String) -> String? in
+        let arguments = try injectedProperties.map() { (property: String) -> String? in
             if let generator = object.values[property] {
-                return "\(property): \(generator.generateCode(in: document))"
+                return "\(property): \(try generator.generateCode(in: document))"
             }
             return nil
         }.flatMap() { $0 }

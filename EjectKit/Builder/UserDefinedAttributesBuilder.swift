@@ -18,7 +18,7 @@ struct UserDefinedAttributeBuilder: Builder {
             guard type == "boolean" else {
                 throw XIBParser.Error.unknown(attributes: attributes)
             }
-            document.addVariableConfiguration(
+            try document.addVariableConfiguration(
                 for: parent.identifier,
                 key: keyPath,
                 value: BasicValue(value: value, format: .boolean),

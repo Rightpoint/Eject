@@ -78,6 +78,8 @@ public class XIBParser: NSObject {
                     self.exitElement(elementName: elementName)
                 case let .body(string):
                     self.foundCharacters(string: string)
+                case .comment:
+                    break
                 }
             }
         }

@@ -32,11 +32,11 @@ struct AnchorageConfiguration: CodeGenerator {
         }
     }
 
-    func generateCode(in document: XIBDocument) -> String {
+    func generateCode(in document: XIBDocument) throws -> String {
         var constraintParts: [String] = []
         var variablePart: [String] = []
 
-        let reference = document.lookupReference(for: first.item)
+        let reference = try document.lookupReference(for: first.item)
         let variable = document.variable(for: reference)
         constraintParts.append("\(variable).\(first.attr)Anchor")
         variablePart.append(variable)
@@ -47,7 +47,7 @@ struct AnchorageConfiguration: CodeGenerator {
         var includeOperationForConstant = false
 
         if let second = second {
-            let reference = document.lookupReference(for: second.item)
+            let reference = try document.lookupReference(for: second.item)
             let variable = document.variable(for: reference)
             constraintParts.append("\(variable).\(second.attr)Anchor")
             variablePart.append("to")

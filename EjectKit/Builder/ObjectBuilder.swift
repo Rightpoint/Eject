@@ -61,7 +61,7 @@ struct ObjectBuilder: Builder {
             else {
                 // Otherwise create a create an assignment
                 let value = VariableValue(objectIdentifier: object.identifier)
-                document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
+                try document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
             }
         }
         try buildElementProperties(attributes: &attributes, document: document, object: object)
@@ -107,10 +107,10 @@ extension ObjectBuilderPropertyContainer {
         for property in properties {
             if let value = attributes.removeValue(forKey: property.key) {
                 if property.injected {
-                    document.lookupReference(for: identifier).values[property.key] = BasicValue(value: value, format: property.format)
+                    try document.lookupReference(for: identifier).values[property.key] = BasicValue(value: value, format: property.format)
                 }
                 else if value != property.defaultValue {
-                    document.addVariableConfiguration(
+                    try document.addVariableConfiguration(
                         for: object.identifier,
                         key: property.key,
                         value: BasicValue(value: value, format: property.format),

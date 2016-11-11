@@ -32,13 +32,14 @@ extension DocumentBuilder {
         register("outletCollection", OutletBuilder(collection: true))
         register("action", ActionBuilder())
         register("placeholder", ObjectBuilder(className: "", placeholder: true))
+        register("customObject", ObjectBuilder(className: "NSObject"))
         register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
         // These two tags are containers that do not need a builder
         for noopElement in ["userDefinedRuntimeAttributes", "connections", "constraints", "resources", "image", "gestureRecognizers"] {
             register(noopElement, NoOpBuilder())
         }
         // These are leaf containers that should do nothing
-        for noopElement in ["freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "modalFormSheetSimulatedSizeMetrics"] {
+        for noopElement in ["freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "modalFormSheetSimulatedSizeMetrics", "simulatedNavigationBarMetrics", "simulatedTabBarMetrics"] {
             register(noopElement, NoOpBuilder())
         }
 
@@ -67,6 +68,17 @@ extension DocumentBuilder {
             properties: [.build("style", .enumeration), .build("width", .number)]
         )
         register("barButtonItem", barButtonItem)
+
+        let navigationItem = ObjectBuilder(
+            className: "UINavigationItem",
+            properties: [
+                .build("title", .string),
+                .build("prompt", .string),
+                .build("hidesBackButton", .boolean),
+                .build("leftItemsSupplementBackButton", .boolean),
+            ]
+        )
+        register("navigationItem", navigationItem)
 
         let collectionViewFlowLayout = ObjectBuilder(
             className: "UICollectionViewFlowLayout",
@@ -370,6 +382,25 @@ extension DocumentBuilder {
                 .build("secureTextEntry", .boolean), .build("text", .string), .build("placeholder", .string)]
         )
         register("textField", textField)
+
+        // Class: MKMapView
+        let mKMapView = view.inherit(
+            className: "MKMapView",
+            properties: [
+                .build("mapType", .enumeration),
+                .build("zoomEnabled", .boolean, "true", .addIsPrefix),
+                .build("scrollEnabled", .boolean, "true", .addIsPrefix),
+                .build("rotateEnabled", .boolean, "true", .addIsPrefix),
+                .build("pitchEnabled", .boolean, "true", .addIsPrefix),
+                .build("showsBuildings", .boolean, "true"),
+                .build("showsCompass", .boolean),
+                .build("showsScale", .boolean, "false"),
+                .build("showsTraffic", .boolean, "false"),
+                .build("showsPointsOfInterest", .boolean, "true"),
+                .build("showsUserLocation", .boolean, "false")
+            ]
+        )
+        register("mapView", mKMapView)
     }
 
     func registerCocoaTouchViewControllers() {
@@ -384,35 +415,43 @@ extension DocumentBuilder {
         )
         register("viewController", viewController)
 
-        let tableViewController = ObjectBuilder(
+        let tableViewController = viewController.inherit(
             className: "UITableViewController",
             properties: [.build("clearsSelectionOnViewWillAppear", .boolean)]
         )
         register("tableViewController", tableViewController)
 
-        let imagePickerController = ObjectBuilder(
+        let imagePickerController = viewController.inherit(
             className: "UIImagePickerController",
             properties: [.build("sourceType", .enumeration), .build("allowsImageEditing", .boolean)]
         )
         register("imagePickerController", imagePickerController)
 
-        let collectionViewController = ObjectBuilder(
+        let collectionViewController = viewController.inherit(
             className: "UICollectionViewController",
             properties: [.build("clearsSelectionOnViewWillAppear", .boolean)]
         )
         register("collectionViewController", collectionViewController)
 
-        let navigationController = ObjectBuilder(
+        let navigationController = viewController.inherit(
             className: "UINavigationController",
             properties: [.build("hidesBarsOnSwipe", .boolean), .build("hidesBarsOnTap", .boolean), .build("hidesBarsWhenKeyboardAppears", .boolean), .build("hidesBarsWhenVerticallyCompact", .boolean)]
         )
         register("navigationController", navigationController)
 
-        let pageViewController = ObjectBuilder(
+        let pageViewController = viewController.inherit(
             className: "UIPageViewController",
             properties: [.build("navigationOrientation", .enumeration), .build("pageSpacing", .number), .build("doubleSided", .boolean)]
         )
         register("pageViewController", pageViewController)
+        let tabBarController = viewController.inherit(
+            className: "UITabBarController",
+            properties: [
+                .build("selectedIndex", .number),
+            ]
+        )
+        register("tabBarController", tabBarController)
+
     }
 
     func registerCocoaTouchGestureRecognizers() {
@@ -477,13 +516,6 @@ extension DocumentBuilder {
             properties: [.build("drawableColorFormat", .enumeration), .build("drawableDepthFormat", .enumeration), .build("drawableStencilFormat", .enumeration), .build("drawableMultisample", .enumeration), .build("enableSetNeedsDisplay", .boolean)]
         )
         register("gLKView", gLKView)
-
-        // Class: MKMapView
-        let mKMapView = ObjectBuilder(
-            className: "MKMapView",
-            properties: [.build("mapType", .enumeration), .build("zoomEnabled", .boolean), .build("scrollEnabled", .boolean), .build("rotateEnabled", .boolean), .build("pitchEnabled", .boolean), .build("showsBuildings", .boolean), .build("showsCompass", .boolean), .build("showsScale", .boolean), .build("showsTraffic", .boolean), .build("showsPointsOfInterest", .boolean), .build("showsUserLocation", .boolean)]
-        )
-        register("mKMapView", mKMapView)
 
         // Class: MTKView
         let mTKView = ObjectBuilder(

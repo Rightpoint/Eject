@@ -34,7 +34,7 @@ struct SegmentsBuilder: Builder, ContainerBuilder {
             guard let parent = parent else { throw XIBParser.Error.needParent }
             for (key, format) in [("title", ValueFormat.string), ("image", ValueFormat.image)] {
                 if let value = attributes.removeValue(forKey: key) {
-                    document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value, format: format))
+                    try document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value, format: format))
                 }
             }
             return parent

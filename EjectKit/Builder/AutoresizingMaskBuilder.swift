@@ -34,7 +34,7 @@ struct AutoresizingMaskBuilder: Builder {
                 throw XIBParser.Error.unknown(attributes: attributes)
             }
         }
-        document.addVariableConfiguration(
+        try document.addVariableConfiguration(
             for: parent.identifier,
             key: "autoresizingMask",
             value: OptionSetValue(attributes: values)

@@ -18,10 +18,10 @@ struct TargetActionConfiguration: CodeGenerator {
         return [objectIdentifier, targetIdentifier]
     }
 
-    func generateCode(in document: XIBDocument) -> String {
-        let object = document.lookupReference(for: objectIdentifier)
+    func generateCode(in document: XIBDocument) throws -> String {
+        let object = try document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
-        let target = document.lookupReference(for: targetIdentifier)
+        let target = try document.lookupReference(for: targetIdentifier)
         let targetVariable = document.variable(for: target)
         let representation: String
         if let event = event {

@@ -18,7 +18,7 @@ struct RectBuilder: Builder {
         let width = try attributes.removeFloatString(forKey: "width") ?? "0"
         let height = try attributes.removeFloatString(forKey: "height") ?? "0"
 
-        document.addVariableConfiguration(
+        try document.addVariableConfiguration(
             for: parent.identifier,
             key: key,
             value: BasicValue(value: "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))")
@@ -36,7 +36,7 @@ struct SizeBuilder: Builder {
         let width = try attributes.removeFloatString(forKey: "width") ?? "0"
         let height = try attributes.removeFloatString(forKey: "height") ?? "0"
 
-        document.addVariableConfiguration(
+        try document.addVariableConfiguration(
             for: parent.identifier,
             key: key,
             value: BasicValue(value: "CGSize(width: \(width), height: \(height))")
@@ -57,7 +57,7 @@ struct InsetBuilder: Builder {
         let height = try attributes.removeFloat(forKey: "maxY")
 
         let edgeInsets = "UIEdgeInsets(top: \(y.shortString), left: \(x.shortString), bottom: \((y + height).shortString), right: \((x + width).shortString))"
-        document.addVariableConfiguration(
+        try document.addVariableConfiguration(
             for: parent.identifier,
             key: key,
             value: BasicValue(value: edgeInsets))
@@ -74,7 +74,7 @@ struct BasicBuilder: Builder {
         guard let parent = parent else { throw XIBParser.Error.needParent }
         let value = try attributes.removeRequiredValue(forKey: key)
 
-        document.addVariableConfiguration(
+        try document.addVariableConfiguration(
             for: parent.identifier,
             key: key,
             value: BasicValue(value: value, format: format)

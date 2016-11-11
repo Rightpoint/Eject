@@ -28,8 +28,8 @@ struct VariableValue: CodeGenerator {
         return [objectIdentifier]
     }
 
-    func generateCode(in document: XIBDocument) -> String {
-        let object = document.lookupReference(for: objectIdentifier)
+    func generateCode(in document: XIBDocument) throws -> String {
+        let object = try document.lookupReference(for: objectIdentifier)
         return document.variable(for: object)
     }
 }

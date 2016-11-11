@@ -20,7 +20,7 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
         if let parent = parent {
             let key = try attributes.removeRequiredValue(forKey: "key")
             value.value = attributes.removeValue(forKey: "value") ?? value.value
-            document.addVariableConfiguration(for: parent.identifier, key: key, value: value)
+            try document.addVariableConfiguration(for: parent.identifier, key: key, value: value)
         }
         return parent
     }

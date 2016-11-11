@@ -12,7 +12,7 @@ public protocol CodeGenerator {
 
     var dependentIdentifiers: Set<String> { get }
 
-    func generateCode(in document: XIBDocument) -> String
+    func generateCode(in document: XIBDocument) throws -> String
 
 }
 
@@ -44,13 +44,13 @@ public enum CodeGeneratorPhase {
 
 extension XIBDocument {
 
-    func code(for generationPhase: CodeGeneratorPhase) -> [String] {
-        return statements.filter() { $0.phase == generationPhase }.map() { $0.generator.generateCode(in: self) }
+    func code(for generationPhase: CodeGeneratorPhase) throws -> [String] {
+        return try statements.filter() { $0.phase == generationPhase }.map() { try $0.generator.generateCode(in: self) }
     }
 
-    public func generateCode(disableComments: Bool = false) -> [String] {
+    public func generateCode(disableComments: Bool = false) throws -> [String] {
         var context = GenerationContext(document: self, disableComments: disableComments)
-        return context.generateCode()
+        return try context.generateCode()
     }
 }
 
@@ -75,7 +75,7 @@ struct GenerationContext {
         return matching.map() { $0.element }
     }
 
-    mutating func declaration(identifier: String) -> String? {
+    mutating func declaration(identifier: String) throws -> String? {
         let declarations = extractStatements() { $0.declares?.identifier == identifier && $0.phase == .initialization }
         guard declarations.count <= 1 else {
             fatalError("Should only have one statement to declare an identifier")
@@ -89,26 +89,26 @@ struct GenerationContext {
             return nil
         }
         declared.insert(declaration.declares!.identifier)
-        return declaration.generator.generateCode(in: document)
+        return try declaration.generator.generateCode(in: document)
     }
 
-    mutating func configuration(identifier: String) -> [String] {
+    mutating func configuration(identifier: String) throws -> [String] {
         // get statements that only depend on the specified object
         let configurations = extractStatements() {
             $0.generator.dependentIdentifiers == Set([identifier]) && $0.phase == .configuration
         }
-        let code = configurations.map() { $0.generator.generateCode(in: document) }
+        let code = try configurations.map() { try $0.generator.generateCode(in: document) }
         return code
     }
 
-    mutating func code(for generationPhase: CodeGeneratorPhase) -> [String] {
-        let code = extractStatements() { $0.phase == generationPhase }
+    mutating func code(for generationPhase: CodeGeneratorPhase) throws -> [String] {
+        let code = try extractStatements() { $0.phase == generationPhase }
             .reversed()
-            .map() { $0.generator.generateCode(in: document) }
+            .map() { try $0.generator.generateCode(in: document) }
         return code
     }
 
-    mutating func generateCode() -> [String] {
+    mutating func generateCode() throws -> [String] {
         var generatedCode: [String] = []
         // Generate the list of objects that need generation. This will remove the
         // placeholders since they are declared externally.
@@ -117,9 +117,9 @@ struct GenerationContext {
         while needGeneration.count > 0 {
             var removedIndexes = IndexSet()
             for (index, reference) in needGeneration.enumerated() {
-                if let code = declaration(identifier: reference.identifier) {
+                if let code = try declaration(identifier: reference.identifier) {
                     generatedCode.append(code)
-                    let configuration = self.configuration(identifier: reference.identifier)
+                    let configuration = try self.configuration(identifier: reference.identifier)
                     if configuration.count > 0 {
                         generatedCode.append(contentsOf: configuration)
                         generatedCode.append("")
@@ -135,7 +135,7 @@ struct GenerationContext {
             }
         }
         for phase: CodeGeneratorPhase in [.subviews, .constraints, .configuration] {
-            let lines = code(for: phase)
+            let lines = try code(for: phase)
             if lines.count > 0 {
                 if !disableComments { generatedCode.append(phase.comment) }
                 generatedCode.append(contentsOf: lines)

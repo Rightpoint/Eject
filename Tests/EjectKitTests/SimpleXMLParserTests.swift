@@ -57,7 +57,9 @@ class XMLParserTests: XCTestCase {
     }
 
     func testValidXML() {
+
         let xmlChecks: [XMLCheck] = [
+            (#line, "<node>\n  <!--this-is-a--comment-->\n  </node>", [.enter(elementName:"node", attributes: [:]), .body(string:"\n  "), .comment(string: "this-is-a--comment"), .body(string:"\n  "), .exit(elementName: "node")]),
             (#line, "<node></node>", [.enter(elementName:"node", attributes: [:]), .exit(elementName: "node")]),
             (#line, "<node/>", [.enter(elementName:"node", attributes: [:]), .exit(elementName: "node")]),
             (#line, "<node foo='bar'></node>", [.enter(elementName:"node", attributes: ["foo": "bar"]), .exit(elementName: "node")]),

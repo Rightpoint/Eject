@@ -69,7 +69,7 @@ public class XIBDocument {
         return variable
     }
 
-    func lookupReference(for identifier: String) -> Reference {
+    func lookupReference(for identifier: String) throws -> Reference {
         for reference in references {
             if reference.identifier == identifier {
                 return reference
@@ -111,7 +111,7 @@ public class XIBDocument {
         return object
     }
 
-    func addVariableConfiguration(for identifier: String, key: String, value: CodeGenerator, context: ConfigurationContext = .assignment) {
+    func addVariableConfiguration(for identifier: String, key: String, value: CodeGenerator, context: ConfigurationContext = .assignment) throws {
         addStatement(
             VariableConfiguration(
                 objectIdentifier: identifier,
@@ -122,7 +122,7 @@ public class XIBDocument {
             phase: .configuration
         )
         // Save the key / CodeGenerator. These can be used by Initializer to inject values
-        let obj = lookupReference(for: identifier)
+        let obj = try lookupReference(for: identifier)
         obj.values[key] = value
     }
 

@@ -17,7 +17,7 @@ func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], file
             XCTFail("No objects in the document", file: file, line: line - 1)
             return
         }
-        let lines = document.generateCode(disableComments: true)
+        let lines = try document.generateCode(disableComments: true)
         document.scanForDuplicateVariableNames()
 
         XCTAssertEqual(lines.count, expected.count, file: file, line:line)
@@ -446,7 +446,7 @@ class EjectTests: XCTestCase {
     }
 
     /// This test will validate the generation eventually. The hope is to have a directory full of xib files and the generated code and ensure things don't change.
-    func skip_testXibResources() {
+    func testXibResources() {
         let path = URL(fileURLWithPath: "/Users/brianking/sandbox/Eject/.nonPublicXIBs")
         let files = try? FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])            
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }
@@ -455,7 +455,7 @@ class EjectTests: XCTestCase {
                 print("File: \(path.lastPathComponent)")
                 let data = try Data(contentsOf: path)
                 let builder = try XIBParser(data: data)
-                let code = builder.document.generateCode()
+                let code = try builder.document.generateCode()
                 if "do not print" == "print"{
                     print(code)
                 }

@@ -17,11 +17,11 @@ struct VariableConfiguration: CodeGenerator {
         return identifiers.union(value.dependentIdentifiers)
     }
 
-    func generateCode(in document: XIBDocument) -> String {
-        let object = document.lookupReference(for: objectIdentifier)
+    func generateCode(in document: XIBDocument) throws -> String {
+        let object = try document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
 
-        let valueString = value.generateCode(in: document)
+        let valueString = try value.generateCode(in: document)
         return style.generateCommand(variable: variable, key: key, valueString: valueString)
     }
 }

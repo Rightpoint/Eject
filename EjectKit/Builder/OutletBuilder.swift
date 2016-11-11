@@ -22,7 +22,7 @@ struct OutletBuilder: Builder {
         attributes.removeValue(forKey: "id")
         attributes.removeValue(forKey: "appends")
         let value = VariableValue(objectIdentifier: destination)
-        document.addVariableConfiguration(
+        try document.addVariableConfiguration(
             for: parent.identifier,
             key: property,
             value: value,

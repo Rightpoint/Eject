@@ -13,6 +13,7 @@ import Foundation
 public enum SAXEvent {
     case enter(elementName: String, attributes: [String: String])
     case body(string: String)
+    case comment(string: String)
     case exit(elementName: String)
 }
 
@@ -24,6 +25,8 @@ extension SAXEvent: Equatable {
             return lhsElementName == rhsElementName && lhsAttributes == rhsAtributes
         case let (.body(lhsString), .body(rhsString)):
             return lhsString == rhsString
+        case let (.comment(lhsComment), .comment(rhsComment)):
+            return lhsComment == rhsComment
         case let (.exit(lhsElementName), .exit(rhsElementName)):
             return lhsElementName == rhsElementName
         default:
@@ -45,11 +48,15 @@ public struct SimpleXMLParser {
         }
     }
     enum Constants {
+        static let COMMENT_PREFIX = [Constants.LT, Constants.BANG, Constants.MINUS, Constants.MINUS]
+        static let COMMENT_SUFFIX = [Constants.MINUS, Constants.MINUS, Constants.GT]
         static let BACKSLASH = UInt8(ascii: "\\")
         static let GT        = UInt8(ascii: ">")
         static let LT        = UInt8(ascii: "<")
         static let EQ        = UInt8(ascii: "=")
         static let SLASH     = UInt8(ascii: "/")
+        static let MINUS     = UInt8(ascii: "-")
+        static let BANG      = UInt8(ascii: "!")
         static let SPACE     = UInt8(ascii: " ")
         static let QUOTE     = UInt8(ascii: "'")
         static let DOUBLEQUOTE = UInt8(ascii: "\"")
@@ -88,6 +95,15 @@ public struct SimpleXMLParser {
             return nil
         }
         return input[location + shift]
+    }
+
+    @inline(__always) func check(sequence: [UInt8]) -> Bool {
+        for (index, item) in sequence.enumerated() {
+            if peek(shift: index) != item {
+                return false
+            }
+        }
+        return true
     }
 
     @inline(__always) func contains(utf8: UInt8?, ranges: [CountableClosedRange<UInt8>]) -> Bool {
@@ -175,6 +191,24 @@ public struct SimpleXMLParser {
         return string(from: start)
     }
 
+    mutating func scanComment() -> String? {
+        guard check(sequence: Constants.COMMENT_PREFIX) else {
+            return nil
+        }
+        location += Constants.COMMENT_PREFIX.count
+
+        let start = location
+        while !(check(sequence: Constants.COMMENT_SUFFIX)) && !eof() {
+            next()
+        }
+        if eof() {
+            return nil
+        }
+        let comment = string(from: start)
+        location += Constants.COMMENT_SUFFIX.count
+        return comment
+    }
+
     mutating func parseProlog() throws {
         guard scan(character: Constants.LT)         else { throw Error.missingLT }
         discardWhitespace()
@@ -198,6 +232,12 @@ public struct SimpleXMLParser {
     }
 
     mutating func parseElement(handler: (SAXEvent) -> Void) throws {
+        discardWhitespace()
+        if let comment = scanComment() {
+            handler(.comment(string: comment))
+            discardWhitespace()
+            return
+        }
         guard scan(character: Constants.LT)         else { throw Error.missingLT }
         discardWhitespace()
         guard let element = scanToken()             else { throw Error.missingElement }
