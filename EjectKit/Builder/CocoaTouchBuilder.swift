@@ -56,7 +56,7 @@ extension DocumentBuilder {
         let barItem = ObjectBuilder(
             className: "UIBarItem",
             properties: [
-                .build("tag", ValueFormat.number), .build("enabled", .boolean),
+                .build("tag", .number), .build("enabled", .boolean),
                 .build("imageInsetsTop", .number), .build("imageInsetsBottom", .number),
                 .build("imageInsetsLeft", .number), .build("imageInsetsRight", .number)
             ]
@@ -65,7 +65,12 @@ extension DocumentBuilder {
 
         let barButtonItem = barItem.inherit(
             className: "UIBarButtonItem",
-            properties: [.build("style", .enumeration), .build("width", .number)]
+            properties: [
+                .build(.map("systemItem", "barButtonSystemItem"), .enumeration, "", .inject),
+                .build("style", .enumeration),
+                .build("title", .string),
+                .build("width", .number),
+            ]
         )
         register("barButtonItem", barButtonItem)
 
@@ -117,11 +122,12 @@ extension DocumentBuilder {
                 .build("contentMode", .enumeration, "scaleToFill"),
                 .build("semanticContentAttribute", .enumeration),
                 .build("tag", .number),
-                .build("userInteractionEnabled", .boolean, "true", .addIsPrefix),
-                .build("multipleTouchEnabled", .boolean, "false", .addIsPrefix),
+                .build("fixedFrame", .boolean, "YES", .ignore),
+                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "true"),
+                .build(.addIsPrefix("multipleTouchEnabled"), .boolean, "false"),
                 .build("alpha", .number),
-                .build("opaque", .boolean, "true", .addIsPrefix),
-                .build("hidden", .boolean, "false", .addIsPrefix),
+                .build(.addIsPrefix("opaque"), .boolean, "true"),
+                .build(.addIsPrefix("hidden"), .boolean, "false"),
                 .build("clearsContextBeforeDrawing", .boolean),
                 .build("clipsToBounds", .boolean),
                 .build("inspectedInstalled", .boolean),
@@ -129,7 +135,7 @@ extension DocumentBuilder {
                 .build("layoutMarginsFollowReadableWidth", .boolean),
                 .build("simulatedAppContext", .enumeration),
                 .build("translatesAutoresizingMaskIntoConstraints", .boolean),
-                .build("clipsSubviews", .boolean, "false", .assigmentOverride(key: "clipsToBounds")),
+                .build(.map("clipsSubviews", "clipsToBounds"), .boolean, "false"),
                 .build("horizontalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
                 .build("verticalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)")),
                 .build("horizontalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .horizontal)")),
@@ -144,8 +150,8 @@ extension DocumentBuilder {
                 .build("indicatorStyle", .enumeration),
                 .build("showsHorizontalScrollIndicator", .boolean, "true"),
                 .build("showsVerticalScrollIndicator", .boolean, "true"),
-                .build("scrollEnabled", .boolean, "true", .addIsPrefix),
-                .build("pagingEnabled", .boolean, "false", .addIsPrefix),
+                .build(.addIsPrefix("scrollEnabled"), .boolean, "true"),
+                .build(.addIsPrefix("pagingEnabled"), .boolean, "false"),
                 .build("directionalLockEnabled", .boolean),
                 .build("bounces", .boolean),
                 .build("alwaysBounceHorizontal", .boolean),
@@ -164,7 +170,7 @@ extension DocumentBuilder {
             className: "UIActivityIndicatorView",
             properties: [
                 .build("style", .enumeration),
-                .build("animating", .boolean, "", .addIsPrefix),
+                .build(.addIsPrefix("animating"), .boolean, ""),
                 .build("hidesWhenStopped", .boolean, "true")]
         )
         register("activityIndicatorView", activityIndicatorView)
@@ -180,28 +186,22 @@ extension DocumentBuilder {
         let collectionViewCell = view.inherit(className: "UICollectionViewCell")
         register("collectionViewCell", collectionViewCell)
 
-        let datePicker = view.inherit(
-            className: "UIDatePicker",
-            properties: [
-                .build("inspectedDatePickerMode", .enumeration),
-                .build("locale", .enumeration),
-                .build("minuteInterval", .enumeration),
-                .build("hasMinimumDate", .boolean),
-                .build("hasMaximumDate", .boolean)
-            ]
-        )
-        register("datePicker", datePicker)
         let imageView = view.inherit(
             className: "UIImageView",
-            properties: [.build("highlighted", .boolean), .build("image", .image)]
+            properties: [
+                .build("highlighted", .boolean),
+                .build("placeholderIntrinsicWidth", .number, "", .ignore), // Used by IB
+                .build("placeholderIntrinsicHeight", .number, "", .ignore), // Used by IB
+                .build("image", .image)
+            ]
         )
         register("imageView", imageView)
         let label = view.inherit(
             className: "UILabel",
             properties: [
                 .build("textAlignment", .enumeration),
-                .build("adjustsFontSizeToFit", .boolean, "false", .assigmentOverride(key: "adjustsFontSizeToFitWidth")),
-                .build("adjustsLetterSpacingToFitWidth", .boolean, "false", .assigmentOverride(key: "allowsDefaultTighteningForTruncation")),
+                .build(.map("adjustsFontSizeToFit", "adjustsFontSizeToFitWidth"), .boolean, "false"),
+                .build(.map("adjustsLetterSpacingToFitWidth", "allowsDefaultTighteningForTruncation"), .boolean, "false"),
                 .build("lineBreakMode", .transformed(lineBreakMappings, .enumeration)),
                 .build("numberOfLines", .number),
                 .build("enabled", .boolean),
@@ -231,7 +231,17 @@ extension DocumentBuilder {
         register("progressView", progressView)
         let searchBar = view.inherit(
             className: "UISearchBar",
-            properties: [.build("searchBarStyle", .enumeration), .build("barStyle", .enumeration), .build("translucent", .boolean), .build("showsSearchResultsButton", .boolean), .build("showsBookmarkButton", .boolean), .build("showsCancelButton", .boolean), .build("inspectedShowsScopeBar", .boolean)]
+            properties: [
+                .build("searchBarStyle", .enumeration),
+                .build("barStyle", .enumeration),
+                .build("translucent", .boolean),
+                .build("text", .string),
+                .build("placeholder", .string),
+                .build("showsSearchResultsButton", .boolean),
+                .build("showsBookmarkButton", .boolean),
+                .build("showsCancelButton", .boolean),
+                .build("showsScopeBar", .boolean)
+            ]
         )
         register("searchBar", searchBar)
         let stackView = view.inherit(
@@ -253,8 +263,8 @@ extension DocumentBuilder {
                 .build("allowsSelectionDuringEditing", .boolean, "false"),
                 .build("sectionHeaderHeight", .number),
                 .build("sectionFooterHeight", .number),
-                .build("frame", .raw, ".zero", .assignment, true),
-                .build("style", .enumeration, "plain", .assignment, true)]
+                .build("frame", .raw, ".zero", .inject),
+                .build("style", .enumeration, "plain", .inject)]
         )
         register("tableView", tableView)
         let tableViewCell = view.inherit(
@@ -282,8 +292,8 @@ extension DocumentBuilder {
             properties: [
                 .build("textAlignment", .enumeration),
                 .build("allowsEditingTextAttributes", .boolean, "false"),
-                .build("editable", .boolean, "true", .addIsPrefix),
-                .build("selectable", .boolean, "true", .addIsPrefix),
+                .build(.addIsPrefix("editable"), .boolean, "true"),
+                .build(.addIsPrefix("selectable"), .boolean, "true"),
                 .build("dataDetectorTypes", .boolean),
                 .build("autocapitalizationType", .enumeration),
                 .build("autocorrectionType", .enumeration),
@@ -335,15 +345,26 @@ extension DocumentBuilder {
         let button = control.inherit(
             className: "UIButton",
             properties: [
-                .build("buttonType", .enumeration, "custom", .assignment, true),
+                .build("buttonType", .enumeration, "custom", .inject),
                 .build("reversesTitleShadowWhenHighlighted", .boolean),
                 .build("showsTouchWhenHighlighted", .boolean),
                 .build("adjustsImageWhenHighlighted", .boolean),
                 .build("adjustsImageWhenDisabled", .boolean),
-                .build("lineBreakMode", .transformed(lineBreakMappings, .enumeration))
+                .build(.map("lineBreakMode", "titleLabel?.lineBreakMode"), .transformed(lineBreakMappings, .enumeration))
             ]
         )
         register("button", button)
+        let datePicker = control.inherit(
+            className: "UIDatePicker",
+            properties: [
+                .build("datePickerMode", .enumeration),
+                .build("locale", .enumeration),
+                .build("minuteInterval", .enumeration),
+                .build("hasMinimumDate", .boolean),
+                .build("hasMaximumDate", .boolean)
+            ]
+        )
+        register("datePicker", datePicker)
         let pageControl = control.inherit(
             className: "UIPageControl",
             properties: [.build("numberOfPages", .number), .build("currentPage", .number), .build("hidesForSinglePage", .boolean), .build("defersCurrentPageDisplay", .boolean)]
@@ -351,12 +372,22 @@ extension DocumentBuilder {
         register("pageControl", pageControl)
         let segmentedControl = control.inherit(
             className: "UISegmentedControl",
-            properties: [.build("momentary", .boolean), .build("apportionsSegmentWidthsByContent", .enumeration), .build("selectedSegmentIndex", .number, "selectedSegmentIndex")]
+            properties: [
+                .build("momentary", .boolean),
+                .build("apportionsSegmentWidthsByContent", .enumeration),
+                .build("selectedSegmentIndex", .number, "selectedSegmentIndex"),
+                .build("segmentControlStyle", .enumeration, "bar", .ignore), // Used by IB to determine appearance, implied by usage in code.
+            ]
         )
         register("segmentedControl", segmentedControl)
         let slider = control.inherit(
             className: "UISlider",
-            properties: [.build("continuous", .boolean)]
+            properties: [
+                .build("continuous", .boolean),
+                .build(.map("maxValue", "maximumValue"), .number, ""),
+                .build(.map("minValue", "minimumValue"), .number, ""),
+                .build("value", .number),
+            ]
         )
         register("slider", slider)
         let stepper = control.inherit(
@@ -366,16 +397,18 @@ extension DocumentBuilder {
         register("stepper", stepper)
         let uiSwitch = control.inherit(
             className: "UISwitch",
-            properties: [.build("on", .boolean, "off", .addIsPrefix)]
+            properties: [.build(.addIsPrefix("on"), .boolean, "off")]
         )
         register("switch", uiSwitch)
         let textField = control.inherit(
             className: "UITextField",
             properties: [
                 .build("textAlignment", .enumeration), .build("allowsEditingTextAttributes", .boolean),
+                .build(.map("adjustsFontSizeToFit", "adjustsFontSizeToFitWidth"), .boolean, "false"),
+                .build(.map("adjustsLetterSpacingToFitWidth", "allowsDefaultTighteningForTruncation"), .boolean, "false"),
                 .build("borderStyle", .enumeration), .build("clearButtonMode", .enumeration),
                 .build("clearsOnBeginEditing", .boolean), .build("minimumFontSize", .number),
-                .build("adjustsFontSizeToFitWidth", .boolean), .build("autocapitalizationType", .enumeration),
+                .build("autocapitalizationType", .enumeration),
                 .build("autocorrectionType", .enumeration), .build("spellCheckingType", .enumeration),
                 .build("keyboardType", .enumeration), .build("keyboardAppearance", .enumeration),
                 .build("returnKeyType", .enumeration), .build("enablesReturnKeyAutomatically", .boolean),
@@ -388,10 +421,10 @@ extension DocumentBuilder {
             className: "MKMapView",
             properties: [
                 .build("mapType", .enumeration),
-                .build("zoomEnabled", .boolean, "true", .addIsPrefix),
-                .build("scrollEnabled", .boolean, "true", .addIsPrefix),
-                .build("rotateEnabled", .boolean, "true", .addIsPrefix),
-                .build("pitchEnabled", .boolean, "true", .addIsPrefix),
+                .build(.addIsPrefix("zoomEnabled"), .boolean, "true"),
+                .build(.addIsPrefix("scrollEnabled"), .boolean, "true"),
+                .build(.addIsPrefix("rotateEnabled"), .boolean, "true"),
+                .build(.addIsPrefix("pitchEnabled"), .boolean, "true"),
                 .build("showsBuildings", .boolean, "true"),
                 .build("showsCompass", .boolean),
                 .build("showsScale", .boolean, "false"),
@@ -401,16 +434,28 @@ extension DocumentBuilder {
             ]
         )
         register("mapView", mKMapView)
+
+        let window = view.inherit(
+            className: "UIWindow",
+            properties: [
+            ]
+        )
+        register("window", window)
     }
 
     func registerCocoaTouchViewControllers() {
         let viewController = ObjectBuilder(
             className: "UIViewController",
             properties: [
-                .build("automaticallyAdjustsScrollViewInsets", .boolean), .build("hidesBottomBarWhenPushed", .boolean),
-                .build("autoresizesArchivedViewToFullSize", .boolean), .build("wantsFullScreenLayout", .boolean),
-                .build("extendedLayoutIncludesOpaqueBars", .boolean), .build("modalTransitionStyle", .enumeration),
-                .build("modalPresentationStyle", .enumeration), .build("definesPresentationContext", .boolean),
+                .build("automaticallyAdjustsScrollViewInsets", .boolean),
+                .build("hidesBottomBarWhenPushed", .boolean),
+                .build("autoresizesArchivedViewToFullSize", .boolean),
+                .build("wantsFullScreenLayout", .boolean),
+                .build("extendedLayoutIncludesOpaqueBars", .boolean),
+                .build("modalTransitionStyle", .enumeration),
+                .build("modalPresentationStyle", .enumeration),
+                .build("title", .string),
+                .build("definesPresentationContext", .boolean),
                 .build("providesPresentationContextTransitionStyle", .boolean)]
         )
         register("viewController", viewController)

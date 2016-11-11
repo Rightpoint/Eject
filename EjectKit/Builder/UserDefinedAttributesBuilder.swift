@@ -26,12 +26,12 @@ struct UserDefinedAttributeBuilder: Builder {
             )
         }
         else {
-            document.containerContext = .assigmentOverride(key: keyPath)
+            document.keyOverride = keyPath
         }
         return parent
     }
 
     func complete(document: XIBDocument) {
-        document.containerContext = nil
+        document.keyOverride = nil
     }
 }

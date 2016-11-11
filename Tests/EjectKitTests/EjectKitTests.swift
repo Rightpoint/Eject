@@ -244,7 +244,7 @@ class EjectTests: XCTestCase {
         let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
             "let button = UIButton()",
-            "button.lineBreakMode = .byTruncatingMiddle",
+            "button.titleLabel?.lineBreakMode = .byTruncatingMiddle",
             "button.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "button.setTitle(\"Title\", for: .normal)",
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",
@@ -357,9 +357,8 @@ class EjectTests: XCTestCase {
             "segmentedControl.setTitle(\"Description\", forSegmentAt: 1)",
             "",
             "self.view = segmentedControl",
-            ], warnings: [
-                "document.objects.segmentedControl: segmentControlStyle='plain'"
-            ])
+            ], warnings: [])
+
     }
 
     func testUserLabelToVariableMapping() {
@@ -440,7 +439,7 @@ class EjectTests: XCTestCase {
             ], warnings: [
                 "document.objects.tableViewCell: reuseIdentifier='snoozeToggleCellId'",
                 "document.objects.tableViewCell.tableViewCellContentView: tableViewCell='27'",
-                "document.objects.tableViewCell.tableViewCellContentView.subviews.label: fixedFrame='YES', useAutomaticPreferredMaxLayoutWidth='YES'",
+                "document.objects.tableViewCell.tableViewCellContentView.subviews.label: useAutomaticPreferredMaxLayoutWidth='YES'",
                 "Can not configure XML nodes 'point'",
             ])
     }

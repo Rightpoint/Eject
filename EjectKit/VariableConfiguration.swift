@@ -26,7 +26,7 @@ struct VariableConfiguration: CodeGenerator {
     }
 }
 
-extension ConfigurationContext {
+private extension ConfigurationContext {
 
     func generateCommand(variable: String, key: String, valueString: String) -> String {
         switch self {
@@ -34,10 +34,6 @@ extension ConfigurationContext {
             return "\(variable).\(key) = \(valueString)"
         case .append:
             return "\(variable).\(key).append(\(valueString))"
-        case .addIsPrefix:
-            return "\(variable).\("is \(key)".snakeCased()) = \(valueString)"
-        case let .assigmentOverride(key):
-            return "\(variable).\(key) = \(valueString)"
         case let .setter(context):
             let label = "set \(key)".snakeCased()
             return "\(variable).\(label)(\(valueString), \(context))"
@@ -46,6 +42,10 @@ extension ConfigurationContext {
         case let .withComment(comment, style):
             let command = style.generateCommand(variable: variable, key: key, valueString: valueString)
             return "\(command) // \(comment)"
+        case .ignore:
+            fatalError("`.ignore` should never be configured on a VariableContext")
+        case .inject:
+            fatalError("`.inject` should never be configured on a VariableContext")
         }
     }
 }

@@ -9,11 +9,19 @@
 import Foundation
 
 struct FontBuilder: Builder {
+    func lookupSize(name: String) -> String {
+        switch name {
+        case "button":
+            return "15"
+        default:
+            return "\(name) -- log a bug with this value!"
+        }
+    }
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
         var key = try attributes.removeRequiredValue(forKey: "key")
-        let pointSize = try attributes.removeRequiredValue(forKey: "pointSize")
+        let pointSize = try attributes.removeValue(forKey: "pointSize") ?? lookupSize(name: try attributes.removeRequiredValue(forKey: "size"))
         let value: String
         attributes.removeValue(forKey: "family")
 

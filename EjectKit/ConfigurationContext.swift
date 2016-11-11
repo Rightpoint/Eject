@@ -18,12 +18,6 @@ indirect enum ConfigurationContext {
     // This will assume the key refers to an array and call `.append`
     case append
 
-    // This can over-ride the key that a configuration is using
-    case assigmentOverride(key: String)
-
-    // Many booleans are prefixed with is
-    case addIsPrefix
-
     // This adds support for `forState: .normal`
     case setter(suffix: String)
 
@@ -32,4 +26,50 @@ indirect enum ConfigurationContext {
 
     // Append a comment after the configuration
     case withComment(String, ConfigurationContext)
+
+    // Inject into the object constructor
+    case inject
+
+    // Ignore the key
+    case ignore
 }
+
+enum MappingKey: ExpressibleByStringLiteral {
+
+    init(stringLiteral value: String) {
+        self = .key(value)
+    }
+    init(extendedGraphemeClusterLiteral value: String){
+        self.init(stringLiteral: value)
+    }
+    init(unicodeScalarLiteral value: String) {
+        self.init(stringLiteral: value)
+    }
+
+    case key(String)
+    case map(String, String)
+    case addIsPrefix(String)
+
+    var attribute: String {
+        switch self {
+        case let .key(attribute):
+            return attribute
+        case let .map(attribute, _):
+            return attribute
+        case let .addIsPrefix(attribute):
+            return attribute
+        }
+    }
+
+    var property: String {
+        switch self {
+        case let .key(property):
+            return property
+        case let .map(_, property):
+            return property
+        case let .addIsPrefix(property):
+            return "is \(property)".snakeCased()
+        }
+    }
+}
+

@@ -24,6 +24,7 @@ public class XIBDocument {
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
     var statements: [Statement] = []
     var references: [Reference] = []
+    var keyOverride: String?
     var containerContext: ConfigurationContext?
     var variableNameOverrides: [String: String] = ["-1": "self"]
     var documentInformation: [String: String] = [:]
@@ -115,7 +116,7 @@ public class XIBDocument {
         addStatement(
             VariableConfiguration(
                 objectIdentifier: identifier,
-                key: key,
+                key: keyOverride ?? key,
                 value: value,
                 style: containerContext ?? context
             ),

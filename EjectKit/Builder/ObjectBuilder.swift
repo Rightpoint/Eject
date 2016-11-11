@@ -10,13 +10,29 @@ import Foundation
 
 struct ObjectBuilder: Builder {
     struct Property {
-        let key: String
+        let key: MappingKey
         let format: ValueFormat
         let defaultValue: String
-        let injected: Bool
         let context: ConfigurationContext
-        static func build(_ key: String, _ format: ValueFormat, _ defaultValue: String = "", _ context: ConfigurationContext = .assignment, _ injected: Bool = false) -> Property {
-            return Property(key: key, format: format, defaultValue: defaultValue, injected: injected, context: context)
+        static func build(_ key: MappingKey, _ format: ValueFormat, _ defaultValue: String = "", _ context: ConfigurationContext = .assignment) -> Property {
+            return Property(key: key, format: format, defaultValue: defaultValue, context: context)
+        }
+
+        var injected: Bool {
+            switch context {
+            case .inject:
+                return true
+            default:
+                return false
+            }
+        }
+        var ignored: Bool {
+            switch context {
+            case .ignore:
+                return true
+            default:
+                return false
+            }
         }
     }
     var className: String
@@ -42,7 +58,7 @@ struct ObjectBuilder: Builder {
             declaration = .placeholder
         }
         else {
-            declaration = .initializer(properties.filter() { $0.injected }.map() { $0.key }, .initialization)
+            declaration = .initializer(properties.filter() { $0.injected }.map() { $0.key.property }, .initialization)
         }
         let object = document.addObject(
             for: identifier,
@@ -105,14 +121,14 @@ extension ObjectBuilderPropertyContainer {
         guard let object = object else { throw XIBParser.Error.needParent }
         let identifier = object.identifier
         for property in properties {
-            if let value = attributes.removeValue(forKey: property.key) {
+            if let value = attributes.removeValue(forKey: property.key.attribute) {
                 if property.injected {
-                    try document.lookupReference(for: identifier).values[property.key] = BasicValue(value: value, format: property.format)
+                    try document.lookupReference(for: identifier).values[property.key.property] = BasicValue(value: value, format: property.format)
                 }
-                else if value != property.defaultValue {
+                else if value != property.defaultValue && !property.ignored {
                     try document.addVariableConfiguration(
                         for: object.identifier,
-                        key: property.key,
+                        key: property.key.property,
                         value: BasicValue(value: value, format: property.format),
                         context: property.context
                     )
