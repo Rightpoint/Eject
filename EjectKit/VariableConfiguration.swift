@@ -27,6 +27,8 @@ struct VariableConfiguration: CodeGenerator {
             return "\(variable).\(key) = \(valueString)"
         case .append:
             return "\(variable).\(key).append(\(valueString))"
+        case .addIsPrefix:
+            return "\(variable).\("is \(key)".snakeCased()) = \(valueString)"
         case let .assigmentOverride(key):
             return "\(variable).\(key) = \(valueString)"
         case let .setter(context):

@@ -16,6 +16,7 @@ indirect enum ValueFormat {
     case boolean
     case string
     case image
+    case transformed([String: String])
 
     func transform(string value: String) -> String {
         switch self {
@@ -31,6 +32,8 @@ indirect enum ValueFormat {
             return "\"\(value)\""
         case .image:
             return "UIImage(named: \"\(value)\")"
+        case let .transformed(mapping):
+            return mapping[value] ?? "INVALID VALUE SHOULD THROW"
         }
     }
 }

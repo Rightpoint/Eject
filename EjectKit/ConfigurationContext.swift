@@ -21,6 +21,9 @@ enum ConfigurationContext {
     // This can over-ride the key that a configuration is using
     case assigmentOverride(key: String)
 
+    // Many booleans are prefixed with is
+    case addIsPrefix
+
     // This adds support for `forState: .normal`
     case setter(suffix: String)
 

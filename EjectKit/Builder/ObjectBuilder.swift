@@ -15,7 +15,7 @@ struct ObjectBuilder: Builder {
         let defaultValue: String
         let injected: Bool
         let context: ConfigurationContext
-        static func build(_ key: String, _ format: ValueFormat, defaultValue: String = "", injected: Bool = false, context: ConfigurationContext = .assignment) -> Property {
+        static func build(_ key: String, _ format: ValueFormat, _ defaultValue: String = "", _ context: ConfigurationContext = .assignment, _ injected: Bool = false) -> Property {
             return Property(key: key, format: format, defaultValue: defaultValue, injected: injected, context: context)
         }
     }

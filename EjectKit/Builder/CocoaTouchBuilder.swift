@@ -96,25 +96,49 @@ extension DocumentBuilder {
         let view = ObjectBuilder(
             className: "UIView",
             properties: [
-                .build("contentMode", .enumeration, defaultValue: "scaleToFill"), .build("semanticContentAttribute", .enumeration),
-                .build("tag", .number), .build("userInteractionEnabled", .boolean),
-                .build("multipleTouchEnabled", .boolean), .build("alpha", .number),
-                .build("opaque", .boolean), .build("hidden", .boolean),
-                .build("clearsContextBeforeDrawing", .boolean), .build("clipsToBounds", .boolean),
-                .build("inspectedInstalled", .boolean), .build("preservesSuperviewLayoutMargins", .boolean),
-                .build("layoutMarginsFollowReadableWidth", .boolean), .build("simulatedAppContext", .enumeration),
-                .build("translatesAutoresizingMaskIntoConstraints", .boolean), .build("clipsSubviews", .boolean),
-                .build("horizontalHuggingPriority", .number, defaultValue: "250", context: .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
-                .build("verticalHuggingPriority", .number, defaultValue: "250", context: .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)")),
-                .build("horizontalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .horizontal)")),
-                .build("verticalCompressionResistancePriority", .number, defaultValue: "750", context: .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .vertical)")),
+                .build("contentMode", .enumeration, "scaleToFill"),
+                .build("semanticContentAttribute", .enumeration),
+                .build("tag", .number),
+                .build("userInteractionEnabled", .boolean, "true", .addIsPrefix),
+                .build("multipleTouchEnabled", .boolean, "false", .addIsPrefix),
+                .build("alpha", .number),
+                .build("opaque", .boolean, "true", .addIsPrefix),
+                .build("hidden", .boolean, "false", .addIsPrefix),
+                .build("clearsContextBeforeDrawing", .boolean),
+                .build("clipsToBounds", .boolean),
+                .build("inspectedInstalled", .boolean),
+                .build("preservesSuperviewLayoutMargins", .boolean),
+                .build("layoutMarginsFollowReadableWidth", .boolean),
+                .build("simulatedAppContext", .enumeration),
+                .build("translatesAutoresizingMaskIntoConstraints", .boolean),
+                .build("clipsSubviews", .boolean, "false", .assigmentOverride(key: "clipsToBounds")),
+                .build("horizontalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
+                .build("verticalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)")),
+                .build("horizontalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .horizontal)")),
+                .build("verticalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .vertical)")),
             ]
         )
         register("view", view)
         registerCocoaTouchControls(view: view)
         let scrollView = view.inherit(
             className: "UIScrollView",
-            properties: [.build("indicatorStyle", .enumeration), .build("showsHorizontalScrollIndicator", .boolean), .build("showsVerticalScrollIndicator", .boolean), .build("scrollEnabled", .boolean), .build("pagingEnabled", .boolean), .build("directionalLockEnabled", .boolean), .build("bounces", .boolean), .build("alwaysBounceHorizontal", .boolean), .build("alwaysBounceVertical", .boolean), .build("minimumZoomScale", .number), .build("maximumZoomScale", .number), .build("bouncesZoom", .boolean), .build("delaysContentTouches", .boolean), .build("canCancelContentTouches", .boolean), .build("keyboardDismissMode", .enumeration)]
+            properties: [
+                .build("indicatorStyle", .enumeration),
+                .build("showsHorizontalScrollIndicator", .boolean, "true"),
+                .build("showsVerticalScrollIndicator", .boolean, "true"),
+                .build("scrollEnabled", .boolean, "true", .addIsPrefix),
+                .build("pagingEnabled", .boolean, "false", .addIsPrefix),
+                .build("directionalLockEnabled", .boolean),
+                .build("bounces", .boolean),
+                .build("alwaysBounceHorizontal", .boolean),
+                .build("alwaysBounceVertical", .boolean),
+                .build("minimumZoomScale", .number),
+                .build("maximumZoomScale", .number),
+                .build("bouncesZoom", .boolean),
+                .build("delaysContentTouches", .boolean, "true"),
+                .build("canCancelContentTouches", .boolean, "true"),
+                .build("keyboardDismissMode", .enumeration)
+            ]
         )
         register("scrollView", scrollView)
 
@@ -143,7 +167,19 @@ extension DocumentBuilder {
         register("imageView", imageView)
         let label = view.inherit(
             className: "UILabel",
-            properties: [.build("textAlignment", .enumeration), .build("adjustsFontSizeToFit", .boolean), .build("lineBreakMode", .enumeration), .build("numberOfLines", .number), .build("enabled", .boolean), .build("highlighted", .boolean), .build("baselineAdjustment", .enumeration), .build("minimumScaleFactor", .number), .build("minimumFontSize", .number), .build("preferredMaxLayoutWidth", .number), .build("text", .string)]
+            properties: [
+                .build("textAlignment", .enumeration),
+                .build("adjustsFontSizeToFit", .boolean),
+                .build("lineBreakMode", .transformed(lineBreakMappings)),
+                .build("numberOfLines", .number),
+                .build("enabled", .boolean),
+                .build("highlighted", .boolean),
+                .build("baselineAdjustment", .enumeration),
+                .build("minimumScaleFactor", .number),
+                .build("minimumFontSize", .number),
+                .build("preferredMaxLayoutWidth", .number),
+                .build("text", .string)
+            ]
         )
         register("label", label)
         let navigationBar = view.inherit(
@@ -178,7 +214,12 @@ extension DocumentBuilder {
         register("tabBar", tabBar)
         let tableView = scrollView.inherit(
             className: "UITableView",
-            properties: [.build("separatorStyle", .enumeration), .build("sectionIndexMinimumDisplayRowCount", .number), .build("rowHeight", .number), .build("sectionHeaderHeight", .number), .build("sectionFooterHeight", .number), .build("frame", .raw, defaultValue: ".zero", injected: true), .build("style", .enumeration, defaultValue: "plain", injected: true)]
+            properties: [
+                .build("separatorStyle", .enumeration), .build("sectionIndexMinimumDisplayRowCount", .number),
+                .build("rowHeight", .number), .build("sectionHeaderHeight", .number),
+                .build("sectionFooterHeight", .number),
+                .build("frame", .raw, ".zero", .assignment, true),
+                .build("style", .enumeration, "plain", .assignment, true)]
         )
         register("tableView", tableView)
         let tableViewCell = view.inherit(
@@ -234,15 +275,19 @@ extension DocumentBuilder {
         let control = view.inherit(
             className: "UIControl",
             properties: [
-                .build("contentHorizontalAlignment", .enumeration, defaultValue: "center"),
-                .build("contentVerticalAlignment", .enumeration, defaultValue: "center"),
+                .build("contentHorizontalAlignment", .enumeration, "center"),
+                .build("contentVerticalAlignment", .enumeration, "center"),
                 .build("selected", .boolean), .build("enabled", .boolean), .build("highlighted", .boolean)]
         )
         let button = control.inherit(
             className: "UIButton",
-            properties: [.build("reversesTitleShadowWhenHighlighted", .boolean), .build("showsTouchWhenHighlighted", .boolean),
-                         .build("adjustsImageWhenHighlighted", .boolean), .build("adjustsImageWhenDisabled", .boolean),
-                         .build("lineBreakMode", .enumeration)]
+            properties: [
+                .build("reversesTitleShadowWhenHighlighted", .boolean),
+                .build("showsTouchWhenHighlighted", .boolean),
+                .build("adjustsImageWhenHighlighted", .boolean),
+                .build("adjustsImageWhenDisabled", .boolean),
+                .build("lineBreakMode", .transformed(lineBreakMappings))
+            ]
         )
         register("button", button)
         let pageControl = control.inherit(
@@ -252,7 +297,7 @@ extension DocumentBuilder {
         register("pageControl", pageControl)
         let segmentedControl = control.inherit(
             className: "UISegmentedControl",
-            properties: [.build("momentary", .boolean), .build("apportionsSegmentWidthsByContent", .enumeration), .build("selectedSegmentIndex", .number, defaultValue: "selectedSegmentIndex")]
+            properties: [.build("momentary", .boolean), .build("apportionsSegmentWidthsByContent", .enumeration), .build("selectedSegmentIndex", .number, "selectedSegmentIndex")]
         )
         register("segmentedControl", segmentedControl)
         let slider = control.inherit(
@@ -267,7 +312,7 @@ extension DocumentBuilder {
         register("stepper", stepper)
         let uiSwitch = control.inherit(
             className: "UISwitch",
-            properties: [.build("on", .boolean)]
+            properties: [.build("on", .boolean, "off", .addIsPrefix)]
         )
         register("switch", uiSwitch)
         let textField = control.inherit(
@@ -425,3 +470,14 @@ extension DocumentBuilder {
         register("aVPlayerViewController", aVPlayerViewController)
     }
 }
+
+let lineBreakMappings: [String: String]  = [
+    "wrapWord": ".byWordWrapping",
+    "wrapChar": ".byCharWrapping",
+    "clipping": ".byClipping",
+    "headTruncation": ".byTruncatingHead",
+    "tailTruncation": ".byTruncatingTail",
+    "middleTruncation": ".byTruncatingMiddle",
+]
+
+
