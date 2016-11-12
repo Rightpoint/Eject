@@ -28,6 +28,12 @@ struct OutletBuilder: Builder {
             value: value,
             context: setterStyle
         )
+        // Specify the outlet name as a variable name override. This rule is ignored for `view` because it's in most view controller .xib's, 
+        // and the class-inferred name is almost always better than 'view'. Also, if the outlet is to a collection, do not use it, it will look
+        // wrong and probably have a duplication.
+        if document.variableNameOverrides[destination] == nil && property != "view" && collection == false {
+            document.variableNameOverrides[destination] = { _ in property }
+        }
         return parent
     }
 

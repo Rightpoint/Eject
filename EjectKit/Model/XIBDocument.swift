@@ -26,7 +26,8 @@ public class XIBDocument {
     var references: [Reference] = []
     var keyOverride: String?
     var containerContext: ConfigurationContext?
-    var variableNameOverrides: [String: (XIBDocument) -> String] = ["-1": { _ in return "self" }]
+    var selfIdentifier = "-1"
+    var variableNameOverrides: [String: (XIBDocument) -> String] = [:]
     var documentInformation: [String: String] = [:]
     public enum Warning {
         case unknownAttribute(String)
@@ -54,11 +55,15 @@ public class XIBDocument {
     /// - Class name without the prefix
     func variable(for object: Reference) -> String {
         let variable: String
-        if let variableName = variableNameOverrides[object.identifier] {
-            variable = variableName(self)
+
+        if object.identifier == selfIdentifier {
+            variable = "self"
         }
         else if let userLabel = object.userLabel {
             variable = userLabel.snakeCased()
+        }
+        else if let variableName = variableNameOverrides[object.identifier] {
+            variable = variableName(self)
         }
         else {
             var className = object.className
