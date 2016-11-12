@@ -123,23 +123,23 @@ extension DocumentBuilder {
         let view = ObjectBuilder(
             className: "UIView",
             properties: [
-                .build("autoresizesSubviews", .boolean, "true"),
+                .build("autoresizesSubviews", .boolean, "YES"),
                 .build("contentMode", .enumeration, "scaleToFill"),
                 .build("semanticContentAttribute", .enumeration),
                 .build("tag", .number),
                 .build("fixedFrame", .boolean, "", .ignore),
-                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "true"),
-                .build(.addIsPrefix("multipleTouchEnabled"), .boolean, "false"),
+                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "YES"),
+                .build(.addIsPrefix("multipleTouchEnabled"), .boolean, "NO"),
                 .build("alpha", .number),
-                .build(.addIsPrefix("opaque"), .boolean, "true"),
-                .build(.addIsPrefix("hidden"), .boolean, "false"),
-                .build("clearsContextBeforeDrawing", .boolean, "true"),
+                .build(.addIsPrefix("opaque"), .boolean, "YES"),
+                .build(.addIsPrefix("hidden"), .boolean, "NO"),
+                .build("clearsContextBeforeDrawing", .boolean, "YES"),
                 .build("preservesSuperviewLayoutMargins", .boolean),
                 .build("layoutMarginsFollowReadableWidth", .boolean),
                 .build("simulatedAppContext", .enumeration),
                 .build("translatesAutoresizingMaskIntoConstraints", .boolean),
-                .build("clipsToBounds", .boolean, "false"),
-                .build(.map("clipsSubviews", "clipsToBounds"), .boolean, "false"),
+                .build("clipsToBounds", .boolean, "NO"),
+                .build(.map("clipsSubviews", "clipsToBounds"), .boolean, "NO"),
                 .build("horizontalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
                 .build("verticalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)")),
                 .build("horizontalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .horizontal)")),
@@ -152,10 +152,10 @@ extension DocumentBuilder {
             className: "UIScrollView",
             properties: [
                 .build("indicatorStyle", .enumeration),
-                .build("showsHorizontalScrollIndicator", .boolean, "true"),
-                .build("showsVerticalScrollIndicator", .boolean, "true"),
-                .build(.addIsPrefix("scrollEnabled"), .boolean, "true"),
-                .build(.addIsPrefix("pagingEnabled"), .boolean, "false"),
+                .build("showsHorizontalScrollIndicator", .boolean, "YES"),
+                .build("showsVerticalScrollIndicator", .boolean, "YES"),
+                .build(.addIsPrefix("scrollEnabled"), .boolean, "YES"),
+                .build(.addIsPrefix("pagingEnabled"), .boolean, "NO"),
                 .build("directionalLockEnabled", .boolean),
                 .build("bounces", .boolean),
                 .build("alwaysBounceHorizontal", .boolean),
@@ -163,8 +163,8 @@ extension DocumentBuilder {
                 .build("minimumZoomScale", .number),
                 .build("maximumZoomScale", .number),
                 .build("bouncesZoom", .boolean),
-                .build("delaysContentTouches", .boolean, "true"),
-                .build("canCancelContentTouches", .boolean, "true"),
+                .build("delaysContentTouches", .boolean, "YES"),
+                .build("canCancelContentTouches", .boolean, "YES"),
                 .build("keyboardDismissMode", .enumeration)
             ]
         )
@@ -175,7 +175,7 @@ extension DocumentBuilder {
             properties: [
                 .build(.map("style", "activityIndicatorStyle"), .enumeration, "", .inject),
                 .build(.addIsPrefix("animating"), .boolean, ""),
-                .build("hidesWhenStopped", .boolean, "true")]
+                .build("hidesWhenStopped", .boolean, "YES")]
         )
         register("activityIndicatorView", activityIndicatorView)
         let collectionView = scrollView.inherit(
@@ -197,7 +197,7 @@ extension DocumentBuilder {
                 .build("placeholderIntrinsicWidth", .number, "", .ignore), // Used by IB
                 .build("placeholderIntrinsicHeight", .number, "", .ignore), // Used by IB
                 .build("image", .image),
-                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "false"),
+                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "NO"),
             ]
         )
         register("imageView", imageView)
@@ -205,9 +205,9 @@ extension DocumentBuilder {
             className: "UILabel",
             properties: [
                 .build("textAlignment", .enumeration),
-                .build(.map("adjustsFontSizeToFit", "adjustsFontSizeToFitWidth"), .boolean, "false"),
-                .build(.map("adjustsLetterSpacingToFitWidth", "allowsDefaultTighteningForTruncation"), .boolean, "false"),
-                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "false"),
+                .build(.map("adjustsFontSizeToFit", "adjustsFontSizeToFitWidth"), .boolean, "NO"),
+                .build(.map("adjustsLetterSpacingToFitWidth", "allowsDefaultTighteningForTruncation"), .boolean, "NO"),
+                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "NO"),
                 .build("lineBreakMode", .transformed(lineBreakMappings, .enumeration)),
                 .build("numberOfLines", .number),
                 .build("enabled", .boolean),
@@ -276,7 +276,7 @@ extension DocumentBuilder {
                 .build("separatorStyle", .transformed(["default": "singleLine"], .enumeration)),
                 .build("sectionIndexMinimumDisplayRowCount", .number),
                 .build("rowHeight", .number),
-                .build("allowsSelectionDuringEditing", .boolean, "false"),
+                .build("allowsSelectionDuringEditing", .boolean, "NO"),
                 .build("sectionHeaderHeight", .number),
                 .build("sectionFooterHeight", .number),
                 .build("frame", .raw, ".zero", .inject),
@@ -312,9 +312,9 @@ extension DocumentBuilder {
             className: "UITextView",
             properties: [
                 .build("textAlignment", .enumeration),
-                .build("allowsEditingTextAttributes", .boolean, "false"),
-                .build(.addIsPrefix("editable"), .boolean, "true"),
-                .build(.addIsPrefix("selectable"), .boolean, "true"),
+                .build("allowsEditingTextAttributes", .boolean, "NO"),
+                .build(.addIsPrefix("editable"), .boolean, "YES"),
+                .build(.addIsPrefix("selectable"), .boolean, "YES"),
                 .build("dataDetectorTypes", .boolean),
                 .build("autocapitalizationType", .enumeration),
                 .build("autocorrectionType", .enumeration),
@@ -428,8 +428,8 @@ extension DocumentBuilder {
             className: "UITextField",
             properties: [
                 .build("textAlignment", .enumeration), .build("allowsEditingTextAttributes", .boolean),
-                .build(.map("adjustsFontSizeToFit", "adjustsFontSizeToFitWidth"), .boolean, "false"),
-                .build(.map("adjustsLetterSpacingToFitWidth", "allowsDefaultTighteningForTruncation"), .boolean, "false"),
+                .build(.map("adjustsFontSizeToFit", "adjustsFontSizeToFitWidth"), .boolean, "NO"),
+                .build(.map("adjustsLetterSpacingToFitWidth", "allowsDefaultTighteningForTruncation"), .boolean, "NO"),
                 .build("borderStyle", .enumeration), .build("clearButtonMode", .enumeration),
                 .build("clearsOnBeginEditing", .boolean), .build("minimumFontSize", .number),
                 .build("autocapitalizationType", .enumeration),
@@ -445,16 +445,16 @@ extension DocumentBuilder {
             className: "MKMapView",
             properties: [
                 .build("mapType", .enumeration),
-                .build(.addIsPrefix("zoomEnabled"), .boolean, "true"),
-                .build(.addIsPrefix("scrollEnabled"), .boolean, "true"),
-                .build(.addIsPrefix("rotateEnabled"), .boolean, "true"),
-                .build(.addIsPrefix("pitchEnabled"), .boolean, "true"),
-                .build("showsBuildings", .boolean, "true"),
+                .build(.addIsPrefix("zoomEnabled"), .boolean, "YES"),
+                .build(.addIsPrefix("scrollEnabled"), .boolean, "YES"),
+                .build(.addIsPrefix("rotateEnabled"), .boolean, "YES"),
+                .build(.addIsPrefix("pitchEnabled"), .boolean, "YES"),
+                .build("showsBuildings", .boolean, "YES"),
                 .build("showsCompass", .boolean),
-                .build("showsScale", .boolean, "false"),
-                .build("showsTraffic", .boolean, "false"),
-                .build("showsPointsOfInterest", .boolean, "true"),
-                .build("showsUserLocation", .boolean, "false")
+                .build("showsScale", .boolean, "NO"),
+                .build("showsTraffic", .boolean, "NO"),
+                .build("showsPointsOfInterest", .boolean, "YES"),
+                .build("showsUserLocation", .boolean, "NO")
             ]
         )
         register("mapView", mKMapView)
@@ -472,7 +472,7 @@ extension DocumentBuilder {
                 .build("modalTransitionStyle", .enumeration),
                 .build("modalPresentationStyle", .enumeration),
                 .build("title", .string),
-                .build("definesPresentationContext", .boolean, "false"),
+                .build("definesPresentationContext", .boolean, "NO"),
                 .build("providesPresentationContextTransitionStyle", .boolean),
                 // Ignored, only used by IB
                 .build("simulatedBottomBarMetrics", .boolean, "", .ignore),

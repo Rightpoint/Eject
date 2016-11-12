@@ -212,12 +212,12 @@ class EjectTests: XCTestCase {
         let xml = wrap("<tableView alwaysBounceVertical='YES' style='plain' separatorStyle='default' rowHeight='44' sectionHeaderHeight='28' sectionFooterHeight='28' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><inset key='separatorInset' minX='15' minY='0.0' maxX='15' maxY='0.0'/><connections><outlet property='dataSource' destination='-1' id='0eg-ac-TGD'/><outlet property='delegate' destination='-1' id='jQ0-LG-WAK'/></connections></tableView>")
         checkXML(xml, [
             "let tableView = UITableView(frame: CGRect(x: 11, y: 11, width: 328, height: 578), style: .plain)",
-            "tableView.translatesAutoresizingMaskIntoConstraints = false",
-            "tableView.alwaysBounceVertical = true",
             "tableView.separatorStyle = .singleLine",
             "tableView.rowHeight = 44",
             "tableView.sectionHeaderHeight = 28",
             "tableView.sectionFooterHeight = 28",
+            "tableView.alwaysBounceVertical = true",
+            "tableView.translatesAutoresizingMaskIntoConstraints = false",
             "tableView.frame = CGRect(x: 11, y: 11, width: 328, height: 578)",
             "tableView.backgroundColor = UIColor(white: 1, alpha: 1)",
             "tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 30)",
@@ -229,12 +229,12 @@ class EjectTests: XCTestCase {
     }
 
     func testImageView() {
-        let xml = wrap("<imageView contentMode='center' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'></imageView>")
+        let xml = wrap("<imageView contentMode='center' image='icon' userInteractionEnabled='NO' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'></imageView>")
         checkXML(xml, [
             "let imageView = UIImageView()",
+            "imageView.image = UIImage(named: \"icon\")",
             "imageView.contentMode = .center",
             "imageView.translatesAutoresizingMaskIntoConstraints = false",
-            "imageView.image = UIImage(named: \"icon\")",
             "",
             "self.view = imageView",
             ])
@@ -372,9 +372,9 @@ class EjectTests: XCTestCase {
         let xml = wrap("<imageView contentMode='center' thisattribute='isnotdefined' image='icon' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><unknown/></imageView>")
         checkXML(xml, [
             "let imageView = UIImageView()",
+            "imageView.image = UIImage(named: \"icon\")",
             "imageView.contentMode = .center",
             "imageView.translatesAutoresizingMaskIntoConstraints = false",
-            "imageView.image = UIImage(named: \"icon\")",
             "",
             "self.view = imageView",
             ], warnings: [
@@ -387,11 +387,11 @@ class EjectTests: XCTestCase {
         let xml = wrap("<switch opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='scaleToFill' contentHorizontalAlignment='center' contentVerticalAlignment='center' on='YES' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><rect key='frame' x='263' y='8' width='51' height='31'/><constraints><constraint firstAttribute='width' constant='49' id='XYJ-oE-Z6H'/><constraint firstAttribute='height' constant='31' id='sv1-aq-Ftb'/></constraints><connections><action selector='snoozeSwitchValueChanged:' destination='-1' eventType='valueChanged' id='-1'/></connections></switch>")
         checkXML(xml, [
             "let switch = UISwitch()",
+            "switch.isOn = true",
             "switch.isMultipleTouchEnabled = true",
             "switch.isOpaque = false",
             "switch.translatesAutoresizingMaskIntoConstraints = false",
             "switch.clipsToBounds = true",
-            "switch.isOn = true",
             "switch.frame = CGRect(x: 263, y: 8, width: 51, height: 31)",
             "",
             "switch.heightAnchor == 31",
@@ -406,21 +406,20 @@ class EjectTests: XCTestCase {
         let xml = wrap("<tableViewCell clearsContextBeforeDrawing='NO' contentMode='scaleToFill' selectionStyle='none' indentationWidth='10' reuseIdentifier='snoozeToggleCellId' id='i5M-Pr-FkT' userLabel='Table View Cell (Snooze Toggle)'><rect key='frame' x='0.0' y='0.0' width='320' height='44'/><autoresizingMask key='autoresizingMask' flexibleMaxX='YES' flexibleMaxY='YES'/><tableViewCellContentView key='contentView' opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='center' tableViewCell='27' id='20C-qx-qiB'><rect key='frame' x='0.0' y='0.0' width='320' height='43'/><autoresizingMask key='autoresizingMask'/><subviews><label opaque='NO' clipsSubviews='YES' userInteractionEnabled='NO' contentMode='scaleToFill' fixedFrame='YES' text='Snooze' lineBreakMode='tailTruncation' minimumFontSize='10' useAutomaticPreferredMaxLayoutWidth='YES' translatesAutoresizingMaskIntoConstraints='NO' id='29'><rect key='frame' x='20' y='13' width='135' height='21'/>                        <fontDescription key='fontDescription' type='system' pointSize='17'/><color key='textColor' cocoaTouchSystemColor='darkTextColor'/><nil key='highlightedColor'/></label></subviews></tableViewCellContentView><color key='backgroundColor' red='1' green='1' blue='1' alpha='1' colorSpace='calibratedRGB'/><point key='canvasLocation' x='-46' y='552'/></tableViewCell>")
         checkXML(xml, [
             "let tableViewCellSnoozeToggle = UITableViewCell(reuseIdentifier: \"snoozeToggleCellId\")",
-            "tableViewCellSnoozeToggle.clearsContextBeforeDrawing = false",
             "tableViewCellSnoozeToggle.selectionStyle = .none",
             "tableViewCellSnoozeToggle.indentationWidth = 10",
+            "tableViewCellSnoozeToggle.clearsContextBeforeDrawing = false",
             "tableViewCellSnoozeToggle.frame = CGRect(x: 0, y: 0, width: 320, height: 44)",
             "tableViewCellSnoozeToggle.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]",
             "tableViewCellSnoozeToggle.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)",
             "",
             "let label = UILabel()",
-            "label.isUserInteractionEnabled = false",
-            "label.isOpaque = false",
-            "label.translatesAutoresizingMaskIntoConstraints = false",
-            "label.clipsToBounds = true",
             "label.lineBreakMode = .byTruncatingTail",
             "label.minimumFontSize = 10",
             "label.text = \"Snooze\"",
+            "label.isOpaque = false",
+            "label.translatesAutoresizingMaskIntoConstraints = false",
+            "label.clipsToBounds = true",
             "label.frame = CGRect(x: 20, y: 13, width: 135, height: 21)",
             "label.font = .systemFont(ofSize: 17)",
             "label.textColor = UIColor.darkText",

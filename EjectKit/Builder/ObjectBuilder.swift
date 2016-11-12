@@ -95,7 +95,7 @@ struct ObjectBuilder: Builder {
     func inherit(className: String, properties: [Property] = [], placeholder: Bool = false) -> ObjectBuilder {
         var subclass = self
         subclass.className = className
-        subclass.properties.append(contentsOf: properties)
+        subclass.properties.insert(contentsOf: properties, at: 0)
         subclass.placeholder = placeholder
         return subclass
     }
@@ -131,6 +131,7 @@ extension ObjectBuilderPropertyContainer {
         for property in properties {
             if let value = attributes.removeValue(forKey: property.key.attribute) {
                 if property.injected {
+                    // If the property is injected, just add the value
                     try document.lookupReference(for: identifier).values[property.key.property] = BasicValue(value: value, format: property.format)
                 }
                 else if value != property.defaultValue && !property.ignored {
