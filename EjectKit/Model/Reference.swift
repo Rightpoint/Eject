@@ -16,14 +16,20 @@ public class Reference {
         return characterSet.inverted
     }()
 
+    let definition: ObjectDefinition
     let identifier: String
-    let className: String
     let userLabel: String?
+    let customSubclass: String?
     var values: [String: CodeGenerator] = [:]
 
-    init(identifier: String, className: String, userLabel: String?) {
+    init(identifier: String, definition: ObjectDefinition, customSubclass: String?, userLabel: String?) {
         self.identifier = identifier
-        self.className = className
+        self.definition = definition
+        self.customSubclass = customSubclass
         self.userLabel = userLabel?.components(separatedBy: Reference.invalidCharacterSet).joined(separator: " ")
+    }
+
+    var className: String {
+        return customSubclass ?? definition.className
     }
 }

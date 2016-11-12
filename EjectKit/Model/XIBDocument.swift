@@ -99,15 +99,15 @@ public class XIBDocument {
         case invocation(CodeGenerator, CodeGeneratorPhase)
     }
 
-    func addObject(for identifier: String, className: String, userLabel: String?, declaration: Declaration) -> Reference {
-        let object = Reference(identifier: identifier, className: className, userLabel: userLabel)
+    func addObject(for identifier: String, definition: ObjectDefinition, customSubclass: String?, userLabel: String?, declaration: Declaration) -> Reference {
+        let object = Reference(identifier: identifier, definition: definition, customSubclass: customSubclass, userLabel: userLabel)
         references.append(object)
 
         switch declaration {
         case .placeholder:
             break
         case let .initializer(injectedProperties, phase):
-            let generator = Initializer(objectIdentifier: identifier, className: className, injectedProperties: injectedProperties)
+            let generator = Initializer(objectIdentifier: identifier, className: object.className, injectedProperties: injectedProperties)
             addStatement(generator, phase: phase, declares: object)
         case let .invocation(invocation, phase):
             let generator = invocation

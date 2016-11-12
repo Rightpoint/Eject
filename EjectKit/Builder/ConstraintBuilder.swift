@@ -119,7 +119,8 @@ struct ConstraintBuilder: Builder {
 
         let constraint = document.addObject(
             for: identifier,
-            className: "NSLayoutConstraint",
+            definition: ObjectDefinition(className: "NSLayoutConstraint"),
+            customSubclass: nil,
             userLabel: attributes.removeValue(forKey: "userLabel"),
             declaration: .invocation(generator, .constraints)
         )
