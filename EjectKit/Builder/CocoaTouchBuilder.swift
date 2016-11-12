@@ -298,9 +298,13 @@ extension DocumentBuilder {
             ]
         )
         register("tableViewCell", tableViewCell)
-        var tableViewCellContentView = view
-        tableViewCellContentView.className = "UITableViewCellContentView"
-        tableViewCellContentView.placeholder = true
+        let tableViewCellContentView = view.inherit(
+            className: "UITableViewCellContentView",
+            properties: [
+                .build("tableViewCell", .raw, "", .ignore) // Ignore the link to the containing cell.
+            ],
+            placeholder: true
+        )
         register("tableViewCellContentView", tableViewCellContentView)
 
         let textView = scrollView.inherit(

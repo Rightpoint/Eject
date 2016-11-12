@@ -436,7 +436,6 @@ class EjectTests: XCTestCase {
             "self.view = tableViewCellSnoozeToggle",
             ], warnings: [
                 "document.objects.tableViewCell: reuseIdentifier='snoozeToggleCellId'",
-                "document.objects.tableViewCell.tableViewCellContentView: tableViewCell='27'",
                 "document.objects.tableViewCell.tableViewCellContentView.subviews.label: useAutomaticPreferredMaxLayoutWidth='YES'",
                 "Can not configure XML nodes 'point'",
             ])
