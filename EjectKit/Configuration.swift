@@ -16,8 +16,8 @@ enum ConstraintConfiguration {
     }
 }
 
-struct Configuration {
-    let useFrames: Bool = false
-    let constrant: ConstraintConfiguration = .anchorage
-    let selfIdentifier: String? = "-1"
+public struct Configuration {
+    var useFrames: Bool = false
+    var constraint: ConstraintConfiguration = .anchor
+    var selfIdentifier: String? = "-1"
 }

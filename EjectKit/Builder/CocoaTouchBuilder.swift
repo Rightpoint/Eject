@@ -120,7 +120,7 @@ extension DocumentBuilder {
     }
 
     func registerCocoaTouchViews() {
-        let translateContext: AssociationContext = document.configuration.constrant.useTranslateAutoresizingMask ? .assignment : .ignore
+        let translateContext: AssociationContext = document.configuration.constraint.useTranslateAutoresizingMask ? .assignment : .ignore
         let view = ObjectDefinition(
             className: "UIView",
             properties: [

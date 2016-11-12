@@ -39,17 +39,17 @@ struct ConstraintBuilder: Builder {
         if multiplier  == "1" || multiplier == "1:1" {
             multiplier = nil
         }
-        let generator = document.configuration.constrant.generator.init(
-            constraintState: ConstraintState(
-                identifier: identifier,
-                first: (firstItem, firstAttr),
-                relationship: relationship,
-                multiplier: multiplier,
-                constant: constant,
-                second: second,
-                priority: priority
-            )
+        let constraintState = ConstraintState(
+            identifier: identifier,
+            first: (firstItem, firstAttr),
+            relationship: relationship,
+            multiplier: multiplier,
+            constant: constant,
+            second: second,
+            priority: priority
         )
+
+        let generator = document.configuration.constraint.generator.init(constraintState: constraintState)
 
         let constraint = document.addObject(
             for: identifier,
@@ -58,6 +58,20 @@ struct ConstraintBuilder: Builder {
             userLabel: attributes.removeValue(forKey: "userLabel"),
             declaration: .invocation(generator, .constraints)
         )
+
+        if let priority = constraintState.priority, document.configuration.constraint.generator.needsPriorityConfigurationCommand {
+            try document.addVariableConfiguration(
+                for: constraintState.identifier,
+                key: "priority",
+                value: BasicValue(value: priority, format: .number)
+            )
+            try document.addVariableConfiguration(
+                for: constraintState.identifier,
+                key: "isActive",
+                value: BasicValue(value: "YES", format: .boolean)
+            )
+        }
+
         return constraint
     }
 

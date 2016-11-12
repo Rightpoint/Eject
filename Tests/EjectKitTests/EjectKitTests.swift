@@ -10,9 +10,9 @@ import XCTest
 import Foundation
 @testable import EjectKit
 
-func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], file: StaticString = #file, line: UInt = #line) {
+func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], configuration: Configuration = Configuration(), file: StaticString = #file, line: UInt = #line) {
     do {
-        let document = try XIBDocument.load(xml: xml)
+        let document = try XIBDocument.load(xml: xml, configuration: configuration)
         guard document.references.count > 0 else {
             XCTFail("No objects in the document", file: file, line: line - 1)
             return
@@ -321,6 +321,41 @@ class EjectTests: XCTestCase {
             ])
     }
 
+    func testAnchorConstraints() {
+        let xml = wrap("<view id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/><subviews><view id='UX2-VG-eOo' customClass='CircularToggleView'><rect key='frame' x='0.0' y='29' width='28' height='28'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><constraints><constraint firstAttribute='height' constant='28' id='BqJ-XJ-eyz'/><constraint firstAttribute='width' constant='28' id='nMF-V2-XRU'/></constraints></view><label id='19u-jG-JIO'><rect key='frame' x='36' y='36' width='52' height='14'/><fontDescription key='fontDescription' name='Gotham-Book' family='Gotham' pointSize='14'/><color key='textColor' red='0.50196078430000002' green='0.50196078430000002' blue='0.50196078430000002' alpha='1' colorSpace='calibratedRGB'/><nil key='highlightedColor'/></label></subviews><color key='backgroundColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/><constraints><constraint firstItem='UX2-VG-eOo' firstAttribute='leading' secondItem='i5M-Pr-FkT' secondAttribute='leading' id='5fR-oy-xvA'/><constraint firstItem='UX2-VG-eOo' firstAttribute='centerY' secondItem='i5M-Pr-FkT' secondAttribute='centerY' id='6Qn-oN-YHI'/><constraint firstAttribute='bottom' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='bottom' constant='20' symbolic='YES' id='BGy-u3-ENo'/><constraint firstAttribute='trailing' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='trailing' constant='20' symbolic='YES' id='Kgc-VK-hur'/><constraint firstItem='19u-jG-JIO' firstAttribute='centerY' secondItem='UX2-VG-eOo' secondAttribute='centerY' id='jSG-kc-EZ6'/><constraint firstItem='19u-jG-JIO' firstAttribute='top' relation='greaterThanOrEqual' secondItem='i5M-Pr-FkT' secondAttribute='top' constant='20' symbolic='YES' id='trv-aZ-Isd'/><constraint firstItem='19u-jG-JIO' firstAttribute='leading' secondItem='UX2-VG-eOo' secondAttribute='trailing' priority='100' constant='8' id='zMe-2W-nrz'/></constraints></view>")
+        var configuration = Configuration()
+        configuration.constraint = .anchor
+        checkXML(xml, [
+            "let view = UIView()",
+            "view.backgroundColor = UIColor(white: 0, alpha: 0)",
+            "",
+            "let circularToggleView = CircularToggleView()",
+            "circularToggleView.backgroundColor = UIColor(white: 1, alpha: 1)",
+            "",
+            "let label = UILabel()",
+            "label.font = UIFont(name: \"Gotham-Book\", size: 14)",
+            "label.textColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1)",
+            "",
+            "view.addSubview(label)",
+            "view.addSubview(circularToggleView)",
+            "",
+            "let labelLeadingEqualToCircularToggleViewTrailing = (label.leadingAnchor.constraint(equalTo: circularToggleView.trailingAnchor, constant: 8.0))",
+            "label.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor, constant: 20.0).isActive = true",
+            "label.centerYAnchor.constraint(equalTo: circularToggleView.centerYAnchor).isActive = true",
+            "view.trailingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: 20.0).isActive = true",
+            "view.bottomAnchor.constraint(greaterThanOrEqualTo: label.bottomAnchor, constant: 20.0).isActive = true",
+            "circularToggleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true",
+            "circularToggleView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true",
+            "circularToggleView.widthAnchor.constraint(equalToConstant: 28.0).isActive = true",
+            "circularToggleView.heightAnchor.constraint(equalToConstant: 28.0).isActive = true",
+            "",
+            "labelLeadingEqualToCircularToggleViewTrailing.isActive = true",
+            "labelLeadingEqualToCircularToggleViewTrailing.priority = 100",
+            "self.view = view"
+            ], configuration: configuration)
+    }
+
+
     func testVisualEffectViewKey() {
         let xml = wrap("<visualEffectView id='i5M-Pr-FkT' userLabel='Blur View'><rect key='frame' x='0.0' y='0.0' width='600' height='600'/><blurEffect style='extraLight'/><view key='contentView' id='F01-5F-ger' userLabel='Content View'></view></visualEffectView>")
         checkXML(xml, [
@@ -431,7 +466,9 @@ class EjectTests: XCTestCase {
                 }
                 print("File: \(path.lastPathComponent)")
                 let data = try Data(contentsOf: path)
-                let builder = try XIBParser(data: data)
+                var configuration = Configuration()
+                configuration.constraint = .anchor
+                let builder = try XIBParser(data: data, configuration: configuration)
                 let code = try builder.document.generateCode()
                 if "print" == "print"{
                     print(code.joined(separator: "\n"))

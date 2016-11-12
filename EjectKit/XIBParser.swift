@@ -55,9 +55,10 @@ public class XIBParser: NSObject {
 
 #if STOCK_PARSER
     private let parser: XMLParser
-    public init(data: Data) throws {
+    public init(data: Data, configuration: Configuration) throws {
         self.parser = XMLParser(data: data)
         super.init()
+        self.document.configuration = configuration
         self.parser.delegate = self
         try parser.throwingParse()
         if let error = error {
@@ -65,8 +66,9 @@ public class XIBParser: NSObject {
         }
     }
 #else
-    public init(data: Data) throws {
+    public init(data: Data, configuration: Configuration) throws {
         super.init()
+        self.document.configuration = configuration
         try data.withUnsafeBytes { (ptr: UnsafePointer<UInt8>) throws -> Void  in
             let buffer = UnsafeBufferPointer(start: ptr, count: data.count)
             var parser = SimpleXMLParser(input: buffer)

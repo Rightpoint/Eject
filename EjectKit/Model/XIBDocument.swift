@@ -12,12 +12,12 @@ import Foundation
 /// Class that models the state of a xib file.
 public class XIBDocument {
 
-    public static func load(xml content: String) throws -> XIBDocument {
+    public static func load(xml content: String, configuration: Configuration) throws -> XIBDocument {
         guard let data = content.data(using: String.Encoding.utf8) else {
             fatalError("Unable to convert to UTF8")
         }
 
-        let parser = try XIBParser(data: data)
+        let parser = try XIBParser(data: data, configuration: configuration)
         return parser.document
     }
 
