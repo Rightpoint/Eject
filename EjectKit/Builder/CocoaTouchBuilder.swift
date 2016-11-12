@@ -120,6 +120,7 @@ extension DocumentBuilder {
     }
 
     func registerCocoaTouchViews() {
+        let translateContext: AssociationContext = document.configuration.constrant.useTranslateAutoresizingMask ? .assignment : .ignore
         let view = ObjectDefinition(
             className: "UIView",
             properties: [
@@ -127,6 +128,7 @@ extension DocumentBuilder {
                 .build("contentMode", .enumeration, "scaleToFill"),
                 .build("semanticContentAttribute", .enumeration),
                 .build("tag", .number),
+                .build("frame", .raw, ".zero", .inject),
                 .build("fixedFrame", .boolean, "", .ignore),
                 .build(.addIsPrefix("userInteractionEnabled"), .boolean, "YES"),
                 .build(.addIsPrefix("multipleTouchEnabled"), .boolean, "NO"),
@@ -137,7 +139,7 @@ extension DocumentBuilder {
                 .build("preservesSuperviewLayoutMargins", .boolean),
                 .build("layoutMarginsFollowReadableWidth", .boolean),
                 .build("simulatedAppContext", .enumeration),
-                .build("translatesAutoresizingMaskIntoConstraints", .boolean),
+                .build("translatesAutoresizingMaskIntoConstraints", .boolean, "true", translateContext),
                 .build("clipsToBounds", .boolean, "NO"),
                 .build(.map("clipsSubviews", "clipsToBounds"), .boolean, "NO"),
                 .build("horizontalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
@@ -279,7 +281,6 @@ extension DocumentBuilder {
                 .build("allowsSelectionDuringEditing", .boolean, "NO"),
                 .build("sectionHeaderHeight", .number),
                 .build("sectionFooterHeight", .number),
-                .build("frame", .raw, ".zero", .inject),
                 .build("style", .enumeration, "plain", .inject)]
         )
         register("tableView", tableView)

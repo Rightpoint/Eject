@@ -10,7 +10,7 @@ struct VariableConfiguration: CodeGenerator {
     let objectIdentifier: String
     let key: String
     let value: CodeGenerator
-    let style: ConfigurationContext
+    let style: AssociationContext
 
     var dependentIdentifiers: Set<String> {
         let identifiers: Set<String> = [objectIdentifier]
@@ -26,7 +26,7 @@ struct VariableConfiguration: CodeGenerator {
     }
 }
 
-private extension ConfigurationContext {
+private extension AssociationContext {
 
     func generateCommand(variable: String, key: String, valueString: String) -> String {
         switch self {

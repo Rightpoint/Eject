@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB05071B1DD7BA35005B5427 /* ConstraintCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB05071A1DD7BA35005B5427 /* ConstraintCodeGenerator.swift */; };
 		AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */; };
 		AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E331DBF8F2E000A0A56 /* Statement.swift */; };
 		AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */; };
 		AB530CD51DD101DE00B54516 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB530CCF1DD101DE00B54516 /* Info.plist */; };
 		AB61CB471DD7A2C0009DB519 /* MappingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB61CB461DD7A2C0009DB519 /* MappingKey.swift */; };
 		AB61CB4A1DD7A41E009DB519 /* ObjectDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */; };
+		AB6415D51DD7A9F500FD0C6C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6415D41DD7A9F500FD0C6C /* Configuration.swift */; };
 		ABB1603C1DD27FCE00EA0F62 /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */; };
 		ABB1603D1DD27FCE00EA0F62 /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */; };
 		ABB1603E1DD27FCE00EA0F62 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */; };
@@ -45,7 +47,7 @@
 		ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */; };
 		ABF8D9091DC0668A008D9178 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D9081DC0668A008D9178 /* main.swift */; };
 		ABF8D90B1DC1197C008D9178 /* SegmentsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */; };
-		ABF8D90D1DC11A7C008D9178 /* ConfigurationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */; };
+		ABF8D90D1DC11A7C008D9178 /* AssociationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90C1DC11A7C008D9178 /* AssociationContext.swift */; };
 		ABF8D90F1DC11E75008D9178 /* ValueFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB05071A1DD7BA35005B5427 /* ConstraintCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintCodeGenerator.swift; sourceTree = "<group>"; };
 		AB477E2F1DBEAA1E000A0A56 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoresizingMaskBuilder.swift; sourceTree = "<group>"; };
 		AB477E331DBF8F2E000A0A56 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleXMLParserTests.swift; sourceTree = "<group>"; };
 		AB61CB461DD7A2C0009DB519 /* MappingKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingKey.swift; sourceTree = "<group>"; };
 		AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDefinition.swift; sourceTree = "<group>"; };
+		AB6415D41DD7A9F500FD0C6C /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = ../Configuration.swift; sourceTree = "<group>"; };
 		ABB389DA1DB95D00008BF59E /* eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
@@ -131,8 +135,8 @@
 		ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBuilder.swift; sourceTree = "<group>"; };
 		ABF8D9081DC0668A008D9178 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentsBuilder.swift; sourceTree = "<group>"; };
-		ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationContext.swift; sourceTree = "<group>"; };
-		ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValueFormat.swift; path = ValueFormat.swift; sourceTree = "<group>"; };
+		ABF8D90C1DC11A7C008D9178 /* AssociationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationContext.swift; sourceTree = "<group>"; };
+		ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +222,7 @@
 				ABB389FE1DB95DDB008BF59E /* Initializer.swift */,
 				ABB38A051DB95DDB008BF59E /* ValueCodeGenerators.swift */,
 				ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */,
+				AB05071A1DD7BA35005B5427 /* ConstraintCodeGenerator.swift */,
 			);
 			path = CodeGenerators;
 			sourceTree = "<group>";
@@ -272,7 +277,8 @@
 		ABB38A001DB95DDB008BF59E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */,
+				AB6415D41DD7A9F500FD0C6C /* Configuration.swift */,
+				ABF8D90C1DC11A7C008D9178 /* AssociationContext.swift */,
 				AB61CB461DD7A2C0009DB519 /* MappingKey.swift */,
 				AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */,
 				ABB38A041DB95DDB008BF59E /* Reference.swift */,
@@ -478,8 +484,9 @@
 				ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */,
 				ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */,
 				ABB38A601DB95F6D008BF59E /* SubviewBuilder.swift in Sources */,
+				AB6415D51DD7A9F500FD0C6C /* Configuration.swift in Sources */,
 				ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */,
-				ABF8D90D1DC11A7C008D9178 /* ConfigurationContext.swift in Sources */,
+				ABF8D90D1DC11A7C008D9178 /* AssociationContext.swift in Sources */,
 				AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */,
 				ABB38A541DB95F6D008BF59E /* ValueCodeGenerators.swift in Sources */,
 				AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */,
@@ -502,6 +509,7 @@
 				ABB38A501DB95F6D008BF59E /* XIBDocument.swift in Sources */,
 				ABB38A611DB95F6D008BF59E /* ConstraintBuilder.swift in Sources */,
 				ABB38A631DB95F6D008BF59E /* ButtonStateBuilder.swift in Sources */,
+				AB05071B1DD7BA35005B5427 /* ConstraintCodeGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

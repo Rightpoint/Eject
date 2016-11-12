@@ -14,8 +14,8 @@ struct ObjectDefinition {
         let key: MappingKey
         let format: ValueFormat
         let defaultValue: String
-        let context: ConfigurationContext
-        static func build(_ key: MappingKey, _ format: ValueFormat, _ defaultValue: String = "", _ context: ConfigurationContext = .assignment) -> Property {
+        let context: AssociationContext
+        static func build(_ key: MappingKey, _ format: ValueFormat, _ defaultValue: String = "", _ context: AssociationContext = .assignment) -> Property {
             return Property(key: key, format: format, defaultValue: defaultValue, context: context)
         }
 

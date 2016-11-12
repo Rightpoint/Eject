@@ -11,7 +11,7 @@ import Foundation
 struct OutletBuilder: Builder {
     let collection: Bool
 
-    var setterStyle: ConfigurationContext {
+    var setterStyle: AssociationContext {
         return collection ? .append : .assignment
     }
 

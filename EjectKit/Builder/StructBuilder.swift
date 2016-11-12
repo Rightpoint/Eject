@@ -18,6 +18,9 @@ struct RectBuilder: Builder {
         let width = try attributes.removeFloatString(forKey: "width") ?? "0"
         let height = try attributes.removeFloatString(forKey: "height") ?? "0"
 
+        if key == "frame" && document.configuration.useFrames == false {
+            return parent
+        }
         try document.addVariableConfiguration(
             for: parent.identifier,
             key: key,

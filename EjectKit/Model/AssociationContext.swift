@@ -1,5 +1,5 @@
 //
-//  ConfigurationContext.swift
+//  AssociationContext.swift
 //  Eject
 //
 //  Created by Brian King on 10/26/16.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-/// ConfigurationContext modifies the behavior to the KVC behavior that the XML files define
+/// AssociationContext modifies the behavior to the KVC behavior that the XML files define
 /// The document stores a configuration context which will be used when adding a variable configuration
-indirect enum ConfigurationContext {
+indirect enum AssociationContext {
 
     // This will perform a normal assignment
     case assignment
@@ -25,7 +25,7 @@ indirect enum ConfigurationContext {
     case invocation(prefix: String, suffix: String)
 
     // Append a comment after the configuration
-    case withComment(String, ConfigurationContext)
+    case withComment(String, AssociationContext)
 
     // Inject into the object constructor
     case inject

@@ -24,11 +24,14 @@ public class XIBDocument {
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
     var statements: [Statement] = []
     var references: [Reference] = []
-    var keyOverride: String?
-    var containerContext: ConfigurationContext?
-    var selfIdentifier = "-1"
     var variableNameOverrides: [String: (XIBDocument) -> String] = [:]
     var documentInformation: [String: String] = [:]
+
+    var keyOverride: String?
+    var containerContext: AssociationContext?
+
+    var configuration: Configuration = Configuration()
+
     public enum Warning {
         case unknownAttribute(String)
         case unknownElementName(String)
@@ -56,7 +59,7 @@ public class XIBDocument {
     func variable(for object: Reference) -> String {
         let variable: String
 
-        if object.identifier == selfIdentifier {
+        if object.identifier == configuration.selfIdentifier {
             variable = "self"
         }
         else if let userLabel = object.userLabel {
@@ -117,7 +120,7 @@ public class XIBDocument {
         return object
     }
 
-    func addVariableConfiguration(for identifier: String, key: String, value: CodeGenerator, context: ConfigurationContext = .assignment) throws {
+    func addVariableConfiguration(for identifier: String, key: String, value: CodeGenerator, context: AssociationContext = .assignment) throws {
         addStatement(
             VariableConfiguration(
                 objectIdentifier: identifier,
