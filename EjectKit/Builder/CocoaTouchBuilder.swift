@@ -14,7 +14,7 @@ import Foundation
 
 extension DocumentBuilder {
 
-    static var ignoredElements = ["freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "modalFormSheetSimulatedSizeMetrics", "simulatedNavigationBarMetrics", "simulatedTabBarMetrics"]
+    static var ignoredElements = ["freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "modalFormSheetSimulatedSizeMetrics", "simulatedNavigationBarMetrics", "simulatedTabBarMetrics", "simulatedBottomBarMetrics", "simulatedTopBarMetrics"]
 
     func registerPrimitives() {
         // Register all the configuration nodes. These do not create objects, but apply configuration to existing objects
