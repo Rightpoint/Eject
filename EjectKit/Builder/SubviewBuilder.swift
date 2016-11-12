@@ -21,7 +21,12 @@ struct SubviewConfiguration: CodeGenerator {
         let variable = document.variable(for: object)
         var representation = ""
         let subviewVariable = document.variable(for: subview)
-        representation.append("\(variable).addSubview(\(subviewVariable))")
+        if object.definition.className == "UIStackView" {
+            representation.append("\(variable).addArrangedSubview(\(subviewVariable))")
+        }
+        else {
+            representation.append("\(variable).addSubview(\(subviewVariable))")
+        }
         return representation
     }
 }
