@@ -286,6 +286,7 @@ extension DocumentBuilder {
         let tableViewCell = view.inherit(
             className: "UITableViewCell",
             properties: [
+                .build("reuseIdentifier", .string, "", .inject),
                 .build("selectionStyle", .enumeration),
                 .build("accessoryType", .enumeration),
                 .build("editingAccessoryType", .enumeration),
