@@ -30,13 +30,13 @@ extension DocumentBuilder {
         register("color", ColorBuilder())
         register("state", ButtonStateBuilder())
         register("subviews", SubviewBuilder())
-        register("constraint", AchorageConstraintBuilder())
+        register("constraint", ConstraintBuilder())
         register("fontDescription", FontBuilder())
         register("outlet", OutletBuilder(collection: false))
         register("outletCollection", OutletBuilder(collection: true))
         register("action", ActionBuilder())
-        register("placeholder", ObjectBuilder(className: "", placeholder: true))
-        register("customObject", ObjectBuilder(className: "NSObject"))
+        register("placeholder", ObjectDefinition(className: "", placeholder: true))
+        register("customObject", ObjectDefinition(className: "NSObject"))
         register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
         // These two tags are containers that do not need a builder
         for noopElement in ["userDefinedRuntimeAttributes", "connections", "constraints", "resources", "image", "gestureRecognizers"] {
@@ -57,7 +57,7 @@ extension DocumentBuilder {
     }
 
     func registerCocoaTouch() {
-        let barItem = ObjectBuilder(
+        let barItem = ObjectDefinition(
             className: "UIBarItem",
             properties: [
                 .build("tag", .number), .build("enabled", .boolean),
@@ -78,7 +78,7 @@ extension DocumentBuilder {
         )
         register("barButtonItem", barButtonItem)
 
-        let navigationItem = ObjectBuilder(
+        let navigationItem = ObjectDefinition(
             className: "UINavigationItem",
             properties: [
                 .build("title", .string),
@@ -90,12 +90,12 @@ extension DocumentBuilder {
         )
         register("navigationItem", navigationItem)
 
-        let collectionViewFlowLayout = ObjectBuilder(
+        let collectionViewFlowLayout = ObjectDefinition(
             className: "UICollectionViewFlowLayout",
             properties: [.build("scrollDirection", .enumeration), .build("minimumLineSpacing", .number), .build("minimumInteritemSpacing", .number)]
         )
         register("collectionViewFlowLayout", collectionViewFlowLayout)
-        let collectionViewLayout = ObjectBuilder(
+        let collectionViewLayout = ObjectDefinition(
             className: "UICollectionViewLayout",
             properties: [],
             placeholder: true
@@ -120,7 +120,7 @@ extension DocumentBuilder {
     }
 
     func registerCocoaTouchViews() {
-        let view = ObjectBuilder(
+        let view = ObjectDefinition(
             className: "UIView",
             properties: [
                 .build("autoresizesSubviews", .boolean, "YES"),
@@ -358,7 +358,7 @@ extension DocumentBuilder {
         register("window", window)
     }
 
-    func registerCocoaTouchControls(view: ObjectBuilder) {
+    func registerCocoaTouchControls(view: ObjectDefinition) {
         let control = view.inherit(
             className: "UIControl",
             properties: [
@@ -461,7 +461,7 @@ extension DocumentBuilder {
     }
 
     func registerCocoaTouchViewControllers() {
-        let viewController = ObjectBuilder(
+        let viewController = ObjectDefinition(
             className: "UIViewController",
             properties: [
                 .build("automaticallyAdjustsScrollViewInsets", .boolean),
@@ -521,7 +521,7 @@ extension DocumentBuilder {
     }
 
     func registerCocoaTouchGestureRecognizers() {
-        let gestureRecognizer = ObjectBuilder(
+        let gestureRecognizer = ObjectDefinition(
             className: "UIGestureRecognizer",
             properties: [.build("enabled", .boolean), .build("cancelsTouchesInView", .boolean), .build("delaysTouchesBegan", .boolean), .build("delaysTouchesEnded", .boolean)]
         )
@@ -571,39 +571,39 @@ extension DocumentBuilder {
     }
 
     func registerProbablyBrokenNamespaced() {
-        let aDBannerView = ObjectBuilder(
+        let aDBannerView = ObjectDefinition(
             className: "ADBannerView",
             properties: [.build("adType", .enumeration)]
         )
         register("aDBannerView", aDBannerView)
 
-        let gLKView = ObjectBuilder(
+        let gLKView = ObjectDefinition(
             className: "GLKView",
             properties: [.build("drawableColorFormat", .enumeration), .build("drawableDepthFormat", .enumeration), .build("drawableStencilFormat", .enumeration), .build("drawableMultisample", .enumeration), .build("enableSetNeedsDisplay", .boolean)]
         )
         register("gLKView", gLKView)
 
         // Class: MTKView
-        let mTKView = ObjectBuilder(
+        let mTKView = ObjectDefinition(
             className: "MTKView",
             properties: [.build("clearDepth", .number), .build("clearStencil", .number), .build("colorPixelFormat", .enumeration), .build("depthStencilPixelFormat", .enumeration), .build("sampleCount", .number), .build("preferredFramesPerSecond", .number), .build("enableSetNeedsDisplay", .boolean), .build("paused", .boolean), .build("autoResizeDrawable", .boolean)]
         )
         register("mTKView", mTKView)
 
         // Class: SCNView
-        let sCNView = ObjectBuilder(
+        let sCNView = ObjectDefinition(
             className: "SCNView",
             properties: [.build("allowsCameraControl", .boolean), .build("jitteringEnabled", .boolean), .build("autoenablesDefaultLighting", .boolean), .build("playing", .boolean), .build("loops", .boolean)]
         )
         register("sCNView", sCNView)
 
-        let gLKViewController = ObjectBuilder(
+        let gLKViewController = ObjectDefinition(
             className: "GLKViewController",
             properties: [.build("preferredFramesPerSecond", .number), .build("pauseOnWillResignActive", .boolean), .build("resumeOnDidBecomeActive", .boolean)]
         )
         register("gLKViewController", gLKViewController)
 
-        let aVPlayerViewController = ObjectBuilder(
+        let aVPlayerViewController = ObjectDefinition(
             className: "AVPlayerViewController",
             properties: [.build("showsPlaybackControls", .boolean)]
         )

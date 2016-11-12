@@ -1,5 +1,5 @@
 //
-//  ObjectBuilder.swift
+//  ObjectDefinition+Builder.swift
 //  Eject
 //
 //  Created by Brian King on 10/19/16.
@@ -8,42 +8,7 @@
 
 import Foundation
 
-struct ObjectBuilder: Builder {
-    struct Property {
-        let key: MappingKey
-        let format: ValueFormat
-        let defaultValue: String
-        let context: ConfigurationContext
-        static func build(_ key: MappingKey, _ format: ValueFormat, _ defaultValue: String = "", _ context: ConfigurationContext = .assignment) -> Property {
-            return Property(key: key, format: format, defaultValue: defaultValue, context: context)
-        }
-
-        var injected: Bool {
-            switch context {
-            case .inject:
-                return true
-            default:
-                return false
-            }
-        }
-        var ignored: Bool {
-            switch context {
-            case .ignore:
-                return true
-            default:
-                return false
-            }
-        }
-    }
-    var className: String
-    var properties: [Property]
-    var placeholder: Bool
-
-    init(className: String, properties: [Property] = [], placeholder: Bool = false) {
-        self.className = className
-        self.properties = properties
-        self.placeholder = placeholder
-    }
+extension ObjectDefinition: Builder {
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         // if a key is specified, the ID can be nil, so just generate a UUID in that case.
@@ -92,7 +57,7 @@ struct ObjectBuilder: Builder {
         return object
     }
 
-    func inherit(className: String, properties: [Property] = [], placeholder: Bool = false) -> ObjectBuilder {
+    func inherit(className: String, properties: [Property] = [], placeholder: Bool = false) -> ObjectDefinition {
         var subclass = self
         subclass.className = className
         subclass.properties.insert(contentsOf: properties, at: 0)
@@ -104,7 +69,7 @@ struct ObjectBuilder: Builder {
 
 struct PropertyBuilder: Builder {
     var keysToRemove: [String]
-    var properties: [ObjectBuilder.Property]
+    var properties: [ObjectDefinition.Property]
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         for key in keysToRemove {
@@ -114,16 +79,16 @@ struct PropertyBuilder: Builder {
     }
 }
 
-extension PropertyBuilder: ObjectBuilderPropertyContainer {}
-extension ObjectBuilder: ObjectBuilderPropertyContainer {}
+extension PropertyBuilder: ObjectDefinitionPropertyContainer {}
+extension ObjectDefinition: ObjectDefinitionPropertyContainer {}
 
-private protocol ObjectBuilderPropertyContainer: Builder {
+private protocol ObjectDefinitionPropertyContainer: Builder {
 
-    var properties: [ObjectBuilder.Property] { get }
+    var properties: [ObjectDefinition.Property] { get }
 
 }
 
-extension ObjectBuilderPropertyContainer {
+extension ObjectDefinitionPropertyContainer {
 
     @discardableResult func buildElementProperties(attributes: inout [String: String], document: XIBDocument, object: Reference?) throws -> Reference? {
         guard let object = object else { throw XIBParser.Error.needParent }

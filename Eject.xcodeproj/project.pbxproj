@@ -11,6 +11,8 @@
 		AB477E341DBF8F2E000A0A56 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB477E331DBF8F2E000A0A56 /* Statement.swift */; };
 		AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */; };
 		AB530CD51DD101DE00B54516 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB530CCF1DD101DE00B54516 /* Info.plist */; };
+		AB61CB471DD7A2C0009DB519 /* MappingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB61CB461DD7A2C0009DB519 /* MappingKey.swift */; };
+		AB61CB4A1DD7A41E009DB519 /* ObjectDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */; };
 		ABB1603C1DD27FCE00EA0F62 /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */; };
 		ABB1603D1DD27FCE00EA0F62 /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */; };
 		ABB1603E1DD27FCE00EA0F62 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */; };
@@ -22,11 +24,11 @@
 		ABB38A4F1DB95F6D008BF59E /* XIBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A081DB95DDB008BF59E /* XIBParser.swift */; };
 		ABB38A501DB95F6D008BF59E /* XIBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A011DB95DDB008BF59E /* XIBDocument.swift */; };
 		ABB38A531DB95F6D008BF59E /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A041DB95DDB008BF59E /* Reference.swift */; };
-		ABB38A541DB95F6D008BF59E /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A051DB95DDB008BF59E /* Values.swift */; };
+		ABB38A541DB95F6D008BF59E /* ValueCodeGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A051DB95DDB008BF59E /* ValueCodeGenerators.swift */; };
 		ABB38A551DB95F6D008BF59E /* VariableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */; };
 		ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */; };
 		ABB38A571DB95F6D008BF59E /* CocoaTouchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */; };
-		ABB38A581DB95F6D008BF59E /* ObjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */; };
+		ABB38A581DB95F6D008BF59E /* ObjectDefinition+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F61DB95DDB008BF59E /* ObjectDefinition+Builder.swift */; };
 		ABB38A5A1DB95F6D008BF59E /* OutletBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */; };
 		ABB38A5B1DB95F6D008BF59E /* KeyValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */; };
 		ABB38A5C1DB95F6D008BF59E /* StructBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */; };
@@ -34,7 +36,7 @@
 		ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F21DB95DDB008BF59E /* ColorBuilder.swift */; };
 		ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F41DB95DDB008BF59E /* FontBuilder.swift */; };
 		ABB38A601DB95F6D008BF59E /* SubviewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */; };
-		ABB38A611DB95F6D008BF59E /* AchorageConstraintBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A261DB95E04008BF59E /* AchorageConstraintBuilder.swift */; };
+		ABB38A611DB95F6D008BF59E /* ConstraintBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB38A261DB95E04008BF59E /* ConstraintBuilder.swift */; };
 		ABB38A621DB95F6D008BF59E /* UserDefinedAttributesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */; };
 		ABB38A631DB95F6D008BF59E /* ButtonStateBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */; };
 		ABB38A641DB95F6D008BF59E /* CodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */; };
@@ -97,6 +99,8 @@
 		AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorPropertyConfigurationTests.swift; sourceTree = "<group>"; };
 		AB530CD21DD101DE00B54516 /* WebBrowserViewController.xibtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WebBrowserViewController.xibtest; sourceTree = "<group>"; };
 		AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleXMLParserTests.swift; sourceTree = "<group>"; };
+		AB61CB461DD7A2C0009DB519 /* MappingKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingKey.swift; sourceTree = "<group>"; };
+		AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDefinition.swift; sourceTree = "<group>"; };
 		ABB389DA1DB95D00008BF59E /* eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
@@ -105,7 +109,7 @@
 		ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentBuilder.swift; sourceTree = "<group>"; };
 		ABB389F41DB95DDB008BF59E /* FontBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontBuilder.swift; sourceTree = "<group>"; };
 		ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueBuilder.swift; sourceTree = "<group>"; };
-		ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectBuilder.swift; sourceTree = "<group>"; };
+		ABB389F61DB95DDB008BF59E /* ObjectDefinition+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObjectDefinition+Builder.swift"; sourceTree = "<group>"; };
 		ABB389F71DB95DDB008BF59E /* OptionSetBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSetBuilder.swift; sourceTree = "<group>"; };
 		ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutletBuilder.swift; sourceTree = "<group>"; };
 		ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructBuilder.swift; sourceTree = "<group>"; };
@@ -115,11 +119,11 @@
 		ABB389FE1DB95DDB008BF59E /* Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 		ABB38A011DB95DDB008BF59E /* XIBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBDocument.swift; sourceTree = "<group>"; };
 		ABB38A041DB95DDB008BF59E /* Reference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
-		ABB38A051DB95DDB008BF59E /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
+		ABB38A051DB95DDB008BF59E /* ValueCodeGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueCodeGenerators.swift; sourceTree = "<group>"; };
 		ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Eject.swift"; sourceTree = "<group>"; };
 		ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableConfiguration.swift; sourceTree = "<group>"; };
 		ABB38A081DB95DDB008BF59E /* XIBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBParser.swift; sourceTree = "<group>"; };
-		ABB38A261DB95E04008BF59E /* AchorageConstraintBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchorageConstraintBuilder.swift; sourceTree = "<group>"; };
+		ABB38A261DB95E04008BF59E /* ConstraintBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintBuilder.swift; sourceTree = "<group>"; };
 		ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EjectKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB38A2F1DB95EA0008BF59E /* EjectKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EjectKit.h; sourceTree = "<group>"; };
 		ABB38A301DB95EA0008BF59E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,7 +132,7 @@
 		ABF8D9081DC0668A008D9178 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentsBuilder.swift; sourceTree = "<group>"; };
 		ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationContext.swift; sourceTree = "<group>"; };
-		ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueFormat.swift; sourceTree = "<group>"; };
+		ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValueFormat.swift; path = ValueFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,11 +165,11 @@
 		AB47D9A31DB5A3DD00A7B5E8 = {
 			isa = PBXGroup;
 			children = (
-				AB530CCC1DD101DE00B54516 /* Tests */,
-				AB477E2F1DBEAA1E000A0A56 /* README.md */,
 				ABB389E71DB95DDA008BF59E /* Eject */,
 				ABB389ED1DB95DDA008BF59E /* EjectKit */,
 				AB47D9AD1DB5A3DD00A7B5E8 /* Products */,
+				AB530CCC1DD101DE00B54516 /* Tests */,
+				AB477E2F1DBEAA1E000A0A56 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,10 +194,10 @@
 		AB530CCD1DD101DE00B54516 /* EjectKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				AB530CD11DD101DE00B54516 /* Resources */,
 				AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */,
 				AB530CCF1DD101DE00B54516 /* Info.plist */,
 				AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */,
-				AB530CD11DD101DE00B54516 /* Resources */,
 				AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */,
 			);
 			path = EjectKitTests;
@@ -205,6 +209,17 @@
 				AB530CD21DD101DE00B54516 /* WebBrowserViewController.xibtest */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		AB61CB481DD7A35C009DB519 /* CodeGenerators */ = {
+			isa = PBXGroup;
+			children = (
+				ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */,
+				ABB389FE1DB95DDB008BF59E /* Initializer.swift */,
+				ABB38A051DB95DDB008BF59E /* ValueCodeGenerators.swift */,
+				ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */,
+			);
+			path = CodeGenerators;
 			sourceTree = "<group>";
 		};
 		ABB389E71DB95DDA008BF59E /* Eject */ = {
@@ -219,19 +234,14 @@
 		ABB389ED1DB95DDA008BF59E /* EjectKit */ = {
 			isa = PBXGroup;
 			children = (
-				ABB38A2F1DB95EA0008BF59E /* EjectKit.h */,
-				ABB38A301DB95EA0008BF59E /* Info.plist */,
-				ABB38A081DB95DDB008BF59E /* XIBParser.swift */,
-				ABB38A001DB95DDB008BF59E /* Model */,
 				ABB389EF1DB95DDB008BF59E /* Builder */,
-				ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */,
-				ABB38A051DB95DDB008BF59E /* Values.swift */,
-				ABB389FE1DB95DDB008BF59E /* Initializer.swift */,
-				ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */,
-				ABB38A071DB95DDB008BF59E /* VariableConfiguration.swift */,
-				ABB389FD1DB95DDB008BF59E /* CodeGeneration.swift */,
+				AB61CB481DD7A35C009DB519 /* CodeGenerators */,
+				ABB38A001DB95DDB008BF59E /* Model */,
+				ABB38A2F1DB95EA0008BF59E /* EjectKit.h */,
 				ABB38A061DB95DDB008BF59E /* Foundation+Eject.swift */,
+				ABB38A301DB95EA0008BF59E /* Info.plist */,
 				AB530CBC1DD0CD8D00B54516 /* SimpleXMLParser.swift */,
+				ABB38A081DB95DDB008BF59E /* XIBParser.swift */,
 			);
 			path = EjectKit;
 			sourceTree = "<group>";
@@ -239,22 +249,22 @@
 		ABB389EF1DB95DDB008BF59E /* Builder */ = {
 			isa = PBXGroup;
 			children = (
-				ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */,
-				ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */,
-				ABB389F61DB95DDB008BF59E /* ObjectBuilder.swift */,
-				ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */,
-				ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */,
-				ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */,
-				ABB389F71DB95DDB008BF59E /* OptionSetBuilder.swift */,
-				ABB389F21DB95DDB008BF59E /* ColorBuilder.swift */,
-				ABB389F41DB95DDB008BF59E /* FontBuilder.swift */,
-				AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */,
-				ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */,
-				ABB38A261DB95E04008BF59E /* AchorageConstraintBuilder.swift */,
-				ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */,
-				ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */,
 				ABB38A6A1DB979A8008BF59E /* ActionBuilder.swift */,
+				AB477E311DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift */,
+				ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */,
+				ABB389F11DB95DDB008BF59E /* CocoaTouchBuilder.swift */,
+				ABB389F21DB95DDB008BF59E /* ColorBuilder.swift */,
+				ABB38A261DB95E04008BF59E /* ConstraintBuilder.swift */,
+				ABB389F31DB95DDB008BF59E /* DocumentBuilder.swift */,
+				ABB389F41DB95DDB008BF59E /* FontBuilder.swift */,
+				ABB389F51DB95DDB008BF59E /* KeyValueBuilder.swift */,
+				ABB389F61DB95DDB008BF59E /* ObjectDefinition+Builder.swift */,
+				ABB389F71DB95DDB008BF59E /* OptionSetBuilder.swift */,
+				ABB389F81DB95DDB008BF59E /* OutletBuilder.swift */,
 				ABF8D90A1DC1197C008D9178 /* SegmentsBuilder.swift */,
+				ABB389FA1DB95DDB008BF59E /* StructBuilder.swift */,
+				ABB389FB1DB95DDB008BF59E /* SubviewBuilder.swift */,
+				ABB389FC1DB95DDB008BF59E /* UserDefinedAttributesBuilder.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -262,9 +272,13 @@
 		ABB38A001DB95DDB008BF59E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ABB38A011DB95DDB008BF59E /* XIBDocument.swift */,
+				ABF8D90C1DC11A7C008D9178 /* ConfigurationContext.swift */,
+				AB61CB461DD7A2C0009DB519 /* MappingKey.swift */,
+				AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */,
 				ABB38A041DB95DDB008BF59E /* Reference.swift */,
 				AB477E331DBF8F2E000A0A56 /* Statement.swift */,
+				ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */,
+				ABB38A011DB95DDB008BF59E /* XIBDocument.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -467,8 +481,9 @@
 				ABB38A5E1DB95F6D008BF59E /* ColorBuilder.swift in Sources */,
 				ABF8D90D1DC11A7C008D9178 /* ConfigurationContext.swift in Sources */,
 				AB530CBD1DD0CD8D00B54516 /* SimpleXMLParser.swift in Sources */,
-				ABB38A541DB95F6D008BF59E /* Values.swift in Sources */,
+				ABB38A541DB95F6D008BF59E /* ValueCodeGenerators.swift in Sources */,
 				AB477E321DBEAD51000A0A56 /* AutoresizingMaskBuilder.swift in Sources */,
+				AB61CB4A1DD7A41E009DB519 /* ObjectDefinition.swift in Sources */,
 				ABB38A531DB95F6D008BF59E /* Reference.swift in Sources */,
 				ABB38A5D1DB95F6D008BF59E /* OptionSetBuilder.swift in Sources */,
 				ABB38A661DB95F6D008BF59E /* Foundation+Eject.swift in Sources */,
@@ -479,12 +494,13 @@
 				ABB38A651DB95F6D008BF59E /* Initializer.swift in Sources */,
 				ABF8D90B1DC1197C008D9178 /* SegmentsBuilder.swift in Sources */,
 				ABB38A561DB95F6D008BF59E /* DocumentBuilder.swift in Sources */,
+				AB61CB471DD7A2C0009DB519 /* MappingKey.swift in Sources */,
 				ABB38A6B1DB979A8008BF59E /* ActionBuilder.swift in Sources */,
 				ABB38A5F1DB95F6D008BF59E /* FontBuilder.swift in Sources */,
-				ABB38A581DB95F6D008BF59E /* ObjectBuilder.swift in Sources */,
+				ABB38A581DB95F6D008BF59E /* ObjectDefinition+Builder.swift in Sources */,
 				ABB38A621DB95F6D008BF59E /* UserDefinedAttributesBuilder.swift in Sources */,
 				ABB38A501DB95F6D008BF59E /* XIBDocument.swift in Sources */,
-				ABB38A611DB95F6D008BF59E /* AchorageConstraintBuilder.swift in Sources */,
+				ABB38A611DB95F6D008BF59E /* ConstraintBuilder.swift in Sources */,
 				ABB38A631DB95F6D008BF59E /* ButtonStateBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

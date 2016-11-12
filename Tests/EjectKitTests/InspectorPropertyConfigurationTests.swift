@@ -110,7 +110,7 @@ class InspectorParser: NSObject, XMLParserDelegate {
 
         if !guessedClassName.contains("-") {
             let viewSubclass = guessedClassName.contains("View") && !guessedClassName.contains("ViewController")
-            let creator = viewSubclass ? "view.inherit(" : "ObjectBuilder("
+            let creator = viewSubclass ? "view.inherit(" : "ObjectDefinition("
             return [
                 "// Class: \(guessedClassName)",
                 "let \(guessedElementName) = \(creator)",

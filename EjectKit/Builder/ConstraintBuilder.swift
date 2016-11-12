@@ -1,5 +1,5 @@
 //
-//  AchorageConstraintBuilder.swift
+//  ConstraintBuilder.swift
 //  Eject
 //
 //  Created by Brian King on 10/20/16.
@@ -89,7 +89,7 @@ struct AnchorageConfiguration: CodeGenerator {
     }
 }
 
-struct AchorageConstraintBuilder: Builder {
+struct ConstraintBuilder: Builder {
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }

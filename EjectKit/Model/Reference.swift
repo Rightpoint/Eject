@@ -24,7 +24,6 @@ public class Reference {
     init(identifier: String, className: String, userLabel: String?) {
         self.identifier = identifier
         self.className = className
-
         self.userLabel = userLabel?.components(separatedBy: Reference.invalidCharacterSet).joined(separator: " ")
     }
 }

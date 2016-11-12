@@ -446,7 +446,7 @@ class EjectTests: XCTestCase {
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }
         for path in xibs {
             do {
-                guard path.lastPathComponent != "" else {
+                guard path.lastPathComponent == "InformationDetailView.xib" else {
                     continue
                 }
                 print("File: \(path.lastPathComponent)")
