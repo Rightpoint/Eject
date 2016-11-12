@@ -11,7 +11,8 @@ Yes, I understand that this is probably a bad idea. But it might not be.
 ### Usage
 
 ```
-# Help me set up `brew install eject`, or copy `eject` out of the xcode project build
+# Help me set up `brew install eject`, these instructions are terrible:
+export PATH=$PATH:<<<drag eject.app from the Products dir in xcode>>>/Contents/MacOS
 
 eject --file /path/to/MassiveViewController.xib
 

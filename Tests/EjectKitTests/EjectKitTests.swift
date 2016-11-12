@@ -405,7 +405,7 @@ class EjectTests: XCTestCase {
     func testTableViewCell() {
         let xml = wrap("<tableViewCell clearsContextBeforeDrawing='NO' contentMode='scaleToFill' selectionStyle='none' indentationWidth='10' reuseIdentifier='snoozeToggleCellId' id='i5M-Pr-FkT' userLabel='Table View Cell (Snooze Toggle)'><rect key='frame' x='0.0' y='0.0' width='320' height='44'/><autoresizingMask key='autoresizingMask' flexibleMaxX='YES' flexibleMaxY='YES'/><tableViewCellContentView key='contentView' opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='center' tableViewCell='27' id='20C-qx-qiB'><rect key='frame' x='0.0' y='0.0' width='320' height='43'/><autoresizingMask key='autoresizingMask'/><subviews><label opaque='NO' clipsSubviews='YES' userInteractionEnabled='NO' contentMode='scaleToFill' fixedFrame='YES' text='Snooze' lineBreakMode='tailTruncation' minimumFontSize='10' useAutomaticPreferredMaxLayoutWidth='YES' translatesAutoresizingMaskIntoConstraints='NO' id='29'><rect key='frame' x='20' y='13' width='135' height='21'/>                        <fontDescription key='fontDescription' type='system' pointSize='17'/><color key='textColor' cocoaTouchSystemColor='darkTextColor'/><nil key='highlightedColor'/></label></subviews></tableViewCellContentView><color key='backgroundColor' red='1' green='1' blue='1' alpha='1' colorSpace='calibratedRGB'/><point key='canvasLocation' x='-46' y='552'/></tableViewCell>")
         checkXML(xml, [
-            "let tableViewCellSnoozeToggle = UITableViewCell()",
+            "let tableViewCellSnoozeToggle = UITableViewCell(reuseIdentifier: \"snoozeToggleCellId\")",
             "tableViewCellSnoozeToggle.clearsContextBeforeDrawing = false",
             "tableViewCellSnoozeToggle.selectionStyle = .none",
             "tableViewCellSnoozeToggle.indentationWidth = 10",
@@ -435,7 +435,6 @@ class EjectTests: XCTestCase {
             "tableViewCellSnoozeToggle.contentView.contentMode = .center",
             "self.view = tableViewCellSnoozeToggle",
             ], warnings: [
-                "document.objects.tableViewCell: reuseIdentifier='snoozeToggleCellId'",
                 "document.objects.tableViewCell.tableViewCellContentView.subviews.label: useAutomaticPreferredMaxLayoutWidth='YES'",
                 "Can not configure XML nodes 'point'",
             ])
