@@ -10,7 +10,7 @@ import XCTest
 import Foundation
 @testable import EjectKit
 
-func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], configuration: Configuration = Configuration(), file: StaticString = #file, line: UInt = #line) {
+func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], configuration: Configuration = Configuration(useFrames: false, constraint: .anchorage, selfIdentifier: "-1"), file: StaticString = #file, line: UInt = #line) {
     do {
         let document = try XIBDocument.load(xml: xml, configuration: configuration)
         guard document.references.count > 0 else {

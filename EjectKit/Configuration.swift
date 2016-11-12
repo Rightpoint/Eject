@@ -20,4 +20,5 @@ public struct Configuration {
     var useFrames: Bool = false
     var constraint: ConstraintConfiguration = .anchor
     var selfIdentifier: String? = "-1"
+    public init() {}
 }

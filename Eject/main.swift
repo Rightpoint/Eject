@@ -38,7 +38,7 @@ let path = URL(fileURLWithPath: arguments.last!)
 
 do {
     let data = try Data(contentsOf: path)
-    let builder = try XIBParser(data: data)
+    let builder = try XIBParser(data: data, configuration: Configuration())
     printWarning(message: builder.document.warnings.map() { $0.message }.joined(separator: "\n"))
 
     let code = try builder.document.generateCode()
