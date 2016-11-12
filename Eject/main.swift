@@ -41,7 +41,7 @@ do {
     let builder = try XIBParser(data: data)
     printWarning(message: builder.document.warnings.map() { $0.message }.joined(separator: "\n"))
 
-    let code = builder.document.generateCode()
+    let code = try builder.document.generateCode()
     print(code.joined(separator: "\n"))
 }
 catch {
