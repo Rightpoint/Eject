@@ -12,7 +12,8 @@ struct ColorBuilder: Builder {
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        let key = try attributes.removeRequiredValue(forKey: "key")
+        var key = try attributes.removeRequiredValue(forKey: "key")
+        if key == "highlightedColor" { key = "highlightedTextColor" }
         let alpha = try attributes.removeFloatString(forKey: "alpha") ?? "1"
         attributes.removeValue(forKey: "colorSpace")
         attributes.removeValue(forKey: "customColorSpace")

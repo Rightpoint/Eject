@@ -14,10 +14,14 @@ import Foundation
 
 extension DocumentBuilder {
 
+    static var ignoredElements = ["freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "modalFormSheetSimulatedSizeMetrics", "simulatedNavigationBarMetrics", "simulatedTabBarMetrics"]
+
     func registerPrimitives() {
         // Register all the configuration nodes. These do not create objects, but apply configuration to existing objects
+        var ignored = DocumentBuilder.ignoredElements
+        ignored.append("highlightedColor")
         register("rect", RectBuilder())
-        register("nil", KeyValueBuilder(value: "nil"))
+        register("nil", KeyValueBuilder(value: "nil", ignoredKeys: ignored))
         register("dataDetectorType", OptionSetBuilder())
         register("userDefinedRuntimeAttribute", UserDefinedAttributeBuilder())
         register("autoresizingMask", AutoresizingMaskBuilder())
@@ -39,7 +43,7 @@ extension DocumentBuilder {
             register(noopElement, NoOpBuilder())
         }
         // These are leaf containers that should do nothing
-        for noopElement in ["freeformSimulatedSizeMetrics", "simulatedMetricsContainer", "simulatedStatusBarMetrics", "simulatedOrientationMetrics", "simulatedScreenMetrics", "modalFormSheetSimulatedSizeMetrics", "simulatedNavigationBarMetrics", "simulatedTabBarMetrics"] {
+        for noopElement in DocumentBuilder.ignoredElements {
             register(noopElement, NoOpBuilder())
         }
 
@@ -123,18 +127,18 @@ extension DocumentBuilder {
                 .build("contentMode", .enumeration, "scaleToFill"),
                 .build("semanticContentAttribute", .enumeration),
                 .build("tag", .number),
-                .build("fixedFrame", .boolean, "YES", .ignore),
+                .build("fixedFrame", .boolean, "", .ignore),
                 .build(.addIsPrefix("userInteractionEnabled"), .boolean, "true"),
                 .build(.addIsPrefix("multipleTouchEnabled"), .boolean, "false"),
                 .build("alpha", .number),
                 .build(.addIsPrefix("opaque"), .boolean, "true"),
                 .build(.addIsPrefix("hidden"), .boolean, "false"),
-                .build("clearsContextBeforeDrawing", .boolean, "false"),
-                .build("clipsToBounds", .boolean, "false"),
+                .build("clearsContextBeforeDrawing", .boolean, "true"),
                 .build("preservesSuperviewLayoutMargins", .boolean),
                 .build("layoutMarginsFollowReadableWidth", .boolean),
                 .build("simulatedAppContext", .enumeration),
                 .build("translatesAutoresizingMaskIntoConstraints", .boolean),
+                .build("clipsToBounds", .boolean, "false"),
                 .build(.map("clipsSubviews", "clipsToBounds"), .boolean, "false"),
                 .build("horizontalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
                 .build("verticalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)")),
@@ -169,7 +173,7 @@ extension DocumentBuilder {
         let activityIndicatorView = view.inherit(
             className: "UIActivityIndicatorView",
             properties: [
-                .build("style", .enumeration),
+                .build(.map("style", "activityIndicatorStyle"), .enumeration, "", .inject),
                 .build(.addIsPrefix("animating"), .boolean, ""),
                 .build("hidesWhenStopped", .boolean, "true")]
         )
@@ -192,7 +196,8 @@ extension DocumentBuilder {
                 .build("highlighted", .boolean),
                 .build("placeholderIntrinsicWidth", .number, "", .ignore), // Used by IB
                 .build("placeholderIntrinsicHeight", .number, "", .ignore), // Used by IB
-                .build("image", .image)
+                .build("image", .image),
+                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "false"),
             ]
         )
         register("imageView", imageView)
@@ -202,6 +207,7 @@ extension DocumentBuilder {
                 .build("textAlignment", .enumeration),
                 .build(.map("adjustsFontSizeToFit", "adjustsFontSizeToFitWidth"), .boolean, "false"),
                 .build(.map("adjustsLetterSpacingToFitWidth", "allowsDefaultTighteningForTruncation"), .boolean, "false"),
+                .build(.addIsPrefix("userInteractionEnabled"), .boolean, "false"),
                 .build("lineBreakMode", .transformed(lineBreakMappings, .enumeration)),
                 .build("numberOfLines", .number),
                 .build("enabled", .boolean),

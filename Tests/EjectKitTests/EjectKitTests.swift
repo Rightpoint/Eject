@@ -314,7 +314,6 @@ class EjectTests: XCTestCase {
             "label.frame = CGRect(x: 36, y: 36, width: 52, height: 14)",
             "label.font = UIFont(name: \"Gotham-Book\", size: 14)",
             "label.textColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1)",
-            "label.highlightedColor = nil",
             "",
             "view.addSubview(label)",
             "view.addSubview(circularToggleView)",
@@ -425,7 +424,6 @@ class EjectTests: XCTestCase {
             "label.frame = CGRect(x: 20, y: 13, width: 135, height: 21)",
             "label.font = .systemFont(ofSize: 17)",
             "label.textColor = UIColor.darkText",
-            "label.highlightedColor = nil",
             "",
             "tableViewCellSnoozeToggle.contentView.addSubview(label)",
             "",
@@ -451,7 +449,9 @@ class EjectTests: XCTestCase {
         let xibs = (files ?? []).filter() { $0.pathExtension == "xib" }
         for path in xibs {
             do {
-                if path.lastPathComponent != "MainWindow.xib" { continue }
+                guard path.lastPathComponent != "" else {
+                    continue
+                }
                 print("File: \(path.lastPathComponent)")
                 let data = try Data(contentsOf: path)
                 let builder = try XIBParser(data: data)
