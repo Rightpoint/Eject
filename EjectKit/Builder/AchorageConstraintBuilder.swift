@@ -57,7 +57,8 @@ struct AnchorageConfiguration: CodeGenerator {
         }
 
         if let multiplier = multiplier {
-            constraintParts.append("* \(multiplier)")
+            // IB will represent the multiplier as X:Y for aspect ratios. Convert it to math.
+            constraintParts.append("* \(multiplier.replacingOccurrences(of: ":", with: "/"))")
         }
 
         if let constant = constant?.floatValue {
