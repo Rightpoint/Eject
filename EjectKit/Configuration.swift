@@ -11,14 +11,14 @@ import Foundation
 /// Simple configuration struct.
 public struct Configuration {
     var useFrames: Bool = false
-    var constraint: ConstraintConfiguration = .anchor
+    public var constraint: ConstraintConfiguration = .anchor
     var selfIdentifier: String? = nil
     public init() {	}
 }
 
-enum ConstraintConfiguration {
-    case anchor
-    case anchorage
+public enum ConstraintConfiguration: String {
+    case anchor = "NSLayoutAnchor"
+    case anchorage = "Anchorage"
     var useTranslateAutoresizingMask: Bool {
         return self != .anchorage
     }
