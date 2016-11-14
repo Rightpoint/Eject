@@ -21,15 +21,15 @@ indirect enum AssociationContext {
     // This adds support for `forState: .normal`
     case setter(suffix: String)
 
-    // This can over-ride the key and invoke a method with one argument instead
+    // Specify the format of the invocation. This ignores the key and creates prefix + value + suffix. Format was breaking on Linux somehow.
     case invocation(prefix: String, suffix: String)
 
-    // Append a comment after the configuration
+    // Take any association and add a comment
     case withComment(String, AssociationContext)
 
-    // Inject into the object constructor
+    // Inject the value into the object constructor
     case inject
 
-    // Ignore the key
+    // Ignore this association
     case ignore
 }

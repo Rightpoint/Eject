@@ -141,19 +141,21 @@ public class XIBDocument {
     }
 
     public func scanForDuplicateVariableNames() {
-        var names: Set<String> = []
-        var warned: Set<String> = []
+        var names: [String:[Reference]] = [:]
         for object in references {
             // Don't count objects that don't have any dependencies
             guard hasDependencies(for: object.identifier) else { continue }
             let variable = self.variable(for: object)
-            if names.contains(variable) && !warned.contains(variable) {
-                let message = "Variable '\(variable): \(object.className)' was generated multiple times."
-                warnings.append(.duplicateVariable(message))
-                warned.insert(variable)
-            }
-            else {
-                names.insert(variable)
+            var objects = names[variable] ?? []
+            objects.append(object)
+            names[variable] = objects
+        }
+        for (name, objects) in names {
+            guard objects.count > 1 else { continue }
+            let message = "Variable '\(variable): \(objects[0].className)' was generated \(objects.count) times."
+            warnings.append(.duplicateVariable(message))
+            for (index, object) in objects.enumerated() {
+                variableNameOverrides[object.identifier] = { _ in "\(name)\(index + 1)" }
             }
         }
     }

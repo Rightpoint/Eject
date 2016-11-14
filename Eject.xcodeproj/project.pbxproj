@@ -277,14 +277,14 @@
 		ABB38A001DB95DDB008BF59E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AB6415D41DD7A9F500FD0C6C /* Configuration.swift */,
-				ABF8D90C1DC11A7C008D9178 /* AssociationContext.swift */,
-				AB61CB461DD7A2C0009DB519 /* MappingKey.swift */,
+				ABB38A011DB95DDB008BF59E /* XIBDocument.swift */,
 				AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */,
 				ABB38A041DB95DDB008BF59E /* Reference.swift */,
 				AB477E331DBF8F2E000A0A56 /* Statement.swift */,
 				ABF8D90E1DC11E75008D9178 /* ValueFormat.swift */,
-				ABB38A011DB95DDB008BF59E /* XIBDocument.swift */,
+				ABF8D90C1DC11A7C008D9178 /* AssociationContext.swift */,
+				AB6415D41DD7A9F500FD0C6C /* Configuration.swift */,
+				AB61CB461DD7A2C0009DB519 /* MappingKey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

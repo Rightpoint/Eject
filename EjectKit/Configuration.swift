@@ -8,6 +8,14 @@
 
 import Foundation
 
+/// Simple configuration struct.
+public struct Configuration {
+    var useFrames: Bool = false
+    var constraint: ConstraintConfiguration = .anchor
+    var selfIdentifier: String? = nil
+    public init() {	}
+}
+
 enum ConstraintConfiguration {
     case anchor
     case anchorage
@@ -16,9 +24,3 @@ enum ConstraintConfiguration {
     }
 }
 
-public struct Configuration {
-    var useFrames: Bool = false
-    var constraint: ConstraintConfiguration = .anchor
-    var selfIdentifier: String? = "-1"
-    public init() {}
-}

@@ -13,12 +13,19 @@ extension ObjectDefinition: Builder {
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         // if a key is specified, the ID can be nil, so just generate a UUID in that case.
         let identifier = attributes.removeValue(forKey: "id") ?? UUID().uuidString
+        let customClass = attributes.removeValue(forKey: "customClass")
+
+        // If this is a top level object with a custom class, select this identifier as self.
+        if customClass != nil && customClass != "UIResponder" && parent == nil && document.configuration.selfIdentifier == nil {
+            document.configuration.selfIdentifier = identifier
+        }
+
         for key in ["customModule", "placeholderIdentifier", "customModuleProvider", "misplaced"] {
             attributes.removeValue(forKey: key)
         }
 
         let declaration: XIBDocument.Declaration
-        if placeholder {
+        if placeholder || document.configuration.selfIdentifier == identifier {
             declaration = .placeholder
         }
         else {
@@ -27,7 +34,7 @@ extension ObjectDefinition: Builder {
         let object = document.addObject(
             for: identifier,
             definition: self,
-            customSubclass: attributes.removeValue(forKey: "customClass"),
+            customSubclass: customClass,
             userLabel: attributes.removeValue(forKey: "userLabel"),
             declaration: declaration
         )

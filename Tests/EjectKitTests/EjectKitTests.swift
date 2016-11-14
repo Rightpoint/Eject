@@ -10,8 +10,13 @@ import XCTest
 import Foundation
 @testable import EjectKit
 
-func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], configuration: Configuration = Configuration(useFrames: false, constraint: .anchorage, selfIdentifier: "-1"), file: StaticString = #file, line: UInt = #line) {
+func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], configuration: Configuration? = nil, file: StaticString = #file, line: UInt = #line) {
     do {
+        let configuration = configuration ?? {
+            var configuration = Configuration()
+            configuration.constraint = .anchorage
+            return configuration
+        }()
         let document = try XIBDocument.load(xml: xml, configuration: configuration)
         guard document.references.count > 0 else {
             XCTFail("No objects in the document", file: file, line: line - 1)
@@ -469,6 +474,7 @@ class EjectTests: XCTestCase {
                 var configuration = Configuration()
                 configuration.constraint = .anchor
                 let builder = try XIBParser(data: data, configuration: configuration)
+                builder.document.scanForDuplicateVariableNames()
                 let code = try builder.document.generateCode()
                 if "print" == "print"{
                     print(code.joined(separator: "\n"))
