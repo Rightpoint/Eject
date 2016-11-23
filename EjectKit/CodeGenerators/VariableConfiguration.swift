@@ -51,6 +51,8 @@ private extension AssociationContext {
             fatalError("`.ignore` should never be configured on a VariableContext")
         case .inject:
             fatalError("`.inject` should never be configured on a VariableContext")
+        case .placeholder:
+            fatalError("`.placeholder` should never be configured on a VariableContext")
         }
     }
 }

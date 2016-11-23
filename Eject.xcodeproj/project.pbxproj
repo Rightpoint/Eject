@@ -15,6 +15,11 @@
 		AB61CB471DD7A2C0009DB519 /* MappingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB61CB461DD7A2C0009DB519 /* MappingKey.swift */; };
 		AB61CB4A1DD7A41E009DB519 /* ObjectDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */; };
 		AB6415D51DD7A9F500FD0C6C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6415D41DD7A9F500FD0C6C /* Configuration.swift */; };
+		AB9EF7A01DE61A910097C3FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9EF79F1DE61A910097C3FC /* AppDelegate.swift */; };
+		AB9EF7A21DE61A910097C3FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9EF7A11DE61A910097C3FC /* ViewController.swift */; };
+		AB9EF7A71DE61A910097C3FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB9EF7A61DE61A910097C3FC /* Assets.xcassets */; };
+		AB9EF7AA1DE61A910097C3FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9EF7A81DE61A910097C3FC /* LaunchScreen.storyboard */; };
+		AB9EF7B01DE61AE40097C3FC /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9EF7AF1DE61AE40097C3FC /* ViewController.xib */; };
 		ABB1603C1DD27FCE00EA0F62 /* EjectKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CCE1DD101DE00B54516 /* EjectKitTests.swift */; };
 		ABB1603D1DD27FCE00EA0F62 /* InspectorPropertyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD01DD101DE00B54516 /* InspectorPropertyConfigurationTests.swift */; };
 		ABB1603E1DD27FCE00EA0F62 /* SimpleXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB530CD31DD101DE00B54516 /* SimpleXMLParserTests.swift */; };
@@ -105,6 +110,13 @@
 		AB61CB461DD7A2C0009DB519 /* MappingKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingKey.swift; sourceTree = "<group>"; };
 		AB61CB491DD7A41E009DB519 /* ObjectDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDefinition.swift; sourceTree = "<group>"; };
 		AB6415D41DD7A9F500FD0C6C /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = ../Configuration.swift; sourceTree = "<group>"; };
+		AB9EF79D1DE61A910097C3FC /* CocoaTouchExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaTouchExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB9EF79F1DE61A910097C3FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AB9EF7A11DE61A910097C3FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AB9EF7A61DE61A910097C3FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AB9EF7A91DE61A910097C3FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AB9EF7AB1DE61A910097C3FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB9EF7AF1DE61AE40097C3FC /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		ABB389DA1DB95D00008BF59E /* eject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB389EC1DB95DDA008BF59E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABB389F01DB95DDB008BF59E /* ButtonStateBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStateBuilder.swift; sourceTree = "<group>"; };
@@ -140,6 +152,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AB9EF79A1DE61A910097C3FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABB389D71DB95D00008BF59E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,11 +188,12 @@
 		AB47D9A31DB5A3DD00A7B5E8 = {
 			isa = PBXGroup;
 			children = (
+				AB477E2F1DBEAA1E000A0A56 /* README.md */,
 				ABB389E71DB95DDA008BF59E /* Eject */,
 				ABB389ED1DB95DDA008BF59E /* EjectKit */,
 				AB47D9AD1DB5A3DD00A7B5E8 /* Products */,
 				AB530CCC1DD101DE00B54516 /* Tests */,
-				AB477E2F1DBEAA1E000A0A56 /* README.md */,
+				AB9EF79E1DE61A910097C3FC /* CocoaTouchExample */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,6 +203,7 @@
 				ABB389DA1DB95D00008BF59E /* eject.app */,
 				ABB38A2D1DB95EA0008BF59E /* EjectKit.framework */,
 				ABB38A351DB95EA0008BF59E /* EjectKitTests.xctest */,
+				AB9EF79D1DE61A910097C3FC /* CocoaTouchExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,6 +246,19 @@
 				AB05071A1DD7BA35005B5427 /* ConstraintCodeGenerator.swift */,
 			);
 			path = CodeGenerators;
+			sourceTree = "<group>";
+		};
+		AB9EF79E1DE61A910097C3FC /* CocoaTouchExample */ = {
+			isa = PBXGroup;
+			children = (
+				AB9EF79F1DE61A910097C3FC /* AppDelegate.swift */,
+				AB9EF7A11DE61A910097C3FC /* ViewController.swift */,
+				AB9EF7AF1DE61AE40097C3FC /* ViewController.xib */,
+				AB9EF7A61DE61A910097C3FC /* Assets.xcassets */,
+				AB9EF7A81DE61A910097C3FC /* LaunchScreen.storyboard */,
+				AB9EF7AB1DE61A910097C3FC /* Info.plist */,
+			);
+			path = CocoaTouchExample;
 			sourceTree = "<group>";
 		};
 		ABB389E71DB95DDA008BF59E /* Eject */ = {
@@ -303,6 +337,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		AB9EF79C1DE61A910097C3FC /* CocoaTouchExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB9EF7AE1DE61A910097C3FC /* Build configuration list for PBXNativeTarget "CocoaTouchExample" */;
+			buildPhases = (
+				AB9EF7991DE61A910097C3FC /* Sources */,
+				AB9EF79A1DE61A910097C3FC /* Frameworks */,
+				AB9EF79B1DE61A910097C3FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaTouchExample;
+			productName = CocoaTouchExample;
+			productReference = AB9EF79D1DE61A910097C3FC /* CocoaTouchExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		ABB389D91DB95D00008BF59E /* eject */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "eject" */;
@@ -371,6 +422,10 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Brian King";
 				TargetAttributes = {
+					AB9EF79C1DE61A910097C3FC = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
 					ABB389D91DB95D00008BF59E = {
 						CreatedOnToolsVersion = 8.0;
 						LastSwiftMigration = 0800;
@@ -402,11 +457,22 @@
 				ABB389D91DB95D00008BF59E /* eject */,
 				ABB38A2C1DB95EA0008BF59E /* EjectKit */,
 				ABB38A341DB95EA0008BF59E /* EjectKitTests */,
+				AB9EF79C1DE61A910097C3FC /* CocoaTouchExample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AB9EF79B1DE61A910097C3FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB9EF7AA1DE61A910097C3FC /* LaunchScreen.storyboard in Resources */,
+				AB9EF7B01DE61AE40097C3FC /* ViewController.xib in Resources */,
+				AB9EF7A71DE61A910097C3FC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABB389D81DB95D00008BF59E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -466,6 +532,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AB9EF7991DE61A910097C3FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB9EF7A21DE61A910097C3FC /* ViewController.swift in Sources */,
+				AB9EF7A01DE61A910097C3FC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABB389D61DB95D00008BF59E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -537,6 +612,17 @@
 			targetProxy = ABB38A401DB95EA0008BF59E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AB9EF7A81DE61A910097C3FC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB9EF7A91DE61A910097C3FC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AB47D9B11DB5A3DD00A7B5E8 /* Debug */ = {
@@ -624,6 +710,41 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AB9EF7AC1DE61A910097C3FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = CocoaTouchExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.CocoaTouchExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB9EF7AD1DE61A910097C3FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = CocoaTouchExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.CocoaTouchExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -755,6 +876,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		AB9EF7AE1DE61A910097C3FC /* Build configuration list for PBXNativeTarget "CocoaTouchExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB9EF7AC1DE61A910097C3FC /* Debug */,
+				AB9EF7AD1DE61A910097C3FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		ABB389E41DB95D00008BF59E /* Build configuration list for PBXNativeTarget "eject" */ = {
 			isa = XCConfigurationList;

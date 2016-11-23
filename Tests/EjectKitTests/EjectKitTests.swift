@@ -426,6 +426,38 @@ class EjectTests: XCTestCase {
             ])
     }
 
+    func testTableViewCellStyle() {
+        let xml = wrap("<tableViewCell clipsSubviews='YES' contentMode='scaleToFill' selectionStyle='gray' accessoryType='checkmark' indentationLevel='1' indentationWidth='10' reuseIdentifier='BasicReuseIdentifier' editingAccessoryType='detailDisclosureButton' textLabel='BX3-qh-zd1' style='IBUITableViewCellStyleDefault' id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='375' height='44'/><autoresizingMask key='autoresizingMask'/><tableViewCellContentView key='contentView' opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='center' tableViewCell='i5M-Pr-FkT' id='xrm-nT-9EU'><frame key='frameInset' width='336' height='43'/><autoresizingMask key='autoresizingMask'/><subviews><label opaque='NO' multipleTouchEnabled='YES' contentMode='left' text='Title' textAlignment='natural' lineBreakMode='tailTruncation' baselineAdjustment='alignBaselines' adjustsFontSizeToFit='NO' id='BX3-qh-zd1'><frame key='frameInset' minX='25' width='311' height='43'/><autoresizingMask key='autoresizingMask'/><fontDescription key='fontDescription' type='system' pointSize='17'/><nil key='textColor'/><nil key='highlightedColor'/></label></subviews></tableViewCellContentView><inset key='separatorInset' minX='15' minY='0.0' maxX='0.0' maxY='0.0'/></tableViewCell>")
+        checkXML(xml, [
+            "let tableViewCell = UITableViewCell(style: .default, reuseIdentifier: \"BasicReuseIdentifier\")",
+            "tableViewCell.selectionStyle = .gray",
+            "tableViewCell.accessoryType = .checkmark",
+            "tableViewCell.editingAccessoryType = .detailDisclosureButton",
+            "tableViewCell.indentationLevel = 1",
+            "tableViewCell.indentationWidth = 10",
+            "tableViewCell.clipsToBounds = true",
+            "tableViewCell.autoresizingMask = []",
+            "tableViewCell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)",
+            "",
+            "tableViewCell.textLabel?.textColor = nil",
+            "tableViewCell.textLabel?.font = .systemFont(ofSize: 17)",
+            "tableViewCell.textLabel?.autoresizingMask = []",
+            "tableViewCell.textLabel?.isOpaque = false",
+            "tableViewCell.textLabel?.isMultipleTouchEnabled = true",
+            "tableViewCell.textLabel?.contentMode = .left",
+            "tableViewCell.textLabel?.text = \"Title\"",
+            "tableViewCell.textLabel?.baselineAdjustment = .alignBaselines",
+            "tableViewCell.textLabel?.lineBreakMode = .byTruncatingTail",
+            "tableViewCell.textLabel?.textAlignment = .natural",
+            "tableViewCell.contentView.autoresizingMask = []",
+            "tableViewCell.contentView.clipsToBounds = true",
+            "tableViewCell.contentView.isOpaque = false",
+            "tableViewCell.contentView.isMultipleTouchEnabled = true",
+            "tableViewCell.contentView.contentMode = .center",
+            "self.view = tableViewCell",
+            ])
+    }
+
     func testTableViewCell() {
         let xml = wrap("<tableViewCell clearsContextBeforeDrawing='NO' contentMode='scaleToFill' selectionStyle='none' indentationWidth='10' reuseIdentifier='snoozeToggleCellId' id='i5M-Pr-FkT' userLabel='Table View Cell (Snooze Toggle)'><rect key='frame' x='0.0' y='0.0' width='320' height='44'/><autoresizingMask key='autoresizingMask' flexibleMaxX='YES' flexibleMaxY='YES'/><tableViewCellContentView key='contentView' opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='center' tableViewCell='27' id='20C-qx-qiB'><rect key='frame' x='0.0' y='0.0' width='320' height='43'/><autoresizingMask key='autoresizingMask'/><subviews><label opaque='NO' clipsSubviews='YES' userInteractionEnabled='NO' contentMode='scaleToFill' fixedFrame='YES' text='Snooze' lineBreakMode='tailTruncation' minimumFontSize='10' useAutomaticPreferredMaxLayoutWidth='YES' translatesAutoresizingMaskIntoConstraints='NO' id='29'><rect key='frame' x='20' y='13' width='135' height='21'/>                        <fontDescription key='fontDescription' type='system' pointSize='17'/><color key='textColor' cocoaTouchSystemColor='darkTextColor'/><nil key='highlightedColor'/></label></subviews></tableViewCellContentView><color key='backgroundColor' red='1' green='1' blue='1' alpha='1' colorSpace='calibratedRGB'/><point key='canvasLocation' x='-46' y='552'/></tableViewCell>")
         checkXML(xml, [

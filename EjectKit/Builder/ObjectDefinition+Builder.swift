@@ -25,7 +25,7 @@ extension ObjectDefinition: Builder {
         }
 
         let declaration: XIBDocument.Declaration
-        if placeholder || document.configuration.selfIdentifier == identifier {
+        if placeholder || document.placeholders.contains(identifier) || document.configuration.selfIdentifier == identifier {
             declaration = .placeholder
         }
         else {
@@ -105,6 +105,12 @@ extension ObjectDefinitionPropertyContainer {
                 if property.injected {
                     // If the property is injected, just add the value
                     try document.lookupReference(for: identifier).values[property.key.property] = BasicValue(value: value, format: property.format)
+                }
+                else if case .placeholder(let property) = property.context {
+                    document.placeholders.append(value)
+                    document.variableNameOverrides[value] = { document in
+                        return [document.variable(for: object), property].joined(separator: ".")
+                    }
                 }
                 else if value != property.defaultValue && !property.ignored {
                     try document.addVariableConfiguration(

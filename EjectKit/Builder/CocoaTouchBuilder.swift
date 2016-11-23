@@ -38,7 +38,7 @@ extension DocumentBuilder {
         register("placeholder", ObjectDefinition(className: "", placeholder: true))
         register("customObject", ObjectDefinition(className: "NSObject"))
         register("blurEffect", BasicBuilder(key: "style", format: .enumeration))
-        // These two tags are containers that do not need a builder
+        // These tags are containers that do not need a builder
         for noopElement in ["userDefinedRuntimeAttributes", "connections", "constraints", "resources", "image", "gestureRecognizers"] {
             register(noopElement, NoOpBuilder())
         }
@@ -46,6 +46,9 @@ extension DocumentBuilder {
         for noopElement in DocumentBuilder.ignoredElements {
             register(noopElement, NoOpBuilder())
         }
+        // frame elements only supply a width and height and are set to `frameInset` on cells.
+        // This doesn't translate to anything useful, so ignore here.
+        register("frame", NoOpBuilder())
 
 
         for type in ["integer", "real"] {
@@ -287,6 +290,7 @@ extension DocumentBuilder {
         let tableViewCell = view.inherit(
             className: "UITableViewCell",
             properties: [
+                .build("style", .transformed(cellStyleMappings, .enumeration), "", .inject),
                 .build("reuseIdentifier", .string, "", .inject),
                 .build("selectionStyle", .enumeration),
                 .build("accessoryType", .enumeration),
@@ -296,6 +300,8 @@ extension DocumentBuilder {
                 .build("indentationWidth", .number),
                 .build("shouldIndentWhileEditing", .boolean),
                 .build("showsReorderControl", .boolean),
+                .build("textLabel", .raw, "", .placeholder(property: "textLabel?")),
+                .build("detailTextLabel", .raw, "", .placeholder(property: "detailTextLabel?")),
                 .build("rowHeight", .number)
             ]
         )
@@ -619,6 +625,13 @@ let lineBreakMappings: [String: String]  = [
     "headTruncation": "byTruncatingHead",
     "tailTruncation": "byTruncatingTail",
     "middleTruncation": "byTruncatingMiddle",
+]
+
+let cellStyleMappings: [String: String]  = [
+    "IBUITableViewCellStyleDefault": "default",
+    "IBUITableViewCellStyleValue1": "value1",
+    "IBUITableViewCellStyleValue2": "value2",
+    "IBUITableViewCellStyleSubtitle": "subtitle",
 ]
 
 

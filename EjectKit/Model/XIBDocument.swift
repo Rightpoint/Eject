@@ -14,7 +14,7 @@ public class XIBDocument {
 
     public static func load(xml content: String, configuration: Configuration) throws -> XIBDocument {
         guard let data = content.data(using: String.Encoding.utf8) else {
-            fatalError("Unable to convert to UTF8")
+            throw Error.inputIsNotUTF8
         }
 
         let parser = try XIBParser(data: data, configuration: configuration)
@@ -22,8 +22,11 @@ public class XIBDocument {
     }
 
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
-    var statements: [Statement] = []
     var references: [Reference] = []
+    // Some items in the xib initialize child nodes automatically. This is the collection of those child nodes that should be treated as placeholders.
+    var placeholders: [String] = []
+    // All of the statements declared by the document
+    var statements: [Statement] = []
     var variableNameOverrides: [String: (XIBDocument) -> String] = [:]
     var documentInformation: [String: String] = [:]
 
@@ -47,6 +50,11 @@ public class XIBDocument {
                 return message
             }
         }
+    }
+
+    public enum Error: Swift.Error {
+        case invalidReference(String)
+        case inputIsNotUTF8
     }
     public var warnings: [Warning] = []
     var missingElementNames: Set<String> = []
@@ -84,7 +92,7 @@ public class XIBDocument {
                 return reference
             }
         }
-        fatalError("Unknown identifier \(identifier)")
+        throw Error.invalidReference(identifier)
     }
 
     func hasDependencies(for identifier: String) -> Bool {

@@ -39,6 +39,10 @@ struct SubviewBuilder: Builder, ContainerBuilder {
     }
 
     func didAddChild(object: Reference, to parent: Reference, document: XIBDocument) {
+        guard !document.placeholders.contains(object.identifier) else {
+            // If the object is a placeholder, assume that it has already been added to the view hierarchy.
+            return
+        }
         document.addStatement(
             SubviewConfiguration(objectIdentifier: parent.identifier, subview: object),
             phase: .subviews
