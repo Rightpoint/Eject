@@ -37,8 +37,13 @@ private extension AssociationContext {
         case let .setter(context):
             let label = "set \(key)".snakeCased()
             return "\(variable).\(label)(\(valueString), \(context))"
-        case let .invocation(prefix, suffix):
-            return "\(variable).\(prefix)\(valueString)\(suffix)"
+        case let .invocation(prefix, suffix, includeTag):
+            if includeTag {
+                return "\(variable).\(prefix)\(key): \(valueString)\(suffix)"
+            }
+            else {
+                return "\(variable).\(prefix)\(valueString)\(suffix)"
+            }
         case let .withComment(comment, style):
             let command = style.generateCommand(variable: variable, key: key, valueString: valueString)
             return "\(command) // \(comment)"

@@ -22,7 +22,7 @@ indirect enum AssociationContext {
     case setter(suffix: String)
 
     // Specify the format of the invocation. This ignores the key and creates prefix + value + suffix. Format was breaking on Linux somehow.
-    case invocation(prefix: String, suffix: String)
+    case invocation(prefix: String, suffix: String, includeTag: Bool)
 
     // Take any association and add a comment
     case withComment(String, AssociationContext)

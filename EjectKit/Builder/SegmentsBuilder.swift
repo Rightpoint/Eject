@@ -11,7 +11,7 @@ import Foundation
 struct SegmentsBuilder: Builder, ContainerBuilder {
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) -> Reference? {
-        document.containerContext = .setter(suffix: "forSegmentAt: 0")
+        document.containerContext = .invocation(prefix: "insertSegment(", suffix: ", at: 0, animated: false)", includeTag: true)
         return parent
     }
 
@@ -20,21 +20,25 @@ struct SegmentsBuilder: Builder, ContainerBuilder {
     }
 
     func didAddChild(object: Reference, to parent: Reference, document: XIBDocument) {
-        guard let context = document.containerContext, case let .setter(suffix) = context else {
+        guard let context = document.containerContext, case let .invocation(prefix, suffix, includeTag) = context else {
             fatalError("Error with Child")
         }
         var components = suffix.components(separatedBy: " ")
-        let index = Int(components[1]) ?? 0
-        components[1] = String(index + 1)
-        document.containerContext = .setter(suffix: components.joined(separator: " "))
+        let index = Int(components[2]) ?? 0
+        components[2] = "\(index + 1),"
+        document.containerContext = .invocation(prefix: prefix, suffix: components.joined(separator: " "), includeTag: includeTag)
     }
 
     struct Segment: Builder {
         func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
             guard let parent = parent else { throw XIBParser.Error.needParent }
-            for (key, format) in [("title", ValueFormat.string), ("image", ValueFormat.image)] {
+            for (key, tag, format) in [("title", "withTitle", ValueFormat.string), ("image", "with", ValueFormat.image)] {
                 if let value = attributes.removeValue(forKey: key) {
-                    try document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value, format: format))
+                    try document.addVariableConfiguration(
+                        for: parent.identifier,
+                        key: tag,
+                        value: BasicValue(value: value, format: format)
+                    )
                 }
             }
             return parent

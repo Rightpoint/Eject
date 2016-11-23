@@ -142,10 +142,10 @@ extension DocumentBuilder {
                 .build("translatesAutoresizingMaskIntoConstraints", .boolean, "true", translateContext),
                 .build("clipsToBounds", .boolean, "NO"),
                 .build(.map("clipsSubviews", "clipsToBounds"), .boolean, "NO"),
-                .build("horizontalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)")),
-                .build("verticalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)")),
-                .build("horizontalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .horizontal)")),
-                .build("verticalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .vertical)")),
+                .build("horizontalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .horizontal)", includeTag: false)),
+                .build("verticalHuggingPriority", .number, "250", .invocation(prefix: "setContentHuggingPriority(", suffix: ", for: .vertical)", includeTag: false)),
+                .build("horizontalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .horizontal)", includeTag: false)),
+                .build("verticalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .vertical)", includeTag: false)),
             ]
         )
         register("view", view)

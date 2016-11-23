@@ -375,12 +375,12 @@ class EjectTests: XCTestCase {
 
     // This is an instance where the sax parser is a bit of a pain. The numberOfSegments property is set by the number of segment elements.
     func testSegmentedControl() {
-        let xml = wrap("<segmentedControl segmentControlStyle='plain' selectedSegmentIndex='0' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><segments><segment title='Overview'/><segment title='Description'/></segments></segmentedControl>")
+        let xml = wrap("<segmentedControl segmentControlStyle='plain' selectedSegmentIndex='0' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><segments><segment title='Overview'/><segment image='fakeImage'/></segments></segmentedControl>")
         checkXML(xml, [
             "let segmentedControl = UISegmentedControl()",
             "segmentedControl.selectedSegmentIndex = 0",
-            "segmentedControl.setTitle(\"Overview\", forSegmentAt: 0)",
-            "segmentedControl.setTitle(\"Description\", forSegmentAt: 1)",
+            "segmentedControl.insertSegment(withTitle: \"Overview\", at: 0, animated: false)",
+            "segmentedControl.insertSegment(with: UIImage(named: \"fakeImage\"), at: 1, animated: false)",
             "",
             "self.view = segmentedControl",
             ], warnings: [])
