@@ -10,19 +10,27 @@ Yes, I understand that this is probably a bad idea. But it might not be.
 
 ### Usage
 
-```
-# Help me set up `brew install eject`, these instructions are terrible:
-export PATH=$PATH:<<<drag eject.app from the Products dir in xcode>>>/Contents/MacOS
+Install with [homebrew](http://brew.sh):
 
+```shell
+brew install eject
+```
+
+Use on the command line:
+
+```shell
 eject --file /path/to/MassiveViewController.xib
-
-# Copy and paste code into .swift file, and remove the .xib
-rm  /path/to/MassiveViewController.xib
-
 ```
-Or to see what changed in a xib file by looking at the changes in generated code
 
+Copy and paste code into .swift file, and remove the .xib:
+
+```shell
+rm /path/to/MassiveViewController.xib
 ```
+
+Or to see what changed in a xib file by looking at the changes in generated code:
+
+```shell
 TMP=`mktemp` && git show HEAD:$XIB > $TMP && diff <(eject --file $XIB ) <(eject --file $TMP)
 ```
 
@@ -55,4 +63,3 @@ This should still be considered an Alpha quality tool.
 - Use default values to remove un-needed code
 - Better error reporting of un-interpreted flags
 - Explore generating code as a method of diffing `.xib` files
-- Homebrew recipie
