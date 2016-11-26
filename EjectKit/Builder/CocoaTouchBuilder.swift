@@ -390,7 +390,7 @@ extension DocumentBuilder {
             properties: [
                 .build("datePickerMode", .enumeration),
                 .build("locale", .enumeration),
-                .build("minuteInterval", .enumeration),
+                .build("minuteInterval", .number),
                 .build("hasMinimumDate", .boolean),
                 .build("hasMaximumDate", .boolean)
             ]
