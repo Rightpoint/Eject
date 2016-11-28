@@ -16,7 +16,7 @@ struct OptionSetValue: CodeGenerator {
         self.keys = keys
     }
 
-    func generateCode(in document: XIBDocument) -> String {
+    func generateCode(in document: XIBDocument) throws -> String? {
         return "[\(keys.map() { ".\($0)" }.joined(separator: ", "))]"
     }
 }
@@ -28,7 +28,7 @@ struct VariableValue: CodeGenerator {
         return [objectIdentifier]
     }
 
-    func generateCode(in document: XIBDocument) throws -> String {
+    func generateCode(in document: XIBDocument) throws -> String? {
         let object = try document.lookupReference(for: objectIdentifier)
         return document.variable(for: object)
     }
@@ -44,7 +44,7 @@ class BasicValue: CodeGenerator {
         self.format = format
     }
 
-    func generateCode(in document: XIBDocument) -> String {
+    func generateCode(in document: XIBDocument) throws -> String? {
         return format.transform(string: value)
     }
 }

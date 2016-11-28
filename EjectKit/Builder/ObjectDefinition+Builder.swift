@@ -30,11 +30,8 @@ extension ObjectDefinition: Builder {
             customSubclass: customClass,
             userLabel: attributes.removeValue(forKey: "userLabel")
         )
-
-        if !document.isPlaceholder(for: identifier) {
-            let generator = Initializer(objectIdentifier: identifier, className: object.className)
-            document.addStatement(generator, phase: .initialization, declares: object)
-        }
+        let initializer = Initializer(objectIdentifier: identifier, className: object.className)
+        document.addStatement(initializer, phase: .initialization, declares: object)
 
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes.removeValue(forKey: "key") {
@@ -83,16 +80,16 @@ struct PropertyBuilder: Builder {
     }
 }
 
-extension PropertyBuilder: ObjectDefinitionPropertyContainer {}
-extension ObjectDefinition: ObjectDefinitionPropertyContainer {}
+extension PropertyBuilder: PropertyContainer {}
+extension ObjectDefinition: PropertyContainer {}
 
-private protocol ObjectDefinitionPropertyContainer: Builder {
+private protocol PropertyContainer: Builder {
 
     var properties: [ObjectDefinition.Property] { get }
 
 }
 
-extension ObjectDefinitionPropertyContainer {
+extension PropertyContainer {
 
     @discardableResult func buildElementProperties(attributes: inout [String: String], document: XIBDocument, object: Reference?) throws -> Reference? {
         guard let object = object else { throw XIBParser.Error.needParent }

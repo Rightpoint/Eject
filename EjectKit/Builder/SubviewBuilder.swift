@@ -16,7 +16,7 @@ struct SubviewConfiguration: CodeGenerator {
         return [objectIdentifier, subview.identifier]
     }
 
-    func generateCode(in document: XIBDocument) throws -> String {
+    func generateCode(in document: XIBDocument) throws -> String? {
         let object = try document.lookupReference(for: objectIdentifier)
         let variable = document.variable(for: object)
         var representation = ""

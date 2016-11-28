@@ -10,9 +10,11 @@ import Foundation
 
 public protocol CodeGenerator {
 
+    /// A set of all identifiers that are dependent on this generator.
     var dependentIdentifiers: Set<String> { get }
 
-    func generateCode(in document: XIBDocument) throws -> String
+    /// Return a line of code, or nil if nothing should be done.
+    func generateCode(in document: XIBDocument) throws -> String?
 
 }
 
@@ -45,7 +47,7 @@ public enum CodeGeneratorPhase {
 extension XIBDocument {
 
     func code(for generationPhase: CodeGeneratorPhase) throws -> [String] {
-        return try statements.filter() { $0.phase == generationPhase }.map() { try $0.generator.generateCode(in: self) }
+        return try statements.filter() { $0.phase == generationPhase }.map() { try $0.generator.generateCode(in: self) }.flatMap { $0 }
     }
 
     public func generateCode(disableComments: Bool = false) throws -> [String] {
@@ -97,7 +99,7 @@ struct GenerationContext {
         let configurations = extractStatements() {
             $0.generator.dependentIdentifiers == Set([identifier]) && $0.phase == .configuration
         }
-        let code = try configurations.map() { try $0.generator.generateCode(in: document) }
+        let code = try configurations.map() { try $0.generator.generateCode(in: document) }.flatMap { $0 }
         return code
     }
 
@@ -105,6 +107,7 @@ struct GenerationContext {
         let code = try extractStatements() { $0.phase == generationPhase }
             .reversed()
             .map() { try $0.generator.generateCode(in: document) }
+            .flatMap { $0 }
         return code
     }
 
@@ -142,7 +145,6 @@ struct GenerationContext {
                 generatedCode.append("")
             }
         }
-        assert(statements.count == 0)
         if generatedCode.last == "" {
             generatedCode.removeLast()
         }

@@ -69,7 +69,7 @@ struct AnchorageConfiguration: ConstraintCodeGenerator {
         return false
     }
 
-    func generateCode(in document: XIBDocument) throws -> String {
+    func generateCode(in document: XIBDocument) throws -> String? {
         var constraintParts: [String] = []
 
         let reference = try document.lookupReference(for: constraintState.first.item)
@@ -126,7 +126,7 @@ struct AnchorConfiguration: ConstraintCodeGenerator {
         return true
     }
 
-    func generateCode(in document: XIBDocument) throws -> String {
+    func generateCode(in document: XIBDocument) throws -> String? {
         let reference = try document.lookupReference(for: constraintState.first.item)
         let variable = document.variable(for: reference)
         var cmd = "\(variable).\(constraintState.first.attr)Anchor"

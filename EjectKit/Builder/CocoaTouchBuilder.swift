@@ -344,7 +344,10 @@ extension DocumentBuilder {
         register("toolbar", toolbar)
         let visualEffectView = view.inherit(
             className: "UIVisualEffectView",
-            properties: [.build("blurEffectStyle", .enumeration), .build("vibrancy", .boolean)]
+            properties: [
+                .build("blurEffectStyle", .enumeration),
+                .build("vibrancy", .boolean)
+            ]
         )
         register("visualEffectView", visualEffectView)
         let webView = view.inherit(
