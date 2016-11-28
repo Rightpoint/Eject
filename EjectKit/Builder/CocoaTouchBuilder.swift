@@ -216,6 +216,7 @@ extension DocumentBuilder {
                 .build("lineBreakMode", .transformed(lineBreakMappings, .enumeration)),
                 .build("numberOfLines", .number),
                 .build("enabled", .boolean),
+                .build(.map("fontDescription", "font"), .raw),
                 .build("highlighted", .boolean),
                 .build("baselineAdjustment", .enumeration),
                 .build("minimumScaleFactor", .number),
@@ -325,6 +326,7 @@ extension DocumentBuilder {
                 .build("dataDetectorTypes", .boolean),
                 .build("autocapitalizationType", .enumeration),
                 .build("autocorrectionType", .enumeration),
+                .build(.map("fontDescription", "font"), .raw),
                 .build("spellCheckingType", .enumeration),
                 .build("keyboardType", .enumeration),
                 .build("keyboardAppearance", .enumeration),
@@ -380,6 +382,7 @@ extension DocumentBuilder {
                 .build("reversesTitleShadowWhenHighlighted", .boolean),
                 .build("showsTouchWhenHighlighted", .boolean),
                 .build("adjustsImageWhenHighlighted", .boolean),
+                .build(.map("fontDescription", "titleLabel?.font"), .raw),
                 .build("adjustsImageWhenDisabled", .boolean),
                 .build(.map("lineBreakMode", "titleLabel?.lineBreakMode"), .transformed(lineBreakMappings, .enumeration))
             ]
@@ -441,6 +444,7 @@ extension DocumentBuilder {
                 .build("clearsOnBeginEditing", .boolean), .build("minimumFontSize", .number),
                 .build("autocapitalizationType", .enumeration),
                 .build("autocorrectionType", .enumeration), .build("spellCheckingType", .enumeration),
+                .build(.map("fontDescription", "font"), .raw),
                 .build("keyboardType", .enumeration), .build("keyboardAppearance", .enumeration),
                 .build("returnKeyType", .enumeration), .build("enablesReturnKeyAutomatically", .boolean),
                 .build("secureTextEntry", .boolean), .build("text", .string), .build("placeholder", .string)]

@@ -20,13 +20,12 @@ struct FontBuilder: Builder {
 
     func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
         guard let parent = parent else { throw XIBParser.Error.needParent }
-        var key = try attributes.removeRequiredValue(forKey: "key")
+        let key = try attributes.removeRequiredValue(forKey: "key")
         let pointSize = try attributes.removeValue(forKey: "pointSize") ?? lookupSize(name: try attributes.removeRequiredValue(forKey: "size"))
         let value: String
         attributes.removeValue(forKey: "family")
 
         // Not sure why, but the IB specifies a private key. Fix it up.
-        if key == "fontDescription" { key = "font" }
         if let type = attributes.removeValue(forKey: "type") {
             value = ".\(type)Font(ofSize: \(pointSize))"
         }
@@ -39,7 +38,7 @@ struct FontBuilder: Builder {
 
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: key,
+            attribute: key,
             value: BasicValue(value: value)
         )
         return parent

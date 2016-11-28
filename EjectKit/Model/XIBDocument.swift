@@ -86,6 +86,11 @@ public class XIBDocument {
         return variable
     }
 
+    func isPlaceholder(for identifier: String) -> Bool {
+        guard let ref = try? self.lookupReference(for: identifier) else { return false }
+        return ref.definition.placeholder || placeholders.contains(identifier) || configuration.selfIdentifier == identifier
+    }
+
     func lookupReference(for identifier: String) throws -> Reference {
         for reference in references {
             if reference.identifier == identifier {
@@ -104,43 +109,36 @@ public class XIBDocument {
         return false
     }
 
-    enum Declaration {
-        case placeholder
-        case initializer([String], CodeGeneratorPhase)
-        case invocation(CodeGenerator, CodeGeneratorPhase)
-    }
-
-    func addObject(for identifier: String, definition: ObjectDefinition, customSubclass: String?, userLabel: String?, declaration: Declaration) -> Reference {
+    func addObject(for identifier: String, definition: ObjectDefinition, customSubclass: String?, userLabel: String?) -> Reference {
         let object = Reference(identifier: identifier, definition: definition, customSubclass: customSubclass, userLabel: userLabel)
         references.append(object)
-
-        switch declaration {
-        case .placeholder:
-            break
-        case let .initializer(injectedProperties, phase):
-            let generator = Initializer(objectIdentifier: identifier, className: object.className, injectedProperties: injectedProperties)
-            addStatement(generator, phase: phase, declares: object)
-        case let .invocation(invocation, phase):
-            let generator = invocation
-            addStatement(generator, phase: phase, declares: object)
-        }
-
         return object
     }
 
-    func addVariableConfiguration(for identifier: String, key: String, value: CodeGenerator, context: AssociationContext = .assignment) throws {
-        addStatement(
-            VariableConfiguration(
-                objectIdentifier: identifier,
-                key: keyOverride ?? key,
-                value: value,
-                style: containerContext ?? context
-            ),
-            phase: .configuration
-        )
-        // Save the key / CodeGenerator. These can be used by Initializer to inject values
+    func addVariableConfiguration(for identifier: String, attribute: String, value: CodeGenerator, context: AssociationContext? = nil) throws {
         let obj = try lookupReference(for: identifier)
-        obj.values[key] = value
+        let property = obj.definition.property(forAttribute: attribute)
+
+        if let property = property, property.injected {
+            // If the property is injected, save the value
+            obj.values[property.key.propertyName] = value
+        }
+        else {
+            // Use the key override, the property defined name, or the actual XML attribute name.
+            let key = keyOverride ?? property?.key.propertyName ?? attribute
+
+            // Use the container context, the specified context, the property context, or assignment
+            let context = containerContext ?? context ?? property?.context ?? .assignment
+            addStatement(
+                VariableConfiguration(
+                    objectIdentifier: identifier,
+                    key: key,
+                    value: value,
+                    style: context
+                ),
+                phase: .configuration
+            )
+        }
     }
 
     func addStatement(_ generator: CodeGenerator, phase: CodeGeneratorPhase, declares: Reference? = nil) {

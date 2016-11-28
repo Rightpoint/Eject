@@ -36,7 +36,7 @@ struct SegmentsBuilder: Builder, ContainerBuilder {
                 if let value = attributes.removeValue(forKey: key) {
                     try document.addVariableConfiguration(
                         for: parent.identifier,
-                        key: tag,
+                        attribute: tag,
                         value: BasicValue(value: value, format: format)
                     )
                 }

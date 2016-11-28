@@ -37,7 +37,7 @@ enum MappingKey: ExpressibleByStringLiteral {
         }
     }
 
-    var property: String {
+    var propertyName: String {
         switch self {
         case let .key(property):
             return property

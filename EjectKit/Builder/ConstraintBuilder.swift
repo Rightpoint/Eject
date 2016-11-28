@@ -55,19 +55,19 @@ struct ConstraintBuilder: Builder {
             for: identifier,
             definition: ObjectDefinition(className: "NSLayoutConstraint"),
             customSubclass: nil,
-            userLabel: attributes.removeValue(forKey: "userLabel"),
-            declaration: .invocation(generator, .constraints)
+            userLabel: attributes.removeValue(forKey: "userLabel")
         )
+        document.addStatement(generator, phase: .constraints, declares: constraint)
 
         if let priority = constraintState.priority, document.configuration.constraint.generator.needsPriorityConfigurationCommand {
             try document.addVariableConfiguration(
                 for: constraintState.identifier,
-                key: "priority",
+                attribute: "priority",
                 value: BasicValue(value: priority, format: .number)
             )
             try document.addVariableConfiguration(
                 for: constraintState.identifier,
-                key: "isActive",
+                attribute: "isActive",
                 value: BasicValue(value: "YES", format: .boolean)
             )
         }

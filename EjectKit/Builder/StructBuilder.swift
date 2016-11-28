@@ -23,7 +23,7 @@ struct RectBuilder: Builder {
         }
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: key,
+            attribute: key,
             value: BasicValue(value: "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))")
         )
         return parent
@@ -41,7 +41,7 @@ struct SizeBuilder: Builder {
 
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: key,
+            attribute: key,
             value: BasicValue(value: "CGSize(width: \(width), height: \(height))")
         )
         return parent
@@ -62,7 +62,7 @@ struct InsetBuilder: Builder {
         let edgeInsets = "UIEdgeInsets(top: \(y.shortString), left: \(x.shortString), bottom: \((y + height).shortString), right: \((x + width).shortString))"
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: key,
+            attribute: key,
             value: BasicValue(value: edgeInsets))
         return parent
     }
@@ -79,7 +79,7 @@ struct BasicBuilder: Builder {
 
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: key,
+            attribute: key,
             value: BasicValue(value: value, format: format)
         )
         return parent

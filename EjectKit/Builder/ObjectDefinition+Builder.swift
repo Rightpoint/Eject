@@ -24,24 +24,21 @@ extension ObjectDefinition: Builder {
             attributes.removeValue(forKey: key)
         }
 
-        let declaration: XIBDocument.Declaration
-        if placeholder || document.placeholders.contains(identifier) || document.configuration.selfIdentifier == identifier {
-            declaration = .placeholder
-        }
-        else {
-            declaration = .initializer(properties.filter() { $0.injected }.map() { $0.key.property }, .initialization)
-        }
         let object = document.addObject(
             for: identifier,
             definition: self,
             customSubclass: customClass,
-            userLabel: attributes.removeValue(forKey: "userLabel"),
-            declaration: declaration
+            userLabel: attributes.removeValue(forKey: "userLabel")
         )
+
+        if !document.isPlaceholder(for: identifier) {
+            let generator = Initializer(objectIdentifier: identifier, className: object.className)
+            document.addStatement(generator, phase: .initialization, declares: object)
+        }
 
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes.removeValue(forKey: "key") {
-            if case .placeholder = declaration {
+            if document.isPlaceholder(for: identifier) {
                 // If this is a placeholder (IE: an object that the parent will initialize internally) set the variable name to the property.
                 document.variableNameOverrides[identifier] = { document in
                     if let parent = parent {
@@ -56,7 +53,7 @@ extension ObjectDefinition: Builder {
                 guard let parent = parent else { throw XIBParser.Error.needParent }
                 // Otherwise create a create an assignment
                 let value = VariableValue(objectIdentifier: object.identifier)
-                try document.addVariableConfiguration(for: parent.identifier, key: parentKey, value: value)
+                try document.addVariableConfiguration(for: parent.identifier, attribute: parentKey, value: value)
             }
         }
         try buildElementProperties(attributes: &attributes, document: document, object: object)
@@ -104,7 +101,7 @@ extension ObjectDefinitionPropertyContainer {
             if let value = attributes.removeValue(forKey: property.key.attribute) {
                 if property.injected {
                     // If the property is injected, just add the value
-                    try document.lookupReference(for: identifier).values[property.key.property] = BasicValue(value: value, format: property.format)
+                    try document.lookupReference(for: identifier).values[property.key.propertyName] = BasicValue(value: value, format: property.format)
                 }
                 else if case .placeholder(let property) = property.context {
                     document.placeholders.append(value)
@@ -114,10 +111,9 @@ extension ObjectDefinitionPropertyContainer {
                 }
                 else if value != property.defaultValue && !property.ignored {
                     try document.addVariableConfiguration(
-                        for: object.identifier,
-                        key: property.key.property,
-                        value: BasicValue(value: value, format: property.format),
-                        context: property.context
+                        for: identifier,
+                        attribute: property.key.attribute,
+                        value: BasicValue(value: value, format: property.format)
                     )
                 }
             }

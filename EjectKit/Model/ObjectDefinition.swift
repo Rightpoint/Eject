@@ -36,6 +36,7 @@ struct ObjectDefinition {
             }
         }
     }
+
     var className: String
     var properties: [Property]
     var placeholder: Bool
@@ -44,5 +45,14 @@ struct ObjectDefinition {
         self.className = className
         self.properties = properties
         self.placeholder = placeholder
+    }
+
+    func property(forAttribute attribute: String) -> Property? {
+        for property in properties {
+            if property.key.attribute == attribute {
+                return property
+            }
+        }
+        return nil
     }
 }

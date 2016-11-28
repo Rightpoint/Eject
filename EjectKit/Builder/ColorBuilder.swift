@@ -36,7 +36,7 @@ struct ColorBuilder: Builder {
         else {
             throw XIBParser.Error.unknown(attributes: attributes)
         }
-        try document.addVariableConfiguration(for: parent.identifier, key: key, value: BasicValue(value: value))
+        try document.addVariableConfiguration(for: parent.identifier, attribute: key, value: BasicValue(value: value))
         return parent
     }
 }

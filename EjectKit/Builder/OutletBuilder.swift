@@ -24,7 +24,7 @@ struct OutletBuilder: Builder {
         let value = VariableValue(objectIdentifier: destination)
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: property,
+            attribute: property,
             value: value,
             context: setterStyle
         )

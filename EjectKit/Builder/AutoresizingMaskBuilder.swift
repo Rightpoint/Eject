@@ -36,7 +36,7 @@ struct AutoresizingMaskBuilder: Builder {
         }
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: "autoresizingMask",
+            attribute: "autoresizingMask",
             value: OptionSetValue(attributes: values)
         )
         // Remove all the keys, any unknown state should be caught above.

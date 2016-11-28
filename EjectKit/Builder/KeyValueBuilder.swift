@@ -23,7 +23,7 @@ struct KeyValueBuilder: Builder, CharacterBuilder {
             let key = try attributes.removeRequiredValue(forKey: "key")
             guard !ignoredKeys.contains(key) else { return parent }
             value.value = attributes.removeValue(forKey: "value") ?? value.value
-            try document.addVariableConfiguration(for: parent.identifier, key: key, value: value)
+            try document.addVariableConfiguration(for: parent.identifier, attribute: key, value: value)
         }
         return parent
     }

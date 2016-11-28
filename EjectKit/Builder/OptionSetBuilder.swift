@@ -14,7 +14,7 @@ struct OptionSetBuilder: Builder {
         guard let parent = parent else { throw XIBParser.Error.needParent }
         try document.addVariableConfiguration(
             for: parent.identifier,
-            key: try attributes.removeRequiredValue(forKey: "key"),
+            attribute: try attributes.removeRequiredValue(forKey: "key"),
             value: OptionSetValue(attributes: attributes)
         )
         return parent

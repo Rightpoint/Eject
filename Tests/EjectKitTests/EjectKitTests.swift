@@ -146,6 +146,57 @@ class EjectTests: XCTestCase {
         )
     }
 
+    func testTextField() {
+        let xml = wrap("<textField opaque='NO' clearsContextBeforeDrawing='NO' contentMode='scaleToFill' horizontalHuggingPriority='248' contentHorizontalAlignment='left' contentVerticalAlignment='center' borderStyle='roundedRect' placeholder='email@domain.com' adjustsFontSizeToFit='NO' minimumFontSize='17' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><rect key='frame' x='87' y='0.0' width='192.5' height='30'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><constraints><constraint firstAttribute='height' constant='30' id='qaX-tk-w4m'/></constraints><fontDescription key='fontDescription' type='system' pointSize='12'/><textInputTraits key='textInputTraits' autocorrectionType='no' keyboardType='emailAddress' returnKeyType='next'/><connections><outlet property='delegate' destination='-1' id='pvC-jL-qxZ'/></connections></textField>")
+        checkXML(xml, [
+            "let textField = UITextField()",
+            "textField.borderStyle = .roundedRect",
+            "textField.minimumFontSize = 17",
+            "textField.placeholder = \"email@domain.com\"",
+            "textField.contentHorizontalAlignment = .left",
+            "textField.isOpaque = false",
+            "textField.clearsContextBeforeDrawing = false",
+            "textField.setContentHuggingPriority(248, for: .horizontal)",
+            "textField.backgroundColor = UIColor(white: 1, alpha: 1)",
+            "textField.font = .systemFont(ofSize: 12)",
+            "textField.autocorrectionType = .no",
+            "textField.keyboardType = .emailAddress",
+            "textField.returnKeyType = .next",
+            "",
+            "textField.heightAnchor == 30",
+            "",
+            "textField.delegate = self",
+            "self.view = textField",
+            ]
+        )
+    }
+
+    func testTextView() {
+        let xml = wrap("<textView hidden='YES' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='scaleToFill' showsHorizontalScrollIndicator='NO' delaysContentTouches='NO' canCancelContentTouches='NO' bouncesZoom='NO' editable='NO' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='320' height='324'/><constraints><constraint firstAttribute='height' constant='324' id='Nia-ck-yFJ'/></constraints><inset key='insetFor6xAndEarlier' minX='0.0' minY='64' maxX='0.0' maxY='0.0'/><string key='text'>It seems there is text here.</string><color key='textColor' red='1' green='1' blue='1' alpha='1' colorSpace='calibratedRGB'/><fontDescription key='fontDescription' name='Helvetica-Bold' family='Helvetica' pointSize='14'/><textInputTraits key='textInputTraits' autocapitalizationType='sentences'/></textView>")
+        checkXML(xml, [
+            "let textView = UITextView()",
+            "textView.isEditable = false",
+            "textView.showsHorizontalScrollIndicator = false",
+            "textView.bouncesZoom = false",
+            "textView.delaysContentTouches = false",
+            "textView.canCancelContentTouches = false",
+            "textView.isMultipleTouchEnabled = true",
+            "textView.isHidden = true",
+            "textView.clipsToBounds = true",
+            "textView.insetFor6xAndEarlier = UIEdgeInsets(top: 64, left: 0, bottom: 64, right: 0)",
+            "textView.text = \"It seems there is text here.\"",
+            "textView.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)",
+            "textView.font = UIFont(name: \"Helvetica-Bold\", size: 14)",
+            "textView.autocapitalizationType = .sentences",
+            "",
+            "textView.heightAnchor == 324",
+            "",
+            "self.view = textView",
+            ]
+        )
+
+    }
+
     func testColor() {
         let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><color key='a' red='0.97254908084869385' green='0.97254908084869385' blue='0.90196084976196289' alpha='1' colorSpace='deviceRGB'/><color key='b' red='0.84705882352941175' green='0.16078431372549021' blue='0.18431372549019609' alpha='1' colorSpace='calibratedRGB'/><color key='c' white='1' alpha='1' colorSpace='custom' customColorSpace='calibratedWhite'/><color key='d' white='0.5' alpha='1' colorSpace='calibratedWhite'/></view>")
         checkXML(xml, [
@@ -239,10 +290,11 @@ class EjectTests: XCTestCase {
     }
 
     func testButton() {
-        let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
+        let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><fontDescription key='fontDescription' type='boldSystem' pointSize='15'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
             "let button = UIButton()",
             "button.titleLabel?.lineBreakMode = .byTruncatingMiddle",
+            "button.titleLabel?.font = .boldSystemFont(ofSize: 15)",
             "button.setTitle(\"Title\", for: .normal)",
             "button.setImage(UIImage(named: \"icon\"), for: .normal)",
             "button.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)",

@@ -20,9 +20,8 @@ struct UserDefinedAttributeBuilder: Builder {
             }
             try document.addVariableConfiguration(
                 for: parent.identifier,
-                key: keyPath,
-                value: BasicValue(value: value, format: .boolean),
-                context: .assignment
+                attribute: keyPath,
+                value: BasicValue(value: value, format: .boolean)
             )
         }
         else {
