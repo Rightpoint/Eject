@@ -116,7 +116,7 @@ public class XIBDocument {
         return object
     }
 
-    func addVariableConfiguration(for identifier: String, attribute: String, value: CodeGenerator, context: AssociationContext? = nil, phase: CodeGeneratorPhase = .configuration) throws {
+    func addVariableConfiguration(for identifier: String, attribute: String, value: CodeGenerator, context: AssociationContext? = nil, phase: CodeGeneratorPhase = .isolatedAssignment) throws {
         let obj = try lookupReference(for: identifier)
         let property = obj.definition.property(forAttribute: attribute)
 
@@ -144,14 +144,14 @@ public class XIBDocument {
     func addStatement(for identifier: String, generator: CodeGenerator, phase: CodeGeneratorPhase) throws {
         let obj = try lookupReference(for: identifier)
         // Clean up the phase based on the context the statement is added.
-        // Currently some statements are demoted to `dependentConfiguration` in order
+        // Currently some statements are demoted to `generalAssignment` in order
         // to isolate some nuance with placeholders and dependencies.
         let newPhase: CodeGeneratorPhase = {
-            if phase == .configuration && generator.dependentIdentifiers.count > 1 {
-                return .dependentConfiguration
+            if phase == .isolatedAssignment && generator.dependentIdentifiers.count > 1 {
+                return .generalAssignment
             }
-            else if phase == .configuration && isPlaceholder(for: identifier) {
-                return .dependentConfiguration
+            else if phase == .isolatedAssignment && isPlaceholder(for: identifier) {
+                return .generalAssignment
             }
             else {
                 return phase

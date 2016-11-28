@@ -26,8 +26,8 @@ extension CodeGenerator {
 
 public enum CodeGeneratorPhase {
     case initialization
-    case configuration
-    case dependentConfiguration
+    case isolatedAssignment
+    case generalAssignment
     case subviews
     case constraints
 
@@ -35,9 +35,9 @@ public enum CodeGeneratorPhase {
         switch self {
         case .initialization:
             return "// Create Views"
-        case .configuration:
-            return "" // Configuration without dependencies -- doesn't really warrent a comment.
-        case .dependentConfiguration:
+        case .isolatedAssignment:
+            return "" // Assignment without dependencies -- doesn't really warrent a comment.
+        case .generalAssignment:
             return "// Remaining Configuration"
         case .subviews:
             return "// Assemble View Hierarchy"
@@ -60,7 +60,7 @@ extension XIBDocument {
         }
 
         // Add all of the remaining phases
-        for phase: CodeGeneratorPhase in [.subviews, .constraints, .dependentConfiguration] {
+        for phase: CodeGeneratorPhase in [.subviews, .constraints, .generalAssignment] {
             generatedCode.append(contentsOf: try generateCode(for: phase))
         }
 
@@ -92,16 +92,24 @@ extension Reference {
     func generateDeclaration(in document: XIBDocument) throws -> [String] {
         var generatedCode: [String] = []
         var lines = try generateCode(for: .initialization, in: document)
-        lines.append(contentsOf: try generateCode(for: .configuration, in: document))
+        lines.append(contentsOf: try generateCode(for: .isolatedAssignment, in: document))
         if lines.count > 0 { generatedCode.append(contentsOf: lines) }
         if lines.count > 1 { generatedCode.append("") }
         return generatedCode
     }
 
-    func generateCode(for phase: CodeGeneratorPhase, in document: XIBDocument) throws -> [String] {
-        return try statements
+    /// Generate code for the specified generation phase. The name of the variable to use for this reference can be over-ridden here
+    /// so the commands can be scoped to a block. The idea is to support `then` style initialization blocks.
+    func generateCode(for phase: CodeGeneratorPhase, in document: XIBDocument, withName name: String? = nil) throws -> [String] {
+        let original = document.variableNameOverrides[identifier]
+        if let name = name {
+            document.variableNameOverrides[identifier] = { _ in name }
+        }
+        let code = try statements
             .filter { $0.phase == phase }
             .map { try $0.generator.generateCode(in: document) }
             .flatMap { $0 }
+        document.variableNameOverrides[identifier] = original
+        return code
     }
 }

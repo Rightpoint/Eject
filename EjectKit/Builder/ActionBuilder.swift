@@ -55,7 +55,7 @@ struct ActionBuilder: Builder {
                 action: action,
                 event: event
             ),
-            phase: .configuration)
+            phase: .isolatedAssignment)
         return parent
     }
 }
