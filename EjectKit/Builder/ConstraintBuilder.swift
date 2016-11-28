@@ -57,18 +57,20 @@ struct ConstraintBuilder: Builder {
             customSubclass: nil,
             userLabel: attributes.removeValue(forKey: "userLabel")
         )
-        document.addStatement(generator, phase: .constraints, declares: constraint)
+        try document.addStatement(for: identifier, generator: generator, phase: .constraints)
 
         if let priority = constraintState.priority, document.configuration.constraint.generator.needsPriorityConfigurationCommand {
             try document.addVariableConfiguration(
                 for: constraintState.identifier,
                 attribute: "priority",
-                value: BasicValue(value: priority, format: .number)
+                value: BasicValue(value: priority, format: .number),
+                phase: .constraints
             )
             try document.addVariableConfiguration(
                 for: constraintState.identifier,
                 attribute: "isActive",
-                value: BasicValue(value: "YES", format: .boolean)
+                value: BasicValue(value: "YES", format: .boolean),
+                phase: .constraints
             )
         }
 

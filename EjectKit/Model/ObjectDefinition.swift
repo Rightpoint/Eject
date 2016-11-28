@@ -47,6 +47,14 @@ struct ObjectDefinition {
         self.placeholder = placeholder
     }
 
+    func inherit(className: String, properties: [Property] = [], placeholder: Bool = false) -> ObjectDefinition {
+        var subclass = self
+        subclass.className = className
+        subclass.properties.insert(contentsOf: properties, at: 0)
+        subclass.placeholder = placeholder
+        return subclass
+    }
+
     func property(forAttribute attribute: String) -> Property? {
         for property in properties {
             if property.key.attribute == attribute {

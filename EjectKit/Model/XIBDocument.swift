@@ -23,10 +23,11 @@ public class XIBDocument {
 
     /// These are all of the objects declared by the xib. These are tracked for lookup reasons.
     var references: [Reference] = []
-    // Some items in the xib initialize child nodes automatically. This is the collection of those child nodes that should be treated as placeholders.
+    /// Some items in the xib initialize child nodes automatically. This is the collection of those child nodes that should be treated as placeholders.
     var placeholders: [String] = []
-    // All of the statements declared by the document
+    /// All of the statements declared by the document. This is just stored to determine dependent statements.
     var statements: [Statement] = []
+
     var variableNameOverrides: [String: (XIBDocument) -> String] = [:]
     var documentInformation: [String: String] = [:]
 
@@ -115,7 +116,7 @@ public class XIBDocument {
         return object
     }
 
-    func addVariableConfiguration(for identifier: String, attribute: String, value: CodeGenerator, context: AssociationContext? = nil) throws {
+    func addVariableConfiguration(for identifier: String, attribute: String, value: CodeGenerator, context: AssociationContext? = nil, phase: CodeGeneratorPhase = .configuration) throws {
         let obj = try lookupReference(for: identifier)
         let property = obj.definition.property(forAttribute: attribute)
 
@@ -129,20 +130,35 @@ public class XIBDocument {
 
             // Use the container context, the specified context, the property context, or assignment
             let context = containerContext ?? context ?? property?.context ?? .assignment
-            addStatement(
-                VariableConfiguration(
-                    objectIdentifier: identifier,
-                    key: key,
-                    value: value,
-                    style: context
-                ),
-                phase: .configuration
+
+            let configuration = VariableConfiguration(
+                objectIdentifier: identifier,
+                key: key,
+                value: value,
+                style: context
             )
+            try addStatement(for: identifier, generator: configuration, phase: phase)
         }
     }
 
-    func addStatement(_ generator: CodeGenerator, phase: CodeGeneratorPhase, declares: Reference? = nil) {
-        let statement = Statement(declares: declares, generator: generator, phase: phase)
+    func addStatement(for identifier: String, generator: CodeGenerator, phase: CodeGeneratorPhase) throws {
+        let obj = try lookupReference(for: identifier)
+        // Clean up the phase based on the context the statement is added.
+        // Currently some statements are demoted to `dependentConfiguration` in order
+        // to isolate some nuance with placeholders and dependencies.
+        let newPhase: CodeGeneratorPhase = {
+            if phase == .configuration && generator.dependentIdentifiers.count > 1 {
+                return .dependentConfiguration
+            }
+            else if phase == .configuration && isPlaceholder(for: identifier) {
+                return .dependentConfiguration
+            }
+            else {
+                return phase
+            }
+        }()
+        let statement = Statement(generator: generator, phase: newPhase)
+        obj.statements.append(statement)
         statements.append(statement)
     }
 

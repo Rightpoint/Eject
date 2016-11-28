@@ -31,7 +31,7 @@ extension ObjectDefinition: Builder {
             userLabel: attributes.removeValue(forKey: "userLabel")
         )
         let initializer = Initializer(objectIdentifier: identifier, className: object.className)
-        document.addStatement(initializer, phase: .initialization, declares: object)
+        try document.addStatement(for: identifier, generator: initializer, phase: .initialization)
 
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes.removeValue(forKey: "key") {
@@ -58,14 +58,6 @@ extension ObjectDefinition: Builder {
         return object
     }
 
-    func inherit(className: String, properties: [Property] = [], placeholder: Bool = false) -> ObjectDefinition {
-        var subclass = self
-        subclass.className = className
-        subclass.properties.insert(contentsOf: properties, at: 0)
-        subclass.placeholder = placeholder
-        return subclass
-    }
-    
 }
 
 struct PropertyBuilder: Builder {

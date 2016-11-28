@@ -139,7 +139,6 @@ struct AnchorConfiguration: ConstraintCodeGenerator {
             cmd.append(": \(variable).\(second.attr)Anchor")
         }
 
-
         if let constant = constraintState.constant?.floatValue {
             if constraintState.second == nil {
                 cmd.append("Constant: \(constant)")

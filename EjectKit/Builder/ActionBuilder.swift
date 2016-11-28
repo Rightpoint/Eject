@@ -47,8 +47,9 @@ struct ActionBuilder: Builder {
             action.replaceSubrange(range, with: "(_:)")
         }
 
-        document.addStatement(
-            TargetActionConfiguration(
+        try document.addStatement(
+            for: parent.identifier,
+            generator: TargetActionConfiguration(
                 objectIdentifier: parent.identifier,
                 targetIdentifier: destination,
                 action: action,

@@ -21,6 +21,7 @@ public class Reference {
     let userLabel: String?
     let customSubclass: String?
     var values: [String: CodeGenerator] = [:]
+    var statements: [Statement] = []
 
     init(identifier: String, definition: ObjectDefinition, customSubclass: String?, userLabel: String?) {
         self.identifier = identifier

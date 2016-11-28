@@ -22,7 +22,7 @@ protocol CharacterBuilder {
 }
 
 protocol ContainerBuilder {
-    func didAddChild(object: Reference, to parent: Reference, document: XIBDocument)
+    func didAddChild(object: Reference, to parent: Reference, document: XIBDocument) throws
 }
 
 protocol BuilderLookup {
@@ -137,7 +137,15 @@ public class XIBParser: NSObject {
         completedBuilder.complete(document: document)
 
         if let lastBuilder = lastBuilder as? ContainerBuilder, let object = object {
-            lastBuilder.didAddChild(object: object, to: lastObject!, document: document)
+            do {
+                try lastBuilder.didAddChild(object: object, to: lastObject!, document: document)
+            }
+            catch let error as XIBParser.Error {
+                self.error = error
+            }
+            catch {
+                fatalError("Unknown error thrown")
+            }
         }
     }
 
