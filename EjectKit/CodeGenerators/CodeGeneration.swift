@@ -49,10 +49,10 @@ public enum CodeGeneratorPhase {
 
 extension XIBDocument {
 
-    public func generateCode(disableComments: Bool = false) throws -> [String] {
+    public func generateCode() throws -> [String] {
         var generatedCode: [String] = []
 
-        if !disableComments { generatedCode.append(CodeGeneratorPhase.initialization.comment) }
+        if configuration.includeComments { generatedCode.append(CodeGeneratorPhase.initialization.comment) }
 
         // Cluster the declaration with the configuration that is isolated (ie no external references)
         for reference in references {
@@ -61,7 +61,7 @@ extension XIBDocument {
 
         // Add all of the remaining phases
         for phase: CodeGeneratorPhase in [.subviews, .constraints, .dependentConfiguration] {
-            generatedCode.append(contentsOf: try generateCode(for: phase, disableComments: disableComments))
+            generatedCode.append(contentsOf: try generateCode(for: phase))
         }
 
         // Trim trailing empty lines
@@ -73,13 +73,13 @@ extension XIBDocument {
 
     /// Generate code for the specified phase. The code is generated in the reverse order of objects that were
     /// added so the top level object configuration is last. This is usually how I like to do things.
-    func generateCode(for phase: CodeGeneratorPhase, disableComments: Bool) throws -> [String] {
+    func generateCode(for phase: CodeGeneratorPhase) throws -> [String] {
         var lines: [String] = []
         for reference in references.reversed() {
             lines.append(contentsOf: try reference.generateCode(for: phase, in: self))
         }
         if lines.count > 0 {
-            if !disableComments { lines.insert(phase.comment, at: 0) }
+            if configuration.includeComments { lines.insert(phase.comment, at: 0) }
             lines.append("")
         }
         return lines

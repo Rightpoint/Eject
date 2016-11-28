@@ -15,6 +15,7 @@ func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], conf
         let configuration = configuration ?? {
             var configuration = Configuration()
             configuration.constraint = .anchorage
+            configuration.includeComments = false
             return configuration
         }()
         let document = try XIBDocument.load(xml: xml, configuration: configuration)
@@ -22,7 +23,7 @@ func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], conf
             XCTFail("No objects in the document", file: file, line: line - 1)
             return
         }
-        let lines = try document.generateCode(disableComments: true)
+        let lines = try document.generateCode()
         document.scanForDuplicateVariableNames()
 
         XCTAssertEqual(lines.count, expected.count, file: file, line:line)
@@ -382,6 +383,7 @@ class EjectTests: XCTestCase {
         let xml = wrap("<view id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='350' height='85'/><subviews><view id='UX2-VG-eOo' customClass='CircularToggleView'><rect key='frame' x='0.0' y='29' width='28' height='28'/><color key='backgroundColor' white='1' alpha='1' colorSpace='calibratedWhite'/><constraints><constraint firstAttribute='height' constant='28' id='BqJ-XJ-eyz'/><constraint firstAttribute='width' constant='28' id='nMF-V2-XRU'/></constraints></view><label id='19u-jG-JIO'><rect key='frame' x='36' y='36' width='52' height='14'/><fontDescription key='fontDescription' name='Gotham-Book' family='Gotham' pointSize='14'/><color key='textColor' red='0.50196078430000002' green='0.50196078430000002' blue='0.50196078430000002' alpha='1' colorSpace='calibratedRGB'/><nil key='highlightedColor'/></label></subviews><color key='backgroundColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/><constraints><constraint firstItem='UX2-VG-eOo' firstAttribute='leading' secondItem='i5M-Pr-FkT' secondAttribute='leading' id='5fR-oy-xvA'/><constraint firstItem='UX2-VG-eOo' firstAttribute='centerY' secondItem='i5M-Pr-FkT' secondAttribute='centerY' id='6Qn-oN-YHI'/><constraint firstAttribute='bottom' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='bottom' constant='20' symbolic='YES' id='BGy-u3-ENo'/><constraint firstAttribute='trailing' relation='greaterThanOrEqual' secondItem='19u-jG-JIO' secondAttribute='trailing' constant='20' symbolic='YES' id='Kgc-VK-hur'/><constraint firstItem='19u-jG-JIO' firstAttribute='centerY' secondItem='UX2-VG-eOo' secondAttribute='centerY' id='jSG-kc-EZ6'/><constraint firstItem='19u-jG-JIO' firstAttribute='top' relation='greaterThanOrEqual' secondItem='i5M-Pr-FkT' secondAttribute='top' constant='20' symbolic='YES' id='trv-aZ-Isd'/><constraint firstItem='19u-jG-JIO' firstAttribute='leading' secondItem='UX2-VG-eOo' secondAttribute='trailing' priority='100' constant='8' id='zMe-2W-nrz'/></constraints></view>")
         var configuration = Configuration()
         configuration.constraint = .anchor
+        configuration.includeComments = false
         checkXML(xml, [
             "let view = UIView()",
             "view.backgroundColor = UIColor(white: 0, alpha: 0)",
