@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DocumentBuilder: BuilderLookup {
+class DocumentBuilder: Builder, BuilderLookup {
     var document = XIBDocument()
     var elementBuilders: [String: Builder] = [:]
 
@@ -20,7 +20,19 @@ class DocumentBuilder: BuilderLookup {
         elementBuilders[element] = builder
     }
 
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        let useAutolayout = attributes["useAutolayout"] ?? "NO"
+        document.configuration.useFrames = (useAutolayout != "YES")
+
+        attributes.removeAll()
+        return nil
+    }
+
     func lookupBuilder(for elementName: String) -> Builder? {
+        if elementName == "document" {
+            return self
+        }
+
         let builder = elementBuilders[elementName]
         if builder == nil && document.references.count == 0 {
             return NoOpBuilder()
@@ -35,6 +47,9 @@ class DocumentBuilder: BuilderLookup {
             if identifier == "com.apple.InterfaceBuilder.IBCocoaTouchPlugin" {
                 documentBuilder!.registerPrimitives()
                 documentBuilder!.registerCocoaTouch()
+            }
+            else {
+                throw XIBParser.Error.unknownPlugin(plugin: identifier)
             }
 
             document.documentInformation["version"] = attributes.removeValue(forKey: "version")

@@ -32,6 +32,7 @@ protocol BuilderLookup {
 public class XIBParser: NSObject {
     public enum Error: Swift.Error {
         case needParent
+        case unknownPlugin(plugin: String)
         case requiredAttribute(attribute: String)
         case invalidAttribute(attribute: String, value: String)
         case unknown(attributes: [String: String])

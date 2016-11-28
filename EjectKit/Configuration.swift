@@ -10,7 +10,7 @@ import Foundation
 
 /// Simple configuration struct.
 public struct Configuration {
-    var useFrames: Bool = false
+    var useFrames: Bool = true
     var includeComments: Bool = true
     public var constraint: ConstraintConfiguration = .anchor
     var selfIdentifier: String? = nil
