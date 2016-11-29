@@ -32,6 +32,28 @@ struct TargetActionConfiguration: CodeGenerator {
         }
         return representation
     }
+
+    // PostProcessor step to move the target / action pair into the initializer
+    struct PostProcessor: EjectKit.PostProcessor {
+
+        func apply(document: XIBDocument) throws {
+            for reference in document.references {
+                for (index, statement) in reference.statements.reversed().enumerated() {
+                    guard let generator = statement.generator as? TargetActionConfiguration,
+                        let targetProperty = reference.definition.property(forAttribute: "target"),
+                        let actionProperty = reference.definition.property(forAttribute: "action") else {
+                            continue
+                    }
+                    let target = try document.lookupReference(for: generator.targetIdentifier)
+                    if targetProperty.injected && actionProperty.injected {
+                        reference.values["target"] = VariableValue(objectIdentifier: generator.targetIdentifier)
+                        reference.values["action"] = BasicValue(value: "#selector(\(target.className).\(generator.action))", format: .raw)
+                        reference.statements.remove(at: index.advanced(by: 1))
+                    }
+                }
+            }
+        }
+    }
 }
 
 

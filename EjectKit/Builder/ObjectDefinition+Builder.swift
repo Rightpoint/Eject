@@ -33,6 +33,12 @@ extension ObjectDefinition: Builder {
         let initializer = Initializer(objectIdentifier: identifier, className: object.className)
         try document.addStatement(for: identifier, generator: initializer, phase: .initialization)
 
+        // Specify default values for properties that are injected in case they are not supplied.
+        for property in properties where property.injected {
+            object.values[property.key.propertyName] = BasicValue(value: property.defaultValue, format: property.format)
+        }
+
+
         // If a key is specified, add a configuration to the parent
         if let parentKey = attributes.removeValue(forKey: "key") {
             if document.isPlaceholder(for: identifier) {

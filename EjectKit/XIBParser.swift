@@ -65,6 +65,7 @@ public class XIBParser: NSObject {
         if let error = error {
             throw error
         }
+        try configuration.postprocessors.forEach() { try $0.apply(document: self.document) }
     }
 #else
     public init(data: Data, configuration: Configuration) throws {
@@ -86,6 +87,7 @@ public class XIBParser: NSObject {
                 }
             }
         }
+        try configuration.postprocessors.forEach() { try $0.apply(document: self.document) }
     }
 #endif
 

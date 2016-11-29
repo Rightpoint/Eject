@@ -30,6 +30,7 @@ extension DocumentBuilder {
         register("color", ColorBuilder())
         register("state", ButtonStateBuilder())
         register("subviews", SubviewBuilder())
+        register("items", ItemsBuilder())
         register("constraint", ConstraintBuilder())
         register("fontDescription", FontBuilder())
         register("outlet", OutletBuilder(collection: false))
@@ -74,9 +75,11 @@ extension DocumentBuilder {
             className: "UIBarButtonItem",
             properties: [
                 .build(.map("systemItem", "barButtonSystemItem"), .enumeration, "", .inject),
-                .build("style", .enumeration),
-                .build("title", .string),
+                .build("style", .enumeration, "plain"),
+                .build("title", .string, ""),
                 .build("width", .number),
+                .build("target", .raw, "nil", .inject),
+                .build("action", .raw, "nil", .inject),
             ]
         )
         register("barButtonItem", barButtonItem)
@@ -124,14 +127,13 @@ extension DocumentBuilder {
 
     func registerCocoaTouchViews() {
         let translateContext: AssociationContext = document.configuration.constraint.useTranslateAutoresizingMask ? .assignment : .ignore
-        let view = ObjectDefinition(
+        var view = ObjectDefinition(
             className: "UIView",
             properties: [
                 .build("autoresizesSubviews", .boolean, "YES"),
                 .build("contentMode", .enumeration, "scaleToFill"),
                 .build("semanticContentAttribute", .enumeration),
                 .build("tag", .number),
-                .build("frame", .raw, ".zero", .inject),
                 .build("fixedFrame", .boolean, "", .ignore),
                 .build(.addIsPrefix("userInteractionEnabled"), .boolean, "YES"),
                 .build(.addIsPrefix("multipleTouchEnabled"), .boolean, "NO"),
@@ -151,6 +153,13 @@ extension DocumentBuilder {
                 .build("verticalCompressionResistancePriority", .number, "750", .invocation(prefix: "setContentCompressionResistancePriority(", suffix: ", for: .vertical)", includeTag: false)),
             ]
         )
+        // Only inject the frame if the configuration is using frames.
+        if document.configuration.useFrames {
+            view.properties.append(.build("frame", .raw, ".zero", .inject))
+        }
+        else {
+            view.properties.append(.build("frame", .raw, ".zero"))
+        }
         register("view", view)
         registerCocoaTouchControls(view: view)
         let scrollView = view.inherit(
@@ -291,7 +300,7 @@ extension DocumentBuilder {
         let tableViewCell = view.inherit(
             className: "UITableViewCell",
             properties: [
-                .build("style", .transformed(cellStyleMappings, .enumeration), "", .inject),
+                .build("style", .transformed(cellStyleMappings, .enumeration), "default", .inject),
                 .build("reuseIdentifier", .string, "", .inject),
                 .build("selectionStyle", .enumeration),
                 .build("accessoryType", .enumeration),
@@ -339,7 +348,10 @@ extension DocumentBuilder {
         register("textView", textView)
         let toolbar = view.inherit(
             className: "UIToolbar",
-            properties: [.build("barStyle", .enumeration), .build("translucent", .boolean), .build("text", .string), .build("keyboardDismissMode", .enumeration)]
+            properties: [
+                .build("barStyle", .enumeration),
+                .build("translucent", .boolean),
+            ]
         )
         register("toolbar", toolbar)
         let visualEffectView = view.inherit(
@@ -537,7 +549,14 @@ extension DocumentBuilder {
     func registerCocoaTouchGestureRecognizers() {
         let gestureRecognizer = ObjectDefinition(
             className: "UIGestureRecognizer",
-            properties: [.build("enabled", .boolean), .build("cancelsTouchesInView", .boolean), .build("delaysTouchesBegan", .boolean), .build("delaysTouchesEnded", .boolean)]
+            properties: [
+                .build("enabled", .boolean),
+                .build("cancelsTouchesInView", .boolean),
+                .build("delaysTouchesBegan", .boolean),
+                .build("delaysTouchesEnded", .boolean),
+                .build("target", .raw, "nil", .inject),
+                .build("action", .raw, "nil", .inject),
+            ]
         )
         register("gestureRecognizer", gestureRecognizer)
 

@@ -13,6 +13,7 @@ public struct Configuration {
     var useFrames: Bool = true
     var includeComments: Bool = true
     public var constraint: ConstraintConfiguration = .anchor
+    public var postprocessors: [PostProcessor] = [DuplicateVariableProcessor(), TargetActionConfiguration.PostProcessor()]
     var selfIdentifier: String? = nil
     public init() {	}
 }

@@ -35,4 +35,5 @@ indirect enum AssociationContext {
 
     // This association should be registered as a placeholder with the specified property
     case placeholder(property: String)
+
 }

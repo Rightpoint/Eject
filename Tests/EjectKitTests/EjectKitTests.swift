@@ -24,7 +24,6 @@ func checkXML(_ xml: String, _ expected: [String], warnings: [String] = [], conf
             return
         }
         let lines = try document.generateCode()
-        document.scanForDuplicateVariableNames()
 
         XCTAssertEqual(lines.count, expected.count, file: file, line:line)
         var i: UInt = 1
@@ -89,15 +88,61 @@ class EjectTests: XCTestCase {
         let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><connections><outletCollection property='gestureRecognizers' destination='fDa-KR-68j' appends='YES' id='7AV-8r-dYL'/></connections></view><panGestureRecognizer minimumNumberOfTouches='1' id='fDa-KR-68j'><connections><action selector='dimissTextField:' destination='-1' id='zAI-0B-Wyz'/><outlet property='delegate' destination='i5M-Pr-FkT' id='0eg-ac-TGD'/></connections></panGestureRecognizer>")
         checkXML(xml, [
             "let test = UIView()",
-            "let panGestureRecognizer = UIPanGestureRecognizer()",
+            "let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(TestClass.dimissTextField(_:)))",
             "panGestureRecognizer.minimumNumberOfTouches = 1",
             "",
-            "panGestureRecognizer.addTarget(self, action: #selector(TestClass.dimissTextField(_:)))",
             "panGestureRecognizer.delegate = test",
             "test.gestureRecognizers.append(panGestureRecognizer)",
             "self.view = test",
             ]
         )
+    }
+
+    func testToolbar() {
+        let xml = wrap("<toolbar clipsSubviews='YES' contentMode='scaleToFill' barStyle='black' id='i5M-Pr-FkT'><rect key='frame' x='0.0' y='0.0' width='320' height='44'/><autoresizingMask key='autoresizingMask' widthSizable='YES' flexibleMinY='YES'/><items><barButtonItem style='plain' systemItem='flexibleSpace' id='35'/><barButtonItem style='plain' id='36'><view key='customView' contentMode='scaleToFill' id='39'><rect key='frame' x='110' y='6' width='100' height='33'/><autoresizingMask key='autoresizingMask' flexibleMaxX='YES' flexibleMaxY='YES'/><subviews><label opaque='NO' clipsSubviews='YES' userInteractionEnabled='NO' contentMode='left' text='xxx' textAlignment='center' lineBreakMode='tailTruncation' minimumFontSize='10' id='40'><rect key='frame' x='0.0' y='6' width='100' height='21'/><autoresizingMask key='autoresizingMask' flexibleMaxX='YES' flexibleMaxY='YES'/><fontDescription key='fontDescription' type='boldSystem' pointSize='17'/><color key='textColor' white='1' alpha='1' colorSpace='calibratedWhite'/><nil key='highlightedColor'/></label></subviews><color key='backgroundColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></view></barButtonItem><barButtonItem style='plain' systemItem='flexibleSpace' id='37'/><barButtonItem style='done' systemItem='done' id='38'><connections><action selector='hidePickers:' destination='-1' id='59'/></connections></barButtonItem></items></toolbar>")
+        // Few interestings cases here. 
+        // - There are 3 valid constructors for barButtonItems, and just one is used by default, the rest will generate compiler errors.
+        //   - All properties should be passed in and then a post processor step can trim out the ones not in use.
+        // - customView won't inject properly without better dependency management
+        // - items does not append but we do anyway.
+        //   - Should be able to write a generic post processor to transform multiple appends to an array assignment.
+        checkXML(xml, [
+            "let toolbar = UIToolbar()",
+            "toolbar.barStyle = .black",
+            "toolbar.clipsToBounds = true",
+            "toolbar.autoresizingMask = [.flexibleBottomMargin, .flexibleWidth]",
+            "",
+            "let barButtonItem1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)",
+            "let barButtonItem2 = UIBarButtonItem(barButtonSystemItem: ., target: nil, action: nil)",
+            "let view = UIView()",
+            "view.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]",
+            "view.backgroundColor = UIColor(white: 0, alpha: 0)",
+            "",
+            "let label = UILabel()",
+            "label.textAlignment = .center",
+            "label.lineBreakMode = .byTruncatingTail",
+            "label.minimumFontSize = 10",
+            "label.text = \"xxx\"",
+            "label.contentMode = .left",
+            "label.isOpaque = false",
+            "label.clipsToBounds = true",
+            "label.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]",
+            "label.font = .boldSystemFont(ofSize: 17)",
+            "label.textColor = UIColor(white: 1, alpha: 1)",
+            "",
+            "let barButtonItem3 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)",
+            "let barButtonItem4 = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(TestClass.hidePickers(_:)))",
+            "barButtonItem4.style = .done",
+            "",
+            "toolbar.items.append(barButtonItem4)",
+            "toolbar.items.append(barButtonItem3)",
+            "view.addSubview(label)",
+            "toolbar.items.append(barButtonItem2)",
+            "toolbar.items.append(barButtonItem1)",
+            "",
+            "barButtonItem2.customView = view",
+            "self.view = toolbar",
+            ], warnings: ["Variable \'barButtonItem: UIBarButtonItem\' was generated 4 times."])
     }
 
     func testLabel() {
@@ -293,7 +338,7 @@ class EjectTests: XCTestCase {
     func testButton() {
         let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><fontDescription key='fontDescription' type='boldSystem' pointSize='15'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
-            "let button = UIButton()",
+            "let button = UIButton(buttonType: .custom)",
             "button.titleLabel?.lineBreakMode = .byTruncatingMiddle",
             "button.titleLabel?.font = .boldSystemFont(ofSize: 15)",
             "button.setTitle(\"Title\", for: .normal)",
@@ -515,7 +560,7 @@ class EjectTests: XCTestCase {
     func testTableViewCell() {
         let xml = wrap("<tableViewCell clearsContextBeforeDrawing='NO' contentMode='scaleToFill' selectionStyle='none' indentationWidth='10' reuseIdentifier='snoozeToggleCellId' id='i5M-Pr-FkT' userLabel='Table View Cell (Snooze Toggle)'><rect key='frame' x='0.0' y='0.0' width='320' height='44'/><autoresizingMask key='autoresizingMask' flexibleMaxX='YES' flexibleMaxY='YES'/><tableViewCellContentView key='contentView' opaque='NO' clipsSubviews='YES' multipleTouchEnabled='YES' contentMode='center' tableViewCell='27' id='20C-qx-qiB'><rect key='frame' x='0.0' y='0.0' width='320' height='43'/><autoresizingMask key='autoresizingMask'/><subviews><label opaque='NO' clipsSubviews='YES' userInteractionEnabled='NO' contentMode='scaleToFill' fixedFrame='YES' text='Snooze' lineBreakMode='tailTruncation' minimumFontSize='10' useAutomaticPreferredMaxLayoutWidth='YES' translatesAutoresizingMaskIntoConstraints='NO' id='29'><rect key='frame' x='20' y='13' width='135' height='21'/>                        <fontDescription key='fontDescription' type='system' pointSize='17'/><color key='textColor' cocoaTouchSystemColor='darkTextColor'/><nil key='highlightedColor'/></label></subviews></tableViewCellContentView><color key='backgroundColor' red='1' green='1' blue='1' alpha='1' colorSpace='calibratedRGB'/><point key='canvasLocation' x='-46' y='552'/></tableViewCell>")
         checkXML(xml, [
-            "let tableViewCellSnoozeToggle = UITableViewCell(reuseIdentifier: \"snoozeToggleCellId\")",
+            "let tableViewCellSnoozeToggle = UITableViewCell(style: .default, reuseIdentifier: \"snoozeToggleCellId\")",
             "tableViewCellSnoozeToggle.selectionStyle = .none",
             "tableViewCellSnoozeToggle.indentationWidth = 10",
             "tableViewCellSnoozeToggle.clearsContextBeforeDrawing = false",
@@ -560,7 +605,6 @@ class EjectTests: XCTestCase {
                 var configuration = Configuration()
                 configuration.constraint = .anchor
                 let builder = try XIBParser(data: data, configuration: configuration)
-                builder.document.scanForDuplicateVariableNames()
                 let code = try builder.document.generateCode()
                 if "print" == "print"{
                     print(code.joined(separator: "\n"))

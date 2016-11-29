@@ -162,26 +162,6 @@ public class XIBDocument {
         statements.append(statement)
     }
 
-    public func scanForDuplicateVariableNames() {
-        var names: [String:[Reference]] = [:]
-        for object in references {
-            // Don't count objects that don't have any dependencies
-            guard hasDependencies(for: object.identifier) else { continue }
-            let variable = self.variable(for: object)
-            var objects = names[variable] ?? []
-            objects.append(object)
-            names[variable] = objects
-        }
-        for (name, objects) in names {
-            guard objects.count > 1 else { continue }
-            let message = "Variable '\(variable): \(objects[0].className)' was generated \(objects.count) times."
-            warnings.append(.duplicateVariable(message))
-            for (index, object) in objects.enumerated() {
-                variableNameOverrides[object.identifier] = { _ in "\(name)\(index + 1)" }
-            }
-        }
-    }
-
     func missingBuilder(forElement element: String) {
         if !missingElementNames.contains(element) {
             warnings.append(.unknownElementName("Can not configure XML nodes '\(element)'"))
