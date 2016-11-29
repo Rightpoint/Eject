@@ -91,9 +91,9 @@ class EjectTests: XCTestCase {
             "let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(TestClass.dimissTextField(_:)))",
             "panGestureRecognizer.minimumNumberOfTouches = 1",
             "",
-            "panGestureRecognizer.delegate = test",
-            "test.gestureRecognizers.append(panGestureRecognizer)",
             "self.view = test",
+            "test.gestureRecognizers.append(panGestureRecognizer)",
+            "panGestureRecognizer.delegate = test",
             ]
         )
     }
@@ -134,14 +134,14 @@ class EjectTests: XCTestCase {
             "let barButtonItem4 = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(TestClass.hidePickers(_:)))",
             "barButtonItem4.style = .done",
             "",
-            "toolbar.items.append(barButtonItem4)",
-            "toolbar.items.append(barButtonItem3)",
             "view.addSubview(label)",
-            "toolbar.items.append(barButtonItem2)",
-            "toolbar.items.append(barButtonItem1)",
             "",
-            "barButtonItem2.customView = view",
             "self.view = toolbar",
+            "toolbar.items.append(barButtonItem1)",
+            "barButtonItem2.customView = view",
+            "toolbar.items.append(barButtonItem2)",
+            "toolbar.items.append(barButtonItem3)",
+            "toolbar.items.append(barButtonItem4)",
             ], warnings: ["Variable \'barButtonItem: UIBarButtonItem\' was generated 4 times."])
     }
 
@@ -211,8 +211,8 @@ class EjectTests: XCTestCase {
             "",
             "textField.heightAnchor == 30",
             "",
-            "textField.delegate = self",
             "self.view = textField",
+            "textField.delegate = self",
             ]
         )
     }
@@ -298,10 +298,10 @@ class EjectTests: XCTestCase {
             "collectionViewFlowLayout.footerReferenceSize = CGSize(width: 0, height: 0)",
             "collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)",
             "",
+            "self.view = collectionView",
             "collectionView.collectionViewLayout = collectionViewFlowLayout",
             "collectionView.dataSource = self",
             "collectionView.delegate = self",
-            "self.view = collectionView",
             ], warnings: [
             ])
     }
@@ -318,9 +318,9 @@ class EjectTests: XCTestCase {
             "tableView.backgroundColor = UIColor(white: 1, alpha: 1)",
             "tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 30)",
             "",
+            "self.view = tableView",
             "tableView.dataSource = self",
             "tableView.delegate = self",
-            "self.view = tableView",
             ])
     }
 
@@ -346,8 +346,8 @@ class EjectTests: XCTestCase {
             "button.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)",
             "button.setTitleShadowColor(UIColor(white: 0, alpha: 0), for: .normal)",
             "",
-            "button.addTarget(self, action: #selector(TestClass.doThing(_:)), for: .touchUpInside)",
             "self.view = button",
+            "button.addTarget(self, action: #selector(TestClass.doThing(_:)), for: .touchUpInside)",
             ])
     }
 
@@ -358,9 +358,9 @@ class EjectTests: XCTestCase {
             "let borderView = UIView()",
             "let webView = UIWebView()",
             "let otherView = UIView()",
-            "view.addSubview(otherView)",
-            "borderView.addSubview(webView)",
             "view.addSubview(borderView)",
+            "borderView.addSubview(webView)",
+            "view.addSubview(otherView)",
             "",
             "self.view = view",
             ])
@@ -373,9 +373,9 @@ class EjectTests: XCTestCase {
             "let borderView = UIView()",
             "let webView = UIWebView()",
             "let otherView = UIView()",
-            "view.addSubview(otherView)",
-            "borderView.addSubview(webView)",
             "view.addSubview(borderView)",
+            "borderView.addSubview(webView)",
+            "view.addSubview(otherView)",
             "",
             "self.view = view",
             ])
@@ -407,18 +407,18 @@ class EjectTests: XCTestCase {
             "label.font = UIFont(name: \"Gotham-Book\", size: 14)",
             "label.textColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1)",
             "",
-            "view.addSubview(label)",
             "view.addSubview(circularToggleView)",
+            "view.addSubview(label)",
             "",
-            "label.leadingAnchor == circularToggleView.trailingAnchor + 8 ~ 100",
-            "label.topAnchor >= view.topAnchor + 20",
-            "label.centerYAnchor == circularToggleView.centerYAnchor",
-            "view.trailingAnchor >= label.trailingAnchor + 20",
-            "view.bottomAnchor >= label.bottomAnchor + 20",
-            "circularToggleView.centerYAnchor == view.centerYAnchor",
-            "circularToggleView.leadingAnchor == view.leadingAnchor",
-            "circularToggleView.widthAnchor == 28",
             "circularToggleView.heightAnchor == 28",
+            "circularToggleView.widthAnchor == 28",
+            "circularToggleView.leadingAnchor == view.leadingAnchor",
+            "circularToggleView.centerYAnchor == view.centerYAnchor",
+            "view.bottomAnchor >= label.bottomAnchor + 20",
+            "view.trailingAnchor >= label.trailingAnchor + 20",
+            "label.centerYAnchor == circularToggleView.centerYAnchor",
+            "label.topAnchor >= view.topAnchor + 20",
+            "label.leadingAnchor == circularToggleView.trailingAnchor + 8 ~ 100",
             "",
             "self.view = view"
             ])
@@ -440,20 +440,20 @@ class EjectTests: XCTestCase {
             "label.font = UIFont(name: \"Gotham-Book\", size: 14)",
             "label.textColor = UIColor(red: 0.502, green: 0.502, blue: 0.502, alpha: 1)",
             "",
-            "view.addSubview(label)",
             "view.addSubview(circularToggleView)",
+            "view.addSubview(label)",
             "",
+            "circularToggleView.heightAnchor.constraint(equalToConstant: 28.0).isActive = true",
+            "circularToggleView.widthAnchor.constraint(equalToConstant: 28.0).isActive = true",
+            "circularToggleView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true",
+            "circularToggleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true",
+            "view.bottomAnchor.constraint(greaterThanOrEqualTo: label.bottomAnchor, constant: 20.0).isActive = true",
+            "view.trailingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: 20.0).isActive = true",
+            "label.centerYAnchor.constraint(equalTo: circularToggleView.centerYAnchor).isActive = true",
+            "label.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor, constant: 20.0).isActive = true",
             "let labelLeadingEqualToCircularToggleViewTrailing = (label.leadingAnchor.constraint(equalTo: circularToggleView.trailingAnchor, constant: 8.0))",
             "labelLeadingEqualToCircularToggleViewTrailing.priority = 100",
             "labelLeadingEqualToCircularToggleViewTrailing.isActive = true",
-            "label.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor, constant: 20.0).isActive = true",
-            "label.centerYAnchor.constraint(equalTo: circularToggleView.centerYAnchor).isActive = true",
-            "view.trailingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: 20.0).isActive = true",
-            "view.bottomAnchor.constraint(greaterThanOrEqualTo: label.bottomAnchor, constant: 20.0).isActive = true",
-            "circularToggleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true",
-            "circularToggleView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true",
-            "circularToggleView.widthAnchor.constraint(equalToConstant: 28.0).isActive = true",
-            "circularToggleView.heightAnchor.constraint(equalToConstant: 28.0).isActive = true",
             "",
             "self.view = view"
             ], configuration: configuration)
@@ -467,8 +467,8 @@ class EjectTests: XCTestCase {
             "blurView.style = .extraLight",
             "",
             "let contentView = UIView()",
-            "blurView.contentView = contentView",
             "self.view = blurView",
+            "blurView.contentView = contentView",
             ])
     }
 
@@ -517,11 +517,11 @@ class EjectTests: XCTestCase {
             "switch.isOpaque = false",
             "switch.clipsToBounds = true",
             "",
-            "switch.heightAnchor == 31",
             "switch.widthAnchor == 49",
+            "switch.heightAnchor == 31",
             "",
-            "switch.addTarget(self, action: #selector(TestClass.snoozeSwitchValueChanged(_:)), for: .valueChanged)",
             "self.view = switch",
+            "switch.addTarget(self, action: #selector(TestClass.snoozeSwitchValueChanged(_:)), for: .valueChanged)",
             ])
     }
 
@@ -538,6 +538,12 @@ class EjectTests: XCTestCase {
             "tableViewCell.autoresizingMask = []",
             "tableViewCell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)",
             "",
+            "self.view = tableViewCell",
+            "tableViewCell.contentView.contentMode = .center",
+            "tableViewCell.contentView.isMultipleTouchEnabled = true",
+            "tableViewCell.contentView.isOpaque = false",
+            "tableViewCell.contentView.clipsToBounds = true",
+            "tableViewCell.contentView.autoresizingMask = []",
             "tableViewCell.textLabel?.textAlignment = .natural",
             "tableViewCell.textLabel?.lineBreakMode = .byTruncatingTail",
             "tableViewCell.textLabel?.baselineAdjustment = .alignBaselines",
@@ -548,12 +554,6 @@ class EjectTests: XCTestCase {
             "tableViewCell.textLabel?.autoresizingMask = []",
             "tableViewCell.textLabel?.font = .systemFont(ofSize: 17)",
             "tableViewCell.textLabel?.textColor = nil",
-            "tableViewCell.contentView.contentMode = .center",
-            "tableViewCell.contentView.isMultipleTouchEnabled = true",
-            "tableViewCell.contentView.isOpaque = false",
-            "tableViewCell.contentView.clipsToBounds = true",
-            "tableViewCell.contentView.autoresizingMask = []",
-            "self.view = tableViewCell",
             ])
     }
 
@@ -578,15 +578,49 @@ class EjectTests: XCTestCase {
             "",
             "tableViewCellSnoozeToggle.contentView.addSubview(label)",
             "",
+            "self.view = tableViewCellSnoozeToggle",
             "tableViewCellSnoozeToggle.contentView.contentMode = .center",
             "tableViewCellSnoozeToggle.contentView.isMultipleTouchEnabled = true",
             "tableViewCellSnoozeToggle.contentView.isOpaque = false",
             "tableViewCellSnoozeToggle.contentView.clipsToBounds = true",
             "tableViewCellSnoozeToggle.contentView.autoresizingMask = []",
-            "self.view = tableViewCellSnoozeToggle",
             ], warnings: [
                 "document.objects.tableViewCell.tableViewCellContentView.subviews.label: useAutomaticPreferredMaxLayoutWidth='YES'",
                 "Can not configure XML nodes 'point'",
+            ])
+    }
+
+    func testStackView() {
+        let xml = wrap("<stackView opaque='NO' contentMode='scaleToFill' translatesAutoresizingMaskIntoConstraints='NO' id='i5M-Pr-FkT' userLabel='HorizontalStackView'><rect key='frame' x='10' y='32.5' width='220' height='20.5'/><subviews><label userLabel='name' userInteractionEnabled='NO' contentMode='left' horizontalHuggingPriority='251' verticalHuggingPriority='251' text='Name' textAlignment='natural' lineBreakMode='tailTruncation' baselineAdjustment='alignBaselines' adjustsFontSizeToFit='NO' translatesAutoresizingMaskIntoConstraints='NO' id='OVd-Xo-RQY'><rect key='frame' x='0.0' y='0.0' width='186.5' height='20.5'/>                                            <fontDescription key='fontDescription' type='system' pointSize='17'/></label><label userLabel='percent' userInteractionEnabled='NO' contentMode='left' horizontalHuggingPriority='750' verticalHuggingPriority='750' horizontalCompressionResistancePriority='1000' text='20%' textAlignment='natural' lineBreakMode='tailTruncation' baselineAdjustment='alignBaselines' adjustsFontSizeToFit='NO' translatesAutoresizingMaskIntoConstraints='NO' id='LbF-gv-XB8'><rect key='frame' x='186.5' y='0.0' width='33.5' height='20.5'/><fontDescription key='fontDescription' type='system' pointSize='17'/></label></subviews></stackView>")
+        checkXML(xml, [
+            "let horizontalStackView = UIStackView()",
+            "horizontalStackView.isOpaque = false",
+            "",
+            "let name = UILabel()",
+            "name.textAlignment = .natural",
+            "name.lineBreakMode = .byTruncatingTail",
+            "name.baselineAdjustment = .alignBaselines",
+            "name.text = \"Name\"",
+            "name.contentMode = .left",
+            "name.setContentHuggingPriority(251, for: .horizontal)",
+            "name.setContentHuggingPriority(251, for: .vertical)",
+            "name.font = .systemFont(ofSize: 17)",
+            "",
+            "let percent = UILabel()",
+            "percent.textAlignment = .natural",
+            "percent.lineBreakMode = .byTruncatingTail",
+            "percent.baselineAdjustment = .alignBaselines",
+            "percent.text = \"20%\"",
+            "percent.contentMode = .left",
+            "percent.setContentHuggingPriority(750, for: .horizontal)",
+            "percent.setContentHuggingPriority(750, for: .vertical)",
+            "percent.setContentCompressionResistancePriority(1000, for: .horizontal)",
+            "percent.font = .systemFont(ofSize: 17)",
+            "",
+            "horizontalStackView.addArrangedSubview(name)",
+            "horizontalStackView.addArrangedSubview(percent)",
+            "",
+            "self.view = horizontalStackView",
             ])
     }
 

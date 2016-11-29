@@ -75,7 +75,7 @@ extension XIBDocument {
     /// added so the top level object configuration is last. This is usually how I like to do things.
     func generateCode(for phase: CodeGeneratorPhase) throws -> [String] {
         var lines: [String] = []
-        for reference in references.reversed() {
+        for reference in references {
             lines.append(contentsOf: try reference.generateCode(for: phase, in: self))
         }
         if lines.count > 0 {
