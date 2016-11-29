@@ -69,6 +69,26 @@ struct InsetBuilder: Builder {
 
 }
 
+struct EdgeInsetBuilder: Builder {
+
+    func buildElement(attributes: inout [String: String], document: XIBDocument, parent: Reference?) throws -> Reference? {
+        guard let parent = parent else { throw XIBParser.Error.needParent }
+        let key = try attributes.removeRequiredValue(forKey: "key")
+        let top = try attributes.removeFloat(forKey: "top")
+        let left = try attributes.removeFloat(forKey: "left")
+        let bottom = try attributes.removeFloat(forKey: "bottom")
+        let right = try attributes.removeFloat(forKey: "right")
+
+        let edgeInsets = "UIEdgeInsets(top: \(top.shortString), left: \(left.shortString), bottom: \(bottom.shortString), right: \(right.shortString))"
+        try document.addVariableConfiguration(
+            for: parent.identifier,
+            attribute: key,
+            value: BasicValue(value: edgeInsets))
+        return parent
+    }
+    
+}
+
 struct BasicBuilder: Builder {
     let key: String
     let format: ValueFormat

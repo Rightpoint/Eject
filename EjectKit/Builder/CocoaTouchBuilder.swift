@@ -27,6 +27,7 @@ extension DocumentBuilder {
         register("autoresizingMask", AutoresizingMaskBuilder())
         register("size", SizeBuilder())
         register("inset", InsetBuilder())
+        register("edgeInsets", EdgeInsetBuilder())
         register("color", ColorBuilder())
         register("state", ButtonStateBuilder())
         register("subviews", SubviewBuilder())

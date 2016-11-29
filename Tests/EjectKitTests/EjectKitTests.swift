@@ -83,6 +83,20 @@ class EjectTests: XCTestCase {
         )
     }
 
+    func testStructBuilders() {
+        let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><rect key='otherFrame' x='0.0' y='0.0' width='350' height='85'/><edgeInsets key='layoutMargins' top='0.0' left='10' bottom='0.0' right='10'/><inset key='sectionInset' minX='0.0' minY='0.0' maxX='0.0' maxY='0.0'/><size key='shadowOffset' width='0.0' height='0.0'/></view>")
+        checkXML(xml, [
+            "let test = UIView()",
+            "test.otherFrame = CGRect(x: 0, y: 0, width: 350, height: 85)",
+            "test.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)",
+            "test.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)",
+            "test.shadowOffset = CGSize(width: 0, height: 0)",
+            "",
+            "self.view = test",
+            ]
+        )
+    }
+
     // Method ordering is broken here, not sure if this is fatal to compile-out-of-the-box.
     func testGestureRecognizer() {
         let xml = wrap("<view userLabel='test' id='i5M-Pr-FkT'><connections><outletCollection property='gestureRecognizers' destination='fDa-KR-68j' appends='YES' id='7AV-8r-dYL'/></connections></view><panGestureRecognizer minimumNumberOfTouches='1' id='fDa-KR-68j'><connections><action selector='dimissTextField:' destination='-1' id='zAI-0B-Wyz'/><outlet property='delegate' destination='i5M-Pr-FkT' id='0eg-ac-TGD'/></connections></panGestureRecognizer>")
