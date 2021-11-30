@@ -16,10 +16,10 @@ func printUsage(errorMessage: String? = nil) -> Never {
     printWarning(message:[
         " Eject:",
         "",
-        " --file <path>.xib",
+        " --file <path>.xib [--anchorage]",
         "",
         " Example:",
-        "    eject --file ./MassiveViewController.xib",
+        "    eject --file ./MassiveViewController.xib --anchorage",
         ].joined(separator: "\n"))
     exit(0)
 }
@@ -28,13 +28,13 @@ func printWarning(message: String) {
     e.write(message.appending("\n").data(using: String.Encoding.utf8)!)
 }
 
-let arguments = CommandLine.arguments.dropFirst()
+let arguments = CommandLine.arguments
 
-guard !arguments.contains("-h") && !arguments.contains("--help") && (arguments.count == 2 || arguments.count == 3) && arguments.first == "--file" else {
+guard !arguments.contains("-h") && !arguments.contains("--help") && (arguments.count == 3 || arguments.count == 4) && arguments[1] == "--file" else {
     printUsage()
 }
 
-let path = URL(fileURLWithPath: arguments.last!)
+let path = URL(fileURLWithPath: arguments[2])
 let configuration = Configuration(arguments.last == "--anchorage" ? .anchorage : .anchor)
 
 do {
