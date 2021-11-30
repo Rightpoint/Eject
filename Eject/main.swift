@@ -30,15 +30,16 @@ func printWarning(message: String) {
 
 let arguments = CommandLine.arguments.dropFirst()
 
-guard !arguments.contains("-h") && !arguments.contains("--help") && arguments.count == 2 && arguments.first == "--file" else {
+guard !arguments.contains("-h") && !arguments.contains("--help") && (arguments.count == 2 || arguments.count == 3) && arguments.first == "--file" else {
     printUsage()
 }
 
 let path = URL(fileURLWithPath: arguments.last!)
+let configuration = Configuration(arguments.last == "--anchorage" ? .anchorage : .anchor)
 
 do {
     let data = try Data(contentsOf: path)
-    let builder = try XIBParser(data: data, configuration: Configuration())
+    let builder = try XIBParser(data: data, configuration: configuration)
     printWarning(message: builder.document.warnings.map() { $0.message }.joined(separator: "\n"))
 
     let code = try builder.document.generateCode()
