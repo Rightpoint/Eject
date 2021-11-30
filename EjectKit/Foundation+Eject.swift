@@ -13,7 +13,7 @@ extension String {
     func snakeCased() -> String {
         var newString = ""
         var previousCharacter: Character? = nil
-        for character in characters {
+        for character in self {
             if previousCharacter == nil {
                 newString.append(String(character).lowercased())
             }
@@ -84,7 +84,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
 
     mutating func remove(contentsOf array: Array<Iterator.Element>) {
         for item in array {
-            if let index = index(of: item) {
+          if let index = firstIndex(of: item) {
                 remove(at: index)
             }
         }

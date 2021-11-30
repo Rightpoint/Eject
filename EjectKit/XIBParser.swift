@@ -103,6 +103,14 @@ public class XIBParser: NSObject {
         return documentBuilder
     }
 
+    // Centralized logic to skip specific elements that don't (and shouldn't) have builders
+    func maybeLogMissingBuilder(elementName: String, attributes: [String: String]) {
+        if elementName == "point" && attributes["key"] == "canvasLocation" {
+            return
+        }
+        document.missingBuilder(forElement: elementName)
+    }
+  
     func enterElement(elementName: String, attributes: [String: String]) {
         guard let builder = builderLookup.lookupBuilder(for: elementName) else {
             document.missingBuilder(forElement: elementName)

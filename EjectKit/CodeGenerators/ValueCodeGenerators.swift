@@ -12,7 +12,7 @@ struct OptionSetValue: CodeGenerator {
     let keys: [String]
 
     init(attributes: [String: String]) {
-        let keys = attributes.map() { $0.value == "YES" ? .some($0.key) : nil }.flatMap() { $0 }
+        let keys = attributes.map() { $0.value == "YES" ? .some($0.key) : nil }.compactMap() { $0 }
         self.keys = keys
     }
 
