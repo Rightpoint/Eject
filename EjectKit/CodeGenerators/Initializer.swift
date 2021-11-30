@@ -26,7 +26,7 @@ struct Initializer: CodeGenerator {
                 return "\(property): \(value)"
             }
             return nil
-        }.flatMap() { $0 }
+        }.compactMap() { $0 }
 
         return "let \(variable) = \(className)(\(arguments.joined(separator: ", ")))"
     }
