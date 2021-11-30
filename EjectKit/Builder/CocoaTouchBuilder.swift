@@ -394,7 +394,7 @@ extension DocumentBuilder {
         let button = control.inherit(
             className: "UIButton",
             properties: [
-                .build("buttonType", .enumeration, "custom", .inject),
+                .build("type", .enumeration, "custom", .inject),
                 .build("reversesTitleShadowWhenHighlighted", .boolean),
                 .build("showsTouchWhenHighlighted", .boolean),
                 .build("adjustsImageWhenHighlighted", .boolean),

@@ -15,7 +15,11 @@ public struct Configuration {
     public var constraint: ConstraintConfiguration = .anchor
     public var postprocessors: [PostProcessor] = [DuplicateVariableProcessor(), TargetActionConfiguration.PostProcessor()]
     var selfIdentifier: String? = nil
-    public init() {	}
+  public init(_ constraint: ConstraintConfiguration? = nil) {
+    if let constraint = constraint {
+      self.constraint = constraint
+    }
+  }
 }
 
 public enum ConstraintConfiguration: String {

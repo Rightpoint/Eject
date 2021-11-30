@@ -352,7 +352,7 @@ class EjectTests: XCTestCase {
     func testButton() {
         let xml = wrap("<button contentHorizontalAlignment='center' contentVerticalAlignment='center' lineBreakMode='middleTruncation' id='i5M-Pr-FkT'><rect key='frame' x='11' y='11' width='328' height='578'/><fontDescription key='fontDescription' type='boldSystem' pointSize='15'/><state key='normal' title='Title' image='icon'><color key='titleColor' white='1' alpha='1' colorSpace='calibratedWhite'/><color key='titleShadowColor' white='0.0' alpha='0.0' colorSpace='calibratedWhite'/></state><connections><action selector='doThing:' destination='-1' eventType='touchUpInside' id='39P-Rs-7z2'/></connections></button>")
         checkXML(xml, [
-            "let button = UIButton(buttonType: .custom)",
+            "let button = UIButton(type: .custom)",
             "button.titleLabel?.lineBreakMode = .byTruncatingMiddle",
             "button.titleLabel?.font = .boldSystemFont(ofSize: 15)",
             "button.setTitle(\"Title\", for: .normal)",
