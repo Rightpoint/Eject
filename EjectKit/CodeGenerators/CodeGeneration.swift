@@ -108,7 +108,7 @@ extension Reference {
         let code = try statements
             .filter { $0.phase == phase }
             .map { try $0.generator.generateCode(in: document) }
-            .flatMap { $0 }
+            .compactMap { $0 }
         document.variableNameOverrides[identifier] = original
         return code
     }
